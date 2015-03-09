@@ -19,8 +19,8 @@ class MultiDimensionalScaling {
         val rowDoc = id2Doc(row)
         val colDoc = id2Doc(col)
         if (col == row) 0.0
-        else if (row < col) computeDistance(hellingerDistance, rowDoc.topicDistribution, colDoc.topicDistribution) * 1000
-        else computeDistance(hellingerDistance, colDoc.topicDistribution, rowDoc.topicDistribution) * 1000
+        else if (row < col) computeDistance(hellingerDistance, rowDoc.topicDistribution, colDoc.topicDistribution) * 2000
+        else computeDistance(hellingerDistance, colDoc.topicDistribution, rowDoc.topicDistribution) * 2000
       }.toArray
     }.toArray
   }

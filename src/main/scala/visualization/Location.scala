@@ -10,7 +10,11 @@ case class Location(val name: String, val center: Point, val ray: Int, val heigh
     val xs = (leftTopCorner.x.toInt to bottomRightCorner.x.toInt).toStream
     val ys = (leftTopCorner.y.toInt to bottomRightCorner.y.toInt).toStream
 
-    val coordinates = xs.flatMap { x => ys zip Stream.continually(x) }
+//    val coordinates = xs.flatMap { x => ys zip Stream.continually(x) }
+    
+    val coordinates = xs.flatMap { x => Stream.continually(x) zip ys}
+    
+    
     
     coordinates.map{ case(x,y) => Point(x,y) }
   }
