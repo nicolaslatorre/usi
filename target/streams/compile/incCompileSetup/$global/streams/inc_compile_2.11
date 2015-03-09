@@ -1,0 +1,755 @@
+format version: 5
+output mode:
+1 items
+0 -> single
+output directories:
+1 items
+output dir -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes
+compile options:
+0 items
+javac options:
+0 items
+compiler version:
+1 items
+0 -> 2.11.5
+compile order:
+1 items
+0 -> Mixed
+name hashing:
+1 items
+0 -> true
+products:
+50 items
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$4.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$5.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$6$$anonfun$apply$13.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$6.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$7.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$buildDiscussions$1.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$1$$anonfun$apply$1.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$1$$anonfun$apply$2.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$1.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2$$anonfun$apply$3$$anonfun$apply$4.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2$$anonfun$apply$3.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2$$anonfun$apply$5.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2$$anonfun$apply$6$$anonfun$apply$7.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2$$anonfun$apply$6.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3$$anonfun$apply$10.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3$$anonfun$apply$11$$anonfun$apply$12.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3$$anonfun$apply$11.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3$$anonfun$apply$8$$anonfun$apply$9.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3$$anonfun$apply$8.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$apply$mcV$sp$1.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$mapPostsWithComments$1.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$openConnection$1.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/Discussion$$anonfun$toString$1.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/Discussion$$anonfun$toString$2.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/Discussion$$anonfun$toString$3$$anonfun$apply$1.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/Discussion$$anonfun$toString$3$$anonfun$apply$2.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/Discussion$$anonfun$toString$3.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/Discussion.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/Badge$.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/Badge.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/Comment$.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/Comment.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/BadPosts.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/GoodPosts.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/Post.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/PostsHistory$.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/PostsHistory.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/StackExchangeSchema$.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/StackExchangeSchema.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/User$.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/User.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/Vote$.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/Vote.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/topicmodeling/TopicModeling$.class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/topicmodeling/TopicModeling.class
+binary dependencies:
+27 items
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home/jre/lib/rt.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/.ivy2/cache/c3p0/c3p0/jars/c3p0-0.9.0.4.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/.ivy2/cache/org.jsoup/jsoup/jars/jsoup-1.8.1.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.5.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/.ivy2/cache/org.squeryl/squeryl_2.11/jars/squeryl_2.11-0.9.5-7.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> /Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home/jre/lib/rt.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> /Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.5.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> /Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home/jre/lib/rt.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> /Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.5.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> /Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home/jre/lib/rt.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> /Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.5.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> /Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home/jre/lib/rt.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> /Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.5.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> /Users/nicolaslatorre/.ivy2/cache/org.squeryl/squeryl_2.11/jars/squeryl_2.11-0.9.5-7.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> /Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home/jre/lib/rt.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> /Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.5.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> /Users/nicolaslatorre/.ivy2/cache/org.squeryl/squeryl_2.11/jars/squeryl_2.11-0.9.5-7.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> /Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home/jre/lib/rt.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> /Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.5.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> /Users/nicolaslatorre/.ivy2/cache/org.squeryl/squeryl_2.11/jars/squeryl_2.11-0.9.5-7.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> /Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home/jre/lib/rt.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> /Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.5.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> /Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home/jre/lib/rt.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> /Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.5.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> /Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home/jre/lib/rt.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> /Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.5.jar
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/lib/tmt-0.4.0.jar
+direct source dependencies:
+0 items
+direct external dependencies:
+0 items
+public inherited source dependencies:
+0 items
+public inherited external dependencies:
+0 items
+member reference internal dependencies:
+12 items
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala
+member reference external dependencies:
+0 items
+inheritance internal dependencies:
+0 items
+inheritance external dependencies:
+0 items
+class names:
+50 items
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$4
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$5
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$6
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$6$$anonfun$apply$13
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$7
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$buildDiscussions$1
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$fetchDiscussions$1
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$1
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$1$$anonfun$apply$1
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$1$$anonfun$apply$2
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2$$anonfun$apply$3
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2$$anonfun$apply$3$$anonfun$apply$4
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2$$anonfun$apply$5
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2$$anonfun$apply$6
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2$$anonfun$apply$6$$anonfun$apply$7
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3$$anonfun$apply$10
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3$$anonfun$apply$11
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3$$anonfun$apply$11$$anonfun$apply$12
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3$$anonfun$apply$8
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3$$anonfun$apply$8$$anonfun$apply$9
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$apply$mcV$sp$1
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$mapPostsWithComments$1
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database.DatabaseConnection$$anonfun$openConnection$1
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> database.Discussion
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> database.Discussion$$anonfun$toString$1
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> database.Discussion$$anonfun$toString$2
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> database.Discussion$$anonfun$toString$3
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> database.Discussion$$anonfun$toString$3$$anonfun$apply$1
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> database.Discussion$$anonfun$toString$3$$anonfun$apply$2
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> squeryl.Badge
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> squeryl.Badge$
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> squeryl.Comment
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> squeryl.Comment$
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> squeryl.BadPosts
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> squeryl.GoodPosts
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> squeryl.Post
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> squeryl.PostsHistory
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> squeryl.PostsHistory$
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> squeryl.StackExchangeSchema
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> squeryl.StackExchangeSchema$
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> squeryl.User
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> squeryl.User$
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> squeryl.Vote
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> squeryl.Vote$
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> topicmodeling.TopicModeling
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> topicmodeling.TopicModeling$
+used names:
+443 items
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> +
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> <
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> <init>
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> ==
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> ===
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> >
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> AnyRef
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> Array
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> Class
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> ComboPooledDataSource
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> Comment
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> DatabaseConnection
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> Discussion
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> Int
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> Iterable
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> Jsoup
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> List
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> Map
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> Nil
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> None
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> Option
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> Post
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> PostgreSqlAdapter
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> Predef
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> PrimitiveTypeMode
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> Session
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> SessionFactory
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> StackExchangeSchema
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> String
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> Tuple2
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> Unit
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> _1
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> _2
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> acceptedAnswerId
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> adapters
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> and
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> answers
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> answersAndComments
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> answersWithComment
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> asInstanceOf
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> body
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> buildDiscussions
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> c
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> c3p0
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> canBuildFrom
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> close
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> com
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> comments
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> concreteFactory_=
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> cpds
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> create
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> database
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> discussion
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> discussions
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> discussionsStrings
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> distinct
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> doc
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> fetchDiscussions
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> find
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> forName
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> from
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> get
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> getConnection
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> getDiscussionString
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> getPost
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> groupBy
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> groupOfAnswers
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> id
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> ids
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> idsAndComments
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> immutable
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> in
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> inTransaction
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> initialParse
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> initialString
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> int2ScalarInt
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> isInstanceOf
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> java
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> join
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> jsoup
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> lang
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> leftOuter
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> like
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> lt
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> map
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> mapPostsWithComments
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> mapValues
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> mchange
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> n
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> ne
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> on
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> openConnection
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> optionInt2ScalarInt
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> optionString2ScalarString
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> org
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> p
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> package
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> par
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> parentId
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> parseBodyFragment
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> password
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> postId
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> postTypeId
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> posts
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> println
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> queryable2JoinPrecursor
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> questions
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> questionsAndComment
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> questionsWithComment
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> select
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> setDriverClass
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> setJdbcUrl
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> setMaxPoolSize
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> setPassword
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> setUser
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> singleColumnQuery2RightHandSideOfIn
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> size
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> squeryl
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> string2ScalarString
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> tags
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> text
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> toList
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> toString
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> url
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> username
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> v2
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> where
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> x
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> y
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> +
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> <init>
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> ==
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> AnyRef
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> Comment
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> Discussion
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> Iterable
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> List
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> Map
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> Nil
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> None
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> Option
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> Post
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> Predef
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> _1
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> _2
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> answersAndComments
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> asInstanceOf
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> body
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> canBuildFrom
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> comments
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> database
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> foldLeft
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> immutable
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> isInstanceOf
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> map
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> n
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> ne
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> package
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> question
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> squeryl
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> text
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> title
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> x
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> y
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> z
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> &&
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> <init>
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> ==
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> AbstractFunction4
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> Badge
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> Date
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> Int
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> None
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> Predef
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> Product
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> ScalaRunTime
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> Serializable
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> Statics
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> String
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> _toString
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> annotations
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> anyHash
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> asInstanceOf
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> date
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> eq
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> finalizeHash
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> id
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> isInstanceOf
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> java
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> mix
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> name
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> org
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> runtime
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> squeryl
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> toString
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> typedProductIterator
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> userId
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> util
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> ||
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> &&
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> <init>
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> ==
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> AbstractFunction6
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> Comment
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> Date
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> Int
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> None
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> Option
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> Predef
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> Product
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> ScalaRunTime
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> Serializable
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> Statics
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> String
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> _toString
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> annotations
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> anyHash
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> asInstanceOf
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> creationDate
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> eq
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> finalizeHash
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> id
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> isInstanceOf
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> java
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> mix
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> org
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> postId
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> runtime
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> score
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> squeryl
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> text
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> toString
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> typedProductIterator
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> userId
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> util
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> ||
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> <init>
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> AnyRef
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> BadPosts
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> Column
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> Date
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> GoodPosts
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> Int
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> Option
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> Post
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> Predef
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> String
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> acceptedAnswerId
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> annotations
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> answerCount
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> body
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> closedDate
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> commmentCount
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> communityOwnedDate
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> creationDate
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> favoriteCount
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> id
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> java
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> lastActivitydDate
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> lastEditDate
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> lastEditorDisplayName
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> lastEditorId
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> org
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> ownerId
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> parentId
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> postTypeId
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> score
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> squeryl
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> tags
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> title
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> util
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> viewCount
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> &&
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> <init>
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> ==
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> AbstractFunction9
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> Column
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> Date
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> Int
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> None
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> Option
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> PostsHistory
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> Predef
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> Product
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> ScalaRunTime
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> Serializable
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> Statics
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> String
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> _toString
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> annotations
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> anyHash
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> asInstanceOf
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> comment
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> creationDate
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> eq
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> finalizeHash
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> id
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> isInstanceOf
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> java
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> mix
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> org
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> postHistoryTypeId
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> postId
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> revisionGUID
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> runtime
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> squeryl
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> text
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> toString
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> typedProductIterator
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> userDisplayName
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> userId
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> util
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> ||
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> <init>
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> BadPosts
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> Badge
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> Comment
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> GoodPosts
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> ManifestFactory
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> Post
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> PostsHistory
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> Schema
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> StackExchangeSchema
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> User
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> Vote
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> badPosts
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> badges
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> classType
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> comments
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> goodPosts
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> org
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> posts
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> postsHistory
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> reflect
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> squeryl
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> table
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> users
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> votes
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> &&
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> <init>
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> ==
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> AbstractFunction13
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> Date
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> Int
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> None
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> Option
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> Predef
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> Product
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> ScalaRunTime
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> Serializable
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> Statics
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> String
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> User
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> _toString
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> aboutMe
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> age
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> annotations
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> anyHash
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> asInstanceOf
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> creationDate
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> displayName
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> downVotes
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> emailHash
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> eq
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> finalizeHash
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> id
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> isInstanceOf
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> java
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> lastAccessDate
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> location
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> mix
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> org
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> reputation
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> runtime
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> squeryl
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> toString
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> typedProductIterator
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> upVotes
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> util
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> views
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> websiteUrl
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> ||
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> &&
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> <init>
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> ==
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> AbstractFunction4
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> Date
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> Int
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> None
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> Product
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> ScalaRunTime
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> Serializable
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> Statics
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> Vote
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> _toString
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> annotations
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> anyHash
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> asInstanceOf
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> creationDate
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> eq
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> finalizeHash
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> id
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> isInstanceOf
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> java
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> mix
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> org
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> postId
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> runtime
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> squeryl
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> toString
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> typedProductIterator
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> util
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> voteTypeId
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> ||
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> ->
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> <init>
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> AnyRef
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> Array
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> CaseFolder
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> DatabaseMetaData
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> MinimumLengthFilter
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> Predef
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> SimpleEnglishTokenizer
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> String
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> TopicModeling
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> WordsAndNumbersOnlyFilter
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> edu
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> java
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> scala
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> scalanlp
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> sql
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> stanford
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> text
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> tokenize
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> topicmodeling
+product stamps:
+50 items
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$4.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$5.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$6$$anonfun$apply$13.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$6.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$7.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$buildDiscussions$1.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$1$$anonfun$apply$1.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$1$$anonfun$apply$2.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$1.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2$$anonfun$apply$3$$anonfun$apply$4.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2$$anonfun$apply$3.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2$$anonfun$apply$5.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2$$anonfun$apply$6$$anonfun$apply$7.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2$$anonfun$apply$6.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$2.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3$$anonfun$apply$10.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3$$anonfun$apply$11$$anonfun$apply$12.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3$$anonfun$apply$11.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3$$anonfun$apply$8$$anonfun$apply$9.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3$$anonfun$apply$8.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$3.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1$$anonfun$apply$mcV$sp$1.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$fetchDiscussions$1.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$mapPostsWithComments$1.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$$anonfun$openConnection$1.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection$.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/DatabaseConnection.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/Discussion$$anonfun$toString$1.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/Discussion$$anonfun$toString$2.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/Discussion$$anonfun$toString$3$$anonfun$apply$1.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/Discussion$$anonfun$toString$3$$anonfun$apply$2.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/Discussion$$anonfun$toString$3.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/database/Discussion.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/BadPosts.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/Badge$.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/Badge.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/Comment$.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/Comment.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/GoodPosts.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/Post.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/PostsHistory$.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/PostsHistory.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/StackExchangeSchema$.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/StackExchangeSchema.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/User$.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/User.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/Vote$.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/squeryl/Vote.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/topicmodeling/TopicModeling$.class -> lastModified(1425223860000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/scala-2.11/classes/topicmodeling/TopicModeling.class -> lastModified(1425223860000)
+source stamps:
+10 items
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> hash(0f0794154f8f9d82c2ad9e42d19c6ebe0138f5a2)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> hash(c7f993cb66e720bcff3bc163d816eff834b2431c)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> hash(19926adf3858f4ec1721008dbd4c8a189a8df140)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> hash(ece94f76c248e31e81366430c994108202f18e85)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> hash(ab02c3a4d565326bbd553a92fb1ed53921a99819)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> hash(48c1359eed7dd00636f25136697b8ce123881d16)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> hash(60d3c3ae81f39a4fc35de91db65cc58bcaff4bbd)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> hash(a1c9e5a2045bdbe763b196a5f2a380aaf9bde268)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> hash(94d3b00fac89fc14bec7234d8f1aa4aaa6ef90c0)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> hash(ea832e48ab9458202e362cdd82878bdea03c5334)
+binary stamps:
+6 items
+/Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home/jre/lib/rt.jar -> lastModified(1418968825000)
+/Users/nicolaslatorre/.ivy2/cache/c3p0/c3p0/jars/c3p0-0.9.0.4.jar -> lastModified(1138072864000)
+/Users/nicolaslatorre/.ivy2/cache/org.jsoup/jsoup/jars/jsoup-1.8.1.jar -> lastModified(1411877260000)
+/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.5.jar -> lastModified(1420590731000)
+/Users/nicolaslatorre/.ivy2/cache/org.squeryl/squeryl_2.11/jars/squeryl_2.11-0.9.5-7.jar -> lastModified(1403129472000)
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/lib/tmt-0.4.0.jar -> lastModified(1425223417000)
+class names:
+6 items
+/Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home/jre/lib/rt.jar -> java.lang.Object
+/Users/nicolaslatorre/.ivy2/cache/c3p0/c3p0/jars/c3p0-0.9.0.4.jar -> com.mchange.v2.c3p0.ComboPooledDataSource
+/Users/nicolaslatorre/.ivy2/cache/org.jsoup/jsoup/jars/jsoup-1.8.1.jar -> org.jsoup.nodes.Element
+/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.5.jar -> scala.Tuple2
+/Users/nicolaslatorre/.ivy2/cache/org.squeryl/squeryl_2.11/jars/squeryl_2.11-0.9.5-7.jar -> org.squeryl.Schema
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/lib/tmt-0.4.0.jar -> scalanlp.text.tokenize.WordsAndNumbersOnlyFilter
+internal apis:
+10 items
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> 
+rO0ABXNyABB4c2J0aS5hcGkuU291cmNlFlpwRASfbtoCAAZJAAdhcGlIYXNoWgAIaGFzTWFjcm9MABhfaW50ZXJuYWxPbmx5X25hbWVIYXNoZXN0ACRMeHNidGkvYXBpL19pbnRlcm5hbE9ubHlfTmFtZUhhc2hlcztMAANhcGl0ABVMeHNidGkvYXBpL1NvdXJjZUFQSTtMAAtjb21waWxhdGlvbnQAF0x4c2J0aS9hcGkvQ29tcGlsYXRpb247WwAEaGFzaHQAAltCeHAPHopFAHNyACJ4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaGVzVNq+mfrU7EwCAAJbAA9pbXBsaWNpdE1lbWJlcnN0ACNbTHhzYnRpL2FwaS9faW50ZXJuYWxPbmx5X05hbWVIYXNoO1sADnJlZ3VsYXJNZW1iZXJzcQB+AAd4cHVyACNbTHhzYnRpLmFwaS5faW50ZXJuYWxPbmx5X05hbWVIYXNoO0lagLbdlov0AgAAeHAAAAAAdXEAfgAJAAAAG3NyACB4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaFsO9SJ2OFfPAgACSQAEaGFzaEwABG5hbWV0ABJMamF2YS9sYW5nL1N0cmluZzt4cP+cMRB0AAZub3RpZnlzcQB+AAwwtYMZdAAHZ2V0UG9zdHNxAH4ADIogVxZ0AAR3YWl0c3EAfgAMJyr1yHQADSRhc0luc3RhbmNlT2ZzcQB+AAyi8UNLdAATZ2V0RGlzY3Vzc2lvblN0cmluZ3NxAH4ADH6S7nl0ABBmZXRjaERpc2N1c3Npb25zc3EAfgAMcN14Z3QABmVxdWFsc3NxAH4ADCzPS3x0AAxhc0luc3RhbmNlT2ZzcQB+AAzXBtvydAAMc3luY2hyb25pemVkc3EAfgAMwhEXE3QADSRpc0luc3RhbmNlT2ZzcQB+AAykquSPdAAEbWFpbnNxAH4ADFF2bUJ0ABRtYXBQb3N0c1dpdGhDb21tZW50c3NxAH4ADDfOkA90AAlub3RpZnlBbGxzcQB+AAyHLXsrdAAMaXNJbnN0YW5jZU9mc3EAfgAM6KLPa3QADm9wZW5Db25uZWN0aW9uc3EAfgAMqrEh33QAEkRhdGFiYXNlQ29ubmVjdGlvbnNxAH4ADKaO1O90AAI9PXNxAH4ADO00US50AAVjbG9uZXNxAH4ADIKx0WF0ABBidWlsZERpc2N1c3Npb25zc3EAfgAMonoiq3QACHRvU3RyaW5nc3EAfgAMeRCtV3QAAiE9c3EAfgAMpi1smnQACGdldENsYXNzc3EAfgAMG92PoHQAAm5lc3EAfgAM2CtiRXQAAmVxc3EAfgAMD3wlJ3QAAiMjc3EAfgAMRx78eXQACGZpbmFsaXplc3EAfgAM3VYR1XQACGhhc2hDb2Rlc3IAE3hzYnRpLmFwaS5Tb3VyY2VBUEm5Xqf5KSM4pAIAAlsAC2RlZmluaXRpb25zdAAXW0x4c2J0aS9hcGkvRGVmaW5pdGlvbjtbAAhwYWNrYWdlc3QAFFtMeHNidGkvYXBpL1BhY2thZ2U7eHB1cgAXW0x4c2J0aS5hcGkuRGVmaW5pdGlvbjuIyVzntONeDgIAAHhwAAAAAXNyABN4c2J0aS5hcGkuQ2xhc3NMaWtlgzQcod+wl2wCAARMAA5kZWZpbml0aW9uVHlwZXQAGkx4c2J0aS9hcGkvRGVmaW5pdGlvblR5cGU7WwAQc2F2ZWRBbm5vdGF0aW9uc3QAE1tMamF2YS9sYW5nL1N0cmluZztMAAhzZWxmVHlwZXQAEEx4c2J0aS9hcGkvTGF6eTtMAAlzdHJ1Y3R1cmVxAH4ATXhyACF4c2J0aS5hcGkuUGFyYW1ldGVyaXplZERlZmluaXRpb275EW6x1VA84gIAAVsADnR5cGVQYXJhbWV0ZXJzdAAaW0x4c2J0aS9hcGkvVHlwZVBhcmFtZXRlcjt4cgAUeHNidGkuYXBpLkRlZmluaXRpb26HKhvocULjRgIABEwABmFjY2Vzc3QAEkx4c2J0aS9hcGkvQWNjZXNzO1sAC2Fubm90YXRpb25zdAAXW0x4c2J0aS9hcGkvQW5ub3RhdGlvbjtMAAltb2RpZmllcnN0ABVMeHNidGkvYXBpL01vZGlmaWVycztMAARuYW1lcQB+AA14cHNyABB4c2J0aS5hcGkuUHVibGljulg9rmwtYEICAAB4cgAQeHNidGkuYXBpLkFjY2Vzc91imvgdYzFIAgAAeHB1cgAXW0x4c2J0aS5hcGkuQW5ub3RhdGlvbjvrl+sZEPaNSAIAAHhwAAAAAHNyABN4c2J0aS5hcGkuTW9kaWZpZXJzxxETIWmc3CQCAAFCAAVmbGFnc3hwAHQAG2RhdGFiYXNlLkRhdGFiYXNlQ29ubmVjdGlvbnVyABpbTHhzYnRpLmFwaS5UeXBlUGFyYW1ldGVyO9ltJg8onfK2AgAAeHAAAAAAfnIAGHhzYnRpLmFwaS5EZWZpbml0aW9uVHlwZQAAAAAAAAAAEgAAeHIADmphdmEubGFuZy5FbnVtAAAAAAAAAAASAAB4cHQABk1vZHVsZXVyABNbTGphdmEubGFuZy5TdHJpbmc7rdJW5+kde0cCAAB4cAAAAABzcgATeHNidGkuU2FmZUxhenkkSW1wbFACLpOXl0A/AgADWgAIYml0bWFwJDBMAAJfdHQAEkxqYXZhL2xhbmcvT2JqZWN0O0wABGV2YWx0ABFMc2NhbGEvRnVuY3Rpb24wO3hyABZ4c2J0aS5hcGkuQWJzdHJhY3RMYXp503e1AV+756ACAAB4cABwc3IAIHhzYnRpLlNhZmVMYXp5JCRhbm9uZnVuJHN0cmljdCQxAAAAAAAAAAACAAFMAAd2YWx1ZSQxcQB+AGZ4cHNyABN4c2J0aS5hcGkuRW1wdHlUeXBlvP2eRkk7iSQCAAB4cgAUeHNidGkuYXBpLlNpbXBsZVR5cGVyeGKIISO/QAIAAHhyAA54c2J0aS5hcGkuVHlwZT9q2SEWSarKAgAAeHBzcQB+AGUAcHNxAH4AanNyABN4c2J0aS5hcGkuU3RydWN0dXJlqar5gJNv2AACAANMAAhkZWNsYXJlZHEAfgBNTAAJaW5oZXJpdGVkcQB+AE1MAAdwYXJlbnRzcQB+AE14cQB+AG5zcQB+AGUAcHNxAH4AanVxAH4ASAAAAAFzcgANeHNidGkuYXBpLkRlZlK+n+J8tDZpAgACTAAKcmV0dXJuVHlwZXQAEEx4c2J0aS9hcGkvVHlwZTtbAA92YWx1ZVBhcmFtZXRlcnN0ABpbTHhzYnRpL2FwaS9QYXJhbWV0ZXJMaXN0O3hxAH4ATnEAfgBXdXEAfgBYAAAAAHNxAH4AWgBxAH4AI3VxAH4AXQAAAABzcgAUeHNidGkuYXBpLlByb2plY3Rpb27z0o1U6UWkLQIAAkwAAmlkcQB+AA1MAAZwcmVmaXh0ABZMeHNidGkvYXBpL1NpbXBsZVR5cGU7eHEAfgBtdAAEVW5pdHNyABN4c2J0aS5hcGkuU2luZ2xldG9u/Kdf+M9W5EYCAAFMAARwYXRodAAQTHhzYnRpL2FwaS9QYXRoO3hxAH4AbXNyAA54c2J0aS5hcGkuUGF0aJs9XAjOpSeEAgABWwAKY29tcG9uZW50c3QAGltMeHNidGkvYXBpL1BhdGhDb21wb25lbnQ7eHB1cgAaW0x4c2J0aS5hcGkuUGF0aENvbXBvbmVudDtD2gl0LWcWdAIAAHhwAAAAAnNyAAx4c2J0aS5hcGkuSWSYMmyLN1PEQAIAAUwAAmlkcQB+AA14cgAXeHNidGkuYXBpLlBhdGhDb21wb25lbnRfmiJbLoafvAIAAHhwdAAFc2NhbGFzcgAOeHNidGkuYXBpLlRoaXPbCe2mzFpAXAIAAHhxAH4Ai3VyABpbTHhzYnRpLmFwaS5QYXJhbWV0ZXJMaXN0O/XTOh3ys3DuAgAAeHAAAAABc3IAF3hzYnRpLmFwaS5QYXJhbWV0ZXJMaXN01sW8HGRJdOMCAAJaAAppc0ltcGxpY2l0WwAKcGFyYW1ldGVyc3QAHFtMeHNidGkvYXBpL01ldGhvZFBhcmFtZXRlcjt4cAB1cgAcW0x4c2J0aS5hcGkuTWV0aG9kUGFyYW1ldGVyO8+4xV2l3bVtAgAAeHAAAAABc3IAGXhzYnRpLmFwaS5NZXRob2RQYXJhbWV0ZXIfRa4X00mw6gIABFoACmhhc0RlZmF1bHRMAAhtb2RpZmllcnQAHUx4c2J0aS9hcGkvUGFyYW1ldGVyTW9kaWZpZXI7TAAEbmFtZXEAfgANTAADdHBlcQB+AHh4cAB+cgAbeHNidGkuYXBpLlBhcmFtZXRlck1vZGlmaWVyAAAAAAAAAAASAAB4cQB+AGB0AAVQbGFpbnQABGFyZ3NzcgAXeHNidGkuYXBpLlBhcmFtZXRlcml6ZWQWbO5pA8m7fwIAAkwACGJhc2VUeXBlcQB+AH9bAA10eXBlQXJndW1lbnRzdAARW0x4c2J0aS9hcGkvVHlwZTt4cQB+AG1zcQB+AH50AAVBcnJheXEAfgCEdXIAEVtMeHNidGkuYXBpLlR5cGU7dP+lWnv56UECAAB4cAAAAAFzcQB+AH50AAZTdHJpbmdzcQB+AIJzcQB+AIV1cQB+AIgAAAADc3EAfgCKdAAEamF2YXNxAH4AinQABGxhbmdxAH4Aj3NxAH4AZQBwc3EAfgBqdXEAfgBIAAAAAHNxAH4AZQBwc3EAfgBqdXEAfgCjAAAAAnNxAH4AfnQABk9iamVjdHEAfgCnc3EAfgB+dAADQW55cQB+AIR1cgAUW0x4c2J0aS5hcGkuUGFja2FnZTtbExk3cKcnoQIAAHhwAAAAAXNyABF4c2J0aS5hcGkuUGFja2FnZX5Zj/auzjlYAgABTAAEbmFtZXEAfgANeHB0AAhkYXRhYmFzZXNyABV4c2J0aS5hcGkuQ29tcGlsYXRpb27t+uDDauigQgIAAkoACXN0YXJ0VGltZVsAB291dHB1dHN0ABpbTHhzYnRpL2FwaS9PdXRwdXRTZXR0aW5nO3hwAAABS9X1+2x1cgAaW0x4c2J0aS5hcGkuT3V0cHV0U2V0dGluZzt/asLzp4elQgIAAHhwAAAAAXNyABd4c2J0aS5hcGkuT3V0cHV0U2V0dGluZ3rZmkd0+x17AgACTAAPb3V0cHV0RGlyZWN0b3J5cQB+AA1MAA9zb3VyY2VEaXJlY3RvcnlxAH4ADXhwdABWL1VzZXJzL25pY29sYXNsYXRvcnJlL0RvY3VtZW50cy9VU0kvVGVzaS9TdGFja092ZXJmbG93Vmlld2VyL3RhcmdldC9zY2FsYS0yLjExL2NsYXNzZXN0AAEvdXIAAltCrPMX+AYIVOACAAB4cAAAABQPB5QVT4+dgsKtnkLRnG6+ATj1og==
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> 
+rO0ABXNyABB4c2J0aS5hcGkuU291cmNlFlpwRASfbtoCAAZJAAdhcGlIYXNoWgAIaGFzTWFjcm9MABhfaW50ZXJuYWxPbmx5X25hbWVIYXNoZXN0ACRMeHNidGkvYXBpL19pbnRlcm5hbE9ubHlfTmFtZUhhc2hlcztMAANhcGl0ABVMeHNidGkvYXBpL1NvdXJjZUFQSTtMAAtjb21waWxhdGlvbnQAF0x4c2J0aS9hcGkvQ29tcGlsYXRpb247WwAEaGFzaHQAAltCeHCYus4bAHNyACJ4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaGVzVNq+mfrU7EwCAAJbAA9pbXBsaWNpdE1lbWJlcnN0ACNbTHhzYnRpL2FwaS9faW50ZXJuYWxPbmx5X05hbWVIYXNoO1sADnJlZ3VsYXJNZW1iZXJzcQB+AAd4cHVyACNbTHhzYnRpLmFwaS5faW50ZXJuYWxPbmx5X05hbWVIYXNoO0lagLbdlov0AgAAeHAAAAAAdXEAfgAJAAAAGHNyACB4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaFsO9SJ2OFfPAgACSQAEaGFzaEwABG5hbWV0ABJMamF2YS9sYW5nL1N0cmluZzt4cPPQkqB0AAZub3RpZnlzcQB+AAxCx4mUdAAIcXVlc3Rpb25zcQB+AAwGaJabdAAEd2FpdHNxAH4ADCUFKuh0AA0kYXNJbnN0YW5jZU9mc3EAfgAM8GF2x3QABmVxdWFsc3NxAH4ADJgJuAZ0AAxhc0luc3RhbmNlT2ZzcQB+AAxN7iMpdAAMc3luY2hyb25pemVkc3EAfgAMXuSo3HQADSRpc0luc3RhbmNlT2ZzcQB+AAy3uKf9dAAJbm90aWZ5QWxsc3EAfgAMmM7NeHQADGlzSW5zdGFuY2VPZnNxAH4ADNPA3It0AApEaXNjdXNzaW9uc3EAfgAMz57Wb3QABjxpbml0PnNxAH4ADH0G/np0AAI9PXNxAH4ADCKa91p0AAVjbG9uZXNxAH4ADJtk6Jh0AAh0b1N0cmluZ3NxAH4ADBYZ9RJ0ABJhbnN3ZXJzQW5kQ29tbWVudHNzcQB+AAwYQgkDdAACIT1zcQB+AAxILr5TdAAIZ2V0Q2xhc3NzcQB+AAxqyGFkdAACbmVzcQB+AAxNOYnbdAACZXFzcQB+AAwsqc0VdAACIyNzcQB+AAyLoUredAAIZmluYWxpemVzcQB+AAyQxT7OdAAIaGFzaENvZGVzcQB+AAwTIORbdAAIY29tbWVudHNzcgATeHNidGkuYXBpLlNvdXJjZUFQSblep/kpIzikAgACWwALZGVmaW5pdGlvbnN0ABdbTHhzYnRpL2FwaS9EZWZpbml0aW9uO1sACHBhY2thZ2VzdAAUW0x4c2J0aS9hcGkvUGFja2FnZTt4cHVyABdbTHhzYnRpLmFwaS5EZWZpbml0aW9uO4jJXOe0414OAgAAeHAAAAABc3IAE3hzYnRpLmFwaS5DbGFzc0xpa2WDNByh37CXbAIABEwADmRlZmluaXRpb25UeXBldAAaTHhzYnRpL2FwaS9EZWZpbml0aW9uVHlwZTtbABBzYXZlZEFubm90YXRpb25zdAATW0xqYXZhL2xhbmcvU3RyaW5nO0wACHNlbGZUeXBldAAQTHhzYnRpL2FwaS9MYXp5O0wACXN0cnVjdHVyZXEAfgBHeHIAIXhzYnRpLmFwaS5QYXJhbWV0ZXJpemVkRGVmaW5pdGlvbvkRbrHVUDziAgABWwAOdHlwZVBhcmFtZXRlcnN0ABpbTHhzYnRpL2FwaS9UeXBlUGFyYW1ldGVyO3hyABR4c2J0aS5hcGkuRGVmaW5pdGlvbocqG+hxQuNGAgAETAAGYWNjZXNzdAASTHhzYnRpL2FwaS9BY2Nlc3M7WwALYW5ub3RhdGlvbnN0ABdbTHhzYnRpL2FwaS9Bbm5vdGF0aW9uO0wACW1vZGlmaWVyc3QAFUx4c2J0aS9hcGkvTW9kaWZpZXJzO0wABG5hbWVxAH4ADXhwc3IAEHhzYnRpLmFwaS5QdWJsaWO6WD2ubC1gQgIAAHhyABB4c2J0aS5hcGkuQWNjZXNz3WKa+B1jMUgCAAB4cHVyABdbTHhzYnRpLmFwaS5Bbm5vdGF0aW9uO+uX6xkQ9o1IAgAAeHAAAAAAc3IAE3hzYnRpLmFwaS5Nb2RpZmllcnPHERMhaZzcJAIAAUIABWZsYWdzeHAAdAATZGF0YWJhc2UuRGlzY3Vzc2lvbnVyABpbTHhzYnRpLmFwaS5UeXBlUGFyYW1ldGVyO9ltJg8onfK2AgAAeHAAAAAAfnIAGHhzYnRpLmFwaS5EZWZpbml0aW9uVHlwZQAAAAAAAAAAEgAAeHIADmphdmEubGFuZy5FbnVtAAAAAAAAAAASAAB4cHQACENsYXNzRGVmdXIAE1tMamF2YS5sYW5nLlN0cmluZzut0lbn6R17RwIAAHhwAAAAAHNyABN4c2J0aS5TYWZlTGF6eSRJbXBsUAIuk5eXQD8CAANaAAhiaXRtYXAkMEwAAl90dAASTGphdmEvbGFuZy9PYmplY3Q7TAAEZXZhbHQAEUxzY2FsYS9GdW5jdGlvbjA7eHIAFnhzYnRpLmFwaS5BYnN0cmFjdExhennTd7UBX7vnoAIAAHhwAHBzcgAgeHNidGkuU2FmZUxhenkkJGFub25mdW4kc3RyaWN0JDEAAAAAAAAAAAIAAUwAB3ZhbHVlJDFxAH4AYHhwc3IAE3hzYnRpLmFwaS5FbXB0eVR5cGW8/Z5GSTuJJAIAAHhyABR4c2J0aS5hcGkuU2ltcGxlVHlwZXJ4YoghI79AAgAAeHIADnhzYnRpLmFwaS5UeXBlP2rZIRZJqsoCAAB4cHNxAH4AXwBwc3EAfgBkc3IAE3hzYnRpLmFwaS5TdHJ1Y3R1cmWpqvmAk2/YAAIAA0wACGRlY2xhcmVkcQB+AEdMAAlpbmhlcml0ZWRxAH4AR0wAB3BhcmVudHNxAH4AR3hxAH4AaHNxAH4AXwBwc3EAfgBkdXEAfgBCAAAAAHNxAH4AXwBwc3EAfgBkdXEAfgBCAAAAAHNxAH4AXwBwc3EAfgBkdXIAEVtMeHNidGkuYXBpLlR5cGU7dP+lWnv56UECAAB4cAAAAAJzcgAUeHNidGkuYXBpLlByb2plY3Rpb27z0o1U6UWkLQIAAkwAAmlkcQB+AA1MAAZwcmVmaXh0ABZMeHNidGkvYXBpL1NpbXBsZVR5cGU7eHEAfgBndAAGT2JqZWN0c3IAE3hzYnRpLmFwaS5TaW5nbGV0b278p1/4z1bkRgIAAUwABHBhdGh0ABBMeHNidGkvYXBpL1BhdGg7eHEAfgBnc3IADnhzYnRpLmFwaS5QYXRomz1cCM6lJ4QCAAFbAApjb21wb25lbnRzdAAaW0x4c2J0aS9hcGkvUGF0aENvbXBvbmVudDt4cHVyABpbTHhzYnRpLmFwaS5QYXRoQ29tcG9uZW50O0PaCXQtZxZ0AgAAeHAAAAADc3IADHhzYnRpLmFwaS5JZJgybIs3U8RAAgABTAACaWRxAH4ADXhyABd4c2J0aS5hcGkuUGF0aENvbXBvbmVudF+aIlsuhp+8AgAAeHB0AARqYXZhc3EAfgCEdAAEbGFuZ3NyAA54c2J0aS5hcGkuVGhpc9sJ7abMWkBcAgAAeHEAfgCFc3EAfgB4dAADQW55c3EAfgB8c3EAfgB/dXEAfgCCAAAAAnNxAH4AhHQABXNjYWxhcQB+AIt1cgAUW0x4c2J0aS5hcGkuUGFja2FnZTtbExk3cKcnoQIAAHhwAAAAAXNyABF4c2J0aS5hcGkuUGFja2FnZX5Zj/auzjlYAgABTAAEbmFtZXEAfgANeHB0AAhkYXRhYmFzZXNyABV4c2J0aS5hcGkuQ29tcGlsYXRpb27t+uDDauigQgIAAkoACXN0YXJ0VGltZVsAB291dHB1dHN0ABpbTHhzYnRpL2FwaS9PdXRwdXRTZXR0aW5nO3hwAAABS9X1+2x1cgAaW0x4c2J0aS5hcGkuT3V0cHV0U2V0dGluZzt/asLzp4elQgIAAHhwAAAAAXNyABd4c2J0aS5hcGkuT3V0cHV0U2V0dGluZ3rZmkd0+x17AgACTAAPb3V0cHV0RGlyZWN0b3J5cQB+AA1MAA9zb3VyY2VEaXJlY3RvcnlxAH4ADXhwdABWL1VzZXJzL25pY29sYXNsYXRvcnJlL0RvY3VtZW50cy9VU0kvVGVzaS9TdGFja092ZXJmbG93Vmlld2VyL3RhcmdldC9zY2FsYS0yLjExL2NsYXNzZXN0AAEvdXIAAltCrPMX+AYIVOACAAB4cAAAABTH+ZPLZucgvP87wWPYFu/4NLJDHA==
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> 
+rO0ABXNyABB4c2J0aS5hcGkuU291cmNlFlpwRASfbtoCAAZJAAdhcGlIYXNoWgAIaGFzTWFjcm9MABhfaW50ZXJuYWxPbmx5X25hbWVIYXNoZXN0ACRMeHNidGkvYXBpL19pbnRlcm5hbE9ubHlfTmFtZUhhc2hlcztMAANhcGl0ABVMeHNidGkvYXBpL1NvdXJjZUFQSTtMAAtjb21waWxhdGlvbnQAF0x4c2J0aS9hcGkvQ29tcGlsYXRpb247WwAEaGFzaHQAAltCeHBMvptAAHNyACJ4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaGVzVNq+mfrU7EwCAAJbAA9pbXBsaWNpdE1lbWJlcnN0ACNbTHhzYnRpL2FwaS9faW50ZXJuYWxPbmx5X05hbWVIYXNoO1sADnJlZ3VsYXJNZW1iZXJzcQB+AAd4cHVyACNbTHhzYnRpLmFwaS5faW50ZXJuYWxPbmx5X05hbWVIYXNoO0lagLbdlov0AgAAeHAAAAAAdXEAfgAJAAAAI3NyACB4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaFsO9SJ2OFfPAgACSQAEaGFzaEwABG5hbWV0ABJMamF2YS9sYW5nL1N0cmluZzt4cAO1lSV0AAZub3RpZnlzcQB+AAzRN1kjdAAEbmFtZXNxAH4ADFfbuod0AAR3YWl0c3EAfgAMh95PYXQADmNvcHkkZGVmYXVsdCQyc3EAfgAMj6oCjXQADSRhc0luc3RhbmNlT2ZzcQB+AAy37vuHdAAMcHJvZHVjdEFyaXR5c3EAfgAMwAECMHQABmVxdWFsc3NxAH4ADP8gSyN0AAxhc0luc3RhbmNlT2ZzcQB+AAzvJOk5dAAMc3luY2hyb25pemVkc3EAfgAMpsRU5HQADSRpc0luc3RhbmNlT2ZzcQB+AAwioVNCdAAIY2FuRXF1YWxzcQB+AAyn2YHSdAAOY29weSRkZWZhdWx0JDRzcQB+AAwQZioWdAANcHJvZHVjdFByZWZpeHNxAH4ADC3eHHR0AAlub3RpZnlBbGxzcQB+AAy3VXYQdAAMaXNJbnN0YW5jZU9mc3EAfgAMtGIEXnQABjxpbml0PnNxAH4ADL7k2fJ0AAJpZHNxAH4ADCktZv50AARkYXRlc3EAfgAMmAL+3XQAAj09c3EAfgAMFPMzk3QABWNsb25lc3EAfgAMrfBBq3QADmNvcHkkZGVmYXVsdCQzc3EAfgAMLLCGh3QABGNvcHlzcQB+AAxrvQu1dAAIdG9TdHJpbmdzcQB+AAxYQJ4LdAACIT1zcQB+AAx5Ch56dAAIZ2V0Q2xhc3NzcQB+AAyw9RZkdAAGdXNlcklkc3EAfgAMCE53vHQADmNvcHkkZGVmYXVsdCQxc3EAfgAMG92vZXQAAm5lc3EAfgAMTBGxlHQAAmVxc3EAfgAMQZSnk3QAD3Byb2R1Y3RJdGVyYXRvcnNxAH4ADPrPOfx0AAVCYWRnZXNxAH4ADIOCb350AAIjI3NxAH4ADE7e90p0AAhmaW5hbGl6ZXNxAH4ADPICkLF0AA5wcm9kdWN0RWxlbWVudHNxAH4ADLJu0ZR0AAhoYXNoQ29kZXNyABN4c2J0aS5hcGkuU291cmNlQVBJuV6n+SkjOKQCAAJbAAtkZWZpbml0aW9uc3QAF1tMeHNidGkvYXBpL0RlZmluaXRpb247WwAIcGFja2FnZXN0ABRbTHhzYnRpL2FwaS9QYWNrYWdlO3hwdXIAF1tMeHNidGkuYXBpLkRlZmluaXRpb247iMlc57TjXg4CAAB4cAAAAAFzcgATeHNidGkuYXBpLkNsYXNzTGlrZYM0HKHfsJdsAgAETAAOZGVmaW5pdGlvblR5cGV0ABpMeHNidGkvYXBpL0RlZmluaXRpb25UeXBlO1sAEHNhdmVkQW5ub3RhdGlvbnN0ABNbTGphdmEvbGFuZy9TdHJpbmc7TAAIc2VsZlR5cGV0ABBMeHNidGkvYXBpL0xhenk7TAAJc3RydWN0dXJlcQB+AF14cgAheHNidGkuYXBpLlBhcmFtZXRlcml6ZWREZWZpbml0aW9u+RFusdVQPOICAAFbAA50eXBlUGFyYW1ldGVyc3QAGltMeHNidGkvYXBpL1R5cGVQYXJhbWV0ZXI7eHIAFHhzYnRpLmFwaS5EZWZpbml0aW9uhyob6HFC40YCAARMAAZhY2Nlc3N0ABJMeHNidGkvYXBpL0FjY2VzcztbAAthbm5vdGF0aW9uc3QAF1tMeHNidGkvYXBpL0Fubm90YXRpb247TAAJbW9kaWZpZXJzdAAVTHhzYnRpL2FwaS9Nb2RpZmllcnM7TAAEbmFtZXEAfgANeHBzcgAQeHNidGkuYXBpLlB1YmxpY7pYPa5sLWBCAgAAeHIAEHhzYnRpLmFwaS5BY2Nlc3PdYpr4HWMxSAIAAHhwdXIAF1tMeHNidGkuYXBpLkFubm90YXRpb24765frGRD2jUgCAAB4cAAAAABzcgATeHNidGkuYXBpLk1vZGlmaWVyc8cREyFpnNwkAgABQgAFZmxhZ3N4cAB0AA1zcXVlcnlsLkJhZGdldXIAGltMeHNidGkuYXBpLlR5cGVQYXJhbWV0ZXI72W0mDyid8rYCAAB4cAAAAAB+cgAYeHNidGkuYXBpLkRlZmluaXRpb25UeXBlAAAAAAAAAAASAAB4cgAOamF2YS5sYW5nLkVudW0AAAAAAAAAABIAAHhwdAAIQ2xhc3NEZWZ1cgATW0xqYXZhLmxhbmcuU3RyaW5nO63SVufpHXtHAgAAeHAAAAAAc3IAE3hzYnRpLlNhZmVMYXp5JEltcGxQAi6Tl5dAPwIAA1oACGJpdG1hcCQwTAACX3R0ABJMamF2YS9sYW5nL09iamVjdDtMAARldmFsdAARTHNjYWxhL0Z1bmN0aW9uMDt4cgAWeHNidGkuYXBpLkFic3RyYWN0TGF6edN3tQFfu+egAgAAeHAAcHNyACB4c2J0aS5TYWZlTGF6eSQkYW5vbmZ1biRzdHJpY3QkMQAAAAAAAAAAAgABTAAHdmFsdWUkMXEAfgB2eHBzcgATeHNidGkuYXBpLkVtcHR5VHlwZbz9nkZJO4kkAgAAeHIAFHhzYnRpLmFwaS5TaW1wbGVUeXBlcnhiiCEjv0ACAAB4cgAOeHNidGkuYXBpLlR5cGU/atkhFkmqygIAAHhwc3EAfgB1AHBzcQB+AHpzcgATeHNidGkuYXBpLlN0cnVjdHVyZamq+YCTb9gAAgADTAAIZGVjbGFyZWRxAH4AXUwACWluaGVyaXRlZHEAfgBdTAAHcGFyZW50c3EAfgBdeHEAfgB+c3EAfgB1AHBzcQB+AHp1cQB+AFgAAAAAc3EAfgB1AHBzcQB+AHp1cQB+AFgAAAAAc3EAfgB1AHBzcQB+AHp1cgARW0x4c2J0aS5hcGkuVHlwZTt0/6Vae/npQQIAAHhwAAAABnNyABR4c2J0aS5hcGkuUHJvamVjdGlvbvPSjVTpRaQtAgACTAACaWRxAH4ADUwABnByZWZpeHQAFkx4c2J0aS9hcGkvU2ltcGxlVHlwZTt4cQB+AH10AAxTZXJpYWxpemFibGVzcgATeHNidGkuYXBpLlNpbmdsZXRvbvynX/jPVuRGAgABTAAEcGF0aHQAEEx4c2J0aS9hcGkvUGF0aDt4cQB+AH1zcgAOeHNidGkuYXBpLlBhdGibPVwIzqUnhAIAAVsACmNvbXBvbmVudHN0ABpbTHhzYnRpL2FwaS9QYXRoQ29tcG9uZW50O3hwdXIAGltMeHNidGkuYXBpLlBhdGhDb21wb25lbnQ7Q9oJdC1nFnQCAAB4cAAAAAJzcgAMeHNidGkuYXBpLklkmDJsizdTxEACAAFMAAJpZHEAfgANeHIAF3hzYnRpLmFwaS5QYXRoQ29tcG9uZW50X5oiWy6Gn7wCAAB4cHQABXNjYWxhc3IADnhzYnRpLmFwaS5UaGlz2wntpsxaQFwCAAB4cQB+AJtzcQB+AI5xAH4AkXNxAH4AknNxAH4AlXVxAH4AmAAAAANzcQB+AJp0AARqYXZhc3EAfgCadAACaW9xAH4An3NxAH4AjnQAB1Byb2R1Y3RxAH4AlHNxAH4AjnQABkVxdWFsc3EAfgCUc3EAfgCOdAAGT2JqZWN0c3EAfgCSc3EAfgCVdXEAfgCYAAAAA3NxAH4AmnEAfgClc3EAfgCadAAEbGFuZ3EAfgCfc3EAfgCOdAADQW55cQB+AJR1cgAUW0x4c2J0aS5hcGkuUGFja2FnZTtbExk3cKcnoQIAAHhwAAAAAXNyABF4c2J0aS5hcGkuUGFja2FnZX5Zj/auzjlYAgABTAAEbmFtZXEAfgANeHB0AAdzcXVlcnlsc3IAFXhzYnRpLmFwaS5Db21waWxhdGlvbu364MNq6KBCAgACSgAJc3RhcnRUaW1lWwAHb3V0cHV0c3QAGltMeHNidGkvYXBpL091dHB1dFNldHRpbmc7eHAAAAFL1fX7bHVyABpbTHhzYnRpLmFwaS5PdXRwdXRTZXR0aW5nO39qwvOnh6VCAgAAeHAAAAABc3IAF3hzYnRpLmFwaS5PdXRwdXRTZXR0aW5netmaR3T7HXsCAAJMAA9vdXRwdXREaXJlY3RvcnlxAH4ADUwAD3NvdXJjZURpcmVjdG9yeXEAfgANeHB0AFYvVXNlcnMvbmljb2xhc2xhdG9ycmUvRG9jdW1lbnRzL1VTSS9UZXNpL1N0YWNrT3ZlcmZsb3dWaWV3ZXIvdGFyZ2V0L3NjYWxhLTIuMTEvY2xhc3Nlc3QAAS91cgACW0Ks8xf4BghU4AIAAHhwAAAAFBmSat84WPTsFyEAjb1MihiajfFA
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> 
+rO0ABXNyABB4c2J0aS5hcGkuU291cmNlFlpwRASfbtoCAAZJAAdhcGlIYXNoWgAIaGFzTWFjcm9MABhfaW50ZXJuYWxPbmx5X25hbWVIYXNoZXN0ACRMeHNidGkvYXBpL19pbnRlcm5hbE9ubHlfTmFtZUhhc2hlcztMAANhcGl0ABVMeHNidGkvYXBpL1NvdXJjZUFQSTtMAAtjb21waWxhdGlvbnQAF0x4c2J0aS9hcGkvQ29tcGlsYXRpb247WwAEaGFzaHQAAltCeHA11eidAHNyACJ4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaGVzVNq+mfrU7EwCAAJbAA9pbXBsaWNpdE1lbWJlcnN0ACNbTHhzYnRpL2FwaS9faW50ZXJuYWxPbmx5X05hbWVIYXNoO1sADnJlZ3VsYXJNZW1iZXJzcQB+AAd4cHVyACNbTHhzYnRpLmFwaS5faW50ZXJuYWxPbmx5X05hbWVIYXNoO0lagLbdlov0AgAAeHAAAAAAdXEAfgAJAAAAJ3NyACB4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaFsO9SJ2OFfPAgACSQAEaGFzaEwABG5hbWV0ABJMamF2YS9sYW5nL1N0cmluZzt4cFA7L9p0AAZub3RpZnlzcQB+AAxvpeVBdAAEd2FpdHNxAH4ADJAkkoV0AA5jb3B5JGRlZmF1bHQkMnNxAH4ADF7m3WV0AA0kYXNJbnN0YW5jZU9mc3EAfgAMHPCt2nQADmNvcHkkZGVmYXVsdCQ1c3EAfgAMzCx0RnQADHByb2R1Y3RBcml0eXNxAH4ADBtcAi50AAZlcXVhbHNzcQB+AAyhP1e/dAAMYXNJbnN0YW5jZU9mc3EAfgAMGUEBF3QADHN5bmNocm9uaXplZHNxAH4ADAXbyt10AAVzY29yZXNxAH4ADOeMzLN0AA0kaXNJbnN0YW5jZU9mc3EAfgAMu/tMI3QABHRleHRzcQB+AAwmNWYadAAIY2FuRXF1YWxzcQB+AAxLfUTRdAAOY29weSRkZWZhdWx0JDRzcQB+AAwXe0o9dAANcHJvZHVjdFByZWZpeHNxAH4ADA+j99t0AAlub3RpZnlBbGxzcQB+AAwynHpddAAMaXNJbnN0YW5jZU9mc3EAfgAMMewd63QABjxpbml0PnNxAH4ADDwPuh10AAJpZHNxAH4ADF234Dd0AAI9PXNxAH4ADDdvP5l0AAZwb3N0SWRzcQB+AAymooRndAAFY2xvbmVzcQB+AAwFQehkdAAMY3JlYXRpb25EYXRlc3EAfgAMY5TeEXQADmNvcHkkZGVmYXVsdCQzc3EAfgAMLSGVoXQABGNvcHlzcQB+AAyJd5OIdAAIdG9TdHJpbmdzcQB+AAz6rDtEdAACIT1zcQB+AAwUA4YOdAAIZ2V0Q2xhc3NzcQB+AAz1fSMDdAAGdXNlcklkc3EAfgAMlrepbXQADmNvcHkkZGVmYXVsdCQxc3EAfgAM8E+0/nQADmNvcHkkZGVmYXVsdCQ2c3EAfgAMX7C4AHQAB0NvbW1lbnRzcQB+AAzp7ri4dAACbmVzcQB+AAyz+/n6dAACZXFzcQB+AAz1AX6IdAAPcHJvZHVjdEl0ZXJhdG9yc3EAfgAMdqiCPXQAAiMjc3EAfgAM3mK5p3QACGZpbmFsaXplc3EAfgAM9GluW3QADnByb2R1Y3RFbGVtZW50c3EAfgAM4vhJ+HQACGhhc2hDb2Rlc3IAE3hzYnRpLmFwaS5Tb3VyY2VBUEm5Xqf5KSM4pAIAAlsAC2RlZmluaXRpb25zdAAXW0x4c2J0aS9hcGkvRGVmaW5pdGlvbjtbAAhwYWNrYWdlc3QAFFtMeHNidGkvYXBpL1BhY2thZ2U7eHB1cgAXW0x4c2J0aS5hcGkuRGVmaW5pdGlvbjuIyVzntONeDgIAAHhwAAAAAXNyABN4c2J0aS5hcGkuQ2xhc3NMaWtlgzQcod+wl2wCAARMAA5kZWZpbml0aW9uVHlwZXQAGkx4c2J0aS9hcGkvRGVmaW5pdGlvblR5cGU7WwAQc2F2ZWRBbm5vdGF0aW9uc3QAE1tMamF2YS9sYW5nL1N0cmluZztMAAhzZWxmVHlwZXQAEEx4c2J0aS9hcGkvTGF6eTtMAAlzdHJ1Y3R1cmVxAH4AZXhyACF4c2J0aS5hcGkuUGFyYW1ldGVyaXplZERlZmluaXRpb275EW6x1VA84gIAAVsADnR5cGVQYXJhbWV0ZXJzdAAaW0x4c2J0aS9hcGkvVHlwZVBhcmFtZXRlcjt4cgAUeHNidGkuYXBpLkRlZmluaXRpb26HKhvocULjRgIABEwABmFjY2Vzc3QAEkx4c2J0aS9hcGkvQWNjZXNzO1sAC2Fubm90YXRpb25zdAAXW0x4c2J0aS9hcGkvQW5ub3RhdGlvbjtMAAltb2RpZmllcnN0ABVMeHNidGkvYXBpL01vZGlmaWVycztMAARuYW1lcQB+AA14cHNyABB4c2J0aS5hcGkuUHVibGljulg9rmwtYEICAAB4cgAQeHNidGkuYXBpLkFjY2Vzc91imvgdYzFIAgAAeHB1cgAXW0x4c2J0aS5hcGkuQW5ub3RhdGlvbjvrl+sZEPaNSAIAAHhwAAAAAHNyABN4c2J0aS5hcGkuTW9kaWZpZXJzxxETIWmc3CQCAAFCAAVmbGFnc3hwAHQAD3NxdWVyeWwuQ29tbWVudHVyABpbTHhzYnRpLmFwaS5UeXBlUGFyYW1ldGVyO9ltJg8onfK2AgAAeHAAAAAAfnIAGHhzYnRpLmFwaS5EZWZpbml0aW9uVHlwZQAAAAAAAAAAEgAAeHIADmphdmEubGFuZy5FbnVtAAAAAAAAAAASAAB4cHQACENsYXNzRGVmdXIAE1tMamF2YS5sYW5nLlN0cmluZzut0lbn6R17RwIAAHhwAAAAAHNyABN4c2J0aS5TYWZlTGF6eSRJbXBsUAIuk5eXQD8CAANaAAhiaXRtYXAkMEwAAl90dAASTGphdmEvbGFuZy9PYmplY3Q7TAAEZXZhbHQAEUxzY2FsYS9GdW5jdGlvbjA7eHIAFnhzYnRpLmFwaS5BYnN0cmFjdExhennTd7UBX7vnoAIAAHhwAHBzcgAgeHNidGkuU2FmZUxhenkkJGFub25mdW4kc3RyaWN0JDEAAAAAAAAAAAIAAUwAB3ZhbHVlJDFxAH4Afnhwc3IAE3hzYnRpLmFwaS5FbXB0eVR5cGW8/Z5GSTuJJAIAAHhyABR4c2J0aS5hcGkuU2ltcGxlVHlwZXJ4YoghI79AAgAAeHIADnhzYnRpLmFwaS5UeXBlP2rZIRZJqsoCAAB4cHNxAH4AfQBwc3EAfgCCc3IAE3hzYnRpLmFwaS5TdHJ1Y3R1cmWpqvmAk2/YAAIAA0wACGRlY2xhcmVkcQB+AGVMAAlpbmhlcml0ZWRxAH4AZUwAB3BhcmVudHNxAH4AZXhxAH4AhnNxAH4AfQBwc3EAfgCCdXEAfgBgAAAAAHNxAH4AfQBwc3EAfgCCdXEAfgBgAAAAAHNxAH4AfQBwc3EAfgCCdXIAEVtMeHNidGkuYXBpLlR5cGU7dP+lWnv56UECAAB4cAAAAAZzcgAUeHNidGkuYXBpLlByb2plY3Rpb27z0o1U6UWkLQIAAkwAAmlkcQB+AA1MAAZwcmVmaXh0ABZMeHNidGkvYXBpL1NpbXBsZVR5cGU7eHEAfgCFdAAMU2VyaWFsaXphYmxlc3IAE3hzYnRpLmFwaS5TaW5nbGV0b278p1/4z1bkRgIAAUwABHBhdGh0ABBMeHNidGkvYXBpL1BhdGg7eHEAfgCFc3IADnhzYnRpLmFwaS5QYXRomz1cCM6lJ4QCAAFbAApjb21wb25lbnRzdAAaW0x4c2J0aS9hcGkvUGF0aENvbXBvbmVudDt4cHVyABpbTHhzYnRpLmFwaS5QYXRoQ29tcG9uZW50O0PaCXQtZxZ0AgAAeHAAAAACc3IADHhzYnRpLmFwaS5JZJgybIs3U8RAAgABTAACaWRxAH4ADXhyABd4c2J0aS5hcGkuUGF0aENvbXBvbmVudF+aIlsuhp+8AgAAeHB0AAVzY2FsYXNyAA54c2J0aS5hcGkuVGhpc9sJ7abMWkBcAgAAeHEAfgCjc3EAfgCWcQB+AJlzcQB+AJpzcQB+AJ11cQB+AKAAAAADc3EAfgCidAAEamF2YXNxAH4AonQAAmlvcQB+AKdzcQB+AJZ0AAdQcm9kdWN0cQB+AJxzcQB+AJZ0AAZFcXVhbHNxAH4AnHNxAH4AlnQABk9iamVjdHNxAH4AmnNxAH4AnXVxAH4AoAAAAANzcQB+AKJxAH4ArXNxAH4AonQABGxhbmdxAH4Ap3NxAH4AlnQAA0FueXEAfgCcdXIAFFtMeHNidGkuYXBpLlBhY2thZ2U7WxMZN3CnJ6ECAAB4cAAAAAFzcgAReHNidGkuYXBpLlBhY2thZ2V+WY/2rs45WAIAAUwABG5hbWVxAH4ADXhwdAAHc3F1ZXJ5bHNyABV4c2J0aS5hcGkuQ29tcGlsYXRpb27t+uDDauigQgIAAkoACXN0YXJ0VGltZVsAB291dHB1dHN0ABpbTHhzYnRpL2FwaS9PdXRwdXRTZXR0aW5nO3hwAAABS9X1+2x1cgAaW0x4c2J0aS5hcGkuT3V0cHV0U2V0dGluZzt/asLzp4elQgIAAHhwAAAAAXNyABd4c2J0aS5hcGkuT3V0cHV0U2V0dGluZ3rZmkd0+x17AgACTAAPb3V0cHV0RGlyZWN0b3J5cQB+AA1MAA9zb3VyY2VEaXJlY3RvcnlxAH4ADXhwdABWL1VzZXJzL25pY29sYXNsYXRvcnJlL0RvY3VtZW50cy9VU0kvVGVzaS9TdGFja092ZXJmbG93Vmlld2VyL3RhcmdldC9zY2FsYS0yLjExL2NsYXNzZXN0AAEvdXIAAltCrPMX+AYIVOACAAB4cAAAABTs6U92wkjjHoE2ZDDJlBCCAvGOhQ==
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> 
+rO0ABXNyABB4c2J0aS5hcGkuU291cmNlFlpwRASfbtoCAAZJAAdhcGlIYXNoWgAIaGFzTWFjcm9MABhfaW50ZXJuYWxPbmx5X25hbWVIYXNoZXN0ACRMeHNidGkvYXBpL19pbnRlcm5hbE9ubHlfTmFtZUhhc2hlcztMAANhcGl0ABVMeHNidGkvYXBpL1NvdXJjZUFQSTtMAAtjb21waWxhdGlvbnQAF0x4c2J0aS9hcGkvQ29tcGlsYXRpb247WwAEaGFzaHQAAltCeHAwjIMzAHNyACJ4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaGVzVNq+mfrU7EwCAAJbAA9pbXBsaWNpdE1lbWJlcnN0ACNbTHhzYnRpL2FwaS9faW50ZXJuYWxPbmx5X05hbWVIYXNoO1sADnJlZ3VsYXJNZW1iZXJzcQB+AAd4cHVyACNbTHhzYnRpLmFwaS5faW50ZXJuYWxPbmx5X05hbWVIYXNoO0lagLbdlov0AgAAeHAAAAAAdXEAfgAJAAAAK3NyACB4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaFsO9SJ2OFfPAgACSQAEaGFzaEwABG5hbWV0ABJMamF2YS9sYW5nL1N0cmluZzt4cIQP94R0AAZub3RpZnlzcQB+AAz1hesydAAEYm9keXNxAH4ADNkJwfd0AAR3YWl0c3EAfgAM4Veoa3QADSRhc0luc3RhbmNlT2ZzcQB+AAx6tN5bdAAJdmlld0NvdW50c3EAfgAMsbNdh3QABmVxdWFsc3NxAH4ADBigdEp0ABFsYXN0QWN0aXZpdHlkRGF0ZXNxAH4ADKrHqPt0AAxsYXN0RWRpdG9ySWRzcQB+AAxjKyIUdAAEdGFnc3NxAH4ADGV7WcJ0AAxhc0luc3RhbmNlT2ZzcQB+AAxOeJU7dAALYW5zd2VyQ291bnRzcQB+AAwH7LAmdAANY29tbW1lbnRDb3VudHNxAH4ADLZ0r+d0AAxzeW5jaHJvbml6ZWRzcQB+AAxwWQVbdAAFc2NvcmVzcQB+AAwXwWpSdAANJGlzSW5zdGFuY2VPZnNxAH4ADJGHfw90ABBhY2NlcHRlZEFuc3dlcklkc3EAfgAMlEGHunQACW5vdGlmeUFsbHNxAH4ADNS9nEd0AAxpc0luc3RhbmNlT2ZzcQB+AAzNIdnedAAGPGluaXQ+c3EAfgAMAKRLTXQAAmlkc3EAfgAMwv0CQnQACmNsb3NlZERhdGVzcQB+AAzFZHZ+dAASY29tbXVuaXR5T3duZWREYXRlc3EAfgAMnIXgenQAFWxhc3RFZGl0b3JEaXNwbGF5TmFtZXNxAH4ADN2TvAx0AAI9PXNxAH4ADEOxrUZ0AARQb3N0c3EAfgAMaX/Ki3QABWNsb25lc3EAfgAMg/6ddXQACnBvc3RUeXBlSWRzcQB+AAxwpfQ4dAAHb3duZXJJZHNxAH4ADKOsEJV0AAxjcmVhdGlvbkRhdGVzcQB+AAw/EUGUdAAIdG9TdHJpbmdzcQB+AAzOq0EhdAAJR29vZFBvc3Rzc3EAfgAMAeLJKHQACEJhZFBvc3Rzc3EAfgAMCaAXp3QAAiE9c3EAfgAMo7kCfnQACGdldENsYXNzc3EAfgAMytXlBHQABXRpdGxlc3EAfgAMG5nTqnQADGxhc3RFZGl0RGF0ZXNxAH4ADIWyvaV0AAJuZXNxAH4ADE1IYsB0AAhwYXJlbnRJZHNxAH4ADD+6r9F0AA1mYXZvcml0ZUNvdW50c3EAfgAMxx34KHQAAmVxc3EAfgAMVFjbrHQAAiMjc3EAfgAMOPJx/XQACGZpbmFsaXplc3EAfgAMoVUQ8XQACGhhc2hDb2Rlc3IAE3hzYnRpLmFwaS5Tb3VyY2VBUEm5Xqf5KSM4pAIAAlsAC2RlZmluaXRpb25zdAAXW0x4c2J0aS9hcGkvRGVmaW5pdGlvbjtbAAhwYWNrYWdlc3QAFFtMeHNidGkvYXBpL1BhY2thZ2U7eHB1cgAXW0x4c2J0aS5hcGkuRGVmaW5pdGlvbjuIyVzntONeDgIAAHhwAAAAA3NyABN4c2J0aS5hcGkuQ2xhc3NMaWtlgzQcod+wl2wCAARMAA5kZWZpbml0aW9uVHlwZXQAGkx4c2J0aS9hcGkvRGVmaW5pdGlvblR5cGU7WwAQc2F2ZWRBbm5vdGF0aW9uc3QAE1tMamF2YS9sYW5nL1N0cmluZztMAAhzZWxmVHlwZXQAEEx4c2J0aS9hcGkvTGF6eTtMAAlzdHJ1Y3R1cmVxAH4AbXhyACF4c2J0aS5hcGkuUGFyYW1ldGVyaXplZERlZmluaXRpb275EW6x1VA84gIAAVsADnR5cGVQYXJhbWV0ZXJzdAAaW0x4c2J0aS9hcGkvVHlwZVBhcmFtZXRlcjt4cgAUeHNidGkuYXBpLkRlZmluaXRpb26HKhvocULjRgIABEwABmFjY2Vzc3QAEkx4c2J0aS9hcGkvQWNjZXNzO1sAC2Fubm90YXRpb25zdAAXW0x4c2J0aS9hcGkvQW5ub3RhdGlvbjtMAAltb2RpZmllcnN0ABVMeHNidGkvYXBpL01vZGlmaWVycztMAARuYW1lcQB+AA14cHNyABB4c2J0aS5hcGkuUHVibGljulg9rmwtYEICAAB4cgAQeHNidGkuYXBpLkFjY2Vzc91imvgdYzFIAgAAeHB1cgAXW0x4c2J0aS5hcGkuQW5ub3RhdGlvbjvrl+sZEPaNSAIAAHhwAAAAAHNyABN4c2J0aS5hcGkuTW9kaWZpZXJzxxETIWmc3CQCAAFCAAVmbGFnc3hwAHQAEHNxdWVyeWwuQmFkUG9zdHN1cgAaW0x4c2J0aS5hcGkuVHlwZVBhcmFtZXRlcjvZbSYPKJ3ytgIAAHhwAAAAAH5yABh4c2J0aS5hcGkuRGVmaW5pdGlvblR5cGUAAAAAAAAAABIAAHhyAA5qYXZhLmxhbmcuRW51bQAAAAAAAAAAEgAAeHB0AAhDbGFzc0RlZnVyABNbTGphdmEubGFuZy5TdHJpbmc7rdJW5+kde0cCAAB4cAAAAABzcgATeHNidGkuU2FmZUxhenkkSW1wbFACLpOXl0A/AgADWgAIYml0bWFwJDBMAAJfdHQAEkxqYXZhL2xhbmcvT2JqZWN0O0wABGV2YWx0ABFMc2NhbGEvRnVuY3Rpb24wO3hyABZ4c2J0aS5hcGkuQWJzdHJhY3RMYXp503e1AV+756ACAAB4cABwc3IAIHhzYnRpLlNhZmVMYXp5JCRhbm9uZnVuJHN0cmljdCQxAAAAAAAAAAACAAFMAAd2YWx1ZSQxcQB+AIZ4cHNyABN4c2J0aS5hcGkuRW1wdHlUeXBlvP2eRkk7iSQCAAB4cgAUeHNidGkuYXBpLlNpbXBsZVR5cGVyeGKIISO/QAIAAHhyAA54c2J0aS5hcGkuVHlwZT9q2SEWSarKAgAAeHBzcQB+AIUAcHNxAH4AinNyABN4c2J0aS5hcGkuU3RydWN0dXJlqar5gJNv2AACAANMAAhkZWNsYXJlZHEAfgBtTAAJaW5oZXJpdGVkcQB+AG1MAAdwYXJlbnRzcQB+AG14cQB+AI5zcQB+AIUAcHNxAH4AinVxAH4AaAAAAABzcQB+AIUAcHNxAH4AinVxAH4AaAAAAABzcQB+AIUAcHNxAH4AinVyABFbTHhzYnRpLmFwaS5UeXBlO3T/pVp7+elBAgAAeHAAAAADc3IAFHhzYnRpLmFwaS5Qcm9qZWN0aW9u89KNVOlFpC0CAAJMAAJpZHEAfgANTAAGcHJlZml4dAAWTHhzYnRpL2FwaS9TaW1wbGVUeXBlO3hxAH4AjXQABFBvc3RzcgATeHNidGkuYXBpLlNpbmdsZXRvbvynX/jPVuRGAgABTAAEcGF0aHQAEEx4c2J0aS9hcGkvUGF0aDt4cQB+AI1zcgAOeHNidGkuYXBpLlBhdGibPVwIzqUnhAIAAVsACmNvbXBvbmVudHN0ABpbTHhzYnRpL2FwaS9QYXRoQ29tcG9uZW50O3hwdXIAGltMeHNidGkuYXBpLlBhdGhDb21wb25lbnQ7Q9oJdC1nFnQCAAB4cAAAAAJzcgAMeHNidGkuYXBpLklkmDJsizdTxEACAAFMAAJpZHEAfgANeHIAF3hzYnRpLmFwaS5QYXRoQ29tcG9uZW50X5oiWy6Gn7wCAAB4cHQAB3NxdWVyeWxzcgAOeHNidGkuYXBpLlRoaXPbCe2mzFpAXAIAAHhxAH4Aq3NxAH4AnnQABk9iamVjdHNxAH4AonNxAH4ApXVxAH4AqAAAAANzcQB+AKp0AARqYXZhc3EAfgCqdAAEbGFuZ3EAfgCvc3EAfgCedAADQW55c3EAfgCic3EAfgCldXEAfgCoAAAAAnNxAH4AqnQABXNjYWxhcQB+AK9zcQB+AGpxAH4Ad3VxAH4AeAAAAABzcQB+AHoAdAARc3F1ZXJ5bC5Hb29kUG9zdHN1cQB+AH0AAAAAcQB+AIF1cQB+AIMAAAAAc3EAfgCFAHBzcQB+AIpxAH4Aj3NxAH4AhQBwc3EAfgCKc3EAfgCSc3EAfgCFAHBzcQB+AIp1cQB+AGgAAAAAc3EAfgCFAHBzcQB+AIp1cQB+AGgAAAAAc3EAfgCFAHBzcQB+AIp1cQB+AJwAAAADc3EAfgCedAAEUG9zdHNxAH4AonNxAH4ApXVxAH4AqAAAAAJzcQB+AKp0AAdzcXVlcnlscQB+AK9zcQB+AJ5xAH4AsXNxAH4AonNxAH4ApXVxAH4AqAAAAANzcQB+AKpxAH4AtnNxAH4AqnEAfgC4cQB+AK9zcQB+AJ5xAH4AunNxAH4AonNxAH4ApXVxAH4AqAAAAAJzcQB+AKpxAH4Av3EAfgCvc3EAfgBqcQB+AHd1cQB+AHgAAAAAc3EAfgB6AHQADHNxdWVyeWwuUG9zdHVxAH4AfQAAAABxAH4AgXVxAH4AgwAAAABzcQB+AIUAcHNxAH4AinEAfgCPc3EAfgCFAHBzcQB+AIpzcQB+AJJzcQB+AIUAcHNxAH4AinVxAH4AaAAAAABzcQB+AIUAcHNxAH4AinVxAH4AaAAAAABzcQB+AIUAcHNxAH4AinVxAH4AnAAAAAJzcQB+AJ5xAH4AsXNxAH4AonNxAH4ApXVxAH4AqAAAAANzcQB+AKpxAH4AtnNxAH4AqnEAfgC4cQB+AK9zcQB+AJ5xAH4AunNxAH4AonNxAH4ApXVxAH4AqAAAAAJzcQB+AKpxAH4Av3EAfgCvdXIAFFtMeHNidGkuYXBpLlBhY2thZ2U7WxMZN3CnJ6ECAAB4cAAAAAFzcgAReHNidGkuYXBpLlBhY2thZ2V+WY/2rs45WAIAAUwABG5hbWVxAH4ADXhwdAAHc3F1ZXJ5bHNyABV4c2J0aS5hcGkuQ29tcGlsYXRpb27t+uDDauigQgIAAkoACXN0YXJ0VGltZVsAB291dHB1dHN0ABpbTHhzYnRpL2FwaS9PdXRwdXRTZXR0aW5nO3hwAAABS9X1+2x1cgAaW0x4c2J0aS5hcGkuT3V0cHV0U2V0dGluZzt/asLzp4elQgIAAHhwAAAAAXNyABd4c2J0aS5hcGkuT3V0cHV0U2V0dGluZ3rZmkd0+x17AgACTAAPb3V0cHV0RGlyZWN0b3J5cQB+AA1MAA9zb3VyY2VEaXJlY3RvcnlxAH4ADXhwdABWL1VzZXJzL25pY29sYXNsYXRvcnJlL0RvY3VtZW50cy9VU0kvVGVzaS9TdGFja092ZXJmbG93Vmlld2VyL3RhcmdldC9zY2FsYS0yLjExL2NsYXNzZXN0AAEvdXIAAltCrPMX+AYIVOACAAB4cAAAABSrAsOk1WUya71VOpL7HtU5IamYGQ==
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> 
+rO0ABXNyABB4c2J0aS5hcGkuU291cmNlFlpwRASfbtoCAAZJAAdhcGlIYXNoWgAIaGFzTWFjcm9MABhfaW50ZXJuYWxPbmx5X25hbWVIYXNoZXN0ACRMeHNidGkvYXBpL19pbnRlcm5hbE9ubHlfTmFtZUhhc2hlcztMAANhcGl0ABVMeHNidGkvYXBpL1NvdXJjZUFQSTtMAAtjb21waWxhdGlvbnQAF0x4c2J0aS9hcGkvQ29tcGlsYXRpb247WwAEaGFzaHQAAltCeHAyk2eRAHNyACJ4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaGVzVNq+mfrU7EwCAAJbAA9pbXBsaWNpdE1lbWJlcnN0ACNbTHhzYnRpL2FwaS9faW50ZXJuYWxPbmx5X05hbWVIYXNoO1sADnJlZ3VsYXJNZW1iZXJzcQB+AAd4cHVyACNbTHhzYnRpLmFwaS5faW50ZXJuYWxPbmx5X05hbWVIYXNoO0lagLbdlov0AgAAeHAAAAAAdXEAfgAJAAAALXNyACB4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaFsO9SJ2OFfPAgACSQAEaGFzaEwABG5hbWV0ABJMamF2YS9sYW5nL1N0cmluZzt4cFUzZpR0AAxyZXZpc2lvbkdVSURzcQB+AAxViOcLdAAGbm90aWZ5c3EAfgAM/+XAvXQAD3VzZXJEaXNwbGF5TmFtZXNxAH4ADFVVlVp0AAR3YWl0c3EAfgAMunKlp3QADmNvcHkkZGVmYXVsdCQyc3EAfgAMZvsgknQADSRhc0luc3RhbmNlT2ZzcQB+AAzba1uwdAAOY29weSRkZWZhdWx0JDVzcQB+AAwQ27YSdAAMcHJvZHVjdEFyaXR5c3EAfgAMsSD7wnQABmVxdWFsc3NxAH4ADE4aA+h0AA5jb3B5JGRlZmF1bHQkOXNxAH4ADIfQeL90AAxhc0luc3RhbmNlT2ZzcQB+AAxnWlTjdAAMc3luY2hyb25pemVkc3EAfgAMfy+TgHQADSRpc0luc3RhbmNlT2ZzcQB+AAxGx8sUdAAOY29weSRkZWZhdWx0JDhzcQB+AAzVkUT9dAAEdGV4dHNxAH4ADCNBG0h0AAhjYW5FcXVhbHNxAH4ADEAzV2R0AA5jb3B5JGRlZmF1bHQkNHNxAH4ADF1uOth0AA1wcm9kdWN0UHJlZml4c3EAfgAMYze7dXQACW5vdGlmeUFsbHNxAH4ADEXIWJ90AAxpc0luc3RhbmNlT2ZzcQB+AAyizPx7dAAGPGluaXQ+c3EAfgAMTbrDfHQAAmlkc3EAfgAMgvOy6XQAAj09c3EAfgAMWNr+c3QABnBvc3RJZHNxAH4ADDMejER0AAVjbG9uZXNxAH4ADO7oYgl0AAdjb21tZW50c3EAfgAMLMh56XQADmNvcHkkZGVmYXVsdCQ3c3EAfgAMn+KYL3QADGNyZWF0aW9uRGF0ZXNxAH4ADJSdIzt0AA5jb3B5JGRlZmF1bHQkM3NxAH4ADHJWS4V0AARjb3B5c3EAfgAMTRK1vnQACHRvU3RyaW5nc3EAfgAM5QqxVXQAAiE9c3EAfgAMcBgeGXQADFBvc3RzSGlzdG9yeXNxAH4ADIbaQbl0AAhnZXRDbGFzc3NxAH4ADGWoRl90AAZ1c2VySWRzcQB+AAyH1a0YdAAOY29weSRkZWZhdWx0JDFzcQB+AAxTZkbddAAOY29weSRkZWZhdWx0JDZzcQB+AAxxXdDHdAACbmVzcQB+AAwaJg/fdAARcG9zdEhpc3RvcnlUeXBlSWRzcQB+AAw/N5USdAACZXFzcQB+AAwpMmTidAAPcHJvZHVjdEl0ZXJhdG9yc3EAfgAMSM3s/3QAAiMjc3EAfgAMGJadOnQACGZpbmFsaXplc3EAfgAMjZYd4nQADnByb2R1Y3RFbGVtZW50c3EAfgAMppgIsXQACGhhc2hDb2Rlc3IAE3hzYnRpLmFwaS5Tb3VyY2VBUEm5Xqf5KSM4pAIAAlsAC2RlZmluaXRpb25zdAAXW0x4c2J0aS9hcGkvRGVmaW5pdGlvbjtbAAhwYWNrYWdlc3QAFFtMeHNidGkvYXBpL1BhY2thZ2U7eHB1cgAXW0x4c2J0aS5hcGkuRGVmaW5pdGlvbjuIyVzntONeDgIAAHhwAAAAAXNyABN4c2J0aS5hcGkuQ2xhc3NMaWtlgzQcod+wl2wCAARMAA5kZWZpbml0aW9uVHlwZXQAGkx4c2J0aS9hcGkvRGVmaW5pdGlvblR5cGU7WwAQc2F2ZWRBbm5vdGF0aW9uc3QAE1tMamF2YS9sYW5nL1N0cmluZztMAAhzZWxmVHlwZXQAEEx4c2J0aS9hcGkvTGF6eTtMAAlzdHJ1Y3R1cmVxAH4AcXhyACF4c2J0aS5hcGkuUGFyYW1ldGVyaXplZERlZmluaXRpb275EW6x1VA84gIAAVsADnR5cGVQYXJhbWV0ZXJzdAAaW0x4c2J0aS9hcGkvVHlwZVBhcmFtZXRlcjt4cgAUeHNidGkuYXBpLkRlZmluaXRpb26HKhvocULjRgIABEwABmFjY2Vzc3QAEkx4c2J0aS9hcGkvQWNjZXNzO1sAC2Fubm90YXRpb25zdAAXW0x4c2J0aS9hcGkvQW5ub3RhdGlvbjtMAAltb2RpZmllcnN0ABVMeHNidGkvYXBpL01vZGlmaWVycztMAARuYW1lcQB+AA14cHNyABB4c2J0aS5hcGkuUHVibGljulg9rmwtYEICAAB4cgAQeHNidGkuYXBpLkFjY2Vzc91imvgdYzFIAgAAeHB1cgAXW0x4c2J0aS5hcGkuQW5ub3RhdGlvbjvrl+sZEPaNSAIAAHhwAAAAAHNyABN4c2J0aS5hcGkuTW9kaWZpZXJzxxETIWmc3CQCAAFCAAVmbGFnc3hwAHQAFHNxdWVyeWwuUG9zdHNIaXN0b3J5dXIAGltMeHNidGkuYXBpLlR5cGVQYXJhbWV0ZXI72W0mDyid8rYCAAB4cAAAAAB+cgAYeHNidGkuYXBpLkRlZmluaXRpb25UeXBlAAAAAAAAAAASAAB4cgAOamF2YS5sYW5nLkVudW0AAAAAAAAAABIAAHhwdAAIQ2xhc3NEZWZ1cgATW0xqYXZhLmxhbmcuU3RyaW5nO63SVufpHXtHAgAAeHAAAAAAc3IAE3hzYnRpLlNhZmVMYXp5JEltcGxQAi6Tl5dAPwIAA1oACGJpdG1hcCQwTAACX3R0ABJMamF2YS9sYW5nL09iamVjdDtMAARldmFsdAARTHNjYWxhL0Z1bmN0aW9uMDt4cgAWeHNidGkuYXBpLkFic3RyYWN0TGF6edN3tQFfu+egAgAAeHAAcHNyACB4c2J0aS5TYWZlTGF6eSQkYW5vbmZ1biRzdHJpY3QkMQAAAAAAAAAAAgABTAAHdmFsdWUkMXEAfgCKeHBzcgATeHNidGkuYXBpLkVtcHR5VHlwZbz9nkZJO4kkAgAAeHIAFHhzYnRpLmFwaS5TaW1wbGVUeXBlcnhiiCEjv0ACAAB4cgAOeHNidGkuYXBpLlR5cGU/atkhFkmqygIAAHhwc3EAfgCJAHBzcQB+AI5zcgATeHNidGkuYXBpLlN0cnVjdHVyZamq+YCTb9gAAgADTAAIZGVjbGFyZWRxAH4AcUwACWluaGVyaXRlZHEAfgBxTAAHcGFyZW50c3EAfgBxeHEAfgCSc3EAfgCJAHBzcQB+AI51cQB+AGwAAAAAc3EAfgCJAHBzcQB+AI51cQB+AGwAAAAAc3EAfgCJAHBzcQB+AI51cgARW0x4c2J0aS5hcGkuVHlwZTt0/6Vae/npQQIAAHhwAAAABnNyABR4c2J0aS5hcGkuUHJvamVjdGlvbvPSjVTpRaQtAgACTAACaWRxAH4ADUwABnByZWZpeHQAFkx4c2J0aS9hcGkvU2ltcGxlVHlwZTt4cQB+AJF0AAxTZXJpYWxpemFibGVzcgATeHNidGkuYXBpLlNpbmdsZXRvbvynX/jPVuRGAgABTAAEcGF0aHQAEEx4c2J0aS9hcGkvUGF0aDt4cQB+AJFzcgAOeHNidGkuYXBpLlBhdGibPVwIzqUnhAIAAVsACmNvbXBvbmVudHN0ABpbTHhzYnRpL2FwaS9QYXRoQ29tcG9uZW50O3hwdXIAGltMeHNidGkuYXBpLlBhdGhDb21wb25lbnQ7Q9oJdC1nFnQCAAB4cAAAAAJzcgAMeHNidGkuYXBpLklkmDJsizdTxEACAAFMAAJpZHEAfgANeHIAF3hzYnRpLmFwaS5QYXRoQ29tcG9uZW50X5oiWy6Gn7wCAAB4cHQABXNjYWxhc3IADnhzYnRpLmFwaS5UaGlz2wntpsxaQFwCAAB4cQB+AK9zcQB+AKJxAH4ApXNxAH4ApnNxAH4AqXVxAH4ArAAAAANzcQB+AK50AARqYXZhc3EAfgCudAACaW9xAH4As3NxAH4AonQAB1Byb2R1Y3RxAH4AqHNxAH4AonQABkVxdWFsc3EAfgCoc3EAfgCidAAGT2JqZWN0c3EAfgCmc3EAfgCpdXEAfgCsAAAAA3NxAH4ArnEAfgC5c3EAfgCudAAEbGFuZ3EAfgCzc3EAfgCidAADQW55cQB+AKh1cgAUW0x4c2J0aS5hcGkuUGFja2FnZTtbExk3cKcnoQIAAHhwAAAAAXNyABF4c2J0aS5hcGkuUGFja2FnZX5Zj/auzjlYAgABTAAEbmFtZXEAfgANeHB0AAdzcXVlcnlsc3IAFXhzYnRpLmFwaS5Db21waWxhdGlvbu364MNq6KBCAgACSgAJc3RhcnRUaW1lWwAHb3V0cHV0c3QAGltMeHNidGkvYXBpL091dHB1dFNldHRpbmc7eHAAAAFL1fX7bHVyABpbTHhzYnRpLmFwaS5PdXRwdXRTZXR0aW5nO39qwvOnh6VCAgAAeHAAAAABc3IAF3hzYnRpLmFwaS5PdXRwdXRTZXR0aW5netmaR3T7HXsCAAJMAA9vdXRwdXREaXJlY3RvcnlxAH4ADUwAD3NvdXJjZURpcmVjdG9yeXEAfgANeHB0AFYvVXNlcnMvbmljb2xhc2xhdG9ycmUvRG9jdW1lbnRzL1VTSS9UZXNpL1N0YWNrT3ZlcmZsb3dWaWV3ZXIvdGFyZ2V0L3NjYWxhLTIuMTEvY2xhc3Nlc3QAAS91cgACW0Ks8xf4BghU4AIAAHhwAAAAFEjBNZ7tfdAGNvJRNml7jOEjiB0W
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> 
+rO0ABXNyABB4c2J0aS5hcGkuU291cmNlFlpwRASfbtoCAAZJAAdhcGlIYXNoWgAIaGFzTWFjcm9MABhfaW50ZXJuYWxPbmx5X25hbWVIYXNoZXN0ACRMeHNidGkvYXBpL19pbnRlcm5hbE9ubHlfTmFtZUhhc2hlcztMAANhcGl0ABVMeHNidGkvYXBpL1NvdXJjZUFQSTtMAAtjb21waWxhdGlvbnQAF0x4c2J0aS9hcGkvQ29tcGlsYXRpb247WwAEaGFzaHQAAltCeHDdaVAZAHNyACJ4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaGVzVNq+mfrU7EwCAAJbAA9pbXBsaWNpdE1lbWJlcnN0ACNbTHhzYnRpL2FwaS9faW50ZXJuYWxPbmx5X05hbWVIYXNoO1sADnJlZ3VsYXJNZW1iZXJzcQB+AAd4cHVyACNbTHhzYnRpLmFwaS5faW50ZXJuYWxPbmx5X05hbWVIYXNoO0lagLbdlov0AgAAeHAAAAACc3IAIHhzYnRpLmFwaS5faW50ZXJuYWxPbmx5X05hbWVIYXNoWw71InY4V88CAAJJAARoYXNoTAAEbmFtZXQAEkxqYXZhL2xhbmcvU3RyaW5nO3hwQUhFNXQACnRoaXNTY2hlbWFzcQB+AAv189qJdAAYYW55UmVmMkFjdGl2ZVRyYW5zYWN0aW9udXEAfgAJAAAAXHNxAH4AC9zT/+x0ABJ0YWJsZU5hbWVGcm9tQ2xhc3NzcQB+AAvg+VUldAAGbm90aWZ5c3EAfgALjhTZjnQAGmNvbHVtbk5hbWVGcm9tUHJvcGVydHlOYW1lc3EAfgALreviEnQACWV2ZW50TmFtZXNxAH4ACyuxR4d0AAxfbmFtaW5nU2NvcGVzcQB+AAupDxvpdAAEbmFtZXNxAH4AC56E3dZ0ABRjYW1lbENhc2UydW5kZXJTY29yZXNxAH4AC6JKUVJ0AANhcmVzcQB+AAvdqPVYdAATQ29sR3JvdXBEZWNsYXJhdGlvbnNxAH4AC/oWPdh0AAR3YWl0c3EAfgALvM8QwHQADSRhc0luc3RhbmNlT2ZzcQB+AAsDlCIddAAVUmVmZXJlbnRpYWxBY3Rpb25JbXBsc3EAfgALnZjHSXQABXZvdGVzc3EAfgALXoYfiHQABXBvc3Rzc3EAfgALmdRF3XQADGJlZm9yZUluc2VydHNxAH4ACwUwMFh0AA5fcGVyZm9ybUFjdGlvbnNxAH4AC052MVR0AAhvbkRlbGV0ZXNxAH4AC/TQvYN0AAZlcXVhbHNzcQB+AAtboUGudAAFZXZlbnRzcQB+AAs8QD4SdAANY29sdW1uVHlwZUZvcnNxAH4ACyiUEBd0AAlnb29kUG9zdHNzcQB+AAuGnhQtdAAHc25ha2lmeXNxAH4AC6Avwy90AAxhc0luc3RhbmNlT2ZzcQB+AAtENZkkdAAFdXNlcnNzcQB+AAtuUT2HdAAMc3luY2hyb25pemVkc3EAfgALoFfcG3QAD2F1dG9JbmNyZW1lbnRlZHNxAH4AC+jnb7d0ABxhcHBseURlZmF1bHRGb3JlaWduS2V5UG9saWN5c3EAfgALuBG1PHQADSRpc0luc3RhbmNlT2ZzcQB+AAvf6KBSdAAGY3JlYXRlc3EAfgALKphQPHQACGJhZFBvc3Rzc3EAfgALUtcWenQAC2FmdGVyVXBkYXRlc3EAfgALvhf2vXQAB2luZGV4ZWRzcQB+AAt34MjddAAJX2FkZFRhYmxlc3EAfgALxt1izHQAJ2RlZmF1bHRDb2x1bW5BdHRyaWJ1dGVzRm9yS2V5ZWRFbnRpdHlJZHNxAH4AC8vM/O10AAlub3RpZnlBbGxzcQB+AAtqreySdAAFbmFtZWRzcQB+AAuELqx7dAAKcHJpbWFyeUtleXNxAH4ACzIngw10AARkcm9wc3EAfgAL5MBz7nQADGlzSW5zdGFuY2VPZnNxAH4AC0lqxOt0AAxBY3RpdmVSZWNvcmRzcQB+AAvd+etRdAAIb25VcGRhdGVzcQB+AAsmb86udAAMdW5pbnNlcnRhYmxlc3EAfgALC6ntTXQAC3VudXBkYXRhYmxlc3EAfgALOUmpy3QADF9hZGRSZWxhdGlvbnNxAH4AC2w4Ynl0AApfY2FsbGJhY2tzc3EAfgALoeR6ZnQACG5vQWN0aW9uc3EAfgALN2oTEHQAEGZpbmRBbGxUYWJsZXNGb3JzcQB+AAt4r7NIdAAmY3JlYXRlQ29sdW1uR3JvdXBDb25zdHJhaW50c0FuZEluZGV4ZXNzcQB+AAvdNvhedAAGPGluaXQ+c3EAfgALHcmw2HQAAm9uc3EAfgAL8VldSXQAB2RlY2xhcmVzcQB+AAuvq29gdAAaTmFtaW5nQ29udmVudGlvblRyYW5zZm9ybXNzcQB+AAtzx7G4dAACPT1zcQB+AAvQQsO5dAALYWZ0ZXJJbnNlcnRzcQB+AAuw1E4pdAAHY29sdW1uc3NxAH4AC3VS+SF0AA1maW5kVGFibGVzRm9yc3EAfgALiqKAxnQABWNsb25lc3EAfgALktXaH3QAB2Nhc2NhZGVzcQB+AAv9pTqAdAALYWZ0ZXJEZWxldGVzcQB+AAtT2Vp+dAAXZGVmYXVsdFNpemVPZkJpZ0RlY2ltYWxzcQB+AAsP8NJDdAAGZGJUeXBlc3EAfgALt7ntjnQADV9hZGRUYWJsZVR5cGVzcQB+AAs65P/2dAAIdG9TdHJpbmdzcQB+AAsJZaZ5dAAMYmVmb3JlVXBkYXRlc3EAfgALyrsAbXQAAiE9c3EAfgALCcKkUXQAFnRhYmxlTmFtZUZyb21DbGFzc05hbWVzcQB+AAtE0YbIdAAIZ2V0Q2xhc3NzcQB+AAulqQT+dAAGdXBkYXRlc3EAfgALbWDE0HQADHBvc3RzSGlzdG9yeXNxAH4ACx1TVnd0AAxiZWZvcmVEZWxldGVzcQB+AAvMHFxUdAAHc2V0TnVsbHNxAH4AC8tH6Z90AARzYXZlc3EAfgALM9FS5nQACWNhbGxiYWNrc3NxAH4AC2FCuTN0AAJuZXNxAH4AC74Y4aB0ABBSZWZlcmVudGlhbEV2ZW50c3EAfgAL2/h/QnQABnRhYmxlc3NxAH4ACwhjJ4l0AAZ1bmlxdWVzcQB+AAuaH3RwdAAGYWN0aW9uc3EAfgALnVu+CnQACHJlc3RyaWN0c3EAfgALS3KSx3QAAmVxc3EAfgALi8Dum3QAHF9jcmVhdGVGb3JlaWduS2V5RGVjbGFyYXRpb25zcQB+AAvkE5U6dAAVZGVmYXVsdExlbmd0aE9mU3RyaW5nc3EAfgALX9rwUnQAAiMjc3EAfgALhyd5w3QACGZpbmFsaXplc3EAfgALMcefbnQABXRhYmxlc3EAfgALJWUeBXQACGhhc2hDb2Rlc3EAfgAL2O73iXQACGNvbW1lbnRzc3EAfgALFHYPVHQAE1N0YWNrRXhjaGFuZ2VTY2hlbWFzcQB+AAtNGZ/hdAAGYmFkZ2Vzc3EAfgALrW5y63QABHZpZXdzcQB+AAvs/YAtdAAIcHJpbnREZGxzcQB+AAtbjLHQdAAKZmFjdG9yeUZvcnNyABN4c2J0aS5hcGkuU291cmNlQVBJuV6n+SkjOKQCAAJbAAtkZWZpbml0aW9uc3QAF1tMeHNidGkvYXBpL0RlZmluaXRpb247WwAIcGFja2FnZXN0ABRbTHhzYnRpL2FwaS9QYWNrYWdlO3hwdXIAF1tMeHNidGkuYXBpLkRlZmluaXRpb247iMlc57TjXg4CAAB4cAAAAAFzcgATeHNidGkuYXBpLkNsYXNzTGlrZYM0HKHfsJdsAgAETAAOZGVmaW5pdGlvblR5cGV0ABpMeHNidGkvYXBpL0RlZmluaXRpb25UeXBlO1sAEHNhdmVkQW5ub3RhdGlvbnN0ABNbTGphdmEvbGFuZy9TdHJpbmc7TAAIc2VsZlR5cGV0ABBMeHNidGkvYXBpL0xhenk7TAAJc3RydWN0dXJlcQB+ANN4cgAheHNidGkuYXBpLlBhcmFtZXRlcml6ZWREZWZpbml0aW9u+RFusdVQPOICAAFbAA50eXBlUGFyYW1ldGVyc3QAGltMeHNidGkvYXBpL1R5cGVQYXJhbWV0ZXI7eHIAFHhzYnRpLmFwaS5EZWZpbml0aW9uhyob6HFC40YCAARMAAZhY2Nlc3N0ABJMeHNidGkvYXBpL0FjY2VzcztbAAthbm5vdGF0aW9uc3QAF1tMeHNidGkvYXBpL0Fubm90YXRpb247TAAJbW9kaWZpZXJzdAAVTHhzYnRpL2FwaS9Nb2RpZmllcnM7TAAEbmFtZXEAfgAMeHBzcgAQeHNidGkuYXBpLlB1YmxpY7pYPa5sLWBCAgAAeHIAEHhzYnRpLmFwaS5BY2Nlc3PdYpr4HWMxSAIAAHhwdXIAF1tMeHNidGkuYXBpLkFubm90YXRpb24765frGRD2jUgCAAB4cAAAAABzcgATeHNidGkuYXBpLk1vZGlmaWVyc8cREyFpnNwkAgABQgAFZmxhZ3N4cAB0ABtzcXVlcnlsLlN0YWNrRXhjaGFuZ2VTY2hlbWF1cgAaW0x4c2J0aS5hcGkuVHlwZVBhcmFtZXRlcjvZbSYPKJ3ytgIAAHhwAAAAAH5yABh4c2J0aS5hcGkuRGVmaW5pdGlvblR5cGUAAAAAAAAAABIAAHhyAA5qYXZhLmxhbmcuRW51bQAAAAAAAAAAEgAAeHB0AAZNb2R1bGV1cgATW0xqYXZhLmxhbmcuU3RyaW5nO63SVufpHXtHAgAAeHAAAAAAc3IAE3hzYnRpLlNhZmVMYXp5JEltcGxQAi6Tl5dAPwIAA1oACGJpdG1hcCQwTAACX3R0ABJMamF2YS9sYW5nL09iamVjdDtMAARldmFsdAARTHNjYWxhL0Z1bmN0aW9uMDt4cgAWeHNidGkuYXBpLkFic3RyYWN0TGF6edN3tQFfu+egAgAAeHAAcHNyACB4c2J0aS5TYWZlTGF6eSQkYW5vbmZ1biRzdHJpY3QkMQAAAAAAAAAAAgABTAAHdmFsdWUkMXEAfgDseHBzcgATeHNidGkuYXBpLkVtcHR5VHlwZbz9nkZJO4kkAgAAeHIAFHhzYnRpLmFwaS5TaW1wbGVUeXBlcnhiiCEjv0ACAAB4cgAOeHNidGkuYXBpLlR5cGU/atkhFkmqygIAAHhwc3EAfgDrAHBzcQB+APBzcgATeHNidGkuYXBpLlN0cnVjdHVyZamq+YCTb9gAAgADTAAIZGVjbGFyZWRxAH4A00wACWluaGVyaXRlZHEAfgDTTAAHcGFyZW50c3EAfgDTeHEAfgD0c3EAfgDrAHBzcQB+APB1cQB+AM4AAAAAc3EAfgDrAHBzcQB+APB1cQB+AM4AAAAAc3EAfgDrAHBzcQB+APB1cgARW0x4c2J0aS5hcGkuVHlwZTt0/6Vae/npQQIAAHhwAAAAA3NyABR4c2J0aS5hcGkuUHJvamVjdGlvbvPSjVTpRaQtAgACTAACaWRxAH4ADEwABnByZWZpeHQAFkx4c2J0aS9hcGkvU2ltcGxlVHlwZTt4cQB+APN0AAZTY2hlbWFzcgATeHNidGkuYXBpLlNpbmdsZXRvbvynX/jPVuRGAgABTAAEcGF0aHQAEEx4c2J0aS9hcGkvUGF0aDt4cQB+APNzcgAOeHNidGkuYXBpLlBhdGibPVwIzqUnhAIAAVsACmNvbXBvbmVudHN0ABpbTHhzYnRpL2FwaS9QYXRoQ29tcG9uZW50O3hwdXIAGltMeHNidGkuYXBpLlBhdGhDb21wb25lbnQ7Q9oJdC1nFnQCAAB4cAAAAANzcgAMeHNidGkuYXBpLklkmDJsizdTxEACAAFMAAJpZHEAfgAMeHIAF3hzYnRpLmFwaS5QYXRoQ29tcG9uZW50X5oiWy6Gn7wCAAB4cHQAA29yZ3NxAH4BEHQAB3NxdWVyeWxzcgAOeHNidGkuYXBpLlRoaXPbCe2mzFpAXAIAAHhxAH4BEXNxAH4BBHQABk9iamVjdHNxAH4BCHNxAH4BC3VxAH4BDgAAAANzcQB+ARB0AARqYXZhc3EAfgEQdAAEbGFuZ3EAfgEXc3EAfgEEdAADQW55c3EAfgEIc3EAfgELdXEAfgEOAAAAAnNxAH4BEHQABXNjYWxhcQB+ARd1cgAUW0x4c2J0aS5hcGkuUGFja2FnZTtbExk3cKcnoQIAAHhwAAAAAXNyABF4c2J0aS5hcGkuUGFja2FnZX5Zj/auzjlYAgABTAAEbmFtZXEAfgAMeHB0AAdzcXVlcnlsc3IAFXhzYnRpLmFwaS5Db21waWxhdGlvbu364MNq6KBCAgACSgAJc3RhcnRUaW1lWwAHb3V0cHV0c3QAGltMeHNidGkvYXBpL091dHB1dFNldHRpbmc7eHAAAAFL1fX7bHVyABpbTHhzYnRpLmFwaS5PdXRwdXRTZXR0aW5nO39qwvOnh6VCAgAAeHAAAAABc3IAF3hzYnRpLmFwaS5PdXRwdXRTZXR0aW5netmaR3T7HXsCAAJMAA9vdXRwdXREaXJlY3RvcnlxAH4ADEwAD3NvdXJjZURpcmVjdG9yeXEAfgAMeHB0AFYvVXNlcnMvbmljb2xhc2xhdG9ycmUvRG9jdW1lbnRzL1VTSS9UZXNpL1N0YWNrT3ZlcmZsb3dWaWV3ZXIvdGFyZ2V0L3NjYWxhLTIuMTEvY2xhc3Nlc3QAAS91cgACW0Ks8xf4BghU4AIAAHhwAAAAFGDTw66B85pPw13pHbZcxYvK/0u9
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> 
+rO0ABXNyABB4c2J0aS5hcGkuU291cmNlFlpwRASfbtoCAAZJAAdhcGlIYXNoWgAIaGFzTWFjcm9MABhfaW50ZXJuYWxPbmx5X25hbWVIYXNoZXN0ACRMeHNidGkvYXBpL19pbnRlcm5hbE9ubHlfTmFtZUhhc2hlcztMAANhcGl0ABVMeHNidGkvYXBpL1NvdXJjZUFQSTtMAAtjb21waWxhdGlvbnQAF0x4c2J0aS9hcGkvQ29tcGlsYXRpb247WwAEaGFzaHQAAltCeHA/84pUAHNyACJ4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaGVzVNq+mfrU7EwCAAJbAA9pbXBsaWNpdE1lbWJlcnN0ACNbTHhzYnRpL2FwaS9faW50ZXJuYWxPbmx5X05hbWVIYXNoO1sADnJlZ3VsYXJNZW1iZXJzcQB+AAd4cHVyACNbTHhzYnRpLmFwaS5faW50ZXJuYWxPbmx5X05hbWVIYXNoO0lagLbdlov0AgAAeHAAAAAAdXEAfgAJAAAANXNyACB4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaFsO9SJ2OFfPAgACSQAEaGFzaEwABG5hbWV0ABJMamF2YS9sYW5nL1N0cmluZzt4cJrk+4l0AAtkaXNwbGF5TmFtZXNxAH4ADLZko1d0AAZub3RpZnlzcQB+AAwx9svTdAAEd2FpdHNxAH4ADD292JF0AApyZXB1dGF0aW9uc3EAfgAMZf6ycnQADmNvcHkkZGVmYXVsdCQyc3EAfgAMT+Bkv3QADSRhc0luc3RhbmNlT2ZzcQB+AAwvWUUydAAIbG9jYXRpb25zcQB+AAxJwmf5dAAOY29weSRkZWZhdWx0JDVzcQB+AAyqRsn4dAAMcHJvZHVjdEFyaXR5c3EAfgAM3SybgnQABmVxdWFsc3NxAH4ADMx/F890AAdhYm91dE1lc3EAfgAMPEIfRnQADmNvcHkkZGVmYXVsdCQ5c3EAfgAMnx/YMXQAD2NvcHkkZGVmYXVsdCQxMnNxAH4ADBa5Php0AAxhc0luc3RhbmNlT2ZzcQB+AAwfRfnNdAAMc3luY2hyb25pemVkc3EAfgAMpmqwwXQADSRpc0luc3RhbmNlT2ZzcQB+AAzcd5D5dAAOY29weSRkZWZhdWx0JDhzcQB+AAxb+STRdAAJZW1haWxIYXNoc3EAfgAMCn4xanQAD2NvcHkkZGVmYXVsdCQxM3NxAH4ADCNvyUp0AAhjYW5FcXVhbHNxAH4ADFHVF590AA5jb3B5JGRlZmF1bHQkNHNxAH4ADMqp/sV0AA1wcm9kdWN0UHJlZml4c3EAfgAM5/Lk0HQAA2FnZXNxAH4ADPbCwJR0AAlub3RpZnlBbGxzcQB+AAxBwHkmdAAMaXNJbnN0YW5jZU9mc3EAfgAMFXnY1nQABjxpbml0PnNxAH4ADFo6HSZ0AAJpZHNxAH4ADLymA+Z0AAI9PXNxAH4ADKs+DAF0AAVjbG9uZXNxAH4ADOU0ATh0AA5jb3B5JGRlZmF1bHQkN3NxAH4ADCaT8nR0AA9jb3B5JGRlZmF1bHQkMTBzcQB+AAwEvtJldAAFdmlld3NzcQB+AAw476jzdAAObGFzdEFjY2Vzc0RhdGVzcQB+AAxf3ht1dAAMY3JlYXRpb25EYXRlc3EAfgAMmQQNH3QABFVzZXJzcQB+AAwebmxedAAKd2Vic2l0ZVVybHNxAH4ADHCKHvx0AA5jb3B5JGRlZmF1bHQkM3NxAH4ADFJ9NhR0AARjb3B5c3EAfgAMbWFAaHQAB3VwVm90ZXNzcQB+AAwbq8HxdAAIdG9TdHJpbmdzcQB+AAzTd3MKdAACIT1zcQB+AAxfbiFXdAAIZ2V0Q2xhc3NzcQB+AAxKdA7WdAAOY29weSRkZWZhdWx0JDFzcQB+AAxgV3R9dAAOY29weSRkZWZhdWx0JDZzcQB+AAwhLYm7dAACbmVzcQB+AAwYAgmadAAPY29weSRkZWZhdWx0JDExc3EAfgAM0nDJ4nQAAmVxc3EAfgAMPZDN53QAD3Byb2R1Y3RJdGVyYXRvcnNxAH4ADOgCksV0AAIjI3NxAH4ADCClKTJ0AAhmaW5hbGl6ZXNxAH4ADLsmyJZ0AA5wcm9kdWN0RWxlbWVudHNxAH4ADKxHNMN0AAhoYXNoQ29kZXNxAH4ADDYUD9h0AAlkb3duVm90ZXNzcgATeHNidGkuYXBpLlNvdXJjZUFQSblep/kpIzikAgACWwALZGVmaW5pdGlvbnN0ABdbTHhzYnRpL2FwaS9EZWZpbml0aW9uO1sACHBhY2thZ2VzdAAUW0x4c2J0aS9hcGkvUGFja2FnZTt4cHVyABdbTHhzYnRpLmFwaS5EZWZpbml0aW9uO4jJXOe0414OAgAAeHAAAAABc3IAE3hzYnRpLmFwaS5DbGFzc0xpa2WDNByh37CXbAIABEwADmRlZmluaXRpb25UeXBldAAaTHhzYnRpL2FwaS9EZWZpbml0aW9uVHlwZTtbABBzYXZlZEFubm90YXRpb25zdAATW0xqYXZhL2xhbmcvU3RyaW5nO0wACHNlbGZUeXBldAAQTHhzYnRpL2FwaS9MYXp5O0wACXN0cnVjdHVyZXEAfgCBeHIAIXhzYnRpLmFwaS5QYXJhbWV0ZXJpemVkRGVmaW5pdGlvbvkRbrHVUDziAgABWwAOdHlwZVBhcmFtZXRlcnN0ABpbTHhzYnRpL2FwaS9UeXBlUGFyYW1ldGVyO3hyABR4c2J0aS5hcGkuRGVmaW5pdGlvbocqG+hxQuNGAgAETAAGYWNjZXNzdAASTHhzYnRpL2FwaS9BY2Nlc3M7WwALYW5ub3RhdGlvbnN0ABdbTHhzYnRpL2FwaS9Bbm5vdGF0aW9uO0wACW1vZGlmaWVyc3QAFUx4c2J0aS9hcGkvTW9kaWZpZXJzO0wABG5hbWVxAH4ADXhwc3IAEHhzYnRpLmFwaS5QdWJsaWO6WD2ubC1gQgIAAHhyABB4c2J0aS5hcGkuQWNjZXNz3WKa+B1jMUgCAAB4cHVyABdbTHhzYnRpLmFwaS5Bbm5vdGF0aW9uO+uX6xkQ9o1IAgAAeHAAAAAAc3IAE3hzYnRpLmFwaS5Nb2RpZmllcnPHERMhaZzcJAIAAUIABWZsYWdzeHAAdAAMc3F1ZXJ5bC5Vc2VydXIAGltMeHNidGkuYXBpLlR5cGVQYXJhbWV0ZXI72W0mDyid8rYCAAB4cAAAAAB+cgAYeHNidGkuYXBpLkRlZmluaXRpb25UeXBlAAAAAAAAAAASAAB4cgAOamF2YS5sYW5nLkVudW0AAAAAAAAAABIAAHhwdAAIQ2xhc3NEZWZ1cgATW0xqYXZhLmxhbmcuU3RyaW5nO63SVufpHXtHAgAAeHAAAAAAc3IAE3hzYnRpLlNhZmVMYXp5JEltcGxQAi6Tl5dAPwIAA1oACGJpdG1hcCQwTAACX3R0ABJMamF2YS9sYW5nL09iamVjdDtMAARldmFsdAARTHNjYWxhL0Z1bmN0aW9uMDt4cgAWeHNidGkuYXBpLkFic3RyYWN0TGF6edN3tQFfu+egAgAAeHAAcHNyACB4c2J0aS5TYWZlTGF6eSQkYW5vbmZ1biRzdHJpY3QkMQAAAAAAAAAAAgABTAAHdmFsdWUkMXEAfgCaeHBzcgATeHNidGkuYXBpLkVtcHR5VHlwZbz9nkZJO4kkAgAAeHIAFHhzYnRpLmFwaS5TaW1wbGVUeXBlcnhiiCEjv0ACAAB4cgAOeHNidGkuYXBpLlR5cGU/atkhFkmqygIAAHhwc3EAfgCZAHBzcQB+AJ5zcgATeHNidGkuYXBpLlN0cnVjdHVyZamq+YCTb9gAAgADTAAIZGVjbGFyZWRxAH4AgUwACWluaGVyaXRlZHEAfgCBTAAHcGFyZW50c3EAfgCBeHEAfgCic3EAfgCZAHBzcQB+AJ51cQB+AHwAAAAAc3EAfgCZAHBzcQB+AJ51cQB+AHwAAAAAc3EAfgCZAHBzcQB+AJ51cgARW0x4c2J0aS5hcGkuVHlwZTt0/6Vae/npQQIAAHhwAAAABnNyABR4c2J0aS5hcGkuUHJvamVjdGlvbvPSjVTpRaQtAgACTAACaWRxAH4ADUwABnByZWZpeHQAFkx4c2J0aS9hcGkvU2ltcGxlVHlwZTt4cQB+AKF0AAxTZXJpYWxpemFibGVzcgATeHNidGkuYXBpLlNpbmdsZXRvbvynX/jPVuRGAgABTAAEcGF0aHQAEEx4c2J0aS9hcGkvUGF0aDt4cQB+AKFzcgAOeHNidGkuYXBpLlBhdGibPVwIzqUnhAIAAVsACmNvbXBvbmVudHN0ABpbTHhzYnRpL2FwaS9QYXRoQ29tcG9uZW50O3hwdXIAGltMeHNidGkuYXBpLlBhdGhDb21wb25lbnQ7Q9oJdC1nFnQCAAB4cAAAAAJzcgAMeHNidGkuYXBpLklkmDJsizdTxEACAAFMAAJpZHEAfgANeHIAF3hzYnRpLmFwaS5QYXRoQ29tcG9uZW50X5oiWy6Gn7wCAAB4cHQABXNjYWxhc3IADnhzYnRpLmFwaS5UaGlz2wntpsxaQFwCAAB4cQB+AL9zcQB+ALJxAH4AtXNxAH4AtnNxAH4AuXVxAH4AvAAAAANzcQB+AL50AARqYXZhc3EAfgC+dAACaW9xAH4Aw3NxAH4AsnQAB1Byb2R1Y3RxAH4AuHNxAH4AsnQABkVxdWFsc3EAfgC4c3EAfgCydAAGT2JqZWN0c3EAfgC2c3EAfgC5dXEAfgC8AAAAA3NxAH4AvnEAfgDJc3EAfgC+dAAEbGFuZ3EAfgDDc3EAfgCydAADQW55cQB+ALh1cgAUW0x4c2J0aS5hcGkuUGFja2FnZTtbExk3cKcnoQIAAHhwAAAAAXNyABF4c2J0aS5hcGkuUGFja2FnZX5Zj/auzjlYAgABTAAEbmFtZXEAfgANeHB0AAdzcXVlcnlsc3IAFXhzYnRpLmFwaS5Db21waWxhdGlvbu364MNq6KBCAgACSgAJc3RhcnRUaW1lWwAHb3V0cHV0c3QAGltMeHNidGkvYXBpL091dHB1dFNldHRpbmc7eHAAAAFL1fX7bHVyABpbTHhzYnRpLmFwaS5PdXRwdXRTZXR0aW5nO39qwvOnh6VCAgAAeHAAAAABc3IAF3hzYnRpLmFwaS5PdXRwdXRTZXR0aW5netmaR3T7HXsCAAJMAA9vdXRwdXREaXJlY3RvcnlxAH4ADUwAD3NvdXJjZURpcmVjdG9yeXEAfgANeHB0AFYvVXNlcnMvbmljb2xhc2xhdG9ycmUvRG9jdW1lbnRzL1VTSS9UZXNpL1N0YWNrT3ZlcmZsb3dWaWV3ZXIvdGFyZ2V0L3NjYWxhLTIuMTEvY2xhc3Nlc3QAAS91cgACW0Ks8xf4BghU4AIAAHhwAAAAFKHJ5aIEW9vnY7GWpfKjgKr5veJo
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> 
+rO0ABXNyABB4c2J0aS5hcGkuU291cmNlFlpwRASfbtoCAAZJAAdhcGlIYXNoWgAIaGFzTWFjcm9MABhfaW50ZXJuYWxPbmx5X25hbWVIYXNoZXN0ACRMeHNidGkvYXBpL19pbnRlcm5hbE9ubHlfTmFtZUhhc2hlcztMAANhcGl0ABVMeHNidGkvYXBpL1NvdXJjZUFQSTtMAAtjb21waWxhdGlvbnQAF0x4c2J0aS9hcGkvQ29tcGlsYXRpb247WwAEaGFzaHQAAltCeHBoGZCvAHNyACJ4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaGVzVNq+mfrU7EwCAAJbAA9pbXBsaWNpdE1lbWJlcnN0ACNbTHhzYnRpL2FwaS9faW50ZXJuYWxPbmx5X05hbWVIYXNoO1sADnJlZ3VsYXJNZW1iZXJzcQB+AAd4cHVyACNbTHhzYnRpLmFwaS5faW50ZXJuYWxPbmx5X05hbWVIYXNoO0lagLbdlov0AgAAeHAAAAAAdXEAfgAJAAAAI3NyACB4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaFsO9SJ2OFfPAgACSQAEaGFzaEwABG5hbWV0ABJMamF2YS9sYW5nL1N0cmluZzt4cI/A+Kd0AAZub3RpZnlzcQB+AAzccY2TdAAEd2FpdHNxAH4ADPxrqcR0AA5jb3B5JGRlZmF1bHQkMnNxAH4ADEScyFx0AA0kYXNJbnN0YW5jZU9mc3EAfgAMMvLeCXQADHByb2R1Y3RBcml0eXNxAH4ADP4PdMN0AAZlcXVhbHNzcQB+AAyjZg6IdAAMYXNJbnN0YW5jZU9mc3EAfgAMPbWIQ3QADHN5bmNocm9uaXplZHNxAH4ADDBQkwx0AA0kaXNJbnN0YW5jZU9mc3EAfgAMBg+ounQACGNhbkVxdWFsc3EAfgAM4PhBgnQADmNvcHkkZGVmYXVsdCQ0c3EAfgAMteSQWHQADXByb2R1Y3RQcmVmaXhzcQB+AAyYU1XUdAAJbm90aWZ5QWxsc3EAfgAMV/PuSXQADGlzSW5zdGFuY2VPZnNxAH4ADBwtsDl0AAY8aW5pdD5zcQB+AAzm4psTdAACaWRzcQB+AAyYZPQrdAAKdm90ZVR5cGVJZHNxAH4ADGXxU6F0AAI9PXNxAH4ADB51G9x0AAZwb3N0SWRzcQB+AAxcb9tsdAAEVm90ZXNxAH4ADPeC1OV0AAVjbG9uZXNxAH4ADInGTfZ0AAxjcmVhdGlvbkRhdGVzcQB+AAxsPpW9dAAOY29weSRkZWZhdWx0JDNzcQB+AAxT9IrPdAAEY29weXNxAH4ADLiLfHV0AAh0b1N0cmluZ3NxAH4ADGWjocR0AAIhPXNxAH4ADBEgz/V0AAhnZXRDbGFzc3NxAH4ADCt8+bl0AA5jb3B5JGRlZmF1bHQkMXNxAH4ADErePgh0AAJuZXNxAH4ADJ+b33Z0AAJlcXNxAH4ADP7nTpl0AA9wcm9kdWN0SXRlcmF0b3JzcQB+AAzBjBegdAACIyNzcQB+AAwgy/4ddAAIZmluYWxpemVzcQB+AAwX8CL1dAAOcHJvZHVjdEVsZW1lbnRzcQB+AAxYGqWwdAAIaGFzaENvZGVzcgATeHNidGkuYXBpLlNvdXJjZUFQSblep/kpIzikAgACWwALZGVmaW5pdGlvbnN0ABdbTHhzYnRpL2FwaS9EZWZpbml0aW9uO1sACHBhY2thZ2VzdAAUW0x4c2J0aS9hcGkvUGFja2FnZTt4cHVyABdbTHhzYnRpLmFwaS5EZWZpbml0aW9uO4jJXOe0414OAgAAeHAAAAABc3IAE3hzYnRpLmFwaS5DbGFzc0xpa2WDNByh37CXbAIABEwADmRlZmluaXRpb25UeXBldAAaTHhzYnRpL2FwaS9EZWZpbml0aW9uVHlwZTtbABBzYXZlZEFubm90YXRpb25zdAATW0xqYXZhL2xhbmcvU3RyaW5nO0wACHNlbGZUeXBldAAQTHhzYnRpL2FwaS9MYXp5O0wACXN0cnVjdHVyZXEAfgBdeHIAIXhzYnRpLmFwaS5QYXJhbWV0ZXJpemVkRGVmaW5pdGlvbvkRbrHVUDziAgABWwAOdHlwZVBhcmFtZXRlcnN0ABpbTHhzYnRpL2FwaS9UeXBlUGFyYW1ldGVyO3hyABR4c2J0aS5hcGkuRGVmaW5pdGlvbocqG+hxQuNGAgAETAAGYWNjZXNzdAASTHhzYnRpL2FwaS9BY2Nlc3M7WwALYW5ub3RhdGlvbnN0ABdbTHhzYnRpL2FwaS9Bbm5vdGF0aW9uO0wACW1vZGlmaWVyc3QAFUx4c2J0aS9hcGkvTW9kaWZpZXJzO0wABG5hbWVxAH4ADXhwc3IAEHhzYnRpLmFwaS5QdWJsaWO6WD2ubC1gQgIAAHhyABB4c2J0aS5hcGkuQWNjZXNz3WKa+B1jMUgCAAB4cHVyABdbTHhzYnRpLmFwaS5Bbm5vdGF0aW9uO+uX6xkQ9o1IAgAAeHAAAAAAc3IAE3hzYnRpLmFwaS5Nb2RpZmllcnPHERMhaZzcJAIAAUIABWZsYWdzeHAAdAAMc3F1ZXJ5bC5Wb3RldXIAGltMeHNidGkuYXBpLlR5cGVQYXJhbWV0ZXI72W0mDyid8rYCAAB4cAAAAAB+cgAYeHNidGkuYXBpLkRlZmluaXRpb25UeXBlAAAAAAAAAAASAAB4cgAOamF2YS5sYW5nLkVudW0AAAAAAAAAABIAAHhwdAAIQ2xhc3NEZWZ1cgATW0xqYXZhLmxhbmcuU3RyaW5nO63SVufpHXtHAgAAeHAAAAAAc3IAE3hzYnRpLlNhZmVMYXp5JEltcGxQAi6Tl5dAPwIAA1oACGJpdG1hcCQwTAACX3R0ABJMamF2YS9sYW5nL09iamVjdDtMAARldmFsdAARTHNjYWxhL0Z1bmN0aW9uMDt4cgAWeHNidGkuYXBpLkFic3RyYWN0TGF6edN3tQFfu+egAgAAeHAAcHNyACB4c2J0aS5TYWZlTGF6eSQkYW5vbmZ1biRzdHJpY3QkMQAAAAAAAAAAAgABTAAHdmFsdWUkMXEAfgB2eHBzcgATeHNidGkuYXBpLkVtcHR5VHlwZbz9nkZJO4kkAgAAeHIAFHhzYnRpLmFwaS5TaW1wbGVUeXBlcnhiiCEjv0ACAAB4cgAOeHNidGkuYXBpLlR5cGU/atkhFkmqygIAAHhwc3EAfgB1AHBzcQB+AHpzcgATeHNidGkuYXBpLlN0cnVjdHVyZamq+YCTb9gAAgADTAAIZGVjbGFyZWRxAH4AXUwACWluaGVyaXRlZHEAfgBdTAAHcGFyZW50c3EAfgBdeHEAfgB+c3EAfgB1AHBzcQB+AHp1cQB+AFgAAAAAc3EAfgB1AHBzcQB+AHp1cQB+AFgAAAAAc3EAfgB1AHBzcQB+AHp1cgARW0x4c2J0aS5hcGkuVHlwZTt0/6Vae/npQQIAAHhwAAAABnNyABR4c2J0aS5hcGkuUHJvamVjdGlvbvPSjVTpRaQtAgACTAACaWRxAH4ADUwABnByZWZpeHQAFkx4c2J0aS9hcGkvU2ltcGxlVHlwZTt4cQB+AH10AAxTZXJpYWxpemFibGVzcgATeHNidGkuYXBpLlNpbmdsZXRvbvynX/jPVuRGAgABTAAEcGF0aHQAEEx4c2J0aS9hcGkvUGF0aDt4cQB+AH1zcgAOeHNidGkuYXBpLlBhdGibPVwIzqUnhAIAAVsACmNvbXBvbmVudHN0ABpbTHhzYnRpL2FwaS9QYXRoQ29tcG9uZW50O3hwdXIAGltMeHNidGkuYXBpLlBhdGhDb21wb25lbnQ7Q9oJdC1nFnQCAAB4cAAAAAJzcgAMeHNidGkuYXBpLklkmDJsizdTxEACAAFMAAJpZHEAfgANeHIAF3hzYnRpLmFwaS5QYXRoQ29tcG9uZW50X5oiWy6Gn7wCAAB4cHQABXNjYWxhc3IADnhzYnRpLmFwaS5UaGlz2wntpsxaQFwCAAB4cQB+AJtzcQB+AI5xAH4AkXNxAH4AknNxAH4AlXVxAH4AmAAAAANzcQB+AJp0AARqYXZhc3EAfgCadAACaW9xAH4An3NxAH4AjnQAB1Byb2R1Y3RxAH4AlHNxAH4AjnQABkVxdWFsc3EAfgCUc3EAfgCOdAAGT2JqZWN0c3EAfgCSc3EAfgCVdXEAfgCYAAAAA3NxAH4AmnEAfgClc3EAfgCadAAEbGFuZ3EAfgCfc3EAfgCOdAADQW55cQB+AJR1cgAUW0x4c2J0aS5hcGkuUGFja2FnZTtbExk3cKcnoQIAAHhwAAAAAXNyABF4c2J0aS5hcGkuUGFja2FnZX5Zj/auzjlYAgABTAAEbmFtZXEAfgANeHB0AAdzcXVlcnlsc3IAFXhzYnRpLmFwaS5Db21waWxhdGlvbu364MNq6KBCAgACSgAJc3RhcnRUaW1lWwAHb3V0cHV0c3QAGltMeHNidGkvYXBpL091dHB1dFNldHRpbmc7eHAAAAFL1fX7bHVyABpbTHhzYnRpLmFwaS5PdXRwdXRTZXR0aW5nO39qwvOnh6VCAgAAeHAAAAABc3IAF3hzYnRpLmFwaS5PdXRwdXRTZXR0aW5netmaR3T7HXsCAAJMAA9vdXRwdXREaXJlY3RvcnlxAH4ADUwAD3NvdXJjZURpcmVjdG9yeXEAfgANeHB0AFYvVXNlcnMvbmljb2xhc2xhdG9ycmUvRG9jdW1lbnRzL1VTSS9UZXNpL1N0YWNrT3ZlcmZsb3dWaWV3ZXIvdGFyZ2V0L3NjYWxhLTIuMTEvY2xhc3Nlc3QAAS91cgACW0Ks8xf4BghU4AIAAHhwAAAAFJTTsA+sifwUvscjTY8apKqm75DA
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> 
+rO0ABXNyABB4c2J0aS5hcGkuU291cmNlFlpwRASfbtoCAAZJAAdhcGlIYXNoWgAIaGFzTWFjcm9MABhfaW50ZXJuYWxPbmx5X25hbWVIYXNoZXN0ACRMeHNidGkvYXBpL19pbnRlcm5hbE9ubHlfTmFtZUhhc2hlcztMAANhcGl0ABVMeHNidGkvYXBpL1NvdXJjZUFQSTtMAAtjb21waWxhdGlvbnQAF0x4c2J0aS9hcGkvQ29tcGlsYXRpb247WwAEaGFzaHQAAltCeHD3BMonAHNyACJ4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaGVzVNq+mfrU7EwCAAJbAA9pbXBsaWNpdE1lbWJlcnN0ACNbTHhzYnRpL2FwaS9faW50ZXJuYWxPbmx5X05hbWVIYXNoO1sADnJlZ3VsYXJNZW1iZXJzcQB+AAd4cHVyACNbTHhzYnRpLmFwaS5faW50ZXJuYWxPbmx5X05hbWVIYXNoO0lagLbdlov0AgAAeHAAAAAAdXEAfgAJAAAAFXNyACB4c2J0aS5hcGkuX2ludGVybmFsT25seV9OYW1lSGFzaFsO9SJ2OFfPAgACSQAEaGFzaEwABG5hbWV0ABJMamF2YS9sYW5nL1N0cmluZzt4cBz7jyV0AAZub3RpZnlzcQB+AAzc4xNRdAAEd2FpdHNxAH4ADJJvVWh0AA0kYXNJbnN0YW5jZU9mc3EAfgAMGIziXHQABmVxdWFsc3NxAH4ADL2eW6B0AAxhc0luc3RhbmNlT2ZzcQB+AAz30K3ldAANVG9waWNNb2RlbGluZ3NxAH4ADNJk6/J0AAxzeW5jaHJvbml6ZWRzcQB+AAz43XWOdAANJGlzSW5zdGFuY2VPZnNxAH4ADCXPfS50AARtYWluc3EAfgAMd0QAGXQACW5vdGlmeUFsbHNxAH4ADFG/3Q10AAxpc0luc3RhbmNlT2ZzcQB+AAzC7S7vdAACPT1zcQB+AAxvfRq9dAAFY2xvbmVzcQB+AAz+aTiRdAAIdG9TdHJpbmdzcQB+AAw1frnVdAACIT1zcQB+AAzE8On9dAAIZ2V0Q2xhc3NzcQB+AAxTdjN3dAACbmVzcQB+AAxz0d0wdAACZXFzcQB+AAxXB4TtdAACIyNzcQB+AAz8Bqn9dAAIZmluYWxpemVzcQB+AAwyGZDCdAAIaGFzaENvZGVzcgATeHNidGkuYXBpLlNvdXJjZUFQSblep/kpIzikAgACWwALZGVmaW5pdGlvbnN0ABdbTHhzYnRpL2FwaS9EZWZpbml0aW9uO1sACHBhY2thZ2VzdAAUW0x4c2J0aS9hcGkvUGFja2FnZTt4cHVyABdbTHhzYnRpLmFwaS5EZWZpbml0aW9uO4jJXOe0414OAgAAeHAAAAABc3IAE3hzYnRpLmFwaS5DbGFzc0xpa2WDNByh37CXbAIABEwADmRlZmluaXRpb25UeXBldAAaTHhzYnRpL2FwaS9EZWZpbml0aW9uVHlwZTtbABBzYXZlZEFubm90YXRpb25zdAATW0xqYXZhL2xhbmcvU3RyaW5nO0wACHNlbGZUeXBldAAQTHhzYnRpL2FwaS9MYXp5O0wACXN0cnVjdHVyZXEAfgBBeHIAIXhzYnRpLmFwaS5QYXJhbWV0ZXJpemVkRGVmaW5pdGlvbvkRbrHVUDziAgABWwAOdHlwZVBhcmFtZXRlcnN0ABpbTHhzYnRpL2FwaS9UeXBlUGFyYW1ldGVyO3hyABR4c2J0aS5hcGkuRGVmaW5pdGlvbocqG+hxQuNGAgAETAAGYWNjZXNzdAASTHhzYnRpL2FwaS9BY2Nlc3M7WwALYW5ub3RhdGlvbnN0ABdbTHhzYnRpL2FwaS9Bbm5vdGF0aW9uO0wACW1vZGlmaWVyc3QAFUx4c2J0aS9hcGkvTW9kaWZpZXJzO0wABG5hbWVxAH4ADXhwc3IAEHhzYnRpLmFwaS5QdWJsaWO6WD2ubC1gQgIAAHhyABB4c2J0aS5hcGkuQWNjZXNz3WKa+B1jMUgCAAB4cHVyABdbTHhzYnRpLmFwaS5Bbm5vdGF0aW9uO+uX6xkQ9o1IAgAAeHAAAAAAc3IAE3hzYnRpLmFwaS5Nb2RpZmllcnPHERMhaZzcJAIAAUIABWZsYWdzeHAAdAAbdG9waWNtb2RlbGluZy5Ub3BpY01vZGVsaW5ndXIAGltMeHNidGkuYXBpLlR5cGVQYXJhbWV0ZXI72W0mDyid8rYCAAB4cAAAAAB+cgAYeHNidGkuYXBpLkRlZmluaXRpb25UeXBlAAAAAAAAAAASAAB4cgAOamF2YS5sYW5nLkVudW0AAAAAAAAAABIAAHhwdAAGTW9kdWxldXIAE1tMamF2YS5sYW5nLlN0cmluZzut0lbn6R17RwIAAHhwAAAAAHNyABN4c2J0aS5TYWZlTGF6eSRJbXBsUAIuk5eXQD8CAANaAAhiaXRtYXAkMEwAAl90dAASTGphdmEvbGFuZy9PYmplY3Q7TAAEZXZhbHQAEUxzY2FsYS9GdW5jdGlvbjA7eHIAFnhzYnRpLmFwaS5BYnN0cmFjdExhennTd7UBX7vnoAIAAHhwAHBzcgAgeHNidGkuU2FmZUxhenkkJGFub25mdW4kc3RyaWN0JDEAAAAAAAAAAAIAAUwAB3ZhbHVlJDFxAH4AWnhwc3IAE3hzYnRpLmFwaS5FbXB0eVR5cGW8/Z5GSTuJJAIAAHhyABR4c2J0aS5hcGkuU2ltcGxlVHlwZXJ4YoghI79AAgAAeHIADnhzYnRpLmFwaS5UeXBlP2rZIRZJqsoCAAB4cHNxAH4AWQBwc3EAfgBec3IAE3hzYnRpLmFwaS5TdHJ1Y3R1cmWpqvmAk2/YAAIAA0wACGRlY2xhcmVkcQB+AEFMAAlpbmhlcml0ZWRxAH4AQUwAB3BhcmVudHNxAH4AQXhxAH4AYnNxAH4AWQBwc3EAfgBedXEAfgA8AAAAAXNyAA14c2J0aS5hcGkuRGVmUr6f4ny0NmkCAAJMAApyZXR1cm5UeXBldAAQTHhzYnRpL2FwaS9UeXBlO1sAD3ZhbHVlUGFyYW1ldGVyc3QAGltMeHNidGkvYXBpL1BhcmFtZXRlckxpc3Q7eHEAfgBCcQB+AEt1cQB+AEwAAAAAc3EAfgBOAHEAfgAfdXEAfgBRAAAAAHNyABR4c2J0aS5hcGkuUHJvamVjdGlvbvPSjVTpRaQtAgACTAACaWRxAH4ADUwABnByZWZpeHQAFkx4c2J0aS9hcGkvU2ltcGxlVHlwZTt4cQB+AGF0AARVbml0c3IAE3hzYnRpLmFwaS5TaW5nbGV0b278p1/4z1bkRgIAAUwABHBhdGh0ABBMeHNidGkvYXBpL1BhdGg7eHEAfgBhc3IADnhzYnRpLmFwaS5QYXRomz1cCM6lJ4QCAAFbAApjb21wb25lbnRzdAAaW0x4c2J0aS9hcGkvUGF0aENvbXBvbmVudDt4cHVyABpbTHhzYnRpLmFwaS5QYXRoQ29tcG9uZW50O0PaCXQtZxZ0AgAAeHAAAAACc3IADHhzYnRpLmFwaS5JZJgybIs3U8RAAgABTAACaWRxAH4ADXhyABd4c2J0aS5hcGkuUGF0aENvbXBvbmVudF+aIlsuhp+8AgAAeHB0AAVzY2FsYXNyAA54c2J0aS5hcGkuVGhpc9sJ7abMWkBcAgAAeHEAfgB/dXIAGltMeHNidGkuYXBpLlBhcmFtZXRlckxpc3Q79dM6HfKzcO4CAAB4cAAAAAFzcgAXeHNidGkuYXBpLlBhcmFtZXRlckxpc3TWxbwcZEl04wIAAloACmlzSW1wbGljaXRbAApwYXJhbWV0ZXJzdAAcW0x4c2J0aS9hcGkvTWV0aG9kUGFyYW1ldGVyO3hwAHVyABxbTHhzYnRpLmFwaS5NZXRob2RQYXJhbWV0ZXI7z7jFXaXdtW0CAAB4cAAAAAFzcgAZeHNidGkuYXBpLk1ldGhvZFBhcmFtZXRlch9FrhfTSbDqAgAEWgAKaGFzRGVmYXVsdEwACG1vZGlmaWVydAAdTHhzYnRpL2FwaS9QYXJhbWV0ZXJNb2RpZmllcjtMAARuYW1lcQB+AA1MAAN0cGVxAH4AbHhwAH5yABt4c2J0aS5hcGkuUGFyYW1ldGVyTW9kaWZpZXIAAAAAAAAAABIAAHhxAH4AVHQABVBsYWludAAEYXJnc3NyABd4c2J0aS5hcGkuUGFyYW1ldGVyaXplZBZs7mkDybt/AgACTAAIYmFzZVR5cGVxAH4Ac1sADXR5cGVBcmd1bWVudHN0ABFbTHhzYnRpL2FwaS9UeXBlO3hxAH4AYXNxAH4AcnQABUFycmF5cQB+AHh1cgARW0x4c2J0aS5hcGkuVHlwZTt0/6Vae/npQQIAAHhwAAAAAXNxAH4AcnQABlN0cmluZ3NxAH4AdnNxAH4AeXVxAH4AfAAAAANzcQB+AH50AARqYXZhc3EAfgB+dAAEbGFuZ3EAfgCDc3EAfgBZAHBzcQB+AF51cQB+ADwAAAAAc3EAfgBZAHBzcQB+AF51cQB+AJcAAAACc3EAfgBydAAGT2JqZWN0cQB+AJtzcQB+AHJ0AANBbnlxAH4AeHVyABRbTHhzYnRpLmFwaS5QYWNrYWdlO1sTGTdwpyehAgAAeHAAAAABc3IAEXhzYnRpLmFwaS5QYWNrYWdlflmP9q7OOVgCAAFMAARuYW1lcQB+AA14cHQADXRvcGljbW9kZWxpbmdzcgAVeHNidGkuYXBpLkNvbXBpbGF0aW9u7frgw2rooEICAAJKAAlzdGFydFRpbWVbAAdvdXRwdXRzdAAaW0x4c2J0aS9hcGkvT3V0cHV0U2V0dGluZzt4cAAAAUvV9ftsdXIAGltMeHNidGkuYXBpLk91dHB1dFNldHRpbmc7f2rC86eHpUICAAB4cAAAAAFzcgAXeHNidGkuYXBpLk91dHB1dFNldHRpbmd62ZpHdPsdewIAAkwAD291dHB1dERpcmVjdG9yeXEAfgANTAAPc291cmNlRGlyZWN0b3J5cQB+AA14cHQAVi9Vc2Vycy9uaWNvbGFzbGF0b3JyZS9Eb2N1bWVudHMvVVNJL1Rlc2kvU3RhY2tPdmVyZmxvd1ZpZXdlci90YXJnZXQvc2NhbGEtMi4xMS9jbGFzc2VzdAABL3VyAAJbQqzzF/gGCFTgAgAAeHAAAAAU6oMuSKuUWCAuNizdgoeL3qA8UzQ=
+external apis:
+0 items
+source infos:
+10 items
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/DatabaseConnection.scala -> 
+AAAAAAAAAAA=
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/database/Discussion.scala -> 
+AAAAAAAAAAA=
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Badge.scala -> 
+AAAAAAAAAAA=
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Comment.scala -> 
+AAAAAAAAAAA=
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Post.scala -> 
+AAAAAAAAAAA=
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/PostsHistory.scala -> 
+AAAAAAAAAAA=
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/StackExchangeSchema.scala -> 
+AAAAAAAAAAA=
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/User.scala -> 
+AAAAAAAAAAA=
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/squeryl/Vote.scala -> 
+AAAAAAAAAAA=
+/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/src/main/scala/topicmodeling/TopicModeling.scala -> 
+AAAAAAAAAAA=
+compilations:
+1 items
+0 -> rO0ABXNyABV4c2J0aS5hcGkuQ29tcGlsYXRpb27t+uDDauigQgIAAkoACXN0YXJ0VGltZVsAB291dHB1dHN0ABpbTHhzYnRpL2FwaS9PdXRwdXRTZXR0aW5nO3hwAAABS9X1+2x1cgAaW0x4c2J0aS5hcGkuT3V0cHV0U2V0dGluZzt/asLzp4elQgIAAHhwAAAAAXNyABd4c2J0aS5hcGkuT3V0cHV0U2V0dGluZ3rZmkd0+x17AgACTAAPb3V0cHV0RGlyZWN0b3J5dAASTGphdmEvbGFuZy9TdHJpbmc7TAAPc291cmNlRGlyZWN0b3J5cQB+AAZ4cHQAVi9Vc2Vycy9uaWNvbGFzbGF0b3JyZS9Eb2N1bWVudHMvVVNJL1Rlc2kvU3RhY2tPdmVyZmxvd1ZpZXdlci90YXJnZXQvc2NhbGEtMi4xMS9jbGFzc2VzdAABLw==

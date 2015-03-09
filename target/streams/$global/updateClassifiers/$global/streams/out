@@ -1,0 +1,1073 @@
+[0m[[0mdebug[0m] [0m:: resolving dependencies :: stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0[0m
+[0m[[0mdebug[0m] [0m	confs: [compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool][0m
+[0m[[0mdebug[0m] [0m	validate = true[0m
+[0m[[0mdebug[0m] [0m	refresh = false[0m
+[0m[[0mdebug[0m] [0mresolving dependencies for configuration 'compile'[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving org.scala-lang#scala-library;2.11.5 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@1c67ae5f[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-library;2.11.5[0m
+[0m[[0mdebug[0m] [0m	found org.scala-lang#scala-library;2.11.5 in sbt-chain[0m
+[0m[[0mdebug[0m] [0m	[2.11.5] org.scala-lang#scala-library;2.11.5[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving org.squeryl#squeryl_2.11;0.9.5-7 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@52c29a97[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.squeryl#squeryl_2.11;0.9.5-7[0m
+[0m[[0mdebug[0m] [0m	found org.squeryl#squeryl_2.11;0.9.5-7 in sbt-chain[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving cglib#cglib-nodep;2.2 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@12dd2a63[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: cglib#cglib-nodep;2.2[0m
+[0m[[0mdebug[0m] [0m	found cglib#cglib-nodep;2.2 in sbt-chain[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving org.scala-lang#scalap;2.11.1 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@1573b439[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scalap;2.11.1[0m
+[0m[[0mdebug[0m] [0m	found org.scala-lang#scalap;2.11.1 in sbt-chain[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving org.scala-lang#scala-compiler;2.11.1 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@4a2f27a9[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-compiler;2.11.1[0m
+[0m[[0mdebug[0m] [0m	found org.scala-lang#scala-compiler;2.11.1 in sbt-chain[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving org.scala-lang#scala-reflect;2.11.1 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@306f07ca[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-reflect;2.11.1[0m
+[0m[[0mdebug[0m] [0m	found org.scala-lang#scala-reflect;2.11.1 in sbt-chain[0m
+[0m[[0mdebug[0m] [0m	[2.11.1] org.scala-lang#scala-reflect;2.11.1[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving org.scala-lang.modules#scala-xml_2.11;1.0.2 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@167b9dbe[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang.modules#scala-xml_2.11;1.0.2[0m
+[0m[[0mdebug[0m] [0m	found org.scala-lang.modules#scala-xml_2.11;1.0.2 in sbt-chain[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@32efefb0[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1[0m
+[0m[[0mdebug[0m] [0m	found org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 in sbt-chain[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving postgresql#postgresql;8.4-701.jdbc4 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@2877066a[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: postgresql#postgresql;8.4-701.jdbc4[0m
+[0m[[0mdebug[0m] [0m	found postgresql#postgresql;8.4-701.jdbc4 in sbt-chain[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving c3p0#c3p0;0.9.0.4 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@3f6efcf4[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: c3p0#c3p0;0.9.0.4[0m
+[0m[[0mdebug[0m] [0m	found c3p0#c3p0;0.9.0.4 in sbt-chain[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving org.jsoup#jsoup;1.8.1 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@393015f0[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.jsoup#jsoup;1.8.1[0m
+[0m[[0mdebug[0m] [0m	found org.jsoup#jsoup;1.8.1 in sbt-chain[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->master][0m
+[0m[[0mdebug[0m] [0mresolving dependencies for configuration 'runtime'[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0mresolving dependencies for configuration 'test'[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [test][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [test->master][0m
+[0m[[0mdebug[0m] [0mresolving dependencies for configuration 'provided'[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [provided][0m
+[0m[[0mdebug[0m] [0mresolving dependencies for configuration 'optional'[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [optional][0m
+[0m[[0mdebug[0m] [0mresolving dependencies for configuration 'compile-internal'[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [compile-internal][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [optional][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [provided][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile-internal->master][0m
+[0m[[0mdebug[0m] [0mresolving dependencies for configuration 'runtime-internal'[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [runtime-internal][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [optional][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime-internal->master][0m
+[0m[[0mdebug[0m] [0mresolving dependencies for configuration 'test-internal'[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [test-internal][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [test][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [runtime->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [test->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [test->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [test->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [test->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [optional][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [provided][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [test-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [test-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [test-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [test-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [test-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [test-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [test-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.squeryl#squeryl_2.11;0.9.5-7 [test-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [test-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [test-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [test-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->cglib#cglib-nodep;2.2 [test-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [test-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [test-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [test-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scalap;2.11.1 [test-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [test-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [test-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [test-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.1 [test-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [test-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [test-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [test-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.1 [test-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [test-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [test-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [test-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.2 [test-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [test-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [test-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [test-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1 [test-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [test-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [test-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [test-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->postgresql#postgresql;8.4-701.jdbc4 [test-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [test-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [test-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [test-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->c3p0#c3p0;0.9.0.4 [test-internal->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [test-internal->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [test-internal->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [test-internal->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.jsoup#jsoup;1.8.1 [test-internal->master][0m
+[0m[[0mdebug[0m] [0mresolving dependencies for configuration 'plugin'[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [plugin][0m
+[0m[[0mdebug[0m] [0mresolving dependencies for configuration 'sources'[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [sources][0m
+[0m[[0mdebug[0m] [0mresolving dependencies for configuration 'docs'[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [docs][0m
+[0m[[0mdebug[0m] [0mresolving dependencies for configuration 'pom'[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [pom][0m
+[0m[[0mdebug[0m] [0mresolving dependencies for configuration 'scala-tool'[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 [scala-tool][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [scala-tool->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [scala-tool->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [scala-tool->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-library;2.11.5 [scala-tool->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.5 [scala-tool->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving org.scala-lang#scala-compiler;2.11.5 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.scala-lang#scala-compiler;2.11.5 {scala-tool=[default(compile)]}[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-compiler;2.11.5[0m
+[0m[[0mdebug[0m] [0m	found org.scala-lang#scala-compiler;2.11.5 in sbt-chain[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.5 [scala-tool->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.5 [scala-tool->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-compiler;2.11.5 [scala-tool->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.5 [scala-tool->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving org.scala-lang#scala-reflect;2.11.5 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.scala-lang#scala-reflect;2.11.5 {scala-tool=[default(compile)]}[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-reflect;2.11.5[0m
+[0m[[0mdebug[0m] [0m	found org.scala-lang#scala-reflect;2.11.5 in sbt-chain[0m
+[0m[[0mdebug[0m] [0m	[2.11.5] org.scala-lang#scala-reflect;2.11.5[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.5 [scala-tool->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.5 [scala-tool->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang#scala-reflect;2.11.5 [scala-tool->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.3 [scala-tool->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving org.scala-lang.modules#scala-xml_2.11;1.0.3 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.scala-lang.modules#scala-xml_2.11;1.0.3 {scala-tool=[default(compile)]}[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang.modules#scala-xml_2.11;1.0.3[0m
+[0m[[0mdebug[0m] [0m	found org.scala-lang.modules#scala-xml_2.11;1.0.3 in sbt-chain[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.3 [scala-tool->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.3 [scala-tool->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-xml_2.11;1.0.3 [scala-tool->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 [scala-tool->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 {scala-tool=[default(compile)]}[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3[0m
+[0m[[0mdebug[0m] [0m	found org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 in sbt-chain[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 [scala-tool->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 [scala-tool->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3 [scala-tool->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->jline#jline;2.12 [scala-tool->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving jline#jline;2.12 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: jline#jline;2.12 {scala-tool=[default(compile)]}[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: jline#jline;2.12[0m
+[0m[[0mdebug[0m] [0m	found jline#jline;2.12 in sbt-chain[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->jline#jline;2.12 [scala-tool->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->jline#jline;2.12 [scala-tool->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0->jline#jline;2.12 [scala-tool->master][0m
+[0m[[0mdebug[0m] [0mcircular dependency found: org.scala-lang#scala-compiler;2.11.1->org.scala-lang.modules#scala-xml_2.11;1.0.2->...[0m
+[0m[[0mdebug[0m] [0m	resolved ivy file produced in cache[0m
+[0m[[0mdebug[0m] [0m:: downloading artifacts ::[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang/scala-library/2.11.5/srcs/scala-library-sources.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scala-library;2.11.5!scala-library.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang/scala-library/2.11.5/docs/scala-library-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.5/scala-library-2.11.5-sources.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.5/scala-library-2.11.5-sources.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.5/scala-library-2.11.5-sources.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.5/scala-library-2.11.5-sources.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.5/scala-library-2.11.5-sources.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang#scala-library;2.11.5!scala-library.jar(src) (1740ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.5/scala-library-2.11.5-javadoc.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.5/scala-library-2.11.5-javadoc.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.5/scala-library-2.11.5-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.5/scala-library-2.11.5-javadoc.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.5/scala-library-2.11.5-javadoc.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang#scala-library;2.11.5!scala-library.jar(doc) (13798ms)[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.squeryl#squeryl_2.11;0.9.5-7!squeryl_2.11.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.squeryl/squeryl_2.11/0.9.5-7/docs/squeryl_2.11-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.squeryl/squeryl_2.11/0.9.5-7/srcs/squeryl_2.11-sources.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/squeryl/squeryl_2.11/0.9.5-7/squeryl_2.11-0.9.5-7-javadoc.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/squeryl/squeryl_2.11/0.9.5-7/squeryl_2.11-0.9.5-7-javadoc.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/squeryl/squeryl_2.11/0.9.5-7/squeryl_2.11-0.9.5-7-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/squeryl/squeryl_2.11/0.9.5-7/squeryl_2.11-0.9.5-7-javadoc.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/squeryl/squeryl_2.11/0.9.5-7/squeryl_2.11-0.9.5-7-javadoc.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.squeryl#squeryl_2.11;0.9.5-7!squeryl_2.11.jar(doc) (2602ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/squeryl/squeryl_2.11/0.9.5-7/squeryl_2.11-0.9.5-7-sources.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/squeryl/squeryl_2.11/0.9.5-7/squeryl_2.11-0.9.5-7-sources.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/squeryl/squeryl_2.11/0.9.5-7/squeryl_2.11-0.9.5-7-sources.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/squeryl/squeryl_2.11/0.9.5-7/squeryl_2.11-0.9.5-7-sources.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/squeryl/squeryl_2.11/0.9.5-7/squeryl_2.11-0.9.5-7-sources.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.squeryl#squeryl_2.11;0.9.5-7!squeryl_2.11.jar(src) (620ms)[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/cglib/cglib-nodep/2.2/srcs/cglib-nodep-sources.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/cglib/cglib-nodep/2.2/docs/cglib-nodep-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] cglib#cglib-nodep;2.2!cglib-nodep.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/cglib/cglib-nodep/2.2/cglib-nodep-2.2-sources.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/cglib/cglib-nodep/2.2/cglib-nodep-2.2-sources.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/cglib/cglib-nodep/2.2/cglib-nodep-2.2-sources.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/cglib/cglib-nodep/2.2/cglib-nodep-2.2-sources.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/cglib/cglib-nodep/2.2/cglib-nodep-2.2-sources.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] cglib#cglib-nodep;2.2!cglib-nodep.jar(src) (650ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/cglib/cglib-nodep/2.2/cglib-nodep-2.2-javadoc.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/cglib/cglib-nodep/2.2/cglib-nodep-2.2-javadoc.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/cglib/cglib-nodep/2.2/cglib-nodep-2.2-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/cglib/cglib-nodep/2.2/cglib-nodep-2.2-javadoc.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/cglib/cglib-nodep/2.2/cglib-nodep-2.2-javadoc.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] cglib#cglib-nodep;2.2!cglib-nodep.jar(doc) (916ms)[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scalap;2.11.1!scalap.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang/scalap/2.11.1/docs/scalap-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang/scalap/2.11.1/srcs/scalap-sources.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/scalap/2.11.1/scalap-2.11.1-javadoc.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/scalap/2.11.1/scalap-2.11.1-javadoc.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scalap/2.11.1/scalap-2.11.1-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scalap/2.11.1/scalap-2.11.1-javadoc.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scalap/2.11.1/scalap-2.11.1-javadoc.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang#scalap;2.11.1!scalap.jar(doc) (1242ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/scalap/2.11.1/scalap-2.11.1-sources.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/scalap/2.11.1/scalap-2.11.1-sources.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scalap/2.11.1/scalap-2.11.1-sources.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scalap/2.11.1/scalap-2.11.1-sources.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scalap/2.11.1/scalap-2.11.1-sources.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang#scalap;2.11.1!scalap.jar(src) (680ms)[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang/scala-compiler/2.11.1/docs/scala-compiler-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang/scala-compiler/2.11.1/srcs/scala-compiler-sources.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scala-compiler;2.11.1!scala-compiler.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.1/scala-compiler-2.11.1-javadoc.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.1/scala-compiler-2.11.1-javadoc.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.1/scala-compiler-2.11.1-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.1/scala-compiler-2.11.1-javadoc.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.1/scala-compiler-2.11.1-javadoc.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang#scala-compiler;2.11.1!scala-compiler.jar(doc) (6077ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.1/scala-compiler-2.11.1-sources.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.1/scala-compiler-2.11.1-sources.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.1/scala-compiler-2.11.1-sources.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.1/scala-compiler-2.11.1-sources.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.1/scala-compiler-2.11.1-sources.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang#scala-compiler;2.11.1!scala-compiler.jar(src) (2031ms)[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scala-reflect;2.11.1!scala-reflect.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang/scala-reflect/2.11.1/srcs/scala-reflect-sources.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang/scala-reflect/2.11.1/docs/scala-reflect-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.1/scala-reflect-2.11.1-sources.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.1/scala-reflect-2.11.1-sources.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.1/scala-reflect-2.11.1-sources.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.1/scala-reflect-2.11.1-sources.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.1/scala-reflect-2.11.1-sources.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang#scala-reflect;2.11.1!scala-reflect.jar(src) (1040ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.1/scala-reflect-2.11.1-javadoc.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.1/scala-reflect-2.11.1-javadoc.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.1/scala-reflect-2.11.1-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.1/scala-reflect-2.11.1-javadoc.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.1/scala-reflect-2.11.1-javadoc.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang#scala-reflect;2.11.1!scala-reflect.jar(doc) (2725ms)[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang.modules/scala-xml_2.11/1.0.2/srcs/scala-xml_2.11-sources.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang.modules/scala-xml_2.11/1.0.2/jars/scala-xml_2.11.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang.modules/scala-xml_2.11/1.0.2/docs/scala-xml_2.11-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-sources.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-sources.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-sources.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-sources.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-sources.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.11;1.0.2!scala-xml_2.11.jar(src) (638ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.11;1.0.2!scala-xml_2.11.jar (926ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-javadoc.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-javadoc.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-javadoc.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-javadoc.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.11;1.0.2!scala-xml_2.11.jar(doc) (1674ms)[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang.modules/scala-parser-combinators_2.11/1.0.1/jars/scala-parser-combinators_2.11.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang.modules/scala-parser-combinators_2.11/1.0.1/docs/scala-parser-combinators_2.11-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang.modules/scala-parser-combinators_2.11/1.0.1/srcs/scala-parser-combinators_2.11-sources.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1!scala-parser-combinators_2.11.jar (783ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1-javadoc.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1-javadoc.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1-javadoc.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1-javadoc.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1!scala-parser-combinators_2.11.jar(doc) (923ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1-sources.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1-sources.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1-sources.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1-sources.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1-sources.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang.modules#scala-parser-combinators_2.11;1.0.1!scala-parser-combinators_2.11.jar(src) (570ms)[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/postgresql/postgresql/8.4-701.jdbc4/docs/postgresql-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] postgresql#postgresql;8.4-701.jdbc4!postgresql.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/postgresql/postgresql/8.4-701.jdbc4/srcs/postgresql-sources.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/postgresql/postgresql/8.4-701.jdbc4/postgresql-8.4-701.jdbc4-javadoc.jar[0m
+[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=https://repo1.maven.org/maven2/postgresql/postgresql/8.4-701.jdbc4/postgresql-8.4-701.jdbc4-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/postgresql/postgresql/8.4-701.jdbc4/postgresql-8.4-701.jdbc4-sources.jar[0m
+[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=https://repo1.maven.org/maven2/postgresql/postgresql/8.4-701.jdbc4/postgresql-8.4-701.jdbc4-sources.jar[0m
+[0m[[33mwarn[0m] [0m	[FAILED     ] postgresql#postgresql;8.4-701.jdbc4!postgresql.jar(doc):  (0ms)[0m
+[0m[[33mwarn[0m] [0m==== local: tried[0m
+[0m[[33mwarn[0m] [0m  /Users/nicolaslatorre/.ivy2/local/postgresql/postgresql/8.4-701.jdbc4/docs/postgresql-javadoc.jar[0m
+[0m[[33mwarn[0m] [0m==== public: tried[0m
+[0m[[33mwarn[0m] [0m  https://repo1.maven.org/maven2/postgresql/postgresql/8.4-701.jdbc4/postgresql-8.4-701.jdbc4-javadoc.jar[0m
+[0m[[33mwarn[0m] [0m	[FAILED     ] postgresql#postgresql;8.4-701.jdbc4!postgresql.jar(src):  (0ms)[0m
+[0m[[33mwarn[0m] [0m==== local: tried[0m
+[0m[[33mwarn[0m] [0m  /Users/nicolaslatorre/.ivy2/local/postgresql/postgresql/8.4-701.jdbc4/srcs/postgresql-sources.jar[0m
+[0m[[33mwarn[0m] [0m==== public: tried[0m
+[0m[[33mwarn[0m] [0m  https://repo1.maven.org/maven2/postgresql/postgresql/8.4-701.jdbc4/postgresql-8.4-701.jdbc4-sources.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/c3p0/c3p0/0.9.0.4/docs/c3p0-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/c3p0/c3p0/0.9.0.4/srcs/c3p0-sources.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] c3p0#c3p0;0.9.0.4!c3p0.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/c3p0/c3p0/0.9.0.4/c3p0-0.9.0.4-javadoc.jar[0m
+[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=https://repo1.maven.org/maven2/c3p0/c3p0/0.9.0.4/c3p0-0.9.0.4-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/c3p0/c3p0/0.9.0.4/c3p0-0.9.0.4-sources.jar[0m
+[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=https://repo1.maven.org/maven2/c3p0/c3p0/0.9.0.4/c3p0-0.9.0.4-sources.jar[0m
+[0m[[33mwarn[0m] [0m	[FAILED     ] c3p0#c3p0;0.9.0.4!c3p0.jar(doc):  (0ms)[0m
+[0m[[33mwarn[0m] [0m==== local: tried[0m
+[0m[[33mwarn[0m] [0m  /Users/nicolaslatorre/.ivy2/local/c3p0/c3p0/0.9.0.4/docs/c3p0-javadoc.jar[0m
+[0m[[33mwarn[0m] [0m==== public: tried[0m
+[0m[[33mwarn[0m] [0m  https://repo1.maven.org/maven2/c3p0/c3p0/0.9.0.4/c3p0-0.9.0.4-javadoc.jar[0m
+[0m[[33mwarn[0m] [0m	[FAILED     ] c3p0#c3p0;0.9.0.4!c3p0.jar(src):  (0ms)[0m
+[0m[[33mwarn[0m] [0m==== local: tried[0m
+[0m[[33mwarn[0m] [0m  /Users/nicolaslatorre/.ivy2/local/c3p0/c3p0/0.9.0.4/srcs/c3p0-sources.jar[0m
+[0m[[33mwarn[0m] [0m==== public: tried[0m
+[0m[[33mwarn[0m] [0m  https://repo1.maven.org/maven2/c3p0/c3p0/0.9.0.4/c3p0-0.9.0.4-sources.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.jsoup#jsoup;1.8.1!jsoup.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.jsoup/jsoup/1.8.1/docs/jsoup-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.jsoup/jsoup/1.8.1/srcs/jsoup-sources.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/jsoup/jsoup/1.8.1/jsoup-1.8.1-javadoc.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/jsoup/jsoup/1.8.1/jsoup-1.8.1-javadoc.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/jsoup/jsoup/1.8.1/jsoup-1.8.1-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/jsoup/jsoup/1.8.1/jsoup-1.8.1-javadoc.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/jsoup/jsoup/1.8.1/jsoup-1.8.1-javadoc.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.jsoup#jsoup;1.8.1!jsoup.jar(doc) (1029ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/jsoup/jsoup/1.8.1/jsoup-1.8.1-sources.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/jsoup/jsoup/1.8.1/jsoup-1.8.1-sources.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/jsoup/jsoup/1.8.1/jsoup-1.8.1-sources.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/jsoup/jsoup/1.8.1/jsoup-1.8.1-sources.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/jsoup/jsoup/1.8.1/jsoup-1.8.1-sources.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.jsoup#jsoup;1.8.1!jsoup.jar(src) (765ms)[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang/scala-compiler/2.11.5/srcs/scala-compiler-sources.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang/scala-compiler/2.11.5/docs/scala-compiler-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.5/scala-compiler-2.11.5-sources.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.5/scala-compiler-2.11.5-sources.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.5/scala-compiler-2.11.5-sources.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.5/scala-compiler-2.11.5-sources.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.5/scala-compiler-2.11.5-sources.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang#scala-compiler;2.11.5!scala-compiler.jar(src) (1813ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.5/scala-compiler-2.11.5-javadoc.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.5/scala-compiler-2.11.5-javadoc.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.5/scala-compiler-2.11.5-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.5/scala-compiler-2.11.5-javadoc.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.5/scala-compiler-2.11.5-javadoc.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang#scala-compiler;2.11.5!scala-compiler.jar(doc) (7798ms)[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang/scala-reflect/2.11.5/srcs/scala-reflect-sources.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang/scala-reflect/2.11.5/docs/scala-reflect-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.5/scala-reflect-2.11.5-sources.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.5/scala-reflect-2.11.5-sources.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.5/scala-reflect-2.11.5-sources.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.5/scala-reflect-2.11.5-sources.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.5/scala-reflect-2.11.5-sources.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang#scala-reflect;2.11.5!scala-reflect.jar(src) (893ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.5/scala-reflect-2.11.5-javadoc.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.5/scala-reflect-2.11.5-javadoc.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.5/scala-reflect-2.11.5-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.5/scala-reflect-2.11.5-javadoc.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.5/scala-reflect-2.11.5-javadoc.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang#scala-reflect;2.11.5!scala-reflect.jar(doc) (3139ms)[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang.modules/scala-xml_2.11/1.0.3/docs/scala-xml_2.11-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang.modules/scala-xml_2.11/1.0.3/srcs/scala-xml_2.11-sources.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-javadoc.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-javadoc.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-javadoc.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-javadoc.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.11;1.0.3!scala-xml_2.11.jar(doc) (1376ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-sources.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-sources.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-sources.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-sources.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.3/scala-xml_2.11-1.0.3-sources.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang.modules#scala-xml_2.11;1.0.3!scala-xml_2.11.jar(src) (717ms)[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang.modules/scala-parser-combinators_2.11/1.0.3/docs/scala-parser-combinators_2.11-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scala-lang.modules/scala-parser-combinators_2.11/1.0.3/srcs/scala-parser-combinators_2.11-sources.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-javadoc.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-javadoc.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-javadoc.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-javadoc.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3!scala-parser-combinators_2.11.jar(doc) (1159ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-sources.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-sources.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-sources.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-sources.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.3/scala-parser-combinators_2.11-1.0.3-sources.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scala-lang.modules#scala-parser-combinators_2.11;1.0.3!scala-parser-combinators_2.11.jar(src) (658ms)[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/jline/jline/2.12/docs/jline-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/jline/jline/2.12/srcs/jline-sources.jar[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/jline/jline/2.12/jline-2.12-javadoc.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/jline/jline/2.12/jline-2.12-javadoc.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/jline/jline/2.12/jline-2.12-javadoc.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/jline/jline/2.12/jline-2.12-javadoc.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/jline/jline/2.12/jline-2.12-javadoc.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] jline#jline;2.12!jline.jar(doc) (785ms)[0m
+[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/jline/jline/2.12/jline-2.12-sources.jar[0m
+[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/jline/jline/2.12/jline-2.12-sources.jar ...[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/jline/jline/2.12/jline-2.12-sources.jar[0m
+[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/jline/jline/2.12/jline-2.12-sources.jar.sha1[0m
+[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/jline/jline/2.12/jline-2.12-sources.jar[0m
+[0m[[0minfo[0m] [0m	[SUCCESSFUL ] jline#jline;2.12!jline.jar(src) (752ms)[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 567ms :: artifacts dl 61352ms[0m
+[0m[[33mwarn[0m] [0m	::::::::::::::::::::::::::::::::::::::::::::::[0m
+[0m[[33mwarn[0m] [0m	::              FAILED DOWNLOADS            ::[0m
+[0m[[33mwarn[0m] [0m	:: ^ see resolution messages for details  ^ ::[0m
+[0m[[33mwarn[0m] [0m	::::::::::::::::::::::::::::::::::::::::::::::[0m
+[0m[[33mwarn[0m] [0m	:: postgresql#postgresql;8.4-701.jdbc4!postgresql.jar(doc)[0m
+[0m[[33mwarn[0m] [0m	:: postgresql#postgresql;8.4-701.jdbc4!postgresql.jar(src)[0m
+[0m[[33mwarn[0m] [0m	:: c3p0#c3p0;0.9.0.4!c3p0.jar(doc)[0m
+[0m[[33mwarn[0m] [0m	:: c3p0#c3p0;0.9.0.4!c3p0.jar(src)[0m
+[0m[[33mwarn[0m] [0m	::::::::::::::::::::::::::::::::::::::::::::::[0m
+[0m[[0mdebug[0m] [0m	report for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 compile produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/resolution-cache/reports/stackoverflowviewer-stackoverflowviewer$sources_javadoc_2.11-compile.xml[0m
+[0m[[0mdebug[0m] [0m	report for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 runtime produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/resolution-cache/reports/stackoverflowviewer-stackoverflowviewer$sources_javadoc_2.11-runtime.xml[0m
+[0m[[0mdebug[0m] [0m	report for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 test produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/resolution-cache/reports/stackoverflowviewer-stackoverflowviewer$sources_javadoc_2.11-test.xml[0m
+[0m[[0mdebug[0m] [0m	report for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 provided produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/resolution-cache/reports/stackoverflowviewer-stackoverflowviewer$sources_javadoc_2.11-provided.xml[0m
+[0m[[0mdebug[0m] [0m	report for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 optional produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/resolution-cache/reports/stackoverflowviewer-stackoverflowviewer$sources_javadoc_2.11-optional.xml[0m
+[0m[[0mdebug[0m] [0m	report for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 compile-internal produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/resolution-cache/reports/stackoverflowviewer-stackoverflowviewer$sources_javadoc_2.11-compile-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 runtime-internal produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/resolution-cache/reports/stackoverflowviewer-stackoverflowviewer$sources_javadoc_2.11-runtime-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 test-internal produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/resolution-cache/reports/stackoverflowviewer-stackoverflowviewer$sources_javadoc_2.11-test-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 plugin produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/resolution-cache/reports/stackoverflowviewer-stackoverflowviewer$sources_javadoc_2.11-plugin.xml[0m
+[0m[[0mdebug[0m] [0m	report for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 sources produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/resolution-cache/reports/stackoverflowviewer-stackoverflowviewer$sources_javadoc_2.11-sources.xml[0m
+[0m[[0mdebug[0m] [0m	report for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 docs produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/resolution-cache/reports/stackoverflowviewer-stackoverflowviewer$sources_javadoc_2.11-docs.xml[0m
+[0m[[0mdebug[0m] [0m	report for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 pom produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/resolution-cache/reports/stackoverflowviewer-stackoverflowviewer$sources_javadoc_2.11-pom.xml[0m
+[0m[[0mdebug[0m] [0m	report for stackoverflowviewer#stackoverflowviewer$sources_javadoc_2.11;1.0 scala-tool produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/target/resolution-cache/reports/stackoverflowviewer-stackoverflowviewer$sources_javadoc_2.11-scala-tool.xml[0m
+[0m[[0mdebug[0m] [0m	resolve done (567ms resolve - 61352ms download)[0m

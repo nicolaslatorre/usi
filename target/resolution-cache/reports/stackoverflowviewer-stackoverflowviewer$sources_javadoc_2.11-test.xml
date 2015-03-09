@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ivy-report.xsl"?>
+<ivy-report version="1.0">
+	<info
+		organisation="stackoverflowviewer"
+		module="stackoverflowviewer$sources_javadoc_2.11"
+		revision="1.0"
+		conf="test"
+		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool"
+		date="20150301163550"/>
+	<dependencies>
+		<module organisation="org.jsoup" name="jsoup">
+			<revision name="1.8.1" status="release" pubdate="20140928060742" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://jsoup.org/" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="10">
+				<license name="The MIT License" url="http://jsoup.com/license"/>
+				<metadata-artifact status="no" details="" size="2932" time="0" location="/Users/nicolaslatorre/.ivy2/cache/org.jsoup/jsoup/ivy-1.8.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/jsoup/jsoup/1.8.1/jsoup-1.8.1.pom"/>
+				<caller organisation="stackoverflowviewer" name="stackoverflowviewer$sources_javadoc_2.11" conf="test, compile, runtime" rev="1.8.1" rev-constraint-default="1.8.1" rev-constraint-dynamic="1.8.1" callerrev="1.0"/>
+				<artifacts>
+					<artifact name="jsoup" type="jar" ext="jar" status="no" details="" size="300845" time="0" location="/Users/nicolaslatorre/.ivy2/cache/org.jsoup/jsoup/jars/jsoup-1.8.1.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/jsoup/jsoup/1.8.1/jsoup-1.8.1.jar"/>
+					</artifact>
+					<artifact name="jsoup" type="doc" ext="jar" extra-classifier="javadoc" status="successful" details="" size="545948" time="1029" location="/Users/nicolaslatorre/.ivy2/cache/org.jsoup/jsoup/docs/jsoup-1.8.1-javadoc.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/jsoup/jsoup/1.8.1/jsoup-1.8.1-javadoc.jar"/>
+					</artifact>
+					<artifact name="jsoup" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="124882" time="765" location="/Users/nicolaslatorre/.ivy2/cache/org.jsoup/jsoup/srcs/jsoup-1.8.1-sources.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/jsoup/jsoup/1.8.1/jsoup-1.8.1-sources.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="c3p0" name="c3p0">
+			<revision name="0.9.0.4" status="release" pubdate="20060510042522" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://c3p0.sourceforge.net" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="9">
+				<license name="GNU LESSER GENERAL PUBLIC LICENSE" url="http://www.gnu.org/licenses/lgpl.txt"/>
+				<metadata-artifact status="no" details="" size="2573" time="0" location="/Users/nicolaslatorre/.ivy2/cache/c3p0/c3p0/ivy-0.9.0.4.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/c3p0/c3p0/0.9.0.4/c3p0-0.9.0.4.pom"/>
+				<caller organisation="stackoverflowviewer" name="stackoverflowviewer$sources_javadoc_2.11" conf="test, compile, runtime" rev="0.9.0.4" rev-constraint-default="0.9.0.4" rev-constraint-dynamic="0.9.0.4" callerrev="1.0"/>
+				<artifacts>
+					<artifact name="c3p0" type="doc" ext="jar" extra-classifier="javadoc" status="failed" details="" size="0" time="0"/>
+					<artifact name="c3p0" type="src" ext="jar" extra-classifier="sources" status="failed" details="" size="0" time="0"/>
+					<artifact name="c3p0" type="jar" ext="jar" status="no" details="" size="490136" time="0" location="/Users/nicolaslatorre/.ivy2/cache/c3p0/c3p0/jars/c3p0-0.9.0.4.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/c3p0/c3p0/0.9.0.4/c3p0-0.9.0.4.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.squeryl" name="squeryl_2.11">
+			<revision name="0.9.5-7" status="release" pubdate="20140619001117" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://squeryl.org" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="1">
+				<license name="Apache 2" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
+				<metadata-artifact status="no" details="" size="3855" time="0" location="/Users/nicolaslatorre/.ivy2/cache/org.squeryl/squeryl_2.11/ivy-0.9.5-7.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/squeryl/squeryl_2.11/0.9.5-7/squeryl_2.11-0.9.5-7.pom"/>
+				<caller organisation="stackoverflowviewer" name="stackoverflowviewer$sources_javadoc_2.11" conf="test, compile, runtime" rev="0.9.5-7" rev-constraint-default="0.9.5-7" rev-constraint-dynamic="0.9.5-7" callerrev="1.0"/>
+				<artifacts>
+					<artifact name="squeryl_2.11" type="jar" ext="jar" status="no" details="" size="1691082" time="0" location="/Users/nicolaslatorre/.ivy2/cache/org.squeryl/squeryl_2.11/jars/squeryl_2.11-0.9.5-7.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/squeryl/squeryl_2.11/0.9.5-7/squeryl_2.11-0.9.5-7.jar"/>
+					</artifact>
+					<artifact name="squeryl_2.11" type="doc" ext="jar" extra-classifier="javadoc" status="successful" details="" size="2037756" time="2602" location="/Users/nicolaslatorre/.ivy2/cache/org.squeryl/squeryl_2.11/docs/squeryl_2.11-0.9.5-7-javadoc.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/squeryl/squeryl_2.11/0.9.5-7/squeryl_2.11-0.9.5-7-javadoc.jar"/>
+					</artifact>
+					<artifact name="squeryl_2.11" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="139929" time="620" location="/Users/nicolaslatorre/.ivy2/cache/org.squeryl/squeryl_2.11/srcs/squeryl_2.11-0.9.5-7-sources.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/squeryl/squeryl_2.11/0.9.5-7/squeryl_2.11-0.9.5-7-sources.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-lang" name="scalap">
+			<revision name="2.11.1" status="release" pubdate="20140520100340" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scala-lang.org/" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="3">
+				<license name="BSD 3-Clause" url="http://www.scala-lang.org/license.html"/>
+				<metadata-artifact status="no" details="" size="2514" time="0" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scalap/ivy-2.11.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-lang/scalap/2.11.1/scalap-2.11.1.pom"/>
+				<caller organisation="stackoverflowviewer" name="stackoverflowviewer$sources_javadoc_2.11" conf="test, compile, runtime" rev="2.11.1" rev-constraint-default="2.11.1" rev-constraint-dynamic="2.11.1" callerrev="1.0"/>
+				<artifacts>
+					<artifact name="scalap" type="jar" ext="jar" status="no" details="" size="757069" time="0" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scalap/jars/scalap-2.11.1.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scalap/2.11.1/scalap-2.11.1.jar"/>
+					</artifact>
+					<artifact name="scalap" type="doc" ext="jar" extra-classifier="javadoc" status="successful" details="" size="1045796" time="1242" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scalap/docs/scalap-2.11.1-javadoc.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scalap/2.11.1/scalap-2.11.1-javadoc.jar"/>
+					</artifact>
+					<artifact name="scalap" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="36634" time="680" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scalap/srcs/scalap-2.11.1-sources.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scalap/2.11.1/scalap-2.11.1-sources.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-lang" name="scala-compiler">
+			<revision name="2.11.1" status="release" pubdate="20140520100308" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scala-lang.org/" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="4">
+				<license name="BSD 3-Clause" url="http://www.scala-lang.org/license.html"/>
+				<metadata-artifact status="no" details="" size="3131" time="0" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-compiler/ivy-2.11.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.1/scala-compiler-2.11.1.pom"/>
+				<caller organisation="stackoverflowviewer" name="stackoverflowviewer$sources_javadoc_2.11" conf="test, compile, runtime" rev="2.11.1" rev-constraint-default="2.11.1" rev-constraint-dynamic="2.11.1" callerrev="1.0"/>
+				<artifacts>
+					<artifact name="scala-compiler" type="doc" ext="jar" extra-classifier="javadoc" status="successful" details="" size="9473506" time="6077" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-compiler/docs/scala-compiler-2.11.1-javadoc.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.1/scala-compiler-2.11.1-javadoc.jar"/>
+					</artifact>
+					<artifact name="scala-compiler" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="2083103" time="2031" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-compiler/srcs/scala-compiler-2.11.1-sources.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.1/scala-compiler-2.11.1-sources.jar"/>
+					</artifact>
+					<artifact name="scala-compiler" type="jar" ext="jar" status="no" details="" size="13449765" time="0" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-compiler/jars/scala-compiler-2.11.1.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.1/scala-compiler-2.11.1.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-lang.modules" name="scala-xml_2.11">
+			<revision name="1.0.2" status="release" pubdate="20140520101040" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scala-lang.org/" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="6">
+				<license name="BSD 3-clause" url="http://opensource.org/licenses/BSD-3-Clause"/>
+				<metadata-artifact status="no" details="" size="3011" time="0" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang.modules/scala-xml_2.11/ivy-1.0.2.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.pom"/>
+				<caller organisation="stackoverflowviewer" name="stackoverflowviewer$sources_javadoc_2.11" conf="test, compile, runtime" rev="1.0.2" rev-constraint-default="1.0.2" rev-constraint-dynamic="1.0.2" callerrev="1.0"/>
+				<artifacts>
+					<artifact name="scala-xml_2.11" type="jar" ext="jar" status="successful" details="" size="648678" time="926" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang.modules/scala-xml_2.11/jars/scala-xml_2.11-1.0.2.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar"/>
+					</artifact>
+					<artifact name="scala-xml_2.11" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="109171" time="638" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang.modules/scala-xml_2.11/srcs/scala-xml_2.11-1.0.2-sources.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-sources.jar"/>
+					</artifact>
+					<artifact name="scala-xml_2.11" type="doc" ext="jar" extra-classifier="javadoc" status="successful" details="" size="1225359" time="1674" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang.modules/scala-xml_2.11/docs/scala-xml_2.11-1.0.2-javadoc.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-javadoc.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-lang.modules" name="scala-parser-combinators_2.11">
+			<revision name="1.0.1" status="release" pubdate="20140416112222" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scala-lang.org/" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="7">
+				<license name="BSD 3-clause" url="http://opensource.org/licenses/BSD-3-Clause"/>
+				<metadata-artifact status="no" details="" size="2803" time="0" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.11/ivy-1.0.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1.pom"/>
+				<caller organisation="stackoverflowviewer" name="stackoverflowviewer$sources_javadoc_2.11" conf="test, compile, runtime" rev="1.0.1" rev-constraint-default="1.0.1" rev-constraint-dynamic="1.0.1" callerrev="1.0"/>
+				<artifacts>
+					<artifact name="scala-parser-combinators_2.11" type="jar" ext="jar" status="successful" details="" size="419701" time="783" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.11/jars/scala-parser-combinators_2.11-1.0.1.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1.jar"/>
+					</artifact>
+					<artifact name="scala-parser-combinators_2.11" type="doc" ext="jar" extra-classifier="javadoc" status="successful" details="" size="661706" time="923" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.11/docs/scala-parser-combinators_2.11-1.0.1-javadoc.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1-javadoc.jar"/>
+					</artifact>
+					<artifact name="scala-parser-combinators_2.11" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="41398" time="570" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang.modules/scala-parser-combinators_2.11/srcs/scala-parser-combinators_2.11-1.0.1-sources.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.1/scala-parser-combinators_2.11-1.0.1-sources.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-lang" name="scala-reflect">
+			<revision name="2.11.1" status="release" pubdate="20140520100246" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scala-lang.org/" extra-info.apiURL="http://www.scala-lang.org/api/2.11.1/" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="5">
+				<license name="BSD 3-Clause" url="http://www.scala-lang.org/license.html"/>
+				<metadata-artifact status="no" details="" size="2825" time="0" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-reflect/ivy-2.11.1.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.1/scala-reflect-2.11.1.pom"/>
+				<caller organisation="stackoverflowviewer" name="stackoverflowviewer$sources_javadoc_2.11" conf="test, compile, runtime" rev="2.11.1" rev-constraint-default="2.11.1" rev-constraint-dynamic="2.11.1" callerrev="1.0" extra-info.apiURL="http://www.scala-lang.org/api/2.11.1/"/>
+				<artifacts>
+					<artifact name="scala-reflect" type="jar" ext="jar" status="no" details="" size="4372892" time="0" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.11.1.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.1/scala-reflect-2.11.1.jar"/>
+					</artifact>
+					<artifact name="scala-reflect" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="555369" time="1040" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-reflect/srcs/scala-reflect-2.11.1-sources.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.1/scala-reflect-2.11.1-sources.jar"/>
+					</artifact>
+					<artifact name="scala-reflect" type="doc" ext="jar" extra-classifier="javadoc" status="successful" details="" size="3616593" time="2725" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-reflect/docs/scala-reflect-2.11.1-javadoc.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.1/scala-reflect-2.11.1-javadoc.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="postgresql" name="postgresql">
+			<revision name="8.4-701.jdbc4" status="release" pubdate="20091002012019" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://jdbc.postgresql.org" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="8">
+				<license name="BSD License" url="http://jdbc.postgresql.org/license.html"/>
+				<metadata-artifact status="no" details="" size="2349" time="0" location="/Users/nicolaslatorre/.ivy2/cache/postgresql/postgresql/ivy-8.4-701.jdbc4.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/postgresql/postgresql/8.4-701.jdbc4/postgresql-8.4-701.jdbc4.pom"/>
+				<caller organisation="stackoverflowviewer" name="stackoverflowviewer$sources_javadoc_2.11" conf="test, compile, runtime" rev="8.4-701.jdbc4" rev-constraint-default="8.4-701.jdbc4" rev-constraint-dynamic="8.4-701.jdbc4" callerrev="1.0"/>
+				<artifacts>
+					<artifact name="postgresql" type="doc" ext="jar" extra-classifier="javadoc" status="failed" details="" size="0" time="0"/>
+					<artifact name="postgresql" type="src" ext="jar" extra-classifier="sources" status="failed" details="" size="0" time="0"/>
+					<artifact name="postgresql" type="jar" ext="jar" status="no" details="" size="510170" time="0" location="/Users/nicolaslatorre/.ivy2/cache/postgresql/postgresql/jars/postgresql-8.4-701.jdbc4.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/postgresql/postgresql/8.4-701.jdbc4/postgresql-8.4-701.jdbc4.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="cglib" name="cglib-nodep">
+			<revision name="2.2" status="release" pubdate="20081201232832" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://cglib.sourceforge.net/" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="2">
+				<license name="ASF 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.txt"/>
+				<metadata-artifact status="no" details="" size="2505" time="0" location="/Users/nicolaslatorre/.ivy2/cache/cglib/cglib-nodep/ivy-2.2.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/cglib/cglib-nodep/2.2/cglib-nodep-2.2.pom"/>
+				<caller organisation="stackoverflowviewer" name="stackoverflowviewer$sources_javadoc_2.11" conf="test, compile, runtime" rev="2.2" rev-constraint-default="2.2" rev-constraint-dynamic="2.2" callerrev="1.0"/>
+				<artifacts>
+					<artifact name="cglib-nodep" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="173150" time="650" location="/Users/nicolaslatorre/.ivy2/cache/cglib/cglib-nodep/srcs/cglib-nodep-2.2-sources.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/cglib/cglib-nodep/2.2/cglib-nodep-2.2-sources.jar"/>
+					</artifact>
+					<artifact name="cglib-nodep" type="doc" ext="jar" extra-classifier="javadoc" status="successful" details="" size="405000" time="916" location="/Users/nicolaslatorre/.ivy2/cache/cglib/cglib-nodep/docs/cglib-nodep-2.2-javadoc.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/cglib/cglib-nodep/2.2/cglib-nodep-2.2-javadoc.jar"/>
+					</artifact>
+					<artifact name="cglib-nodep" type="jar" ext="jar" status="no" details="" size="322362" time="0" location="/Users/nicolaslatorre/.ivy2/cache/cglib/cglib-nodep/jars/cglib-nodep-2.2.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/cglib/cglib-nodep/2.2/cglib-nodep-2.2.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-lang" name="scala-library">
+			<revision name="2.11.5" status="release" pubdate="20150107013212" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://www.scala-lang.org/" extra-info.apiURL="http://www.scala-lang.org/api/2.11.5/" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="0">
+				<license name="BSD 3-Clause" url="http://www.scala-lang.org/license.html"/>
+				<metadata-artifact status="no" details="" size="2653" time="0" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-library/ivy-2.11.5.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.5/scala-library-2.11.5.pom"/>
+				<caller organisation="stackoverflowviewer" name="stackoverflowviewer$sources_javadoc_2.11" conf="test, compile, runtime" rev="2.11.5" rev-constraint-default="2.11.5" rev-constraint-dynamic="2.11.5" callerrev="1.0" extra-info.apiURL="http://www.scala-lang.org/api/2.11.5/"/>
+				<artifacts>
+					<artifact name="scala-library" type="src" ext="jar" extra-classifier="sources" status="successful" details="" size="903802" time="1740" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-library/srcs/scala-library-2.11.5-sources.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.5/scala-library-2.11.5-sources.jar"/>
+					</artifact>
+					<artifact name="scala-library" type="jar" ext="jar" status="no" details="" size="5576839" time="0" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.11.5.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.5/scala-library-2.11.5.jar"/>
+					</artifact>
+					<artifact name="scala-library" type="doc" ext="jar" extra-classifier="javadoc" status="successful" details="" size="22807575" time="13798" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-library/docs/scala-library-2.11.5-javadoc.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.5/scala-library-2.11.5-javadoc.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+	</dependencies>
+</ivy-report>
