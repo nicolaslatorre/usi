@@ -3,111 +3,97 @@ package visualization
 import java.awt.Color
 import java.awt.Toolkit
 import java.awt.geom.Rectangle2D
-import scala.swing._
-import scala.swing.BorderPanel.Position._
-import multidimensionalscaling.MultiDimensionalScaling
+
+import scala.swing.BorderPanel
+import scala.swing.BorderPanel.Position.Center
+import scala.swing.Frame
+import scala.swing.Graphics2D
+import scala.swing.Panel
+
 import javax.swing.SwingUtilities
-import scala.swing.event.ButtonClicked
+import javax.swing.WindowConstants.EXIT_ON_CLOSE
 
-object View extends SwingApplication {
-  val (dem, locations) = setup()
-  println("dem")
+object Starter {
+  def main(args: Array[String]) {
+    def thread(task: => Unit) = new Thread(new Runnable {
+      def run() { task }
+    }).start()
 
-  // Initial Setup
-  def setup() = {
-    val points = MultiDimensionalScaling.generatePoints("document-distribution.csv")
-    val mapScheme = new MapScheme(points)
-    val dem = mapScheme.dem
-    val locations = mapScheme.locations
+    thread({
+      val model = new Model
 
-    (dem, locations)
-  }
-
-  def startup(args: Array[String]) = {
-    //    setup()
-  }
-
-  override def main(args: Array[String]) {
-    println("main")
-    SwingUtilities.invokeLater(new Runnable {
-      def run {
-        val window = top
-        window.peer.setVisible(true)
-      }
+      SwingUtilities.invokeLater(new Runnable {
+        def run {
+          val view = new View(model)
+          val control = new Control(model, view)
+          control.view.peer.setVisible(true)
+        }
+      })
     })
-  }
-
-  def getCentersShapes() = {
-    val maxX = dem.maxBy { case (point, _) => point.x }._1.x
-    val maxY = dem.maxBy { case (point, _) => point.y }._1.y
-
-    val minX = dem.minBy { case (point, _) => point.x }._1.x
-    val minY = dem.minBy { case (point, _) => point.y }._1.y
-
-    val centers = locations.map { loc => loc.center + Point(Math.abs(minX), Math.abs(minY)) }
-
-    val d = dem.map { case (x, y) => (x + Point(Math.abs(minX), Math.abs(minY)), y) }.toMap
-    (centers, d)
-  }
-
-  // DRAWING
-  def top = new MainFrame {
-    title = "StackOverflow Viewer"
-
-    val header = new FlowPanel {
-      val button = new Button {
-        text = "Run"
-        enabled = true
-      }
-
-      contents += button
-
-    }
-
-    val (c, d) = getCentersShapes()
-    val canvas = new Canvas(c, d) {
-      preferredSize = Toolkit.getDefaultToolkit.getScreenSize
-    }
-
-    contents = new BorderPanel {
-      layout(header) = North
-      layout(canvas) = Center
-    }
-
-    // Eventes
-    listenTo(header.button)
-
-    // React to events
-    reactions += {
-      case ButtonClicked(header.button) =>
-        println("Clicked")
-        preferredSize = new Dimension(300, 300)
-        canvas.background = new Color(0, 128, 255)
-    }
 
   }
 }
 
-class Canvas(val centers: List[Point], val dem: Map[Point, Double]) extends Panel {
+class View(val model: Model) extends Frame {
+  title = "StackOverflow Viewer"
+  peer.setDefaultCloseOperation(EXIT_ON_CLOSE)
+
+  val panel = new BorderPanel {
+    val canvas = new Canvas(model.centers, model.adjustedDem, model.gradient, model.maxHeight, model.minHeight)
+    layout(canvas) = Center
+  }
+
+  contents = panel
+}
+
+class Canvas(val centers: List[Point], val dem: Map[Point, Double], val gradient: Map[Int, Color], val maxHeght: Double, val minHeight: Double) extends Panel {
+  preferredSize = Toolkit.getDefaultToolkit.getScreenSize
+  val backgroundColor = new Color(0, 128, 255)
+  opaque = true
+  background = backgroundColor
+
   var zoomFactor = 1.0
   var offsetX = 0.0
   var offsetY = 0.0
-  val centersShapes = centers.map { p => (p - Point(zoomFactor / 2, zoomFactor / 2)) * zoomFactor }
-  val demShapes = dem.map { case (p, h) => (p + Point(offsetX, offsetY)) * zoomFactor } // carefull, we should include also height
 
-  opaque = true
-  background = new Color(0, 128, 255)
-  
   override def paintComponent(g: Graphics2D) = {
-    g.setColor(new Color(0, 0, 0))
-    demShapes.par.foreach {
-      point =>
-        g.fill(new Rectangle2D.Double(point.x, point.y, zoomFactor, zoomFactor))
-    }
-    
+    super.paintComponent(g)
+
+    dem.map {
+      case (p, h) =>
+        if (zoomFactor == 1.0) {
+          val point = (p + Point(offsetX, offsetY)) * zoomFactor
+          (new Rectangle2D.Double(point.x, point.y, zoomFactor, zoomFactor), getColor(h, p))
+        } else {
+          val point = (p + Point(offsetX, offsetY) - Point(zoomFactor / 2, zoomFactor / 2)) * zoomFactor
+          (new Rectangle2D.Double(point.x, point.y, zoomFactor, zoomFactor), getColor(h, p))
+        }
+    }.par foreach {
+      case (rect, color) =>
+        g.setColor(color)
+        g.fill(rect)
+    } // carefull, we should include also height
+
     g.setColor(new Color(255, 255, 0))
-    centersShapes.par.foreach { point =>
-      g.fill(new Rectangle2D.Double(point.x, point.y, 1 * zoomFactor, 1 * zoomFactor))
-    }
+    centers.map { p =>
+      val point = (p + Point(offsetX, offsetY) - Point(zoomFactor / 2, zoomFactor / 2)) * zoomFactor
+      new Rectangle2D.Double(point.x, point.y, 1 * zoomFactor, 1 * zoomFactor)
+    }.par foreach { rect => g.fill(rect) }
+
   }
+
+  def getColor(height: Double, point: Point) = {
+    val levels = gradient.keySet.size
+    val interval = maxHeght / levels
+
+    val ls = (0 until levels) toList
+
+    val index = ls.find { i1 => height >= (minHeight + interval * i1) && height < (minHeight + interval * (i1 + 1)) }
+
+    index match {
+      case Some(n) => gradient.get(n).last
+      case None => gradient.get(levels - 1).last
+    } // ????
+  }
+
 }

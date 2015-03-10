@@ -100,30 +100,23 @@ object MultiDimensionalScaling {
       Stream.continually(x) zip Stream.iterate(x)(x => x + 1) take (dissimilarityMatrix.length - x) toList
     }).take(dissimilarityMatrix.length).toList
 
-    triangular flatMap { x => x } foreach { case (x, y) => if (dissimilarityMatrix(x)(y) != dissimilarityMatrix(y)(x)) System.err.println("There is a Problem") }
-
-    //dissimilarityMatrix.foreach { x => x.toList.foreach { x => print(x+ " ") }; println()}
+//    triangular flatMap { x => x } foreach { case (x, y) => if (dissimilarityMatrix(x)(y) != dissimilarityMatrix(y)(x)) System.err.println("There is a Problem") }
 
     println("Computing MDS")
-    val points = MDSJ.classicalScaling(dissimilarityMatrix, 3)
-
+    val points = MDSJ.classicalScaling(dissimilarityMatrix, 2)
     val pointsList = points.map { x => x.toList }.toList
-    printPoints(pointsList)
 
     //ugly but points should contains only two list
     pointsList(0).zip(pointsList(1)).map { case (x, y) => new Point(x, y) }
 
   }
 
-  def main(args: Array[String]) = {
-    val points = generatePoints("document-distribution.csv")
-
-    //points foreach { x => println(x) }
-
-  }
+//  def main(args: Array[String]) = {
+//    val points = generatePoints("document-distribution.csv")
+//  }
 
   def printPoints(points: List[List[Double]]) = {
-    val pointList = points(0) zip points(1) // zip points(2) zip points(3)
+    val pointList = points(0) zip points(1)
     pointList foreach { x => println(x) }
   }
 
