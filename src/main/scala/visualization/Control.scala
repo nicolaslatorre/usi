@@ -34,10 +34,13 @@ class Control(val model: Model, val view: View) {
       view.repaint()
 
     case KeyPressed(_, Key.R, _, _) =>
-      println("pressed R")
       canvas.offsetX = 0.0
       canvas.offsetY = 0.0
+      canvas.zoomFactor = 1.0
       view.repaint()
   }
+  
+  view.panel.canvas.focusable = true
+  
 
 }

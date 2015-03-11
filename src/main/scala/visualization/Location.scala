@@ -18,5 +18,11 @@ case class Location(val name: String, val center: Point, val ray: Int, val heigh
     
     coordinates.map{ case(x,y) => Point(x,y) }
   }
+  
+  def circumferencePointAsStream(rayInterval: Double, levels: Int) = {
+    val intervals = Stream.iterate(ray.toDouble)(x => x-rayInterval).take(levels).toList
+    
+    intervals.flatMap { currentRay => asPointStream.filter { x => x.distance(center) >= currentRay-1 && x.distance(center) <= currentRay+1} }
+  }
 
 }
