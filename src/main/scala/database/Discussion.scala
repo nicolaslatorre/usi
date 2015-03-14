@@ -2,7 +2,7 @@ package database
 
 import squeryl._
 
-class Discussion(val question: Post, val comments: List[Option[Comment]], val answersAndComments: Map[Post, List[Option[Comment]]]) {
+class Discussion(val id: Int, val question: Post, val comments: List[Option[Comment]], val answersAndComments: Map[Post, List[Option[Comment]]], val tags: List[String]) {
 
   override def toString() = {
     val commentsString = {

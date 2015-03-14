@@ -21,30 +21,39 @@ import scala.io.Source
 object TopicModeling {
 
   def main(args: Array[String]) = {
-    val path = "discussions.old.csv" // 904 discussions, 200 discussions
-    val numberOfTopics = 50
-    val alpha = 1.0 / numberOfTopics
+    val path = "datasets/dataset6/discussions-java-cpp-python-php.csv"
+    //    val path1 = "datasets/dataset4/discussions-html.csv"
+    
+    val alpha = 10.0
     val beta = 0.006
     val iterations = 1000
-    val instanceList = createInstanceList(path)
+    val discussions = getDiscussions(path)
+    val numberOfTopics = 4//getNumberOfTags(discussions)
+    val instanceList = createInstanceList(discussions)
 
     val threads = Runtime.getRuntime.availableProcessors()
     val model = executeLDA(instanceList, numberOfTopics, alpha, beta, threads, iterations)
 
-    val instancesRange = (0 until (instanceList.size() - 1))
+    val instancesRange = (0 until instanceList.size())
     val probabilities = instancesRange.map { index => wrapProbabilities(model, index) }.toList
 
     println(probabilities.size)
-    
+
     val topicSequences = model.getData.get(0).topicSequence
     val distribution = model.getTopicProbabilities(topicSequences).toList
     println(distribution.length)
-    writeResult(probabilities, numberOfTopics)
+    writeResult(probabilities, numberOfTopics, discussions)
 
     //topWords.foreach { x => x.foreach { y => println(y)} }
 
     println()
 
+  }
+  
+  def getNumberOfTags(discussions: List[List[String]]) = {
+    discussions.flatMap { x => x(3).split(" ").toList }.distinct.size
+    //println(tags)
+    //tags.size
   }
 
   //MyClass should be the same
@@ -55,28 +64,54 @@ object TopicModeling {
   //StopWords, tutte in lowercase
   //stemming, porter stemmer or snowball stemmer
 
-  def createInstanceList(path: String) = {
-    //val pattern = Pattern.compile("\\p{L}[\\p{L}\\p{P}]+\\p{L}")
-    val reader = CSVReader.open(new File(path))
-    val discussions = reader.all()
+  //  def createInstanceListTwoPath(path: String, path1: String) = {
+  //    //val pattern = Pattern.compile("\\p{L}[\\p{L}\\p{P}]+\\p{L}")
+  //    val reader = CSVReader.open(new File(path))
+  //    
+  //    val reader2 = CSVReader.open(new File(path1))
+  //    
+  //    val discussions = (reader.all() ::: reader2.all())
+  //    println(discussions.length)
+  //
+  //    val pattern = Pattern.compile("\\S+")
+  //
+  //    //    val pipeList = List(new CharSequenceLowercase, new CharSequence2TokenSequence(), new TokenSequenceRemoveNonAlpha, new TokenSequenceFilterLength(3),
+  //    //      getStopWords, new Stemming, new TokenSequence2FeatureSequence())
+  //
+  //    val pipeList = List(new CharSequenceLowercase, new CharSequence2TokenSequence(), new TokenSequenceRemoveNonAlpha, new TokenSequenceFilterLength(3),
+  //      getStopWords, new Stemming, new TokenSequence2FeatureSequence())
+  //    val pipes = new SerialPipes(pipeList)
+  //
+  //    val instanceList = new InstanceList(pipes)
+  //
+  //    val instances = discussions.take(2000).map { xs => instanceList.addThruPipe(createInstance(xs, discussions.indexOf(xs))) }
+  //
+  //    instanceList
+  //  }
 
+  def getDiscussions(path: String) = {
+    val reader = CSVReader.open(new File(path))
+    reader.all()
+  }
+
+  def createInstanceList(discussions: List[List[String]]) = {
     val pattern = Pattern.compile("\\S+")
 
-    val pipeList = List(new CharSequenceLowercase, new CharSequence2TokenSequence(pattern), new TokenSequenceFilterLength(3), new TokenSequenceRemoveNonAlpha,
-      getStopWords, new Stemming, getStopWords, new TokenSequence2FeatureSequence())
+    val pipeList = List(new CharSequenceLowercase, new CharSequence2TokenSequence(), new TokenSequenceRemoveNonAlpha, new TokenSequenceFilterLength(3),
+      getStopWords, new Stemming, new TokenSequence2FeatureSequence())
     val pipes = new SerialPipes(pipeList)
 
     val instanceList = new InstanceList(pipes)
 
-    val instances = discussions.map { xs => instanceList.addThruPipe(createInstance(xs)) }
+    val instances = discussions.take(2000).map { xs => instanceList.addThruPipe(createInstance(xs)) }
 
     instanceList
   }
 
   def getStopWords() = {
-    val stopwords = new File("stoplist/stop-words_english_1_en.txt")
+    val stopwords = new File("stoplist/stopwords.txt")
 
-    val stopwords2 = new File("stoplist/stopwordsProgramming.txt")
+    val stopwords2 = new File("stoplist/stopwordsPython.txt")
     val programmingStopwords = Source.fromFile(stopwords2).mkString.split("\n")
 
     val removeStopWords = new TokenSequenceRemoveStopwords(stopwords, "UTF-8", false, false, false)
@@ -85,7 +120,7 @@ object TopicModeling {
   }
 
   def createInstance(line: List[String]) = {
-    val Array(id, label, text) = line.toArray
+    val Array(id, label, text, tags) = line.toArray
     new Instance(text, "noLabel", id, 0) // the last value of the instance constructor is for classification task, it is not needed here.
   }
 
@@ -116,14 +151,30 @@ object TopicModeling {
     wrappedNames -> wrappedProbabilities
   }
 
-  def writeResult(probabilities: List[(String, List[Double])], numberOfTopics: Int) = {
-    val firstRow = (for (i <- 0 to (numberOfTopics - 1)) yield "T" + i).toList
-    val path = "document-distribution.csv"
+  def writeResult(probabilities: List[(String, List[Double])], numberOfTopics: Int, discussions: List[List[String]]) = {
+    val firstRow = (for (i <- 0 until numberOfTopics) yield "T" + i).toList
+    val path = "datasets/dataset6/document-distribution-" + numberOfTopics + "-java-cpp-python-php-mix.csv"
     val file = new File(path)
-
     val writer = CSVWriter.open(file)
-    writer.writeRow("" :: firstRow)
-    probabilities.foreach { case (x, ys) => writer.writeRow(x :: ys.map { y => y.toString() }) }
+
+    val ds = discussions.map { xs => (xs(0), xs(2), xs(3)) }
+
+    writer.writeRow("" :: (firstRow ::: List("Text")))
+    //    probabilities.foreach { case (x, ys) => writer.writeRow(x :: ys.map { y => y.toString() }) }
+    //val map = (ds zip probabilities).groupBy(_._1).mapValues(x => (x(0)._1._2, x(0)._2._2)).map { case (x, y) => (x._1, y) }
+    val map = (ds zip probabilities).groupBy(_._1).mapValues{x => 
+      val text = x(0)._1._2
+      val tags = x(0)._1._3
+      val probabilities = x(0)._2._2
+      (text, tags, probabilities)
+      }.map{case(x, y) => (x._1, y)}
+    
+    
+    map.foreach {
+      case (x, y) =>
+        writer.writeRow(x :: y._1 :: y._2 :: y._3.map { x => x.toString() })
+    }
+
     writer.close()
   }
 

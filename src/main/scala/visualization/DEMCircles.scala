@@ -2,42 +2,42 @@ package visualization
 
 import java.awt.Color
 
-class DEMCircles(val locations: List[Location]) {
-  def computeGlobalDEM(levels: Int) = {
-    println("Computing Digital Elevation Model for " + locations.size + " locations")
-    val tempDEMs = locations.take(2).par.map { x => computeDEM(x, levels) }
-    tempDEMs.foreach(x => println(x))
-    //tempDEMs.flatMap { x => x }.groupBy(_._1).mapValues(x => x.map { y => y._2 }.max).seq //.map { x => (x._1, x._2.max) } seq
-
-    val dem = tempDEMs.flatMap { x => x }.groupBy(_._1).mapValues { x => x.map { t => t._2 }.max }.seq.toMap
-    println(dem.size)
-    dem
-  }
-
-  def computeDEM(location: Location, levels: Int) = {
-    val ray = location.ray
-    val rayInterval = ray / levels.toDouble
-
-    val elevation = location.height
-    val angle = Math.atan(elevation / ray)
-
-    val pointsInCircumferences = List(Point(1.0, 1.0))
-    
-    //pointsInCircumferences.foreach { x => println(x) }
-    println("points: " + pointsInCircumferences.size)
-
-    val heights = pointsInCircumferences map { point =>
-      val distance = point.distance(location.center)
-
-      val height = (elevation / ray) * (ray - distance)
-      (point, height)
-
-    }
-    //println(heights.toList)
-
-    //    heights.filter(x => heights.indexOf(x) < 30).foreach(x => print(x))
-    heights.toList
-  }
+object DEMCircles {
+//  def computeGlobalDEM(levels: Int) = {
+//    println("Computing Digital Elevation Model for " + locations.size + " locations")
+//    val tempDEMs = locations.take(2).par.map { x => computeDEM(x, levels) }
+//    tempDEMs.foreach(x => println(x))
+//    //tempDEMs.flatMap { x => x }.groupBy(_._1).mapValues(x => x.map { y => y._2 }.max).seq //.map { x => (x._1, x._2.max) } seq
+//
+//    val dem = tempDEMs.flatMap { x => x }.groupBy(_._1).mapValues { x => x.map { t => t._2 }.max }.seq.toMap
+//    println(dem.size)
+//    dem
+//  }
+//
+//  def computeDEM(location: Location, levels: Int) = {
+//    val ray = location.ray
+//    val rayInterval = ray / levels.toDouble
+//
+//    val elevation = location.height
+//    val angle = Math.atan(elevation / ray)
+//
+//    val pointsInCircumferences = List(Point(1.0, 1.0))
+//    
+//    //pointsInCircumferences.foreach { x => println(x) }
+//    println("points: " + pointsInCircumferences.size)
+//
+//    val heights = pointsInCircumferences map { point =>
+//      val distance = point.distance(location.center)
+//
+//      val height = (elevation / ray) * (ray - distance)
+//      (point, height)
+//
+//    }
+//    //println(heights.toList)
+//
+//    //    heights.filter(x => heights.indexOf(x) < 30).foreach(x => print(x))
+//    heights.toList
+//  }
 
   def buildGradient(levels: Int) = {
     val colorStart = new Color(0, 0, 0)

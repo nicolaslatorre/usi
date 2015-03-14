@@ -25,6 +25,7 @@ case class Point(val x: Double, val y: Double) {
     Point(x * value, y * value)
   }
   
+  
   def valueOver (value: Double) = {
     Point(value / x, value / y)
   }

@@ -6,7 +6,7 @@ class MapScheme(val points: List[Point]) {
   
   
   def generateLocations() = {
-    points.map { x => new Location("", x, 10, 300.0) }
+    points.map { x => new Location("", x, 10, 300.0, "", "") }
   }
   
   def computeDigitalElevationModel(locations: List[Location]) = {
