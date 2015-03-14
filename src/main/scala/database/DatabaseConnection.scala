@@ -12,19 +12,32 @@ import com.github.tototoshi.csv._
 import java.io.File
 import java.io.PrintWriter
 import java.nio.charset.Charset
+import scala.io.Source
 
 object DatabaseConnection {
 
   def main(args: Array[String]) {
-    //    val strings = fetchDiscussions()
-    val strings = fetchTags
-  }
-
-  def openConnection() = {
     val url = "jdbc:postgresql://localhost:5432/stackoverflow_dump"
     val username = "sodb"
     val password = "sodb"
+    val path = "datasets/dataset7/discussions-questions.csv"
+    val idsPath = "datasets/dataset7/ids-random.txt"
 
+    //    val strings = fetchDiscussions(url, username, password, path)
+    //val fullDiscussions = fetchFullDiscussions(url, username, password, path)
+    //val questionsAndAnswer = fetchQuestionsAndAnswers(url, username, password, path, idsPath)
+    val questions = fetchQuestions(url, username, password, path, idsPath)
+    
+  }
+
+  /**
+   * Opens a connection with a database
+   *
+   * @param url the address of the database
+   * @param username
+   * @param password
+   */
+  def openConnection(url: String, username: String, password: String) = {
     val cpds = new ComboPooledDataSource()
     cpds.setDriverClass("org.postgresql.Driver") //loads the jdbc driver 
     cpds.setJdbcUrl(url)
@@ -41,46 +54,6 @@ object DatabaseConnection {
 
     println("Opened DB")
     cpds
-  }
-
-  def fetchDiscussions() = {
-    val path = "datasets/dataset5/discussions-random.csv"
-    val cpds = openConnection()
-
-    //Squeryl database interaction must occur in a transaction block :
-    val discussions = inTransaction {
-      //      val ids = from(posts)(p => where((p.postTypeId === 1) and (p.tags like "%&lt;java&gt;%") and (p.id lt 100000)) select (p.id))
-
-      //      val ids = from(posts)(p => where((p.postTypeId === 1) and ((p.tags like "%&lt;html&gt;%") or (p.tags like "%&lt;java&gt;%")
-      //        or (p.tags like "%&lt;c++&gt;%") or (p.tags like "%&lt;javascript&gt;%") or (p.tags like "%&lt;python&gt;%")) and (p.id lt 100000)) select (p.id))
-
-      val ids = from(posts)(p => where((p.postTypeId === 1) and (p.id lt 50000)) select (p.id))
-
-      println("# of ids: " + ids.distinct.size)
-
-      val questionsWithComment =
-        join(posts, comments.leftOuter)((p, c) =>
-          where((p.id in ids) and (p.acceptedAnswerId > 0))
-            select (p, c)
-            on (p.id === c.map(_.postId)))
-
-      val answersWithComment =
-        join(posts, comments.leftOuter)((p, c) =>
-          where((p.parentId in ids) and (p.postTypeId === 2))
-            select (p, c)
-            on (p.id === c.map(_.postId))).par
-
-      val discussions = buildDiscussions(questionsWithComment.toList, answersWithComment.toList)
-
-      //      discussionsStrings = discussions.map { x => getDiscussionString(x) }.toList
-      //      println("# of discussions: " + discussionsStrings.size)
-      discussions
-    }.toList
-
-    cpds.close()
-    println("Closed DB")
-    writeCSV(discussions, path)
-    discussions.map { x => getDiscussionString(x) }.toList
   }
 
   //  def fetchTags = {
@@ -118,35 +91,34 @@ object DatabaseConnection {
   //    discussionsStrings
   //  }
 
-  def fetchTags = {
-    val path = "discussions-dataset5.csv"
-    val cpds = openConnection()
-    val discussionsStrings = inTransaction {
-//      val ids = from(posts)(p => where((p.postTypeId === 1) and ((p.tags like "%&lt;php&gt;%") and (p.tags like "%&lt;sql&gt;%") and
-//        (p.tags like "%&lt;database&gt;%") ) and (p.id lt 4000000)) select (p.id))
-        
-//        val ids = from(posts)(p => where((p.postTypeId === 1) and ((p.tags like "%&lt;java&gt;%") and (p.tags like "%&lt;swing&gt;%")
-//            and (p.id lt 300000))) select (p.id))
-//        
-//        val ids = from(posts)(p => where((p.postTypeId === 1) and ((p.tags like "%&lt;python&gt;%") and (p.tags like "%&lt;numpy&gt;%") 
-//            and (p.id lt 2000000))) select (p.id))
-//        
-//        val ids = from(posts)(p => where((p.postTypeId === 1) and (p.tags like "%&lt;c++&gt;%") and (p.tags like "%&lt;opengl&gt;%") 
-//            and (p.id lt 2000000)) select (p.id))
-      
-      val ids = from(posts)(p => where((p.postTypeId === 1) and (p.tags like "%&lt;c#&gt;%") and (p.tags like "%&lt;.net&gt;%") 
-            and (p.id lt 30000)) select (p.id))
-      
-      
+  def fetchFullDiscussions(url: String, username: String, password: String, path: String) = {
+    val cpds = openConnection(url, username, password)
+    val discussions = inTransaction {
+      val ids1 = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and ((p.tags like "%&lt;php&gt;%") and (p.tags like "%&lt;sql&gt;%") and
+        (p.tags like "%&lt;database&gt;%"))) select (p.id)).take(1500)
 
-      println("# of ids: " + ids.distinct.size)
-//      println("# of ids2: " + ids2.size)
-//      println("# of ids3: " + ids3.size)
-//      println("# of ids4: " + ids4.size)
+      val ids2 = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and ((p.tags like "%&lt;java&gt;%") and (p.tags like "%&lt;swing&gt;%")
+        and not (p.id in ids1))) select (p.id)).take(1500)
+
+      val ids3 = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and ((p.tags like "%&lt;python&gt;%") and (p.tags like "%&lt;numpy&gt;%")
+        and not (p.id in ids1) and not (p.id in ids2))) select (p.id)).take(1500)
+
+      val ids4 = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and (p.tags like "%&lt;c++&gt;%") and (p.tags like "%&lt;opengl&gt;%")
+        and not (p.id in ids1) and not (p.id in ids2) and not (p.id in ids3)) select (p.id)).take(1500)
+
+      //      val ids = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and (p.tags like "%&lt;c#&gt;%") and (p.tags like "%&lt;.net&gt;%") 
+      //            and (p.id lt 30000)) select (p.id))
+
+      println("# of ids1: " + ids1.size)
+      println("# of ids2: " + ids2.size)
+      println("# of ids3: " + ids3.size)
+      println("# of ids4: " + ids4.size)
+      
+      val ids = ids1.toList ::: ids2.toList ::: ids3.toList ::: ids4.toList
 
       val questionsWithComment =
         join(posts, comments.leftOuter)((p, c) =>
-          where(((p.id in ids)) and (p.acceptedAnswerId > 0))
+          where(((p.id in ids)))
             select (p, c)
             on (p.id === c.map(_.postId)))
 
@@ -154,22 +126,57 @@ object DatabaseConnection {
         join(posts, comments.leftOuter)((p, c) =>
           where(((p.parentId in ids)) and (p.postTypeId === 2))
             select (p, c)
-            on (p.id === c.map(_.postId))).par
+            on (p.id === c.map(_.postId)))
 
-//      buildTagsMatrix(questionsWithComment.toList, answersWithComment.toList).toList
-      val discussions = buildDiscussions(questionsWithComment.toList, answersWithComment.toList)
-      discussions
+      buildFullDiscussions(questionsWithComment.toList, answersWithComment.toList)
     }.toList
-    
-    println("# of discussions: " + discussionsStrings.size)
+
+    println("# of discussions: " + discussions.size)
     cpds.close()
     println("Closed DB")
-
-    val file = new File(path)
-    val writer = CSVWriter.open(file)
-    writeCSV(discussionsStrings, path)
-    discussionsStrings
+    writeCSV(discussions, path)
+    discussions
   }
+  
+  def fetchQuestionsAndAnswers(url: String, username: String, password: String, path: String, idsPath: String) = {
+    val cpds = openConnection(url, username, password)
+    val discussions = inTransaction {
+      
+      val ids = Source.fromFile(new File(idsPath)).getLines().toList.map { x => x.toInt }
+
+      val questions = from(posts)(p => where(p.id in ids) select (p)).toList
+      val answers = from(posts)(p => where((p.parentId in ids) and (p.postTypeId === 2)) select(p)).toList
+
+      buildQuestionsAndAnswers(questions, answers)
+    }.toList
+
+    println("# of discussions: " + discussions.size)
+    cpds.close()
+    println("Closed DB")
+    writeCSV(discussions, path)
+    discussions
+  }
+  
+  def fetchQuestions(url: String, username: String, password: String, path: String, idsPath: String) = {
+    val cpds = openConnection(url, username, password)
+    val discussions = inTransaction {
+      
+      val ids = Source.fromFile(new File(idsPath)).getLines().toList.map { x => x.toInt }
+
+      val questions = from(posts)(p => where(p.id in ids) select (p)).toList
+
+      buildQuestions(questions)
+    }.toList
+
+    println("# of discussions: " + discussions.size)
+    cpds.close()
+    println("Closed DB")
+    writeCSV(discussions, path)
+    discussions
+    
+  }
+  
+  
 
   def buildTagsMatrix(questions: List[(Post, Option[Comment])], answers: List[(Post, Option[Comment])]) = {
     //    val tags = Map()
@@ -215,6 +222,11 @@ object DatabaseConnection {
 
   }
 
+  def getIds() = {
+    from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and (p.tags like "%&lt;c#&gt;%") and (p.tags like "%&lt;.net&gt;%")
+      and (p.id lt 30000)) select (p.id))
+  }
+
   def buildTags(post: Post) = {
     val tags = post.tags match {
       case Some(t) => t
@@ -223,7 +235,7 @@ object DatabaseConnection {
     Jsoup.parse(tags).body().text().replace("<", "").replace(">", " ").split(" ").toList
   }
 
-  def buildDiscussions(questions: List[(Post, Option[Comment])], answers: List[(Post, Option[Comment])]) = {
+  def buildFullDiscussions(questions: List[(Post, Option[Comment])], answers: List[(Post, Option[Comment])]) = {
     val questionsAndComment = mapPostsWithComments(questions)
     val answersAndComments = mapPostsWithComments(answers)
     val groupOfAnswers = answersAndComments.groupBy {
@@ -239,6 +251,18 @@ object DatabaseConnection {
         case Some(n) => n
       }, buildTags(x))
     }
+  }
+  
+  def buildQuestionsAndAnswers(questions: List[Post], answers: List[Post]) = {
+    val idQuestions = questions.map {x => (x.id, x)}
+    val idAnswers = answers.groupBy { x => x.parentId.get }//map { x => (x.parentId.get, x) }
+    val questionsAndAnswers = idQuestions.zip(idAnswers).groupBy(_._1).mapValues{ x => x.map{ case(q, a) => (q._2, a._2)}}.flatMap{case(x, y) => y}.toList
+    questionsAndAnswers.map { case(q, a) => new Discussion(q.id, q, List(), a.map { x => (x, List()) }.toMap, buildTags(q)) }
+  }
+  
+  def buildQuestions(questions: List[Post]) = {
+    val idQuestions = questions.map {x => (x.id, x)}
+    questions.map { q => new Discussion(q.id, q, List(), Map(), buildTags(q)) }
   }
 
   def mapPostsWithComments(posts: List[(Post, Option[Comment])]) = {
