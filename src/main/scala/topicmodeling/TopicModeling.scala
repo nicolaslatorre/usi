@@ -21,14 +21,16 @@ import scala.io.Source
 object TopicModeling {
 
   def main(args: Array[String]) = {
-    val openPath = "../Datasets/dataset7/discussions-questions.csv"
+    val openPath = "../Datasets/dataset2/discussions-fullQuestions.csv"
+    
+    val tagPath = "../Datasets/tags-recurrence.csv"
     
     
     val alpha = 10.0
     val beta = 0.006
     val iterations = 1000
     val discussions = getDiscussions(openPath)
-    val numberOfTopics = 4
+    val numberOfTopics = getNumberOfTopics(tagPath)
     val instanceList = createInstanceList(discussions)
 
     val threads = Runtime.getRuntime.availableProcessors()
@@ -43,7 +45,7 @@ object TopicModeling {
     val distribution = model.getTopicProbabilities(topicSequences).toList
     println(distribution.length)
     
-    val resultPath = "../Datasets/dataset7/document-distribution-" + numberOfTopics + "-questions.csv"
+    val resultPath = "../Datasets/dataset2/document-distribution-" + numberOfTopics + "-fullQuestions.csv"
     writeResult(probabilities, numberOfTopics, discussions, resultPath)
 
     println()
@@ -54,6 +56,12 @@ object TopicModeling {
     discussions.flatMap { x => x(3).split(" ").toList }.distinct.size
     //println(tags)
     //tags.size
+  }
+  
+  def getNumberOfTopics(path: String) = {
+    val tags = getDiscussions(path)
+    val topics = tags.length
+    val threshold = (topics/100).toInt
   }
 
   //MyClass should be the same

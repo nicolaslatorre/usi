@@ -23,16 +23,17 @@ object DatabaseConnection {
     
 //    val path = "../Datasets/dataset7/discussions-fullQuestions.csv"
 //    val path = "../Datasets/dataset7/discussions-nocomment.csv"
-    val path = "../Datasets/dataset7/discussions-questions.csv"
+//    val path = "../Datasets/dataset7/discussions-questions.csv"
+    
+    val path = "../Datasets/dataset2/discussions-fullQuestions.csv"
     
     
-    val idsPath = "../Datasets/dataset7/ids-random.txt"
+    val idsPath = "../Datasets/dataset2/ids.txt"
     val tagPath = "../Datasets/tags-recurrence.csv"
 
-    //    val strings = fetchDiscussions(url, username, password, path)
-    //val fullDiscussions = fetchFullDiscussions(url, username, password, path, idsPath)
+    val fullDiscussions = fetchFullDiscussions(url, username, password, path, idsPath)
 //    val questionsAndAnswer = fetchQuestionsAndAnswers(url, username, password, path, idsPath)
-    val questions = fetchQuestions(url, username, password, path, idsPath)
+//    val questions = fetchQuestions(url, username, password, path, idsPath)
       //val tags = buildRecurrences(url, username, password, tagPath)
 
   }
@@ -101,6 +102,10 @@ object DatabaseConnection {
   def fetchFullDiscussions(url: String, username: String, password: String, path: String, idsPath: String) = {
     val cpds = openConnection(url, username, password)
     val discussions = inTransaction {
+      
+      val ids = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0)) select (p.id)).take(5000)
+      
+      
 //      val ids1 = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and ((p.tags like "%&lt;php&gt;%") and (p.tags like "%&lt;sql&gt;%") and
 //        (p.tags like "%&lt;database&gt;%"))) select (p.id)).take(1500)
 //
@@ -116,7 +121,7 @@ object DatabaseConnection {
 
 //      val ids = ids1.toList ::: ids2.toList ::: ids3.toList ::: ids4.toList
       
-      val ids = Source.fromFile(new File(idsPath)).getLines().toList.map { x => x.toInt }
+//      val ids = Source.fromFile(new File(idsPath)).getLines().toList.map { x => x.toInt }
 
       val questionsWithComment =
         join(posts, comments.leftOuter)((p, c) =>
