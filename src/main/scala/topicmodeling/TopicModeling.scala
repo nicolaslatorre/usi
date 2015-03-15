@@ -21,7 +21,7 @@ import scala.io.Source
 object TopicModeling {
 
   def main(args: Array[String]) = {
-    val openPath = "datasets/dataset7/discussions-nocomment.csv"
+    val openPath = "../Datasets/dataset7/discussions-questions.csv"
     
     
     val alpha = 10.0
@@ -43,7 +43,7 @@ object TopicModeling {
     val distribution = model.getTopicProbabilities(topicSequences).toList
     println(distribution.length)
     
-    val resultPath = "datasets/dataset7/document-distribution-" + numberOfTopics + "-questions.csv"
+    val resultPath = "../Datasets/dataset7/document-distribution-" + numberOfTopics + "-questions.csv"
     writeResult(probabilities, numberOfTopics, discussions, resultPath)
 
     println()
