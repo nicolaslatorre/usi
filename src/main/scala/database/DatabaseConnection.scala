@@ -31,10 +31,10 @@ object DatabaseConnection {
     val idsPath = "../Datasets/dataset2/ids.txt"
     val tagPath = "../Datasets/tags-recurrence.csv"
 
-    val fullDiscussions = fetchFullDiscussions(url, username, password, path, idsPath)
+//    val fullDiscussions = fetchFullDiscussions(url, username, password, path, idsPath)
 //    val questionsAndAnswer = fetchQuestionsAndAnswers(url, username, password, path, idsPath)
 //    val questions = fetchQuestions(url, username, password, path, idsPath)
-      //val tags = buildRecurrences(url, username, password, tagPath)
+      val tags = buildRecurrences(url, username, password, tagPath)
 
   }
 

@@ -61,7 +61,10 @@ object TopicModeling {
   def getNumberOfTopics(path: String) = {
     val tags = getDiscussions(path)
     val topics = tags.length
+    println(topics)
     val threshold = (topics/100).toInt
+    
+    tags.filter { x => x.last.toInt >= threshold }.size
   }
 
   //MyClass should be the same
