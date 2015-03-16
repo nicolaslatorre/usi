@@ -77,7 +77,7 @@ class Control(val model: Model, val view: View) {
 
   view.panel.canvas.focusable = true
 
-  def isInLocation(point: Point, location: Location, ray: Int): Option[Location] = {
+  def isInLocation(point: Point, location: Location, ray: Int): Option[Location] = { 
     val distance = point.distance((location.center + Point(canvas.offsetX, canvas.offsetY)) * canvas.zoomFactor)
     if (distance <= (ray*canvas.zoomFactor)) Some(location)
     else None
