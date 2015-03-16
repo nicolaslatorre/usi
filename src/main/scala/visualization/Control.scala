@@ -9,6 +9,7 @@ import scala.swing.event.MouseDragged
 import scala.swing.event.MouseWheelMoved
 import scala.swing.event.KeyPressed
 import scala.swing.event.Key
+import java.awt.Dimension
 
 class Control(val model: Model, val view: View) {
   //view.peer.setVisible(true)
@@ -55,19 +56,20 @@ class Control(val model: Model, val view: View) {
       if (r > 0) {
         canvas.zoomFactor -= 0.1
       } else {
-        canvas.zoomFactor += 0.1        
+        canvas.zoomFactor += 0.1       
       }
 
       view.repaint()
 
     case KeyPressed(_, Key.R, _, _) =>
+      println("Reset")
       canvas.offsetX = 0.0
       canvas.offsetY = 0.0
       canvas.zoomFactor = 1.0
       view.repaint()
 
     case KeyPressed(_, Key.C, _, _) =>
-      println("Pressed C")
+      println("Change rays")
       canvas.drawWithEqualRay = !canvas.drawWithEqualRay
       println(canvas.drawWithEqualRay)
       view.repaint()
@@ -76,9 +78,13 @@ class Control(val model: Model, val view: View) {
   view.panel.canvas.focusable = true
 
   def isInLocation(point: Point, location: Location, ray: Int): Option[Location] = {
+    
 
-    val coordinates = location.asPointStreamWithRay(ray).toList.map { x => (x + Point(canvas.offsetX, canvas.offsetY)) * canvas.zoomFactor }
-    if (coordinates.contains(point)) Some(location)
+//    val coordinates = location.asPointStreamWithRay(ray).toList.map { x => (x + Point(canvas.offsetX, canvas.offsetY)) * canvas.zoomFactor }
+//    println("Click at: " + point)
+//    coordinates.foreach { x => println(x) }
+    val distance = point.distance((location.center + Point(canvas.offsetX, canvas.offsetY)) * canvas.zoomFactor)
+    if (distance <= (ray*canvas.zoomFactor)) Some(location)
     else None
   }
 

@@ -50,7 +50,7 @@ class View(val model: Model) extends Frame {
     layout(canvas) = Center
   }
 
-  val chooser = new FileChooser(new File("/Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer"))
+  val chooser = new FileChooser(new File("/Users/nicolaslatorre/Documents/USI/Tesi/Datasets"))
   menuBar = new MenuBar {
     contents += new Menu("File") {
       contents += new MenuItem(Action("Open") {
@@ -179,6 +179,7 @@ class Canvas(var locations: List[Location], var gradient: Map[Int, Color], val m
     //    }
 
     println("Drawing Completed. Drawed " + centers.size + " discussions.")
+    println("Size: " + preferredSize.getWidth + ", " + preferredSize.getHeight)
   }
 
   def getColor(height: Double) = {
