@@ -12,8 +12,6 @@ import scala.swing.event.Key
 import java.awt.Dimension
 
 class Control(val model: Model, val view: View) {
-  //view.peer.setVisible(true)
-
   val canvas = view.panel.canvas
 
   view.listenTo(canvas.mouse.clicks, canvas.mouse.moves, canvas.mouse.wheel, canvas.keys)
