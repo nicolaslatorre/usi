@@ -20,21 +20,28 @@ object DatabaseConnection {
     val url = "jdbc:postgresql://localhost:5432/stackoverflow_dump"
     val username = "sodb"
     val password = "sodb"
-    
-//    val path = "../Datasets/dataset7/discussions-fullQuestions.csv"
-//    val path = "../Datasets/dataset7/discussions-nocomment.csv"
-//    val path = "../Datasets/dataset7/discussions-questions.csv"
-    
-    val path = "../Datasets/dataset2/discussions-fullQuestions.csv"
-    
-    
+
+    //    val path = "../Datasets/dataset7/discussions-fullQuestions.csv"
+    //    val path = "../Datasets/dataset7/discussions-nocomment.csv"
+    //    val path = "../Datasets/dataset7/discussions-questions.csv"
+
+    val path = "../Datasets/dataset5/5000-discussions-tags.csv"
+
     val idsPath = "../Datasets/dataset2/ids.txt"
     val tagPath = "../Datasets/tags-recurrence.csv"
+    val newTagPath = "../Datasets/tags-recurrence-single.csv"
+    val singleTagsPath = "../Datasets/single-tags-recurrence.csv"
 
-//    val fullDiscussions = fetchFullDiscussions(url, username, password, path, idsPath)
-//    val questionsAndAnswer = fetchQuestionsAndAnswers(url, username, password, path, idsPath)
-//    val questions = fetchQuestions(url, username, password, path, idsPath)
-      val tags = buildRecurrences(url, username, password, tagPath)
+    //    val fullDiscussions = fetchFullDiscussions(url, username, password, path, idsPath)
+    //    val questionsAndAnswer = fetchQuestionsAndAnswers(url, username, password, path, idsPath)
+    //    val questions = fetchQuestions(url, username, password, path, idsPath)
+    //      val tags = buildRecurrences(url, username, password, tagPath)
+
+    //      val tags = buildSingleRecurrences(tagPath, newTagPath)
+
+    val tagsOccurences = getTagsOccurences(singleTagsPath)
+
+    val d = buildByTags(url, username, password, path, tagsOccurences.take(50))
 
   }
 
@@ -102,26 +109,24 @@ object DatabaseConnection {
   def fetchFullDiscussions(url: String, username: String, password: String, path: String, idsPath: String) = {
     val cpds = openConnection(url, username, password)
     val discussions = inTransaction {
-      
+
       val ids = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0)) select (p.id)).take(5000)
-      
-      
-//      val ids1 = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and ((p.tags like "%&lt;php&gt;%") and (p.tags like "%&lt;sql&gt;%") and
-//        (p.tags like "%&lt;database&gt;%"))) select (p.id)).take(1500)
-//
-//      val ids2 = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and ((p.tags like "%&lt;java&gt;%") and (p.tags like "%&lt;swing&gt;%")
-//        and not(p.id in ids1))) select (p.id)).take(1500)
-//
-//      val ids3 = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and ((p.tags like "%&lt;python&gt;%") and (p.tags like "%&lt;numpy&gt;%")
-//        and not(p.id in ids1) and not(p.id in ids2))) select (p.id)).take(1500)
-//
-//      val ids4 = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and (p.tags like "%&lt;c++&gt;%") and (p.tags like "%&lt;opengl&gt;%")
-//        and not(p.id in ids1) and not(p.id in ids2) and not(p.id in ids3)) select (p.id)).take(1500)
 
+      //      val ids1 = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and ((p.tags like "%&lt;php&gt;%") and (p.tags like "%&lt;sql&gt;%") and
+      //        (p.tags like "%&lt;database&gt;%"))) select (p.id)).take(1500)
+      //
+      //      val ids2 = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and ((p.tags like "%&lt;java&gt;%") and (p.tags like "%&lt;swing&gt;%")
+      //        and not(p.id in ids1))) select (p.id)).take(1500)
+      //
+      //      val ids3 = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and ((p.tags like "%&lt;python&gt;%") and (p.tags like "%&lt;numpy&gt;%")
+      //        and not(p.id in ids1) and not(p.id in ids2))) select (p.id)).take(1500)
+      //
+      //      val ids4 = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and (p.tags like "%&lt;c++&gt;%") and (p.tags like "%&lt;opengl&gt;%")
+      //        and not(p.id in ids1) and not(p.id in ids2) and not(p.id in ids3)) select (p.id)).take(1500)
 
-//      val ids = ids1.toList ::: ids2.toList ::: ids3.toList ::: ids4.toList
-      
-//      val ids = Source.fromFile(new File(idsPath)).getLines().toList.map { x => x.toInt }
+      //      val ids = ids1.toList ::: ids2.toList ::: ids3.toList ::: ids4.toList
+
+      //      val ids = Source.fromFile(new File(idsPath)).getLines().toList.map { x => x.toInt }
 
       val questionsWithComment =
         join(posts, comments.leftOuter)((p, c) =>
@@ -183,17 +188,74 @@ object DatabaseConnection {
 
   }
 
+  def buildSingleRecurrences(path: String, newPath: String) = {
+    val tags = Source.fromFile(new File(path)).getLines().toList
+
+    val newTags = tags.map { x => x.split(",").toList }.filter { x => x(0).split(" ").length == 1 }
+    val t = newTags.map { x => (List(x(0)), x(1).toInt) }
+
+    writeTagsCSV(t, newPath)
+    //println(newTags.take(3))
+  }
+
+  def buildByTags(url: String, username: String, password: String, path: String, tagsOccurences: List[(String, Int)]) = {
+    val cpds = openConnection(url, username, password)
+    val matrix = inTransaction {
+      //      val tags = Source.fromFile(new File(tagPath)).getLines().toList.map { x => x.split(",").toList.head }
+
+      //var ids: List[Int] = Nil
+
+      //    val ids1 = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and (p.tags like "%&lt;"+x+";%"))) select (p.id)).take(1500)
+
+      //      tags.take(50).map { x =>
+      //        val idsTemp = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and ((p.tags like "&lt;" + x + "&gt;") and not(p.id in ids))) select (p.id)).take(100).toList
+      //        ids = idsTemp ::: ids
+      //      }
+      //
+      //      println("size: " + ids.size)
+      //      println("distinct " + ids.distinct.size)
+
+      val ids = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0)) select (p.id)).take(5000)
+
+      val questionsWithComment =
+        join(posts, comments.leftOuter)((p, c) =>
+          where(((p.id in ids)))
+            select (p, c)
+            on (p.id === c.map(_.postId)))
+
+      val answersWithComment =
+        join(posts, comments.leftOuter)((p, c) =>
+          where(((p.parentId in ids)) and (p.postTypeId === 2))
+            select (p, c)
+            on (p.id === c.map(_.postId)))
+
+      val discussions = buildFullDiscussions(questionsWithComment.toList, answersWithComment.toList).toList
+      val matrix = buildTagsMatrix(discussions, tagsOccurences).toList
+
+      matrix
+    }
+
+    println("# of discussions: " + matrix.size)
+    cpds.close()
+    println("Closed DB")
+    writeTagsMatrixCSV(matrix, path)
+    println("Saved")
+    matrix
+  }
+
   def buildRecurrences(url: String, username: String, password: String, path: String) = {
     val cpds = openConnection(url, username, password)
     val tagsList = inTransaction {
 
-      val tags = from(posts)(p => where((p.postTypeId === 1)) select (p.tags))
+      //      val tags = from(posts)(p => where((p.postTypeId === 1)) select (p.tags))
+
+      val tags = from(posts)(p => where((p.postTypeId === 1) and (p.tags like "&lt;%&gt;")) select (p.tags))
 
       tags.map {
         case (Some(tag)) => buildTags(tag).sortWith(_.toLowerCase < _.toLowerCase)
         case None => List("")
       }.groupBy(x => x).mapValues { y => y.size }
-      
+
     }.toList.sortBy(x => x._2).reverse
 
     println("# of tags: " + tagsList.size)
@@ -203,53 +265,63 @@ object DatabaseConnection {
     tagsList
   }
 
-  def buildTagsMatrix(questions: List[(Post, Option[Comment])], answers: List[(Post, Option[Comment])]) = {
-    //    val tags = Map()
-    val questionsAndComment = mapPostsWithComments(questions)
-    val answersAndComments = mapPostsWithComments(answers)
-    val groupOfAnswers = answersAndComments.groupBy {
-      case (x, y) => x.parentId match {
-        case None => -1
-        case Some(n) => n
-      }
-    }
-
-    questionsAndComment.map {
-      case (x, y) => getTags(x)
+  def buildTagsMatrix(discussions: List[Discussion], tagsOccurences: List[(String, Int)]) = {
+    discussions.map {
+      case x =>
+        val vectorTag = TagManager.getVectorTag(x.tags, tagsOccurences)
+        (x, vectorTag)
     }
   }
 
-  def getTags(post: Post) = {
-    val tags = post.tags match {
-      case Some(t) => t
-      case None => ""
-    }
-    val postTags = Jsoup.parse(tags).body().text().replace("<", "").replace(">", " ").split(" ").toList
+  //  def buildTagsMatrix(questions: List[(Post, Option[Comment])], answers: List[(Post, Option[Comment])]) = {
+  //    //    val tags = Map()
+  //    val questionsAndComment = mapPostsWithComments(questions)
+  //    val answersAndComments = mapPostsWithComments(answers)
+  //    val groupOfAnswers = answersAndComments.groupBy {
+  //      case (x, y) => x.parentId match {
+  //        case None => -1
+  //        case Some(n) => n
+  //      }
+  //    }
+  //
+  //    questionsAndComment.map {
+  //      case (x, y) => getTags(x)
+  //    }
+  //  }
+  //
+  //  def getTags(post: Post) = {
+  //    val tags = post.tags match {
+  //      case Some(t) => t
+  //      case None => ""
+  //    }
+  //    val postTags = Jsoup.parse(tags).body().text().replace("<", "").replace(">", " ").split(" ").toList
+  //
+  //    val tagList = List("html", "c++", "java", "javascript", "python")
+  //    val t = postTags.filter { x => tagList.contains(x) }.map { x =>
+  //      x match {
+  //        case "html" => List(1, 0, 0, 0, 0)
+  //        case "c++" => List(0, 1, 0, 0, 0)
+  //        case "java" => List(0, 0, 1, 0, 0)
+  //        case "javascript" => List(0, 0, 0, 1, 0)
+  //        case "python" => List(0, 0, 0, 0, 1)
+  //        case _ => List(0, 0, 0, 0, 0)
+  //      }
+  //    }
+  //
+  //    t.foldLeft(List(0, 0, 0, 0, 0))((x, y) => x zip y map {
+  //      case (x, y) => (x > y) match {
+  //        case true => x
+  //        case false => y
+  //      }
+  //    })
+  //
+  //  }
 
-    val tagList = List("html", "c++", "java", "javascript", "python")
-    val t = postTags.filter { x => tagList.contains(x) }.map { x =>
-      x match {
-        case "html" => List(1, 0, 0, 0, 0)
-        case "c++" => List(0, 1, 0, 0, 0)
-        case "java" => List(0, 0, 1, 0, 0)
-        case "javascript" => List(0, 0, 0, 1, 0)
-        case "python" => List(0, 0, 0, 0, 1)
-        case _ => List(0, 0, 0, 0, 0)
-      }
-    }
-
-    t.foldLeft(List(0, 0, 0, 0, 0))((x, y) => x zip y map {
-      case (x, y) => (x > y) match {
-        case true => x
-        case false => y
-      }
-    })
-
-  }
-
-  def getIds() = {
-    from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0) and (p.tags like "%&lt;c#&gt;%") and (p.tags like "%&lt;.net&gt;%")
-      and (p.id lt 30000)) select (p.id))
+  def getTagsOccurences(path: String) = {
+    Source.fromFile(new File(path)).getLines().map { x =>
+      val Array(tag, value) = x.split(",")
+      (tag, value.toInt)
+    }.toList
   }
 
   def buildTags(post: Post) = {
@@ -325,8 +397,30 @@ object DatabaseConnection {
     writer.close()
   }
 
+  def writeTagsMatrixCSV(matrix: List[(Discussion, List[Int])], path: String) = {
+    println("Writing...")
+    val firstRow = (for (i <- 0 until matrix(0)._2.size) yield "T" + i).toList
+    val file = new File(path)
+    val writer = CSVWriter.open(file)
+
+    writer.writeRow("" :: (firstRow ::: List("Text")))
+
+    val contents = matrix.map {
+      case (discussion, distribution) =>
+        val string = (discussion.id.toString, getDiscussionString(discussion).split(",").mkString(""), discussion.tags.mkString(" "))
+        val ds = distribution.zipWithIndex.filter { x => x._1==1 }.map { case(value, index) => value + " " + index  }
+        (string._1 :: string._2 :: string._3 :: discussion.question.answerCount.get.toString :: discussion.question.commmentCount.get.toString :: ds)
+    }
+
+    contents.foreach {
+      x => writer.writeRow(x)
+    }
+
+    writer.close()
+  }
+
   def writeTagsCSV(tags: List[(List[String], Int)], path: String) = {
-    val content = tags.map{ case(tag, r) => List(tag.mkString(" "), r)}
+    val content = tags.map { case (tag, r) => List(tag.mkString(" "), r) }
     val file = new File(path)
     val writer = CSVWriter.open(file)
     writer.writeAll(content)

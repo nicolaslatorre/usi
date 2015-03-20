@@ -27,14 +27,19 @@ object Starter {
 
     thread({
       val model = new Model
+      val path = "../Datasets/dataset5/5000-discussions-tags.csv"
+      val destinationPath = "../Datasets/dataset5/5000-image-tags.png"
+      val (locations, gradient) = model.computeModel(path)
+      val writer = new WriteImage
+      writer.write(locations, false, gradient, destinationPath)
 
-      SwingUtilities.invokeLater(new Runnable {
-        def run {
-          val view = new View(model)
-          val control = new Control(model, view)
-          control.view.peer.setVisible(true)
-        }
-      })
+//      SwingUtilities.invokeLater(new Runnable {
+//        def run {
+//          val view = new View(model)
+//          val control = new Control(model, view)
+//          control.view.peer.setVisible(true)
+//        }
+//      })
     })
 
   }
@@ -179,7 +184,6 @@ class Canvas(var locations: List[Location], var gradient: Map[Int, Color], val m
     //    }
 
     println("Drawing Completed. Drawed " + centers.size + " discussions.")
-    println("Size: " + preferredSize.getWidth + ", " + preferredSize.getHeight)
   }
 
   def getColor(height: Double) = {

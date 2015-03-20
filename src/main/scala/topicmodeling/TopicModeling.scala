@@ -21,7 +21,7 @@ import scala.io.Source
 object TopicModeling {
 
   def main(args: Array[String]) = {
-    val openPath = "../Datasets/dataset2/discussions-fullQuestions.csv"
+    val openPath = "../Datasets/dataset4/discussions-fullQuestions.csv"
     
     val tagPath = "../Datasets/tags-recurrence.csv"
     
@@ -30,7 +30,7 @@ object TopicModeling {
     val beta = 0.006
     val iterations = 1000
     val discussions = getDiscussions(openPath)
-    val numberOfTopics = getNumberOfTopics(tagPath)
+    val numberOfTopics = 50//getNumberOfTopics(tagPath)
     val instanceList = createInstanceList(discussions)
 
     val threads = Runtime.getRuntime.availableProcessors()
@@ -45,7 +45,7 @@ object TopicModeling {
     val distribution = model.getTopicProbabilities(topicSequences).toList
     println(distribution.length)
     
-    val resultPath = "../Datasets/dataset2/document-distribution-" + numberOfTopics + "-fullQuestions.csv"
+    val resultPath = "../Datasets/dataset3/document-distribution-" + numberOfTopics + "-fullQuestions.csv"
     writeResult(probabilities, numberOfTopics, discussions, resultPath)
 
     println()

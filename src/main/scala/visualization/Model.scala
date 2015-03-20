@@ -10,11 +10,20 @@ class Model {
   def computeModel(path: String) = {
     //	  val points = MultiDimensionalScaling.generatePoints("datasets/dataset1/document-distribution-100-java.csv")
     val pointsAndDiscussions = MultiDimensionalScaling.getPointAndDiscussions(path)
-    val locations = pointsAndDiscussions.map { case(x, y) => new Location(y.id, x, (y.text.length()/50), 300.0, y.text, y.tags) }
-//    val d = new DEMCircles(locations)
+    val locations = pointsAndDiscussions.map {
+      case (x, y) =>
+        val ray = {
+          val sum = y.answerCount + y.commentCount // sum can be zero, so we need to adjust it.
+          if (sum==0) 0.5
+          else sum
+        }.toInt
+        
+        println(y.answerCount + y.commentCount)
+        new Location(y.id, x, ray*10, 300.0, y.text, y.tags)
+    }
+    //    val d = new DEMCircles(locations)
 
-    
-//    val dem = d.computeGlobalDEM(levels)
+    //    val dem = d.computeGlobalDEM(levels)
     val gradient = DEMCircles.buildGradient(levels)
 //    val centers = adjustPoints(locations)
 
@@ -22,10 +31,8 @@ class Model {
     (locations, gradient)
   }
 
-  
-
-//  val maxHeight = adjustedDem.maxBy { case (_, h) => h }._2
-//  val minHeight = adjustedDem.minBy { case (_, h) => h }._2
+  //  val maxHeight = adjustedDem.maxBy { case (_, h) => h }._2
+  //  val minHeight = adjustedDem.minBy { case (_, h) => h }._2
 
   def adjustPoints(locations: List[Location]) = {
     val maxX = locations.maxBy { l => l.center.x }.center.x

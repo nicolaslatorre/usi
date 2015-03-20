@@ -34,7 +34,8 @@ class MultiDimensionalScaling {
 
   // EUCLIDEAN DISTANCE
   def euclideanDistance(first: List[Double], second: List[Double]) = {
-    val distance = first.zip(second).map { case (x, y) => (x.toDouble - y.toDouble) * (x.toDouble - y.toDouble) }.foldLeft(0.0)((x, y) => x + y)
+    val distance = first.zip(second).map { case (x, y) => 
+      if(x > 0.0 || y > 0.0) (x.toDouble - y.toDouble) * (x.toDouble - y.toDouble) else 0.0}.foldLeft(0.0)((x, y) => x + y)
     Math.sqrt(distance)
   }
 
@@ -84,53 +85,53 @@ class MultiDimensionalScaling {
 }
 
 object MultiDimensionalScaling {
-//  def generatePoints(path: String) = {
-//    val mds = new MultiDimensionalScaling
-//    val features = mds.openFeatureVectors(path)
-//
-//    val dissimilarityMatrix = mds.computeDissimilarityMatrix(features.toList)
-//
-//    val triangular = (Stream.iterate(0)(x => x + 1) map { x =>
-//      Stream.continually(x) zip Stream.iterate(x)(x => x + 1) take (dissimilarityMatrix.length - x) toList
-//    }).take(dissimilarityMatrix.length).toList
-//
-//    triangular flatMap { x => x } foreach { case (x, y) => if (dissimilarityMatrix(x)(y) != dissimilarityMatrix(y)(x)) System.err.println("There is a Problem") }
-//
-//    //triangular flatMap { x => x } foreach { case (x, y) => println(dissimilarityMatrix(x)(y) + " -> " + dissimilarityMatrix(y)(x)) }
-//
-//    println("Computing MDS")
-//    val points = MDSJ.classicalScaling(dissimilarityMatrix, 2)
-//    val pointsList = points.map { x => x.toList }.toList
-//
-//    //ugly but points should contains only two list
-//    pointsList(0).zip(pointsList(1)).map { case (x, y) => new Point(x, y) }
-//
-//  }
+  //  def generatePoints(path: String) = {
+  //    val mds = new MultiDimensionalScaling
+  //    val features = mds.openFeatureVectors(path)
+  //
+  //    val dissimilarityMatrix = mds.computeDissimilarityMatrix(features.toList)
+  //
+  //    val triangular = (Stream.iterate(0)(x => x + 1) map { x =>
+  //      Stream.continually(x) zip Stream.iterate(x)(x => x + 1) take (dissimilarityMatrix.length - x) toList
+  //    }).take(dissimilarityMatrix.length).toList
+  //
+  //    triangular flatMap { x => x } foreach { case (x, y) => if (dissimilarityMatrix(x)(y) != dissimilarityMatrix(y)(x)) System.err.println("There is a Problem") }
+  //
+  //    //triangular flatMap { x => x } foreach { case (x, y) => println(dissimilarityMatrix(x)(y) + " -> " + dissimilarityMatrix(y)(x)) }
+  //
+  //    println("Computing MDS")
+  //    val points = MDSJ.classicalScaling(dissimilarityMatrix, 2)
+  //    val pointsList = points.map { x => x.toList }.toList
+  //
+  //    //ugly but points should contains only two list
+  //    pointsList(0).zip(pointsList(1)).map { case (x, y) => new Point(x, y) }
+  //
+  //  }
 
   def getPointAndDiscussions(path: String) = {
     val documents = openFeatureVectors(path)
     val mds = new MultiDimensionalScaling
     val dissimilarityMatrix = mds.computeDissimilarityMatrix(documents)
-    
-//    val triangular = (Stream.iterate(0)(x => x + 1) map { x =>
-//      Stream.continually(x) zip Stream.iterate(x)(x => x + 1) take (dissimilarityMatrix.length - x) toList
-//    }).take(dissimilarityMatrix.length).toList
-//
-//    triangular flatMap { x => x } foreach { case (x, y) => if (dissimilarityMatrix(x)(y) != dissimilarityMatrix(y)(x)) System.err.println("There is a Problem") }
-    
+
+    //    val triangular = (Stream.iterate(0)(x => x + 1) map { x =>
+    //      Stream.continually(x) zip Stream.iterate(x)(x => x + 1) take (dissimilarityMatrix.length - x) toList
+    //    }).take(dissimilarityMatrix.length).toList
+    //
+    //    triangular flatMap { x => x } foreach { case (x, y) => if (dissimilarityMatrix(x)(y) != dissimilarityMatrix(y)(x)) System.err.println("There is a Problem") }
+
     println("Computing MDS")
     val pointsArray = MDSJ.classicalScaling(dissimilarityMatrix, 2)
     val pointsList = pointsArray.map { x => x.toList }.toList
     val points = adjustPoints(pointsList) //pointsList(0).zip(pointsList(1)).map { case (x, y) => new Point(x, y) }
-    
+
     points zip documents
   }
 
   def main(args: Array[String]) = {
-    val points = getPointAndDiscussions("discussions-tags.csv")
+    val points = getPointAndDiscussions("../Datasets/dataset5/discussions-tags.csv")
 
   }
-  
+
   def adjustPoints(pointsList: List[List[Double]]) = {
     val points = pointsList(0).zip(pointsList(1)).map { case (x, y) => new Point(x, y) }
     val maxX = points.maxBy { p => p.x }.x
@@ -139,6 +140,7 @@ object MultiDimensionalScaling {
     val minX = points.minBy { p => p.x }.x
     val minY = points.minBy { p => p.y }.y
 
+    println("MinX: " + minX + ", MinY: " + minY)
     points.map { point => point + Point(Math.abs(minX), Math.abs(minY)) }
   }
 
@@ -157,11 +159,29 @@ object MultiDimensionalScaling {
   }
 
   def openFeatureVectors(path: String) = {
-    val reader = CSVReader.open(new File(path))
-    val lines = reader.all().drop(1)
+    val tags = true
+    val reader = CSVReader.open(new File(path)).all
+    val numberOfTopics = reader.head.size - 2 // ATTENTION IN THE FUTURE
+    val lines = reader.drop(1)
     lines.map { x =>
-      val probabilities = x.drop(3).map { p => p.toDouble }
-      new Document(x.head, probabilities, x(1), x(2))
+      val probabilities = x.drop(5)
+
+      val values = if (tags) buildMatrix(probabilities, numberOfTopics) else probabilities.map { x => x.toDouble }
+      new Document(x.head, values, x(1), x(2), x(3).toInt, x(4).toInt)
     }
+  }
+
+  def buildMatrix(vector: List[String], topics: Int) = {
+    val index = vector.map { x =>
+      val Array(value, i) = x.split(" ")
+      List.fill(i.toInt)(0) ::: List(1) ::: List.fill(topics-1-i.toInt)(0)
+    }.foldLeft(List.fill(topics)(0))((x, y) => x zip y map {
+      case (a, b) =>
+        if (a >= b) a
+        else b
+    })
+    
+    
+    index.map { x => x.toDouble }
   }
 }
