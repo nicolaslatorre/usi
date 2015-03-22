@@ -3,29 +3,42 @@ package visualization
 import multidimensionalscaling.MultiDimensionalScaling
 import java.io.PrintWriter
 import java.io.File
+import scala.util.Random
+import database.Discussion
+import multidimensionalscaling.Document
 
 class Model {
-  val levels = 10
+  //  val levels = 10
 
   def computeModel(path: String) = {
     //	  val points = MultiDimensionalScaling.generatePoints("datasets/dataset1/document-distribution-100-java.csv")
     val pointsAndDiscussions = MultiDimensionalScaling.getPointAndDiscussions(path)
+    
+    val discussions = pointsAndDiscussions.map{ case(p, d) => d}
+    val tagOccurences = getStringTagOccurrences(discussions)
+//    val tagOccurences = getStringTagSingleOccurrences(discussions)
+    
     val locations = pointsAndDiscussions.map {
       case (x, y) =>
         val ray = {
-          val sum = y.answerCount + y.commentCount // sum can be zero, so we need to adjust it.
-          if (sum==0) 0.5
+          val sum = y.answerCount + y.commentCount + 5// sum can be zero, so we add give a default ray of one to each location.
+          if (sum == 0) 5
           else sum
         }.toInt
+
+        val tags = y.tags.split(" ").toList.sorted.mkString(" ")
+        val height = tagOccurences.get(tags).get
         
-        println(y.answerCount + y.commentCount)
-        new Location(y.id, x, ray*10, 300.0, y.text, y.tags)
+        println(height)
+        new Location(y.id, x, ray, height, y.text, y.tags)
     }
     //    val d = new DEMCircles(locations)
+    val levels = 10//((locations.maxBy { x => x.height }.height) / 10).toInt
+    //println(levels)
 
-    //    val dem = d.computeGlobalDEM(levels)
+//    val dem = DEMCircles.computeGlobalDEM(levels, locations)
     val gradient = DEMCircles.buildGradient(levels)
-//    val centers = adjustPoints(locations)
+    //    val centers = adjustPoints(locations)
 
     println("Model Computed")
     (locations, gradient)
@@ -42,6 +55,19 @@ class Model {
     val minY = locations.minBy { l => l.center.y }.center.y
 
     locations.map { loc => loc.center + Point(Math.abs(minX), Math.abs(minY)) }
+  }
+  
+  def getStringTagOccurrences(documents: List[Document]) = {
+    val tags = documents.map { x => x.tags.split(" ").toList.sorted.mkString(" ") }
+    tags.groupBy(x => x).mapValues { x => x.size }
+  }
+  
+  def getStringTagSingleOccurrences(documents: List[Document]) = {
+    val tags = documents.flatMap { x => x.tags.split(" ").toList.sorted }
+    val initialOccurrences = tags.groupBy(x => x).mapValues { x => x.size }
+    
+    initialOccurrences
+    
   }
 
   def writeDEM(dem: Map[Point, Double]) = {

@@ -15,18 +15,47 @@ class MultiDimensionalScaling {
     val rows = 0 until input.size
     val cols = rows
 
+    val mapping: Map[(Int, Int), Double] = Map()
+
+    val triangular = (Stream.iterate(0)(x => x + 1) map { x =>
+      Stream.continually(x) zip Stream.iterate(x)(x => x + 1) take (rows.size - x) toList
+    }).take(rows.size).toList
+
+    val dis = triangular.par.flatMap { x => x }.map {
+      case (x, y) =>
+        if (x == y) ((x, y), 0.0)
+        else {
+          val rowDoc = id2Doc(x)
+          val colDoc = id2Doc(y)
+          val distance = computeDistanceTag(euclideanDistanceTag, rowDoc.topicDistribution, colDoc.topicDistribution) * 3000
+          ((x, y), distance)
+        }
+    }.toMap
+
     rows.map { row =>
       cols.map { col =>
-        val rowDoc = id2Doc(row)
-        val colDoc = id2Doc(col)
         if (col == row) 0.0
-        else if (row < col) computeDistance(euclideanDistance, rowDoc.topicDistribution, colDoc.topicDistribution) * 3000
-        else computeDistance(euclideanDistance, colDoc.topicDistribution, rowDoc.topicDistribution) * 3000
+        else if (row < col) dis.get((row, col)).get
+        else dis.get((col, row)).get
       }.toArray
     }.toArray
+
+    //triangular flatMap { x => x } foreach { case (x, y) => println(dissimilarityMatrix(x)(y) + " -> " + dissimilarityMatrix(y)(x)) }
+
+    //    rows.map { row =>
+    //      cols.map { col =>
+    //        val rowDoc = id2Doc(row)
+    //        val colDoc = id2Doc(col)
+    //        if (col == row) 0.0
+    //        else if (row < col) computeDistance(euclideanDistance, rowDoc.topicDistribution, colDoc.topicDistribution) * 3000
+    //        else computeDistance(euclideanDistance, colDoc.topicDistribution, rowDoc.topicDistribution) * 3000
+    //      }.toArray
+    //    }.toArray
   }
 
   def computeDistance(callback: (List[Double], List[Double]) => Double, x: List[Double], y: List[Double]) = callback(x, y)
+  
+  def computeDistanceTag(callback: (List[(Int, Int)], List[(Int, Int)]) => Double, x: List[(Int, Int)], y: List[(Int, Int)]) = callback(x, y)
 
   //
   // DISTANCES
@@ -34,8 +63,18 @@ class MultiDimensionalScaling {
 
   // EUCLIDEAN DISTANCE
   def euclideanDistance(first: List[Double], second: List[Double]) = {
-    val distance = first.zip(second).map { case (x, y) => 
-      if(x > 0.0 || y > 0.0) (x.toDouble - y.toDouble) * (x.toDouble - y.toDouble) else 0.0}.foldLeft(0.0)((x, y) => x + y)
+    val distance = first.zip(second).map {
+      case (x, y) =>
+        if (x > 0.0 || y > 0.0) (x.toDouble - y.toDouble) * (x.toDouble - y.toDouble) else 0.0
+    }.foldLeft(0.0)((x, y) => x + y)
+    Math.sqrt(distance)
+  }
+  
+  def euclideanDistanceTag(first: List[(Int, Int)], second: List[(Int, Int)]) = {
+    val distance = (first ::: second).groupBy(_._2).mapValues(x => x.map(y => y._1)).map{ case(x, y) =>
+      if(y.size == 1) (y(0).toDouble - 0) * (y(0).toDouble - 0)
+      else (y(0).toDouble - y(1).toDouble) * (y(0).toDouble - y(1).toDouble)
+    }.toList.sum
     Math.sqrt(distance)
   }
 
@@ -166,22 +205,29 @@ object MultiDimensionalScaling {
     lines.map { x =>
       val probabilities = x.drop(5)
 
-      val values = if (tags) buildMatrix(probabilities, numberOfTopics) else probabilities.map { x => x.toDouble }
+//      val values = if (tags) buildMatrix(probabilities, numberOfTopics) else probabilities.map { x => x.toDouble }
+      val values = buildVectorIndex(probabilities, numberOfTopics)
       new Document(x.head, values, x(1), x(2), x(3).toInt, x(4).toInt)
     }
   }
-
-  def buildMatrix(vector: List[String], topics: Int) = {
-    val index = vector.map { x =>
-      val Array(value, i) = x.split(" ")
-      List.fill(i.toInt)(0) ::: List(1) ::: List.fill(topics-1-i.toInt)(0)
-    }.foldLeft(List.fill(topics)(0))((x, y) => x zip y map {
-      case (a, b) =>
-        if (a >= b) a
-        else b
-    })
-    
-    
-    index.map { x => x.toDouble }
+  
+  def buildVectorIndex(vector: List[String], topics: Int) = {
+    vector.map{ x => 
+      val Array(value, index) = x.split(" ")
+      (value.toInt, index.toInt)
+    }
   }
+
+//  def buildMatrix(vector: List[String], topics: Int) = {
+//    val index = vector.map { x =>
+//      val Array(value, i) = x.split(" ")
+//      List.fill(i.toInt)(0) ::: List(1) ::: List.fill(topics - 1 - i.toInt)(0)
+//    }.foldLeft(List.fill(topics)(0))((x, y) => x zip y map {
+//      case (a, b) =>
+//        if (a >= b) a
+//        else b
+//    })
+//
+//    index.map { x => x.toDouble }
+//  }
 }

@@ -57,6 +57,27 @@ object TagManager {
   }
   
   
+  def buildVectorTag(postTags: List[String], tagList: List[String]) = {
+    val vectorsTag = postTags.map { tag =>
+      val index = tagList.indexOf(tag.trim)
+      if (index == -1) {
+        //System.err.println("index: " + index)
+        0
+      }
+      val end = (tagList.size - 1) - index
+      if (index == 0) List(1) ::: List.fill(end-1)(0) 
+      else Stream.continually(0).take(index).toList ::: List(1) ::: List.fill(end)(0)
+    }
+
+    val vectorTag = vectorsTag.foldLeft(List.fill(tagList.size)(0))((x, y) => x zip y map {
+      case (a, b) =>
+        if (a >= b) a
+        else b
+    })
+    vectorTag
+  }
+  
+  
 //  def getVectorTag(post: Post, tagsOccurences: List[(String, Int)]) = {
 //    val postTagsString = post.tags match {
 //      case Some(t) => t

@@ -3,10 +3,9 @@ package visualization
 import java.awt.Color
 
 object DEMCircles {
-//  def computeGlobalDEM(levels: Int) = {
+//  def computeGlobalDEM(levels: Int, locations: List[Location]) = {
 //    println("Computing Digital Elevation Model for " + locations.size + " locations")
-//    val tempDEMs = locations.take(2).par.map { x => computeDEM(x, levels) }
-//    tempDEMs.foreach(x => println(x))
+//    val tempDEMs = locations.par.map { x => computeDEM(x, levels) }
 //    //tempDEMs.flatMap { x => x }.groupBy(_._1).mapValues(x => x.map { y => y._2 }.max).seq //.map { x => (x._1, x._2.max) } seq
 //
 //    val dem = tempDEMs.flatMap { x => x }.groupBy(_._1).mapValues { x => x.map { t => t._2 }.max }.seq.toMap
@@ -16,26 +15,21 @@ object DEMCircles {
 //
 //  def computeDEM(location: Location, levels: Int) = {
 //    val ray = location.ray
-//    val rayInterval = ray / levels.toDouble
 //
 //    val elevation = location.height
 //    val angle = Math.atan(elevation / ray)
 //
-//    val pointsInCircumferences = List(Point(1.0, 1.0))
-//    
-//    //pointsInCircumferences.foreach { x => println(x) }
-//    println("points: " + pointsInCircumferences.size)
-//
-//    val heights = pointsInCircumferences map { point =>
+//    val heights = location.asPointStream flatMap { point =>
 //      val distance = point.distance(location.center)
+//      if (distance <= ray) {
+//        if (point == location.center) Some((point, location.height))
+//        else {
+//          val height = (elevation / ray) * (ray - distance)
+//          Some((point, height))
+//        }
 //
-//      val height = (elevation / ray) * (ray - distance)
-//      (point, height)
-//
+//      } else None
 //    }
-//    //println(heights.toList)
-//
-//    //    heights.filter(x => heights.indexOf(x) < 30).foreach(x => print(x))
 //    heights.toList
 //  }
 

@@ -25,12 +25,14 @@ object DatabaseConnection {
     //    val path = "../Datasets/dataset7/discussions-nocomment.csv"
     //    val path = "../Datasets/dataset7/discussions-questions.csv"
 
-    val path = "../Datasets/dataset5/5000-discussions-tags.csv"
+//    val path = "../Datasets/dataset6/5000-discussions-tags.csv"
+    val path = args(0)
+    val size = args(1).toInt
 
-    val idsPath = "../Datasets/dataset2/ids.txt"
-    val tagPath = "../Datasets/tags-recurrence.csv"
-    val newTagPath = "../Datasets/tags-recurrence-single.csv"
-    val singleTagsPath = "../Datasets/single-tags-recurrence.csv"
+//    val idsPath = "../Datasets/dataset2/ids.txt"
+//    val tagPath = "../Datasets/tags-recurrence.csv"
+//    val newTagPath = "../Datasets/tags-recurrence-single.csv"
+//    val singleTagsPath = "../Datasets/single-tags-recurrence.csv"
 
     //    val fullDiscussions = fetchFullDiscussions(url, username, password, path, idsPath)
     //    val questionsAndAnswer = fetchQuestionsAndAnswers(url, username, password, path, idsPath)
@@ -39,9 +41,9 @@ object DatabaseConnection {
 
     //      val tags = buildSingleRecurrences(tagPath, newTagPath)
 
-    val tagsOccurences = getTagsOccurences(singleTagsPath)
+//    val tagsOccurences = getTagsOccurences(singleTagsPath)
 
-    val d = buildByTags(url, username, password, path, tagsOccurences.take(50))
+    val d = buildByTags(url, username, password, path, size)
 
   }
 
@@ -198,7 +200,7 @@ object DatabaseConnection {
     //println(newTags.take(3))
   }
 
-  def buildByTags(url: String, username: String, password: String, path: String, tagsOccurences: List[(String, Int)]) = {
+  def buildByTags(url: String, username: String, password: String, path: String, size: Int) = {
     val cpds = openConnection(url, username, password)
     val matrix = inTransaction {
       //      val tags = Source.fromFile(new File(tagPath)).getLines().toList.map { x => x.split(",").toList.head }
@@ -215,7 +217,7 @@ object DatabaseConnection {
       //      println("size: " + ids.size)
       //      println("distinct " + ids.distinct.size)
 
-      val ids = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0)) select (p.id)).take(5000)
+      val ids = from(posts)(p => where((p.postTypeId === 1) and (p.acceptedAnswerId > 0)) select (p.id) orderBy(p.creationDate asc)).take(size)
 
       val questionsWithComment =
         join(posts, comments.leftOuter)((p, c) =>
@@ -230,7 +232,7 @@ object DatabaseConnection {
             on (p.id === c.map(_.postId)))
 
       val discussions = buildFullDiscussions(questionsWithComment.toList, answersWithComment.toList).toList
-      val matrix = buildTagsMatrix(discussions, tagsOccurences).toList
+      val matrix = buildTagsMatrix(discussions).toList
 
       matrix
     }
@@ -265,10 +267,15 @@ object DatabaseConnection {
     tagsList
   }
 
-  def buildTagsMatrix(discussions: List[Discussion], tagsOccurences: List[(String, Int)]) = {
+  def buildTagsMatrix(discussions: List[Discussion]) = {
+    val tags = discussions.flatMap{ discussion => discussion.tags}.distinct
+    
+    
+    
     discussions.map {
       case x =>
-        val vectorTag = TagManager.getVectorTag(x.tags, tagsOccurences)
+//        val vectorTag = TagManager.getVectorTag(x.tags, tagsOccurences)
+        val vectorTag = TagManager.buildVectorTag(x.tags, tags)
         (x, vectorTag)
     }
   }

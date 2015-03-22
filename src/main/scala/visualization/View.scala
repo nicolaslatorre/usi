@@ -21,26 +21,21 @@ import java.io.File
 
 object Starter {
   def main(args: Array[String]) {
-    def thread(task: => Unit) = new Thread(new Runnable {
-      def run() { task }
-    }).start()
 
-    thread({
-      val model = new Model
-      val path = "../Datasets/dataset5/5000-discussions-tags.csv"
-      val destinationPath = "../Datasets/dataset5/5000-image-tags.png"
-      val (locations, gradient) = model.computeModel(path)
-      val writer = new WriteImage
-      writer.write(locations, false, gradient, destinationPath)
+    val model = new Model
+    val path = "../Datasets/dataset6/5000-discussions-tags.csv"
+    val destinationPath = "../Datasets/dataset6/5000-image-tags.png"
+    val (locations, gradient) = model.computeModel(path)
+    val writer = new WriteImage
+    writer.write(locations, false, gradient, destinationPath)
 
-//      SwingUtilities.invokeLater(new Runnable {
-//        def run {
-//          val view = new View(model)
-//          val control = new Control(model, view)
-//          control.view.peer.setVisible(true)
-//        }
-//      })
-    })
+    //      SwingUtilities.invokeLater(new Runnable {
+    //        def run {
+    //          val view = new View(model)
+    //          val control = new Control(model, view)
+    //          control.view.peer.setVisible(true)
+    //        }
+    //      })
 
   }
 }
@@ -83,7 +78,7 @@ class Canvas(var locations: List[Location], var gradient: Map[Int, Color], val m
   val backgroundColor = new Color(0, 128, 255)
   opaque = true
   background = backgroundColor
-  
+
   var drawWithEqualRay = false
   val defaultRay = 30.0
 
@@ -137,11 +132,12 @@ class Canvas(var locations: List[Location], var gradient: Map[Int, Color], val m
 
     levels.foreach { level =>
       centers.foreach { c =>
-        val ray = {if(!drawWithEqualRay) {
-        	val rayMax = rays(centers.indexOf(c))
-        	rayMax - ((rayMax / gradient.size) * level)  
-        } else {
-          defaultRay - ((defaultRay / gradient.size) * level) 
+        val ray = {
+          if (!drawWithEqualRay) {
+            val rayMax = rays(centers.indexOf(c))
+            rayMax - ((rayMax / gradient.size) * level)
+          } else {
+            defaultRay - ((defaultRay / gradient.size) * level)
           }
         }
         val point = ((c - Point(ray, ray)) + Point(offsetX, offsetY)) * zoomFactor
@@ -152,7 +148,7 @@ class Canvas(var locations: List[Location], var gradient: Map[Int, Color], val m
       }
     }
 
-//    g.setColor(new Color(255, 255, 0))
+    //    g.setColor(new Color(255, 255, 0))
     g.setColor(Color.BLACK)
     centers.map { p =>
       val point = (p - Point(0.5, 0.5) + Point(offsetX, offsetY)) * zoomFactor
