@@ -74,8 +74,6 @@ class WriteImage {
       location -> rays.toList
     }.toMap
     
-    locationsRays.foreach{case(x, y) => println(y.size)}
-    
 
     levels.foreach { level =>
       val raysToDraw = locationsRays.filter { case (l, rs) => rs.size > level }.map {
@@ -108,7 +106,7 @@ class WriteImage {
         ig2.fill(rect)
         ig2.setColor(Color.GREEN)
 //        if (message.split(" ").toList.size <= 2) ig2.drawString(message.toString, rect.getX.toInt-3, rect.getY.toInt-3)
-        if(maxHeights.contains(location.height.toDouble)) ig2.drawString(message.toString, rect.getX.toInt-3, rect.getY.toInt-3)
+        if(message.split(" ").length <= 2 && location.height > 10) ig2.drawString(message.toString, rect.getX.toInt-3, rect.getY.toInt-3)
 //        ig2.drawString(message.toString, rect.getX.toInt-3, rect.getY.toInt-3)
     }
 

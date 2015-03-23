@@ -1,11 +1,12 @@
 package multidimensionalscaling
 
 import java.io.File
+import java.io.PrintWriter
+
 import com.github.tototoshi.csv.CSVReader
+
 import mdsj.MDSJ
 import visualization.Point
-import mdsj.ClassicalScaling
-import java.io.PrintWriter
 
 class MultiDimensionalScaling {
 
@@ -15,30 +16,63 @@ class MultiDimensionalScaling {
     val rows = 0 until input.size
     val cols = rows
 
-    val mapping: Map[(Int, Int), Double] = Map()
-
-    val triangular = (Stream.iterate(0)(x => x + 1) map { x =>
-      Stream.continually(x) zip Stream.iterate(x)(x => x + 1) take (rows.size - x) toList
-    }).take(rows.size).toList
-
-    val dis = triangular.par.flatMap { x => x }.map {
-      case (x, y) =>
-        if (x == y) ((x, y), 0.0)
-        else {
-          val rowDoc = id2Doc(x)
-          val colDoc = id2Doc(y)
-          val distance = computeDistanceTag(euclideanDistanceTag, rowDoc.topicDistribution, colDoc.topicDistribution) * 3000
-          ((x, y), distance)
+//    val mapping: Map[(Int, Int), Double] = Map()
+//
+//    val triangular = (Stream.iterate(0)(x => x + 1) map { x =>
+//      Stream.continually(x) zip Stream.iterate(x)(x => x + 1) take (rows.size - x) toList
+//    }).take(rows.size).toList
+    
+//    val builder = new CSCMatrix.Builder[Double](input.size, input.size)
+    
+//    val dis = triangular.par.flatMap { x => x }.foreach {
+//      case (x, y) =>
+//        if (x == y) builder.add(x, y, 0.0)
+//        else {
+//          val rowDoc = id2Doc(x)
+//          val colDoc = id2Doc(y)
+//          val distance = computeDistanceTag(euclideanDistanceTag, rowDoc.topicDistribution, colDoc.topicDistribution) * 3000
+//          builder.add(x, y, distance)
+//          builder.add(y, x, distance)
+//        }
+//    }
+    
+    val dissimilarity: Array[Array[Double]] = Array.fill(rows.size)(Array.fill(rows.size)(0.0))
+        rows.par.foreach { row =>
+          cols.foreach { col =>
+            val rowDoc = id2Doc(row)
+            val colDoc = id2Doc(col)
+            if (row < col) {
+              val distance = computeDistanceTag(euclideanDistanceTag, rowDoc.topicDistribution, colDoc.topicDistribution) * 3000
+              dissimilarity(col)(row) = distance
+              dissimilarity(row)(col) = distance
+            }
+          }
         }
-    }.toMap
+    
+    
 
-    rows.map { row =>
-      cols.map { col =>
-        if (col == row) 0.0
-        else if (row < col) dis.get((row, col)).get
-        else dis.get((col, row)).get
-      }.toArray
-    }.toArray
+//    val dis = triangular.flatMap { x => x }.map {
+//      case (x, y) =>
+//        if (x == y) ((x, y), 0.0)
+//        else {
+//          val rowDoc = id2Doc(x)
+//          val colDoc = id2Doc(y)
+//          val distance = computeDistanceTag(euclideanDistanceTag, rowDoc.topicDistribution, colDoc.topicDistribution) * 3000
+//          ((x, y), distance)
+//        }
+//    }.toMap
+    
+//    println(dis)
+    
+    dissimilarity
+
+//    rows.map { row =>
+//      cols.map { col =>
+//        if (col == row) 0.0
+//        else if (row < col) dis.get((row, col)).get
+//        else dis.get((col, row)).get
+//      }.toArray
+//    }.toArray
 
     //triangular flatMap { x => x } foreach { case (x, y) => println(dissimilarityMatrix(x)(y) + " -> " + dissimilarityMatrix(y)(x)) }
 
@@ -72,8 +106,8 @@ class MultiDimensionalScaling {
   
   def euclideanDistanceTag(first: List[(Int, Int)], second: List[(Int, Int)]) = {
     val distance = (first ::: second).groupBy(_._2).mapValues(x => x.map(y => y._1)).map{ case(x, y) =>
-      if(y.size == 1) (y(0).toDouble - 0) * (y(0).toDouble - 0)
-      else (y(0).toDouble - y(1).toDouble) * (y(0).toDouble - y(1).toDouble)
+      if(y.size == 1) 1
+      else 0
     }.toList.sum
     Math.sqrt(distance)
   }
@@ -147,8 +181,8 @@ object MultiDimensionalScaling {
   //
   //  }
 
-  def getPointAndDiscussions(path: String) = {
-    val documents = openFeatureVectors(path)
+  def getPointAndDiscussions(discussions: List[List[String]], path: String = "") = {
+    val documents = openFeatureVectors(discussions, path)
     val mds = new MultiDimensionalScaling
     val dissimilarityMatrix = mds.computeDissimilarityMatrix(documents)
 
@@ -167,7 +201,7 @@ object MultiDimensionalScaling {
   }
 
   def main(args: Array[String]) = {
-    val points = getPointAndDiscussions("../Datasets/dataset5/discussions-tags.csv")
+    //val points = getPointAndDiscussions("../Datasets/dataset5/discussions-tags.csv")
 
   }
 
@@ -179,7 +213,7 @@ object MultiDimensionalScaling {
     val minX = points.minBy { p => p.x }.x
     val minY = points.minBy { p => p.y }.y
 
-    println("MinX: " + minX + ", MinY: " + minY)
+//    println("MinX: " + minX + ", MinY: " + minY)
     points.map { point => point + Point(Math.abs(minX), Math.abs(minY)) }
   }
 
@@ -197,15 +231,18 @@ object MultiDimensionalScaling {
     writer.close()
   }
 
-  def openFeatureVectors(path: String) = {
+  def openFeatureVectors(discussions: List[List[String]], path: String = "") = {
     val tags = true
-    val reader = CSVReader.open(new File(path)).all
-    val numberOfTopics = reader.head.size - 2 // ATTENTION IN THE FUTURE
-    val lines = reader.drop(1)
+    
+    val (lines, numberOfTopics) = if(path.length() > 0) {
+    	val reader = CSVReader.open(new File(path)).all 
+      (reader.drop(1), reader.head.size - 2) // ATTENTION IN THE FUTURE
+    } else { 	
+    	(discussions.drop(1), discussions.head.size - 2)
+    }
+    
     lines.map { x =>
       val probabilities = x.drop(5)
-
-//      val values = if (tags) buildMatrix(probabilities, numberOfTopics) else probabilities.map { x => x.toDouble }
       val values = buildVectorIndex(probabilities, numberOfTopics)
       new Document(x.head, values, x(1), x(2), x(3).toInt, x(4).toInt)
     }

@@ -18,14 +18,25 @@ import scala.swing.FileChooser
 import scala.swing.FileChooser.Result
 import scala.swing.Action
 import java.io.File
+import database.DatabaseConnection
 
 object Starter {
   def main(args: Array[String]) {
+//    val path = "../Datasets/dataset6/5000-discussions-tags.csv"
+//    val destinationPath = "../Datasets/dataset6/5000-image-tags.png"
+
+    val url = "jdbc:postgresql://localhost:5432/stackoverflow_dump"
+    val username = "sodb"
+    val password = "sodb"
 
     val model = new Model
-    val path = "../Datasets/dataset6/5000-discussions-tags.csv"
-    val destinationPath = "../Datasets/dataset6/5000-image-tags.png"
-    val (locations, gradient) = model.computeModel(path)
+    //val path = args(0)
+    val destinationPath = args(0)
+    val size = args(1).toInt
+    
+    //val discussions = DatabaseConnection.buildByTags(url, username, password, size)
+    //val (locations, gradient) = model.computeModel(discussions)
+    val (locations, gradient) = model.computeModel(List(), "../Datasets/dataset7/6000-discussions-tags.csv")
     val writer = new WriteImage
     writer.write(locations, false, gradient, destinationPath)
 
@@ -57,7 +68,8 @@ class View(val model: Model) extends Frame {
         println("Action '" + title + "' invoked")
         chooser.showOpenDialog(this) match {
           case Result.Approve =>
-            map = model.computeModel(chooser.selectedFile.toString())
+//            map = model.computeModel(chooser.selectedFile.toString())
+            map = model.computeModel(List(List()))
             panel.canvas.setLocations(map._1)
             panel.canvas.setGradient(map._2)
             panel.canvas.repaint()

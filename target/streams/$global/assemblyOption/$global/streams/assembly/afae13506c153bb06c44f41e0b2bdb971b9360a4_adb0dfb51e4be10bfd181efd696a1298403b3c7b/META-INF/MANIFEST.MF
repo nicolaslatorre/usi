@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Vendor: org.squeryl
+Implementation-Title: squeryl
+Implementation-Version: 0.9.5-7
+Implementation-Vendor-Id: org.squeryl
+Specification-Vendor: org.squeryl
+Specification-Title: squeryl
+Implementation-URL: http://squeryl.org
+Specification-Version: 0.9.5-7
+Main-Class: org.squeryl.logging.UsageProfileConsolidator
+

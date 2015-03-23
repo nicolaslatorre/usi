@@ -14,7 +14,6 @@ resolvers +=
   "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 
 libraryDependencies += "com.github.tototoshi" %% "scala-csv" % "1.2.0"
-
 	  
 //yourDatabaseDependency is one of the supported databases :
 	 
