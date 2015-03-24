@@ -1,8 +1,9 @@
 package database
 
 import squeryl._
+import java.util.Date
 
-class Discussion(val id: Int, val question: Post, val comments: List[Option[Comment]], val answersAndComments: Map[Post, List[Option[Comment]]], val tags: List[String]) {
+class Discussion(val id: Int, val title: Option[String], val creationDate: Date, val body: String, val commentCount: Option[Int], val answerCount: Option[Int], val comments: List[Option[Comment]], val answersAndComments: Map[Post, List[Option[Comment]]], val tags: List[String]) {
 
   override def toString() = {
     val commentsString = {
@@ -37,11 +38,11 @@ class Discussion(val id: Int, val question: Post, val comments: List[Option[Comm
     }
 
     {
-      question.title match {
+      title match {
         case None => ""
         case Some(n) => n
       }
-    } + "\n" + question.body + "\n" + commentsString + "\n" + answers + "\n"
+    } + "\n" + body + "\n" + commentsString + "\n" + answers + "\n"
   }
 
 }

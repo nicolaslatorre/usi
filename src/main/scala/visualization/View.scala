@@ -4,7 +4,7 @@ import java.awt.Color
 import java.awt.Toolkit
 import java.awt.geom.Rectangle2D
 import scala.swing.BorderPanel
-import scala.swing.BorderPanel.Position.Center
+import scala.swing.BorderPanel.Position._
 import scala.swing.Frame
 import scala.swing.Graphics2D
 import scala.swing.Panel
@@ -19,45 +19,45 @@ import scala.swing.FileChooser.Result
 import scala.swing.Action
 import java.io.File
 import database.DatabaseConnection
+import multidimensionalscaling.Document
+import scala.swing.TextArea
+import scala.swing.FlowPanel
+import scala.swing.TextField
+import javax.swing.JOptionPane
 
 object Starter {
   def main(args: Array[String]) {
-//    val path = "../Datasets/dataset6/5000-discussions-tags.csv"
-//    val destinationPath = "../Datasets/dataset6/5000-image-tags.png"
-
     val url = "jdbc:postgresql://localhost:5432/stackoverflow_dump"
     val username = "sodb"
     val password = "sodb"
 
-    val model = new Model
-    //val path = args(0)
-    val destinationPath = args(0)
-    val size = args(1).toInt
     
-    //val discussions = DatabaseConnection.buildByTags(url, username, password, size)
-    //val (locations, gradient) = model.computeModel(discussions)
-    val (locations, gradient) = model.computeModel(List(), "../Datasets/dataset7/6000-discussions-tags.csv")
-    val writer = new WriteImage
-    writer.write(locations, false, gradient, destinationPath)
+    val dataset = "../Datasets/dataset3/15000-discussions-tags.csv"
+    val destinationPath = args(0)
+    val saveImage = false
+    val levels = 15
+    
+    val model = new Model(dataset, levels, 2)
+//    val locations = model.computeModel()
+//    val gradient = model.getGradient(levels)
 
-    //      SwingUtilities.invokeLater(new Runnable {
-    //        def run {
-    //          val view = new View(model)
-    //          val control = new Control(model, view)
-    //          control.view.peer.setVisible(true)
-    //        }
-    //      })
+    SwingUtilities.invokeLater(new Runnable {
+      def run {
+        val view = new View(model, levels)
+        val control = new Control(model, view)
+        control.view.peer.setVisible(true)
+      }
+    })
 
   }
 }
 
-class View(val model: Model) extends Frame {
+class View(val model: Model, val levels: Int, var nrDiscussion: Int = 5000) extends Frame {
   title = "StackOverflow Viewer"
   peer.setDefaultCloseOperation(EXIT_ON_CLOSE)
 
-  var map: (List[Location], Map[Int, Color]) = (List(), Map())
   val panel = new BorderPanel {
-    val canvas = new Canvas(map._1, map._2, 300.0, 0.0)
+    val canvas = new Canvas(model)
     layout(canvas) = Center
   }
 
@@ -68,14 +68,18 @@ class View(val model: Model) extends Frame {
         println("Action '" + title + "' invoked")
         chooser.showOpenDialog(this) match {
           case Result.Approve =>
-//            map = model.computeModel(chooser.selectedFile.toString())
-            map = model.computeModel(List(List()))
-            panel.canvas.setLocations(map._1)
-            panel.canvas.setGradient(map._2)
+            val otherModel = new Model(chooser.selectedFile.toString(), levels, nrDiscussion)
+            
+            panel.canvas.setModel(otherModel)
             panel.canvas.repaint()
           case Result.Cancel => println("Cancelled")
           case Result.Error => System.err.println("An error occured opening the following file " + chooser.selectedFile.toString())
         }
+      })
+      
+      contents += new MenuItem(Action("Change size") {
+        val dialog = JOptionPane.showInputDialog("new size")
+        nrDiscussion = dialog.toInt
       })
     }
   }
@@ -85,143 +89,76 @@ class View(val model: Model) extends Frame {
   pack
 }
 
-class Canvas(var locations: List[Location], var gradient: Map[Int, Color], val maxHeight: Double, val minHeight: Double) extends Panel {
+class Canvas(var model: Model) extends Panel {
+  requestFocus()
   preferredSize = Toolkit.getDefaultToolkit.getScreenSize
   val backgroundColor = new Color(0, 128, 255)
   opaque = true
   background = backgroundColor
-
-  var drawWithEqualRay = false
-  val defaultRay = 30.0
-
-  var centers = locations.map { x => x.center }
-  var rays = locations.map { x => x.ray }
-
-  def setLocations(ls: List[Location]) = {
-    locations = ls
+  
+  def setModel(other: Model) = {
+    model = other
   }
 
-  def setGradient(gdt: Map[Int, Color]) = {
-    gradient = gdt
-  }
+//  var centers = model.locations.map { x => x.center }
+//  var rays = model.locations.map { x => x.ray }
 
-  var zoomFactor = 1.0
+  var zoomFactor = 0.5
   var offsetX = 0.0
   var offsetY = 0.0
+  
+  var drawMessages = false
+  var drawAllMessages = false
 
   override def paintComponent(g: Graphics2D) = {
     super.paintComponent(g)
-
-    val centers = locations.map { x => x.center }
-    val rays = locations.map { x => x.ray }
-
-    //    dem.map {
-    //      case (p, h) =>
-    //        if (zoomFactor == 1.0) {
-    //          val point = (p + Point(offsetX, offsetY)) * zoomFactor
-    //          (new Rectangle2D.Double(point.x, point.y, zoomFactor, zoomFactor), h)
-    //        } else {
-    //          val point = (p + Point(offsetX, offsetY) - Point(zoomFactor / 2, zoomFactor / 2)) * zoomFactor
-    //          (new Rectangle2D.Double(point.x, point.y, zoomFactor, zoomFactor), h)
-    //        }
-    //    } foreach {
-    //      case (rect, height) =>
-    //        g.setColor(getColor(height))
-    //        g.fill(rect)
-    //    } // carefull, we should include also height
-
-    //val rays = Stream.iterate(30.0)(x => x - (30.0 / 10)).take(10).toList
-
-    //    centers.foreach{ c => 
-    //      rays.foreach { ray => 
-    //        val point = ((c - Point(ray, ray)) + Point(offsetX, offsetY)/* - Point(zoomFactor / 2, zoomFactor / 2)*/) * zoomFactor
-    //        //g.setColor(getColorByCircle(rays.indexOf(ray)))
-    //        g.setColor(Color.BLACK)
-    //        g.fill(new Ellipse2D.Double(point.x, point.y, ray*2*zoomFactor, ray*2*zoomFactor))}
-    //      }
-
+    
+    val locationsRays = drawModelInfo(model)
+    val locations = model.locations
+    val gradient = model.gradient
+    val centers = model.locations.map { x => x.center }
+    
     val levels = (0 until gradient.size).toStream
 
     levels.foreach { level =>
-      centers.foreach { c =>
-        val ray = {
-          if (!drawWithEqualRay) {
-            val rayMax = rays(centers.indexOf(c))
-            rayMax - ((rayMax / gradient.size) * level)
-          } else {
-            defaultRay - ((defaultRay / gradient.size) * level)
-          }
-        }
-        val point = ((c - Point(ray, ray)) + Point(offsetX, offsetY)) * zoomFactor
-
-        g.setColor(getColorByCircle(level))
-        //g.setColor(Color.BLACK)
-        g.fill(new Ellipse2D.Double(point.x, point.y, ray * 2 * zoomFactor, ray * 2 * zoomFactor))
+      val raysToDraw = locationsRays.filter { case (l, rs) => rs.size > level }.map {
+        case (location, rs) =>
+          (location, rs(level))
       }
+
+      raysToDraw.foreach {
+        case (location, ray) =>
+          val c = location.center
+          val point = ((c - Point(ray, ray)) + Point(offsetX, offsetY)) * zoomFactor
+
+          g.setColor(getColorByCircle(level, gradient))
+          g.fill(new Ellipse2D.Double(point.x, point.y, ray * 2 * zoomFactor, ray * 2 * zoomFactor))
+      }
+
     }
 
-    //    g.setColor(new Color(255, 255, 0))
     g.setColor(Color.BLACK)
-    centers.map { p =>
-      val point = (p - Point(0.5, 0.5) + Point(offsetX, offsetY)) * zoomFactor
-      new Ellipse2D.Double(point.x, point.y, 1 * zoomFactor, 1 * zoomFactor)
-    }.foreach { rect => g.fill(rect) }
-
-    //    rays.foreach { ray =>
-    //      centers.foreach { c =>
-    //        //if (inScreen(c * zoomFactor)) {
-    //
-    //        val point = ((c - Point(ray, ray)) + Point(offsetX, offsetY) /* - Point(zoomFactor / 2, zoomFactor / 2)*/ ) * zoomFactor
-    //        g.setColor(getColorByCircle(rays.indexOf(ray)))
-    //        //g.setColor(Color.BLACK)
-    //        g.fill(new Ellipse2D.Double(point.x, point.y, ray * 2 * zoomFactor, ray * 2 * zoomFactor))
-    //      }
-    //}
-
-    //    g.setColor(new Color(255, 255, 0))
-    //    centers.map { p =>
-    //      val point = (p + Point(offsetX, offsetY) - Point(zoomFactor / 2, zoomFactor / 2)) * zoomFactor
-    //      new Rectangle2D.Double(point.x, point.y, 1 * zoomFactor, 1 * zoomFactor)
-    //    }.foreach { rect => g.fill(rect) }
-
-    //      g.setColor(new Color(255, 255, 0))
-    //      centers.map { p =>
-    //        val point = (p - Point(0.5, 0.5) + Point(offsetX, offsetY)) * zoomFactor
-    //        new Ellipse2D.Double(point.x, point.y, 1 * zoomFactor, 1 * zoomFactor)
-    //      }.foreach { rect => g.fill(rect) }
-    //    }
+    locations.map {
+      location => 
+        val p = location.center
+        val point = (p - Point(0.5, 0.5) + Point(offsetX, offsetY)) * zoomFactor
+        val ellispe = new Ellipse2D.Double(point.x, point.y, 1 * zoomFactor, 1 * zoomFactor)
+        (ellispe, location)
+    }.foreach {
+      case (rect, location) =>
+        val message = location.tags
+        g.setColor(Color.CYAN)
+        g.fill(rect)
+        g.setColor(Color.YELLOW)
+        if(drawMessages && message.split(" ").length <= 2 && location.height > 10) g.drawString(message.toString, rect.getX.toInt-3, rect.getY.toInt-3)
+        else if(drawAllMessages) g.drawString(message.toString, rect.getX.toInt-3, rect.getY.toInt-3)
+        
+    }
 
     println("Drawing Completed. Drawed " + centers.size + " discussions.")
   }
 
-  def getColor(height: Double) = {
-    val levels = gradient.keySet.size
-    val interval = maxHeight / levels
-
-    val ls = (0 until levels) toList
-
-    val index = height / interval
-    //val index = ls.filter { level => height >= (minHeight + interval * level) && height < (minHeight + interval * (level + 1)) }
-
-    //    println(maxHeight)
-
-    index.toInt match {
-      case 0 =>
-        val color = gradient.get(0)
-        color match {
-          case Some(c) => c
-          case None => new Color(0, 0, 0)
-        }
-      case n =>
-        val color = gradient.get(n)
-        color match {
-          case Some(c) => c
-          case None => new Color(255, 255, 255)
-        }
-    }
-  }
-
-  def getColorByCircle(level: Int) = {
+  def getColorByCircle(level: Int, gradient: Map[Int, Color]) = {
     level match {
       case 0 =>
         val color = gradient.get(0)
@@ -242,6 +179,40 @@ class Canvas(var locations: List[Location], var gradient: Map[Int, Color], val m
     val size = preferredSize
     if (point.x + offsetX < 0 || point.y + offsetY < 0 || point.x + offsetX > size.width * zoomFactor || point.y + offsetY > size.height * zoomFactor) false
     else true
+  }
+  
+  def drawModelInfo(model: Model) = {
+    val locations = model.locations
+    val gradient = model.gradient
+    
+    val heights = locations.map { x => x.height }
+    val maxHeight = model.locations.maxBy { x => x.height }.height
+    val maxHeights = heights.distinct.sorted.reverse.take(10)
+    val interval = maxHeight / gradient.size
+
+    //For each location we have a list of rays
+    val locationsRays = locations.map { location =>
+      val ray = location.ray
+      val height = location.height
+      
+      // Find out number of possible intervals
+      val intervals = getNumberOfIntervals(interval, height)
+
+      //Compute rays
+      val ls = (0 until intervals).toStream
+      val rayInterval = ray.toDouble / intervals
+      val rays = ls.map { x => ray - (rayInterval * x) }
+      location -> rays.toList
+    }.toMap
+    
+
+    locationsRays
+  }
+  
+  def getNumberOfIntervals(interval: Double, height: Double) = {
+    var counter = 1
+    while ((interval * counter) < height) counter += 1
+    counter
   }
 
 }

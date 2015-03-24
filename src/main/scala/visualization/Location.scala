@@ -1,6 +1,8 @@
 package visualization
 
-case class Location(val name: String, val center: Point, val ray: Int, val height: Double, val text: String, val tags: String) {
+import multidimensionalscaling.Document
+
+case class Location(val id: String, val title: String, val tags: String, val date: String, val answerCount: Int, val center: Point, val ray: Int, val height: Double) {
 
   val leftTopCorner = center - Point(ray, ray)
 

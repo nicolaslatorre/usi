@@ -36,24 +36,6 @@ class WriteImage {
 
     val levels = (0 until gradient.size).toStream
 
-    //    levels.foreach { level =>
-    //      (centers zip heights).foreach {
-    //        case (c, h) =>
-    //            val ray = {
-    //              if (!drawWithEqualRay) {
-    //                val rayMax = rays(centers.indexOf(c))
-    //                rayMax - ((rayMax / gradient.size) * level)
-    //              } else {
-    //                defaultRay - ((defaultRay / gradient.size) * level)
-    //              }
-    //            }
-    //            val point = ((c - Point(ray, ray)) + Point(offsetX, offsetY)) * zoomFactor
-    //
-    //            ig2.setColor(getColorByCircle(level, gradient))
-    //            ig2.fill(new Ellipse2D.Double(point.x, point.y, ray * 2 * zoomFactor, ray * 2 * zoomFactor))
-    //      }
-    //    }
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     val maxHeight = locations.maxBy { x => x.height }.height
     val maxHeights = heights.distinct.sorted.reverse.take(10)
