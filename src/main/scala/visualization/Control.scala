@@ -9,6 +9,8 @@ import scala.swing.event.KeyPressed
 import scala.swing.event.Key
 import scala.sys.process._
 import scala.swing.event.MouseEvent
+import scala.swing.event.KeyReleased
+import scala.swing.event.MouseReleased
 
 class Control(val model: Model, val view: View) {
   val canvas = view.panel.canvas
@@ -16,6 +18,7 @@ class Control(val model: Model, val view: View) {
   view.listenTo(canvas, canvas.mouse.clicks, canvas.mouse.moves, canvas.mouse.wheel, view.panel.canvas.keys)
   var x = 0
   var y = 0
+
 
   view.reactions += {
     case e: MouseClicked =>
@@ -36,17 +39,61 @@ class Control(val model: Model, val view: View) {
     case MousePressed(_, p, _, _, _) =>
       x = p.x
       y = p.y
+      if(canvas.changingViewPort) {
+        canvas.viewPortX = x
+        canvas.viewPortY = y
+      }
     case MouseDragged(_, p, _) =>
-      val dx = p.x - x
-      val dy = p.y - y
+      if (!canvas.changingViewPort) {
+        val dx = p.x - x
+        val dy = p.y - y
 
-      canvas.offsetX += dx
-      canvas.offsetY += dy
+        canvas.offsetX += dx
+        canvas.offsetY += dy
 
-      x += dx
-      y += dy
+        x += dx
+        y += dy
 
-      view.repaint()
+        view.repaint()
+
+      } else if (canvas.changingViewPort) {
+        val dx = p.x - x
+        val dy = p.y - y
+        
+        println("possibleZoom: " + (canvas.preferredSize.getWidth/dx))
+        
+        canvas.viewPortWidth = dx
+        canvas.viewPortHeight = ((canvas.preferredSize.getHeight * dx) / canvas.preferredSize.getWidth).toInt
+        
+        view.repaint()
+      }
+
+    case MouseReleased(_, p, _, _, _) =>
+      if (canvas.changingViewPort) {
+        val dx = p.x - x
+        val dy = p.y - y
+
+        canvas.offsetX -= (x / canvas.zoomFactor)
+        canvas.offsetY -= (y / canvas.zoomFactor)
+        
+        val width = canvas.preferredSize.getWidth
+        val height = canvas.preferredSize.getHeight
+        
+        val d = width / height
+        val h = (height * dx) / width
+        
+        //val steps = ((width - dx)/100).toInt
+        val steps = width / dx
+        val steps2 = dy * (height / dy)
+        
+        println("new zoom: " + steps)
+        canvas.zoomFactor += 0.1 * steps
+        
+        resetViewPortSelection()
+
+        view.repaint()
+
+      }
 
     case MouseWheelMoved(_, p, _, r) =>
       if (r > 0) {
@@ -54,6 +101,8 @@ class Control(val model: Model, val view: View) {
       } else {
         canvas.zoomFactor += 0.1
       }
+      
+      println("CURRENT ZOOM: " + canvas.zoomFactor)
 
       view.repaint()
 
@@ -71,7 +120,7 @@ class Control(val model: Model, val view: View) {
 
       if (ls.size > 0) {
         val infos = ls.map { location =>
-          "Id: " + location.id + "<br>Title: " + location.title + "<br>Tags: " + location.tags +"<br>Creation Date: " + location.date + "<br><br>"
+          "Id: " + location.id + "<br>Title: " + location.title + "<br>Tags: " + location.tags + "<br>answers: " + location.answerCount + "<br>Creation Date: " + location.date + "<br><br>"
         }.mkString("")
         canvas.tooltip = "<html>" + infos + "</html>"
 
@@ -83,7 +132,7 @@ class Control(val model: Model, val view: View) {
       println("Reset")
       canvas.offsetX = 0.0
       canvas.offsetY = 0.0
-      canvas.zoomFactor = 0.5
+      canvas.zoomFactor = 0.1
       view.repaint()
 
     case KeyPressed(_, Key.M, _, _) =>
@@ -96,6 +145,16 @@ class Control(val model: Model, val view: View) {
       canvas.drawAllMessages = !canvas.drawAllMessages
       view.repaint()
 
+    case KeyPressed(_, Key.C, _, _) =>
+      println("Changing viewport")
+      canvas.changingViewPort = true
+      view.repaint()
+
+    case KeyReleased(_, Key.C, _, _) =>
+      println("Stop changing viewport")
+      canvas.changingViewPort = false
+      view.repaint()
+
   }
 
   view.panel.canvas.focusable = true
@@ -104,6 +163,13 @@ class Control(val model: Model, val view: View) {
     val distance = point.distance((location.center + Point(canvas.offsetX, canvas.offsetY)) * canvas.zoomFactor)
     if (distance <= (ray * canvas.zoomFactor)) Some(location)
     else None
+  }
+  
+  def resetViewPortSelection() = {
+    canvas.viewPortX = 0
+    canvas.viewPortY = 0
+    canvas.viewPortWidth = 0
+    canvas.viewPortHeight = 0
   }
 
 }

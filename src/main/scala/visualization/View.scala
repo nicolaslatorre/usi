@@ -92,6 +92,7 @@ class View(val model: Model, val levels: Int, var nrDiscussion: Int = 5000) exte
 class Canvas(var model: Model) extends Panel {
   requestFocus()
   preferredSize = Toolkit.getDefaultToolkit.getScreenSize
+  println(preferredSize.getWidth + ", " + preferredSize.getHeight)
   val backgroundColor = new Color(0, 128, 255)
   opaque = true
   background = backgroundColor
@@ -103,12 +104,19 @@ class Canvas(var model: Model) extends Panel {
 //  var centers = model.locations.map { x => x.center }
 //  var rays = model.locations.map { x => x.ray }
 
-  var zoomFactor = 0.5
+  var zoomFactor = 0.1
   var offsetX = 0.0
   var offsetY = 0.0
   
   var drawMessages = false
   var drawAllMessages = false
+  
+  
+  var changingViewPort = false
+  var viewPortX = 0
+  var viewPortY = 0
+  var viewPortWidth = 0
+  var viewPortHeight = 0
 
   override def paintComponent(g: Graphics2D) = {
     super.paintComponent(g)
@@ -153,6 +161,11 @@ class Canvas(var model: Model) extends Panel {
         if(drawMessages && message.split(" ").length <= 2 && location.height > 10) g.drawString(message.toString, rect.getX.toInt-3, rect.getY.toInt-3)
         else if(drawAllMessages) g.drawString(message.toString, rect.getX.toInt-3, rect.getY.toInt-3)
         
+    }
+    
+    if(changingViewPort) {
+      g.setColor(Color.BLACK)
+      g.drawRect(viewPortX, viewPortY, viewPortWidth, viewPortHeight)
     }
 
     println("Drawing Completed. Drawed " + centers.size + " discussions.")
