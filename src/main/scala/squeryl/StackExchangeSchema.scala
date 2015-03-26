@@ -6,8 +6,9 @@ import org.squeryl.Schema
 
 object StackExchangeSchema extends Schema {
 
-  val posts = table[Post]("posts")
+  val posts = table[Post]("posts") 
   val comments = table[Comment]("comments")
+  val terms = table[Dictionary]("dictionary")
   val users = table[User]("users")
   val votes = table[Vote]("votes")
   val postsHistory = table[PostsHistory]("posts_history")

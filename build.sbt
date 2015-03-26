@@ -4,7 +4,11 @@ libraryDependencies  ++=  Seq(
 )
 
 // LUCENE
-libraryDependencies += "org.apache.lucene" % "lucene-core" % "5.0.0"
+//libraryDependencies += "org.apache.lucene" % "lucene-core" % "5.0.0"
+libraryDependencies += "org.apache.lucene" % "lucene-core" % "4.10.4"
+
+//libraryDependencies += "org.apache.lucene" % "lucene-analyzers-common" % "5.0.0"
+libraryDependencies += "org.apache.lucene" % "lucene-analyzers-common" % "4.10.4"
 
 // CP30
 libraryDependencies += "c3p0" % "c3p0" % "0.9.0.4"

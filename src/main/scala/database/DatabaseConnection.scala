@@ -21,8 +21,8 @@ object DatabaseConnection {
     val username = "sodb"
     val password = "sodb"
 
-    val path = "../Datasets/dataset3/15000-discussions-tags.csv"
-    val size = 15000 //args(1).toInt
+    val path = "../Datasets/dataset3/10-discussions-tags.csv"
+    val size = 10 //args(1).toInt
 
     val discussions = buildByTags(url, username, password, size, path, true)
   }
