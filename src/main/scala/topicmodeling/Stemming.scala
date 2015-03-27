@@ -10,18 +10,18 @@ class Stemming extends Pipe {
 
   override def pipe(carrier: Instance) = {
 
-    val stemmer = new englishStemmer()
-
-    val tokenSequence = carrier.getData.asInstanceOf[TokenSequence]
-
-    val indexes = 0 until tokenSequence.size()
-
-    indexes.foreach { x =>
-      val token = tokenSequence.get(x)
-      stemmer.setCurrent(token.getText)
-      stemmer.stem()
-      token.setText(stemmer.getCurrent)
-    }
+//    val stemmer = new englishStemmer()
+//
+//    val tokenSequence = carrier.getData.asInstanceOf[TokenSequence]
+//
+//    val indexes = 0 until tokenSequence.size()
+//
+//    indexes.foreach { x =>
+//      val token = tokenSequence.get(x)
+//      stemmer.setCurrent(token.getText)
+//      stemmer.stem()
+//      token.setText(stemmer.getCurrent)
+//    }
 
     carrier
   }

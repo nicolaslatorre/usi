@@ -26,87 +26,136 @@ object DictionaryFactory {
     val username = "sodb"
     val password = "sodb"
 
-    //val texts = retrievePosts(url, username, password)
-      val texts = "<p>The only way to do this in client side is using AJAX.<br> It is better to do SF stuff in server side (via DB if you have access or Web service if they have one or at least sending data via CURL at server side).<br> it is possible one of submissions fail in client side (and it seems to be bad if second one fail - first request has no idea that scond one is not done properly).</p> <hr> <p><strong>EDIT:</strong><br> Sample code for posting with CURL:<br> assuming you have a form with a <code>text</code> and a <code>hidden</code> input: </p> <pre><code>&lt;form method='post' action='http://your.sf.site/your_sf_submit_page.php'&gt; &lt;input type='text' name='field1'/&gt; &lt;input type='hidden' name='field2'/&gt; &lt;/form&gt; </code></pre> <p>you can submit it using CURL like this: </p> <pre><code>$ch = curl_init(); curl_setopt($ch, CURLOPT_URL,\"http://your.sf.site/your_sf_submit_page.php\"); curl_setopt($ch, CURLOPT_POST, 1); curl_setopt($ch, CURLOPT_POSTFIELDS,\"field1=value1&amp;field2=value2\"); curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); $server_output = curl_exec ($ch); curl_close ($ch); </code></pre> <p>then you can check <code>$server_output</code> for being sure that form is submitted correctly. </p>"
-    
-    val analyzer = new DefaultLuceneAnalyzer(Version.LUCENE_4_10_4, StopWords.asCharArraySet)
-    
-    val tokens = analyzer.createComponents("field", new StringReader(texts)).getTokenStream
-    val attr = tokens.addAttribute(classOf[CharTermAttribute])
-    
-    retrieveSomething(url, username, password)
-    
-    //insertTerm(url, username, password, List())
-    
-    tokens.reset()
-    
-    while(tokens.incrementToken) {
-      println(attr.toString())
-    }
+    val start = args(0).toInt
+    val pageLength = args(1).toInt
+    val dict = createDictionary(url, username, password, start, pageLength)
 
   }
-  
-  def parseHtml(texts: List[String]) = {
-    texts.map { text => 
-      Jsoup.parse(text).body().text()  
-    }
-  }
-  
-  def retrieveSomething(url: String, username: String, password: String) = {
+
+  def createDictionary(url: String, username: String, password: String, start: Int, pageLength: Int) = {
+    val analyzer = new DefaultLuceneAnalyzer(Version.LUCENE_4_10_4, StopWords.asCharArraySet)
+
     val cpds = DatabaseConnection.openConnection(url, username, password)
 
-    val texts = inTransaction {
-      val t = from(terms)(p => select(p.term))
-      println(t.toList)
+
+    val dict = inTransaction {
+      //val postIds = retrievePostsIds(start, pageLength)
+      val commentIds = retrieveCommentsIds(start, pageLength)
+
+      val chunkSize = 20000
+      //val postChunks = postIds.grouped(chunkSize).toList
+      val commentChunks = commentIds.grouped(chunkSize).toList
+      
+      val currentDictionary = retrieveDictionary()
+      
+//      val postDict = addToDictionaryPost(analyzer, postIds, chunkSize, currentDictionary)
+//      println("Done posts")
+      val commentDict = addToDictionaryComment(analyzer, commentIds, chunkSize, currentDictionary)
+      println("Done comments")
+      
+      //val dictionary = postDict.distinct
+      val dictionary = commentDict.distinct
+      
+      //println("PostDict size: " + postDict.size)
+      //println("CommentDict size: " + commentDict.size)
+      //println("postDict + commentDict: " + (postDict.size + commentDict.size))
+      //println("dict size: " + dictionary.size)
+      
+      val ts = dictionary.par.map { x => new Dictionary(x) }.toList
+      terms.insert(ts)
+      dictionary 
     }
-    
-    
+    println("Dictionary Populated with: " + dict.size)
     cpds.close()
+  }
+
+  def addToDictionaryPost(analyzer: DefaultLuceneAnalyzer, ids: List[Int], chunkSize: Int, dictionary: Map[String, Int]) = {
+    val chunks = ids.grouped(chunkSize).toList
+    chunks.par.flatMap { chunk =>
+      var dict: List[String] = List()
+      val texts = retrievePosts(chunk).mkString(" ")
+      val tokens = analyzer.createComponents("field", new StringReader(texts)).getTokenStream
+      val attr = tokens.addAttribute(classOf[CharTermAttribute])
+
+      tokens.reset()
+
+      while (tokens.incrementToken) {
+        val term = attr.toString()
+        if (!dictionary.contains(term)) dict = term :: dict
+      }
+      dict
+    }.toList.distinct
+  }
+  
+  def addToDictionaryComment(analyzer: DefaultLuceneAnalyzer, ids: List[Int], chunkSize: Int, dictionary: Map[String, Int]) = {
+    val chunks = ids.grouped(chunkSize).toList
+    chunks.par.flatMap { chunk =>
+      var dict: List[String] = List()
+      val texts = retrieveComments(chunk).mkString(" ")
+      val tokens = analyzer.createComponents("field", new StringReader(texts)).getTokenStream
+      val attr = tokens.addAttribute(classOf[CharTermAttribute])
+
+      tokens.reset()
+
+      while (tokens.incrementToken) {
+        val term = attr.toString()
+        if (!dictionary.contains(term)) dict = term :: dict
+      }
+      dict
+    }.toList.distinct
+  }
+
+  def parseHtml(texts: List[String]) = {
+    texts.map { text =>
+      Jsoup.parse(text).body().text()
+    }
+  }
+
+  def retrievePostsIds(n: Int, pageLength: Int) = {
+    val ids = from(posts)(p => select(p.id) orderBy (p.id asc)).page(pageLength*n, pageLength)
+    println(ids.size + " post ids retrieved")
+    ids.toList
+  }
+
+  def retrieveCommentsIds(n: Int, pageLength: Int) = {
+    val ids = from(comments)(c => select(c.id) orderBy (c.id asc)).page(pageLength*n, pageLength)
+    println(ids.size + " comment ids retrieved")
+    ids.toList
   }
 
   /**
-   * Retrieve post title, tags, and body from DB
+   * Retrieve post title, and body from DB
    */
-  def retrievePosts(url: String, username: String, password: String) = {
-    val cpds = DatabaseConnection.openConnection(url, username, password)
-
-    val texts = inTransaction {
-      val postsId = from(posts)(p => select(p.id)).take(100)
-      val postsQuery = from(posts)(p => where(p.id in postsId)select(p.title, p.body))
-      postsQuery.map {
-        case (title,body) =>
+  def retrievePosts(ids: List[Int]) = {
+    inTransaction {
+      val postsQuery = from(posts)(p => where(p.id in ids) select (p.title, p.body))
+      val texts = postsQuery.map {
+        case (title, body) =>
           val ti = matchString(title)
           ti ++ " " ++ body
       }.toList
+      //println(texts.size + " posts retrieved")
+      parseHtml(parseHtml(texts))
     }
-    cpds.close()
-    parseHtml(texts)
   }
 
-   /**
+  /**
    * Retrieve comment text from DB
    */
-  def retrieveComments(url: String, username: String, password: String) = {
-    val cpds = DatabaseConnection.openConnection(url, username, password)
-
-    val texts = inTransaction {
-      from(comments)(c => select(c.text)).take(100)
-    }.toList
-    cpds.close()
-    texts
-  }
-  
-  def insertTerm(url: String, username: String, password: String, words: List[String]) = {
-    val cpds = DatabaseConnection.openConnection(url, username, password)
-    
-    val term = inTransaction {
-      //words.foreach { word => terms.insert(new Dictionary(word)) }
-      terms.insert(new Dictionary("test"))
+  def retrieveComments(ids: List[Int]) = {
+    inTransaction {
+    	val texts = inTransaction {
+    		from(comments)(c => where(c.id in ids) select(c.text))
+    	}.toList
+    	parseHtml(texts)      
     }
-    
-    cpds close()
   }
   
+  def retrieveDictionary() = {
+    inTransaction {
+      from(terms)(t => select(t.term))
+    }.map { x => (x, 0) }.toMap
+  }
 
   /**
    * Extract the string from an Option[String]
