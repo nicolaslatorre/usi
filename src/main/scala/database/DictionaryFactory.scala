@@ -35,7 +35,7 @@ object DictionaryFactory {
   def createDictionary(url: String, username: String, password: String, start: Int, pageLength: Int) = {
     val analyzer = new DefaultLuceneAnalyzer(Version.LUCENE_4_10_4, StopWords.asCharArraySet)
 
-    val cpds = DatabaseConnection.openConnection(url, username, password)
+    val cpds = DatabaseRequest.openConnection(url, username, password)
 
 
     val dict = inTransaction {
@@ -112,9 +112,11 @@ object DictionaryFactory {
   }
 
   def retrievePostsIds(n: Int, pageLength: Int) = {
-    val ids = from(posts)(p => select(p.id) orderBy (p.id asc)).page(pageLength*n, pageLength)
-    println(ids.size + " post ids retrieved")
-    ids.toList
+    inTransaction {
+    	val ids = from(posts)(p => select(p.id) orderBy (p.id asc)).page(pageLength*n, pageLength)
+    			println(ids.size + " post ids retrieved")
+    			ids.toList    
+    }
   }
 
   def retrieveCommentsIds(n: Int, pageLength: Int) = {

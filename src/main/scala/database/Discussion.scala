@@ -3,46 +3,14 @@ package database
 import squeryl._
 import java.util.Date
 
-class Discussion(val id: Int, val title: Option[String], val creationDate: Date, val body: String, val commentCount: Option[Int], val answerCount: Option[Int], val comments: List[Option[Comment]], val answersAndComments: Map[Post, List[Option[Comment]]], val tags: List[String]) {
-
+class Discussion(val id: Int, val title: String, val creationDate: Date, val body: String, val commentCount: Option[Int], val answerCount: Option[Int], val comments: List[Comment], val answers: List[Answer], val tags: List[String]) {
+  
   override def toString() = {
-    val commentsString = {
-      comments match {
-        case Nil => ""
-        case xs => xs.map { x =>
-          x match {
-            case None => ""
-            case Some(n) => "\t" + n.text + "\n"
-          }
-        }.foldLeft("")((x, y) => x + y)
-      }
-    }
+    val commentsString = comments.map{comment => comment.text }.mkString("\n")
 
-    val answers = {
-      answersAndComments.map { x =>
-        x match {
-          case null => ""
-          case (x, y) => x.body + "\n" + {
-            y match {
-              case Nil => ""
-              case xs => xs.map { z =>
-                z match {
-                  case None => ""
-                  case Some(n) => "\t" + n.text + "\n"
-                }
-              }.foldLeft("")((x, y) => x + y)
-            }
-          }
-        }
-      }.mkString(", ")
-    }
+    val answersString = answers.map { answer => answer.toString() }.mkString("\n")
 
-    {
-      title match {
-        case None => ""
-        case Some(n) => n
-      }
-    } + "\n" + body + "\n" + commentsString + "\n" + answers + "\n"
+    title + "\n" + body + "\n" + commentsString + "\n" + answersString + "\n"
   }
 
 }

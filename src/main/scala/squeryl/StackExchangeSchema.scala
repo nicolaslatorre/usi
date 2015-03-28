@@ -9,6 +9,7 @@ object StackExchangeSchema extends Schema {
   val posts = table[Post]("posts") 
   val comments = table[Comment]("comments")
   val terms = table[Dictionary]("dictionary")
+  val contextVectors = table[ContextVector]("context_vectors")
   val users = table[User]("users")
   val votes = table[Vote]("votes")
   val postsHistory = table[PostsHistory]("posts_history")
