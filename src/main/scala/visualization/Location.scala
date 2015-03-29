@@ -1,6 +1,5 @@
 package visualization
 
-import multidimensionalscaling.Document
 
 case class Location(val id: String, val title: String, val tags: String, val date: String, val answerCount: Int, val center: Point, val ray: Int, val height: Double) {
 

@@ -1,11 +1,9 @@
 package visualization
 
-import multidimensionalscaling.MultiDimensionalScaling
 import java.io.PrintWriter
 import java.io.File
 import scala.util.Random
 import database.Discussion
-import multidimensionalscaling.Document
 import com.github.tototoshi.csv.CSVReader
 
 class Model(val path: String, val levels: Int, size: Int) {
@@ -15,20 +13,21 @@ class Model(val path: String, val levels: Int, size: Int) {
   val gradient = getGradient(levels)
 
   def computeModel() = {
-    val pointsAndDiscussions = MultiDimensionalScaling.getPointAndDiscussions(dataset)
+    val pointsAndDiscussions: Map[Point, Discussion] = Map()
     
     val discussions = pointsAndDiscussions.map{ case(p, d) => d}
-    val tagOccurences = getStringTagOccurrences(discussions)
+    val tagOccurences: Map[String, Int] = Map()//getStringTagOccurrences(discussions)
     
-    val locations = pointsAndDiscussions.map {
-      case (x, y) =>
-        val initial = 3
-        val ray = y.answerCount + initial
-
-        val tags = y.tags.split(" ").toList.sorted.mkString(" ")
-        val height = tagOccurences.get(tags).get
-        new Location(y.id, y.title, y.tags, y.date, y.answerCount, x, ray, height)
-    }
+//    val locations = pointsAndDiscussions.map {
+//      case (x, y) =>
+//        val initial = 3
+//        val ray = y.answerCount + initial
+//
+//        val tags = y.tags.split(" ").toList.sorted.mkString(" ")
+//        val height = tagOccurences.get(tags).get
+//        new Location(y.id, y.title, y.tags, y.date, y.answerCount, x, ray, height)
+//    }
+    val locations: List[Location] = List()
     println("Model Computed")
     locations
   }
@@ -37,16 +36,16 @@ class Model(val path: String, val levels: Int, size: Int) {
     DEMCircles.buildGradient(levels)
   }
   
-  def getStringTagOccurrences(documents: List[Document]) = {
-    val tags = documents.map { x => x.tags.split(" ").toList.sorted.mkString(" ") }
-    tags.groupBy(x => x).mapValues { x => x.size }
-  }
-  
-  def getStringTagSingleOccurrences(documents: List[Document]) = {
-    val tags = documents.flatMap { x => x.tags.split(" ").toList.sorted }
-    val initialOccurrences = tags.groupBy(x => x).mapValues { x => x.size }
-    initialOccurrences 
-  }
+//  def getStringTagOccurrences(documents: List[Document]) = {
+//    val tags = documents.map { x => x.tags.split(" ").toList.sorted.mkString(" ") }
+//    tags.groupBy(x => x).mapValues { x => x.size }
+//  }
+//  
+//  def getStringTagSingleOccurrences(documents: List[Document]) = {
+//    val tags = documents.flatMap { x => x.tags.split(" ").toList.sorted }
+//    val initialOccurrences = tags.groupBy(x => x).mapValues { x => x.size }
+//    initialOccurrences 
+//  }
   
   /**
    * Open the dataset which is stored in a csv file
@@ -63,8 +62,9 @@ class Model(val path: String, val levels: Int, size: Int) {
       val probabilities = x.drop(7)
       val values = buildVectorIndex(probabilities)
       //new Document(x.head, values, x(1), x(2), x(3).toInt, x(4).toInt)
-      new Document(x(0), x(1), x(2), x(3), x(4), x(5).toInt, x(6).toInt, values)
+     // new Document(x(0), x(1), x(2), x(3), x(4), x(5).toInt, x(6).toInt, values)
     }
+    List()
   }
   
   def buildVectorIndex(vector: List[String]) = {

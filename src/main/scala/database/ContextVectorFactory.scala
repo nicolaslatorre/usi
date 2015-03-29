@@ -1,16 +1,16 @@
 package database
 
 import java.io.StringReader
-
 import scala.util.Random
-
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute
 import org.apache.lucene.util.Version
 import org.squeryl.PrimitiveTypeMode.inTransaction
-
 import lucene.DefaultLuceneAnalyzer
 import lucene.StopWords
 import squeryl.ContextVector
+import com.github.tototoshi.csv.CSVWriter
+import java.io.File
+import com.github.tototoshi.csv.CSVReader
 
 object ContextVectorFactory {
   val S = 0.5
@@ -20,53 +20,59 @@ object ContextVectorFactory {
     val username = "sodb"
     val password = "sodb"
 
-    val offset = 0 //args(0).toInt
-    val pageLength = 5000 //args(1).toInt
+    val offset = 0//args(0).toInt
+    val pageLength = 10000// args(1).toInt
+    val chunkSize = 2000//args(2).toInt
+    val path = "../indexVectors.csv"//args(3)
+    val saveToDb = false//args(4).toBoolean
 
-    getContextVectors(url, username, password, offset, pageLength)
+    if(offset == -1) saveIndexVectors(url, username, password, path)
+    else getContextVectors(url, username, password, offset, pageLength, chunkSize, path, saveToDb)
     println()
   }
 
-  def getContextVectors(url: String, username: String, password: String, offset: Int, pageLength: Int) = {
+  def getContextVectors(url: String, username: String, password: String, offset: Int, pageLength: Int, chunkSize: Int, path: String, saveToDb: Boolean) = {
     val analyzer = new DefaultLuceneAnalyzer(Version.LUCENE_4_10_4, StopWords.asCharArraySet)
-    DatabaseRequest.openConnection(url, username, password)
+    val file = new File(path)
+    val reader = CSVReader.open(file).all()
+    val indexVectors = reader.map { row => (row(0), new Vector(row(1).toDouble, row(2).toDouble)) }.toMap
+    println("Fetched Index Vectors")
+    val cpds = DatabaseRequest.openConnection(url, username, password)
 
     inTransaction {
-      // STEP 1
-      val dictionary = DatabaseRequest.retrieveDictionary()
-      val indexVectors = dictionary.par.map { term => (term, createIndexVector) }.toList
-      println("Created index vectors")
 
       //STEP 2
       val questionIds = DatabaseRequest.retrieveQuestionsIds(offset, pageLength)
       println(questionIds.size + " questions id retrieved")
 
-      val chunkSize = 1000
       val postChunks = questionIds.grouped(chunkSize).toList
 
-      val vectors = postChunks.par.flatMap { chunk =>
+      val terms = postChunks.par.flatMap { chunk =>
         val questions = DatabaseRequest.retrieveQuestionsAndComments(chunk)
         val answers = DatabaseRequest.retrieveAnswersAndComments(chunk)
 
         val terms = DataManagement.getPostsTerms(analyzer, questions, answers)
-        val contexts = terms.map { case (id, terms) => (id, new Vector(0.0, 0.0)) }
+        
 
-        contexts.map {
+        terms
+      }.toMap
+      
+      val contexts = terms.par.map { case (id, terms) => (id, new Vector(0.0, 0.0)) }
+      println("Initialized Context Vectors")
+      
+      val reduction = contexts.map {
           case (id, context) =>
             val postTerms = terms.get(id).get
-            val sum = indexVectors.filter { case (term, vector) => postTerms.contains(term) }.aggregate(context)((v1, iv) => v1 + iv._2, _ + _)
+            val sum = postTerms.map { term => indexVectors.get(term).get }.aggregate(context)((v1, v2) => v1 + v2, _ + _)
 
             new ContextVector(id, sum.x, sum.y)
-        }.toList
-        
       }.toList
-
       println("Reduction done")
-
-      //DatabaseRequest.insertContextVectors(reduction)
-
+      
+      if(saveToDb) DatabaseRequest.insertContextVectors(reduction)
     }
     println("Context Vectors Inserted")
+    cpds.close()
   }
 
   def getTermListFromPost(post: String) = {
@@ -99,6 +105,34 @@ object ContextVectorFactory {
       val v = random.nextDouble
       if (v <= S / 2) 1.0 else -1.0
     } else 0.0
+  }
+
+  /**
+   * Save the index vectors map into a file
+   */
+  def saveIndexVectors(url: String, username: String, password: String, path: String) = {
+    val cpds = DatabaseRequest.openConnection(url, username, password)
+    val indexVectors = inTransaction {
+      computeIndexVectors
+    }
+    cpds.close()
+    
+    val contents = indexVectors.map{ case(term, vector) => List(term, vector.x.toString(), vector.y.toString)}.toList
+    val file = new File(path)
+    val writer = CSVWriter.open(file)
+    writer.writeAll(contents)
+    writer.close()
+  }
+
+  /**
+   * Compute the index vectors
+   */
+  def computeIndexVectors() = {
+    // STEP 1
+    inTransaction {
+      val dictionary = DatabaseRequest.retrieveDictionary()
+      dictionary.par.map { term => (term, createIndexVector) }.toMap
+    }
   }
 
 }

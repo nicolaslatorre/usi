@@ -44,7 +44,7 @@ object DatabaseRequest {
    */
   def retrieveQuestionsIds(n: Int, pageLength: Int) = {
     inTransaction {
-      from(posts)(p => where(p.postTypeId === 1) select (p.id)).page(pageLength*n, pageLength)
+      from(posts)(p => where(p.postTypeId === 1) select (p.id) orderBy(p.creationDate asc)).page(pageLength*n, pageLength)
     }.toSet
   }
 

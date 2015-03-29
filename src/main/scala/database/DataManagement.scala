@@ -55,16 +55,17 @@ object DataManagement {
   def getPostsTerms(analyzer: DefaultLuceneAnalyzer, questions: Map[Post, List[Comment]], answers: Map[Post, List[Comment]]) = {
     val ids = answers.groupBy { case (post, comments) => post.parentId.get }
 
-    questions.map {
+    questions.par.map {
       case (post, comments) =>
-        val answersTerms = ids.get(post.id) match {
+        val answersTerms:Set[String] = ids.get(post.id) match {
           case Some(n) => getAnswersTerms(analyzer, n)
-          case None => Set("")
+          case None => Set()
         }
-        val title = parseHtml(parseHtml(post.title.get))
-        val body = parseHtml(parseHtml(post.body))
-        val commentsString = comments.map { comment => comment.text }.mkString("\n")
-        val questionTerms = getTerms(analyzer, title ++ body ++ commentsString)
+        val title = post.title.get
+        val body = post.body
+        val upper = parseHtml(parseHtml(title ++ " " ++ body))
+        val commentsString = comments.map { comment => parseHtml(comment.text) }.mkString(" ")
+        val questionTerms = getTerms(analyzer, upper  ++ " " ++ commentsString)
         (post.id, questionTerms union answersTerms)
     }.toMap
   }
@@ -73,8 +74,8 @@ object DataManagement {
     answers.flatMap {
       case (post, comments) =>
         val body = parseHtml(parseHtml(post.body))
-        val commentsString = comments.map { comment => comment.text }.mkString("\n")
-        getTerms(analyzer, body ++ commentsString)
+        val commentsString = comments.map { comment => parseHtml(comment.text) }.mkString(" ")
+        getTerms(analyzer, body ++ " " ++ commentsString)
     }.toSet
   }
 
@@ -91,5 +92,4 @@ object DataManagement {
     }
     terms
   }
-
 }

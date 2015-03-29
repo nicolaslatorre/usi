@@ -19,7 +19,6 @@ import scala.swing.FileChooser.Result
 import scala.swing.Action
 import java.io.File
 import database.DatabaseConnection
-import multidimensionalscaling.Document
 import scala.swing.TextArea
 import scala.swing.FlowPanel
 import scala.swing.TextField
