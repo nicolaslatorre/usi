@@ -6,28 +6,23 @@ import scala.util.Random
 import database.Discussion
 import com.github.tototoshi.csv.CSVReader
 
-class Model(val path: String, val levels: Int, size: Int) {
+class Model(val points: Map[Int, Point], val levels: Int, size: Int) {
   
-  val dataset = openDataset(path, size)
   val locations = computeModel
   val gradient = getGradient(levels)
+  
 
   def computeModel() = {
-    val pointsAndDiscussions: Map[Point, Discussion] = Map()
+	  val heights = points.groupBy{ case(id, point) => point}.mapValues(x => x.map{ case(id, point) => point}.size)
     
-    val discussions = pointsAndDiscussions.map{ case(p, d) => d}
-    val tagOccurences: Map[String, Int] = Map()//getStringTagOccurrences(discussions)
-    
-//    val locations = pointsAndDiscussions.map {
-//      case (x, y) =>
-//        val initial = 3
-//        val ray = y.answerCount + initial
-//
-//        val tags = y.tags.split(" ").toList.sorted.mkString(" ")
-//        val height = tagOccurences.get(tags).get
-//        new Location(y.id, y.title, y.tags, y.date, y.answerCount, x, ray, height)
-//    }
-    val locations: List[Location] = List()
+    val locations = points.map {
+      case (x, y) =>
+        val initial = 50
+        val ray = initial//y.answerCount + initial
+
+        val height = heights.get(y).get//30.0//tagOccurences.get(tags).get
+        new Location(x.toString(), "", "", "", 0, y, ray, height)
+    }
     println("Model Computed")
     locations
   }

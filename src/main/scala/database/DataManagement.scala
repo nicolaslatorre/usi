@@ -37,6 +37,10 @@ object DataManagement {
         new Answer(post.id, post.parentId.get, post.creationDate, body, comments)
     }.toList
   }
+  
+  def getText(post: List[(Int, Option[String], String, Option[Comment])]) = {
+    
+  }
 
   /**
    * Build tags as a list of strings
@@ -67,6 +71,24 @@ object DataManagement {
         val commentsString = comments.map { comment => parseHtml(comment.text) }.mkString(" ")
         val questionTerms = getTerms(analyzer, upper  ++ " " ++ commentsString)
         (post.id, questionTerms union answersTerms)
+    }.toMap
+  }
+  
+  /**
+   * Get the set of terms of a discussion.
+   */
+  def getQuestionTerms(analyzer: DefaultLuceneAnalyzer, questions: Map[Int, String], answers: Map[Int, List[String]]) = {
+    questions.par.map {
+      case (id, string) =>
+        val answerTerms: Set[String] = answers.get(id) match {
+          case Some(n) => 
+            val s = n.flatMap { x => getTerms(analyzer, x) }.toSet
+            Set()
+          case None => Set()
+        }
+        //println("id: " + id + "\n" + string + "\n" + answerTerms.mkString("\n"))
+        val questionTerms = getTerms(analyzer, string)
+        (id, questionTerms union answerTerms) // manca l'union
     }.toMap
   }
 

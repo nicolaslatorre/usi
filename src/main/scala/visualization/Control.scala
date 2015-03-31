@@ -120,7 +120,7 @@ class Control(val model: Model, val view: View) {
 
       if (ls.size > 0) {
         val infos = ls.map { location =>
-          "Id: " + location.id + "<br>Title: " + location.title + "<br>Tags: " + location.tags + "<br>answers: " + location.answerCount + "<br>Creation Date: " + location.date + "<br><br>"
+          "Id: " + location.id + "<br>Point: " + location.center + "<br>Height: " + location.height +  "<br>Title: " + location.title + "<br>Tags: " + location.tags + "<br>answers: " + location.answerCount + "<br>Creation Date: " + location.date + "<br><br>"
         }.mkString("")
         canvas.tooltip = "<html>" + infos + "</html>"
 

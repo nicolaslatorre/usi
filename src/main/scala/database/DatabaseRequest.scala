@@ -10,6 +10,7 @@ import squeryl.Post
 import squeryl.Comment
 import scala.collection.immutable.TreeSet
 import squeryl.ContextVector
+import squeryl.IndexVector
 
 object DatabaseRequest {
 
@@ -44,7 +45,7 @@ object DatabaseRequest {
    */
   def retrieveQuestionsIds(n: Int, pageLength: Int) = {
     inTransaction {
-      from(posts)(p => where(p.postTypeId === 1) select (p.id) orderBy(p.creationDate asc)).page(pageLength*n, pageLength)
+      from(posts)(p => where(p.postTypeId === 1) select (p.id) orderBy (p.creationDate asc)).page(pageLength * n, pageLength)
     }.toSet
   }
 
@@ -62,30 +63,28 @@ object DatabaseRequest {
    */
   def retrieveQuestionsAndComments(ids: Set[Int]) = {
     inTransaction {
-    	val questionsAndAnswers = inTransaction {
-    		join(posts, comments.leftOuter)((p, c) =>
-    		where(p.id in ids)
-    		select (p, c)
-    		on (p.id === c.map(_.postId)))
-    	}.toList
-    	mapPostsWithComments(questionsAndAnswers)      
-    }
+      val questionsAndAnswers = join(posts, comments.leftOuter)((p, c) =>
+        where(p.id in ids)
+          select (p, c)
+          on (p.id === c.map(_.postId)))
+      mapPostsWithComments(questionsAndAnswers.toList)
+    }.toMap
   }
+
 
   /**
    * Retrieve answers with respective comments
    */
   def retrieveAnswersAndComments(ids: Set[Int]) = {
     inTransaction {
-    	val answersAndComments = inTransaction {
-    		join(posts, comments.leftOuter)((p, c) =>
-    		where(((p.parentId in ids)) and (p.postTypeId === 2))
-    		select (p, c)
-    		on (p.id === c.map(_.postId)))
-    	}.toList
-    	mapPostsWithComments(answersAndComments)     
-    }
+      val answersAndComments = join(posts, comments.leftOuter)((p, c) =>
+        where(((p.parentId in ids)) and (p.postTypeId === 2))
+          select (p, c)
+          on (p.id === c.map(_.postId)))
+      mapPostsWithComments(answersAndComments.toList)
+    }.toMap
   }
+
 
   /**
    * Map posts with comments
@@ -97,11 +96,33 @@ object DatabaseRequest {
     }.mapValues {
       pc => pc.flatMap { case (post, comment) => comment }
     }
-    idsAndComments.map{case(id, comments) => (posts.get(id).get, comments)}
+    idsAndComments.map { case (id, comments) => (posts.get(id).get, comments) }
+  }
+
+  
+
+  
+  
+  /**
+   * Retrieve index vectors from db as set
+   */
+  def retrieveIndexVectors() = {
+    from(indexVectors)(iv => select(iv)).map{ iv => (iv.term, new Vector(iv.x, iv.y)) }.toMap
+  }
+
+  def retrievePoints() = {
+	  inTransaction {
+		  from(contextVectors)(cv => select(cv)).page(0, 20000)      
+	  }.toList
   }
   
-  def insertContextVectors(contexts: List[ContextVector]) ={
+  def insertContextVectors(contexts: List[ContextVector]) = {
     contextVectors.insert(contexts)
   }
+  
+  def insertIndexVectors(vectors: List[IndexVector]) = {
+    indexVectors.insert(vectors)
+  }
+  
 
 }

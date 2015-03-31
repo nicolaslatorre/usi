@@ -23,6 +23,9 @@ import scala.swing.TextArea
 import scala.swing.FlowPanel
 import scala.swing.TextField
 import javax.swing.JOptionPane
+import database.DatabaseRequest
+
+import org.squeryl.PrimitiveTypeMode._
 
 object Starter {
   def main(args: Array[String]) {
@@ -30,15 +33,14 @@ object Starter {
     val username = "sodb"
     val password = "sodb"
 
-    
-    val dataset = "../Datasets/dataset3/15000-discussions-tags.csv"
-    val destinationPath = args(0)
     val saveImage = false
     val levels = 15
     
-    val model = new Model(dataset, levels, 2)
-//    val locations = model.computeModel()
-//    val gradient = model.getGradient(levels)
+    val points = getPoint(url, username, password).map { cv => (cv.id, new Point(cv.x, cv.y) * 100) }.toMap
+
+    val model = new Model(points, levels, 2)
+    //    val locations = model.computeModel()
+    //    val gradient = model.getGradient(levels)
 
     SwingUtilities.invokeLater(new Runnable {
       def run {
@@ -48,6 +50,17 @@ object Starter {
       }
     })
 
+  }
+
+  def getPoint(url: String, username: String, password: String) = {
+    val cpds = DatabaseRequest.openConnection(url, username, password)
+
+    val contextVectors = inTransaction {
+    	DatabaseRequest.retrievePoints()
+    }
+
+    cpds.close()
+    contextVectors
   }
 }
 
@@ -67,15 +80,15 @@ class View(val model: Model, val levels: Int, var nrDiscussion: Int = 5000) exte
         println("Action '" + title + "' invoked")
         chooser.showOpenDialog(this) match {
           case Result.Approve =>
-            val otherModel = new Model(chooser.selectedFile.toString(), levels, nrDiscussion)
-            
-            panel.canvas.setModel(otherModel)
-            panel.canvas.repaint()
+//            val otherModel = new Model(chooser.selectedFile.toString(), levels, nrDiscussion)
+//
+//            panel.canvas.setModel(otherModel)
+//            panel.canvas.repaint()
           case Result.Cancel => println("Cancelled")
           case Result.Error => System.err.println("An error occured opening the following file " + chooser.selectedFile.toString())
         }
       })
-      
+
       contents += new MenuItem(Action("Change size") {
         val dialog = JOptionPane.showInputDialog("new size")
         nrDiscussion = dialog.toInt
@@ -95,22 +108,21 @@ class Canvas(var model: Model) extends Panel {
   val backgroundColor = new Color(0, 128, 255)
   opaque = true
   background = backgroundColor
-  
+
   def setModel(other: Model) = {
     model = other
   }
 
-//  var centers = model.locations.map { x => x.center }
-//  var rays = model.locations.map { x => x.ray }
+  //  var centers = model.locations.map { x => x.center }
+  //  var rays = model.locations.map { x => x.ray }
 
-  var zoomFactor = 0.1
+  var zoomFactor = 1.0
   var offsetX = 0.0
   var offsetY = 0.0
-  
+
   var drawMessages = false
   var drawAllMessages = false
-  
-  
+
   var changingViewPort = false
   var viewPortX = 0
   var viewPortY = 0
@@ -119,12 +131,12 @@ class Canvas(var model: Model) extends Panel {
 
   override def paintComponent(g: Graphics2D) = {
     super.paintComponent(g)
-    
+
     val locationsRays = drawModelInfo(model)
     val locations = model.locations
     val gradient = model.gradient
     val centers = model.locations.map { x => x.center }
-    
+
     val levels = (0 until gradient.size).toStream
 
     levels.foreach { level =>
@@ -146,7 +158,7 @@ class Canvas(var model: Model) extends Panel {
 
     g.setColor(Color.BLACK)
     locations.map {
-      location => 
+      location =>
         val p = location.center
         val point = (p - Point(0.5, 0.5) + Point(offsetX, offsetY)) * zoomFactor
         val ellispe = new Ellipse2D.Double(point.x, point.y, 1 * zoomFactor, 1 * zoomFactor)
@@ -157,12 +169,12 @@ class Canvas(var model: Model) extends Panel {
         g.setColor(Color.CYAN)
         g.fill(rect)
         g.setColor(Color.YELLOW)
-        if(drawMessages && message.split(" ").length <= 2 && location.height > 10) g.drawString(message.toString, rect.getX.toInt-3, rect.getY.toInt-3)
-        else if(drawAllMessages) g.drawString(message.toString, rect.getX.toInt-3, rect.getY.toInt-3)
-        
+        if (drawMessages && message.split(" ").length <= 2 && location.height > 10) g.drawString(message.toString, rect.getX.toInt - 3, rect.getY.toInt - 3)
+        else if (drawAllMessages) g.drawString(message.toString, rect.getX.toInt - 3, rect.getY.toInt - 3)
+
     }
-    
-    if(changingViewPort) {
+
+    if (changingViewPort) {
       g.setColor(Color.BLACK)
       g.drawRect(viewPortX, viewPortY, viewPortWidth, viewPortHeight)
     }
@@ -192,12 +204,12 @@ class Canvas(var model: Model) extends Panel {
     if (point.x + offsetX < 0 || point.y + offsetY < 0 || point.x + offsetX > size.width * zoomFactor || point.y + offsetY > size.height * zoomFactor) false
     else true
   }
-  
+
   def drawModelInfo(model: Model) = {
     val locations = model.locations
     val gradient = model.gradient
-    
-    val heights = locations.map { x => x.height }
+
+    val heights = locations.map { x => x.height }.toList
     val maxHeight = model.locations.maxBy { x => x.height }.height
     val maxHeights = heights.distinct.sorted.reverse.take(10)
     val interval = maxHeight / gradient.size
@@ -206,7 +218,7 @@ class Canvas(var model: Model) extends Panel {
     val locationsRays = locations.map { location =>
       val ray = location.ray
       val height = location.height
-      
+
       // Find out number of possible intervals
       val intervals = getNumberOfIntervals(interval, height)
 
@@ -216,11 +228,10 @@ class Canvas(var model: Model) extends Panel {
       val rays = ls.map { x => ray - (rayInterval * x) }
       location -> rays.toList
     }.toMap
-    
 
     locationsRays
   }
-  
+
   def getNumberOfIntervals(interval: Double, height: Double) = {
     var counter = 1
     while ((interval * counter) < height) counter += 1

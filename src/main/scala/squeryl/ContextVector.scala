@@ -7,7 +7,7 @@ import org.squeryl.annotations.Column
  */
 class ContextVector(
                       @Column("id")
-                      var term: Int,
+                      var id: Int,
                       
                       @Column("x")
                       var x: Double,
