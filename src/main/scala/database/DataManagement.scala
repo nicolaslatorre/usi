@@ -1,13 +1,13 @@
 package database
 
-import squeryl.Post
-import squeryl.Comment
-import org.jsoup.Jsoup
-import lucene.StopWords
-import lucene.DefaultLuceneAnalyzer
-import org.apache.lucene.util.Version
 import java.io.StringReader
+
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute
+import org.jsoup.Jsoup
+
+import lucene.DefaultLuceneAnalyzer
+import squeryl.Comment
+import squeryl.Post
 
 object DataManagement {
 

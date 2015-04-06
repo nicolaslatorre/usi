@@ -39,22 +39,22 @@ object DictionaryFactory {
 
 
     val dict = inTransaction {
-      //val postIds = retrievePostsIds(start, pageLength)
-      val commentIds = retrieveCommentsIds(start, pageLength)
+      val postIds = retrievePostsIds(start, pageLength)
+      //val commentIds = retrieveCommentsIds(start, pageLength)
 
       val chunkSize = 20000
-      //val postChunks = postIds.grouped(chunkSize).toList
-      val commentChunks = commentIds.grouped(chunkSize).toList
+      val postChunks = postIds.grouped(chunkSize).toList
+      //val commentChunks = commentIds.grouped(chunkSize).toList
       
       val currentDictionary = retrieveDictionary()
       
-//      val postDict = addToDictionaryPost(analyzer, postIds, chunkSize, currentDictionary)
-//      println("Done posts")
-      val commentDict = addToDictionaryComment(analyzer, commentIds, chunkSize, currentDictionary)
-      println("Done comments")
+      val postDict = addToDictionaryPost(analyzer, postIds, chunkSize, currentDictionary)
+      println("Done posts")
+//      val commentDict = addToDictionaryComment(analyzer, commentIds, chunkSize, currentDictionary)
+//      println("Done comments")
       
-      //val dictionary = postDict.distinct
-      val dictionary = commentDict.distinct
+      val dictionary = postDict.distinct
+//      val dictionary = commentDict.distinct
       
       //println("PostDict size: " + postDict.size)
       //println("CommentDict size: " + commentDict.size)

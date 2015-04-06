@@ -8,6 +8,7 @@ import com.github.tototoshi.csv.CSVReader
 import database.DatabaseRequest
 import org.squeryl.PrimitiveTypeMode._
 import database.DataManagement
+import database.ContextVectorFactory
 
 class Model(val url: String, val username: String, val password: String, val offset: Int, val pageLength: Int, val keywords: List[String], val levels: Int) {
 
@@ -30,7 +31,7 @@ class Model(val url: String, val username: String, val password: String, val off
         val ray = initial//discussion.answerCount.get + initial
 
         val point = points.get(discussion.id).get
-        val height = 30//heights.get(point).get //30.0//tagOccurences.get(tags).get
+        val height = 30.0//tagOccurences.get(tags).get
 
         new Location(discussion.id.toString(), discussion.title, discussion.tags.mkString(" "), discussion.creationDate.toString, discussion.answerCount.get, point, ray, height)
     }
@@ -50,14 +51,9 @@ class Model(val url: String, val username: String, val password: String, val off
   }
 
   def getPoints(ids: Set[Int]) = {
-    val cpds = DatabaseRequest.openConnection(url, username, password)
-
-    val contextVectors = inTransaction {
-      DatabaseRequest.retrievePoints(ids).map { cv => (cv.id, new Point(cv.x, cv.y)*100) }
-    }.toMap
-
-    cpds.close()
-    contextVectors
+    val indexVectors = ContextVectorFactory.computeIndexVectors(url, username, password).seq
+    val contextVectors = ContextVectorFactory.getContextVectors(url, username, password, indexVectors, offset, pageLength, 100, false, keywords)
+    contextVectors.map { cv => (cv.id, new Point(cv.x, cv.y) * 10) }.toMap
   }
 
   def getDiscussions(ids: Set[Int]) = {

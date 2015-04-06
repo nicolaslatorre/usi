@@ -11,6 +11,7 @@ import squeryl.Comment
 import scala.collection.immutable.TreeSet
 import squeryl.ContextVector
 import squeryl.IndexVector
+import org.jsoup.Jsoup
 
 object DatabaseRequest {
 
@@ -48,13 +49,13 @@ object DatabaseRequest {
       from(posts)(p => where(p.postTypeId === 1) select (p.id) orderBy (p.creationDate asc)).page(pageLength * n, pageLength)
     }.toSet
   }
-  
+
   /**
    * Retrieve the posts in a specific set of ids
    */
   def retrieveSpecificIds(n: Int, pageLength: Int, keyword: String) = {
     inTransaction {
-      from(posts)(p => where((p.postTypeId === 1) and (p.tags like keyword)) select(p.id) orderBy (p.creationDate asc)).page(n, pageLength)
+      from(posts)(p => where((p.postTypeId === 1) and (p.tags like keyword)) select (p.id) orderBy (p.creationDate asc)).page(n, pageLength)
       //from(posts)(p => where((p.postTypeId === 1)) select(p.id)).page(n, pageLength)
     }.toSet
   }
@@ -81,7 +82,6 @@ object DatabaseRequest {
     }.toMap
   }
 
-
   /**
    * Retrieve answers with respective comments
    */
@@ -94,7 +94,6 @@ object DatabaseRequest {
       mapPostsWithComments(answersAndComments.toList)
     }.toMap
   }
-
 
   /**
    * Map posts with comments
@@ -109,32 +108,40 @@ object DatabaseRequest {
     idsAndComments.map { case (id, comments) => (posts.get(id).get, comments) }
   }
 
-  
+  /**
+   * Retrieve Tags
+   */
+  def retrieveTagsPosts(ids: Set[Int]) = {
+    inTransaction {
+      val tags = from(posts)(p => where((p.id in ids) and (p.postTypeId === 1)) select (p.id, p.tags)).toMap
+      tags.map {case (id, tags) =>
+        val ts = Jsoup.parse(tags.get).body().text().replace("<", "").replace(">", " ").split(" ").toList
+        (id, ts)
+      }
+    }  
+  }
 
-  
-  
   /**
    * Retrieve index vectors from db as set
    */
   def retrieveIndexVectors() = {
-    from(indexVectors)(iv => select(iv)).map{ iv => (iv.term, new Vector(iv.x, iv.y)) }.toMap
+    from(indexVectors)(iv => select(iv)).map { iv => (iv.term, new Vector(iv.x, iv.y)) }.toMap
   }
 
   def retrievePoints(ids: Set[Int]) = {
-	  inTransaction {
-		  from(contextVectors)(cv => where(cv.id in ids) select(cv))    
-	  }.toList
+    inTransaction {
+      from(contextVectors)(cv => where(cv.id in ids) select (cv))
+    }.toList
   }
-  
+
   def insertContextVectors(contexts: List[ContextVector]) = {
     contextVectors.insert(contexts)
   }
-  
+
   def insertIndexVectors(vectors: List[IndexVector]) = {
     inTransaction {
-    	indexVectors.insert(vectors)      
+      indexVectors.insert(vectors)
     }
   }
-  
 
 }

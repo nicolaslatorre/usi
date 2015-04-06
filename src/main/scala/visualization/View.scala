@@ -29,8 +29,8 @@ object Starter {
 
     val levels = 15
     val offset = 0
-    val pageLength = 1000
-    val keywords = List("&lt;android&gt;", "&lt;php&gt;")//, "&lt;javascript&gt;&lt;jquery&gt;", "&lt;java&gt;", "&lt;javascript&gt;", "&lt;jquery&gt;", "&lt;c#&gt;")
+    val pageLength = 100
+    val keywords = List("&lt;android&gt;", "&lt;php&gt;", "&lt;javascript&gt;&lt;jquery&gt;", "&lt;java&gt;", "&lt;javascript&gt;", "&lt;jquery&gt;", "&lt;c#&gt;")
     
     val model = new Model(url, username, password, offset, pageLength, keywords, levels)
 
