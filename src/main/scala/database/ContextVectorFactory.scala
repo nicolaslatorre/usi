@@ -12,9 +12,10 @@ import com.github.tototoshi.csv.CSVWriter
 import java.io.File
 import com.github.tototoshi.csv.CSVReader
 import squeryl.IndexVector
+import scala.io.Source
 
 object ContextVectorFactory {
-  val S = 0.05
+  val S = 1.0 / 3.0
 
   def main(args: Array[String]) = {
     val url = "jdbc:postgresql://localhost:5432/stackoverflow_dump"
@@ -25,13 +26,18 @@ object ContextVectorFactory {
     val pageLength = args(1).toInt
     val chunkSize = args(2).toInt
     val saveToDb = args(3).toBoolean
+    val keywords = getKeywords(args(4))//List("&lt;android&gt;", "&lt;php&gt;", "&lt;javascript&gt;&lt;jquery&gt;", "&lt;java&gt;")
 
     if (offset == -1) computeIndexVectors(url, username, password)
-    else getContextVectors(url, username, password, offset, pageLength, chunkSize, saveToDb)
+    else getContextVectors(url, username, password, offset, pageLength, chunkSize, saveToDb, keywords)
     println()
   }
+  
+  def getKeywords(path: String) = {
+    Source.fromFile(path).getLines.toList
+  }
 
-  def getContextVectors(url: String, username: String, password: String, offset: Int, pageLength: Int, chunkSize: Int, saveToDb: Boolean) = {
+  def getContextVectors(url: String, username: String, password: String, offset: Int, pageLength: Int, chunkSize: Int, saveToDb: Boolean, keywords: List[String]) = {
     val analyzer = new DefaultLuceneAnalyzer(Version.LUCENE_4_10_4, StopWords.asCharArraySet)
     val cpds = DatabaseRequest.openConnection(url, username, password)
 
@@ -41,7 +47,8 @@ object ContextVectorFactory {
       println("Fetched Index Vectors")
 
       //STEP 2
-      val questionIds = DatabaseRequest.retrieveQuestionsIds(offset, pageLength)
+      //val questionIds = DatabaseRequest.retrieveQuestionsIds(offset, pageLength)
+      val questionIds = keywords.flatMap { keyword => DatabaseRequest.retrieveSpecificIds(offset, pageLength, keyword) }.toSet
       println(questionIds.size + " questions id retrieved")
 
       val postChunks = questionIds.grouped(chunkSize).toList
@@ -58,8 +65,10 @@ object ContextVectorFactory {
 
         val reduction = ts.map {
           case (id, setTerms) =>
-            val sum = setTerms.map { term => indexVectors.get(term).get }.aggregate(new Vector(0.0, 0.0))((v1, v2) => v1 + v2, _ + _)
-
+            val su = setTerms.toList.map { term => indexVectors.get(term).get }
+            println("Terms in post: " + setTerms.size)
+            println("Terms in context vector " + id + ": " + su.size)//.reduce(_ + _)//).aggregate(new Vector(0.0, 0.0))((v1, v2) => v1 + v2, _ + _)
+            val sum = su.reduce(_ + _)
             new ContextVector(id, sum.x, sum.y)
         }.toList
 
@@ -103,17 +112,16 @@ object ContextVectorFactory {
   def createIndexVector() = {
     val x = determineValue()
     val y = determineValue()
-
     new Vector(x, y)
   }
 
   def determineValue() = {
     val random = new Random
     val value = random.nextDouble()
-
-    if (value <= S / 2) -1.0 / getUniform
-    else if (value > S / 2 && value <= (S / 2 + S)) 0.0
-    else 1.0 / getUniform
+    
+    if(value <= S/2.0) -1.0 // / getUniform
+    else if(value >= 1 - S/2.0) 1.0 // getUniform
+    else 0.0
   }
 
   def getUniform() = {
@@ -130,12 +138,17 @@ object ContextVectorFactory {
     val cpds = DatabaseRequest.openConnection(url, username, password)
     inTransaction {
       val dictionary = DatabaseRequest.retrieveDictionary()
+      println("Dictionary retrieved")
       val vectors = dictionary.par.map { term =>
         val vector = createIndexVector
         new IndexVector(term, vector.x, vector.y)
       }.toList
-      DatabaseRequest.insertIndexVectors(vectors)
-      println("Index vectors created")
+      println("Index vectors created.")
+      val groups = vectors.grouped(100000).toList.par
+      
+      groups.foreach { x => DatabaseRequest.insertIndexVectors(x) }
+      
+      println("Index vectors stored.")
     }
     cpds.close()
 

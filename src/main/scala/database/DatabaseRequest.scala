@@ -48,6 +48,16 @@ object DatabaseRequest {
       from(posts)(p => where(p.postTypeId === 1) select (p.id) orderBy (p.creationDate asc)).page(pageLength * n, pageLength)
     }.toSet
   }
+  
+  /**
+   * Retrieve the posts in a specific set of ids
+   */
+  def retrieveSpecificIds(n: Int, pageLength: Int, keyword: String) = {
+    inTransaction {
+      from(posts)(p => where((p.postTypeId === 1) and (p.tags like keyword)) select(p.id) orderBy (p.creationDate asc)).page(n, pageLength)
+      //from(posts)(p => where((p.postTypeId === 1)) select(p.id)).page(n, pageLength)
+    }.toSet
+  }
 
   /**
    * Retrieve the dictionary from the database
@@ -110,9 +120,9 @@ object DatabaseRequest {
     from(indexVectors)(iv => select(iv)).map{ iv => (iv.term, new Vector(iv.x, iv.y)) }.toMap
   }
 
-  def retrievePoints() = {
+  def retrievePoints(ids: Set[Int]) = {
 	  inTransaction {
-		  from(contextVectors)(cv => select(cv)).page(0, 20000)      
+		  from(contextVectors)(cv => where(cv.id in ids) select(cv))    
 	  }.toList
   }
   
@@ -121,7 +131,9 @@ object DatabaseRequest {
   }
   
   def insertIndexVectors(vectors: List[IndexVector]) = {
-    indexVectors.insert(vectors)
+    inTransaction {
+    	indexVectors.insert(vectors)      
+    }
   }
   
 

@@ -2,30 +2,24 @@ package visualization
 
 import java.awt.Color
 import java.awt.Toolkit
-import java.awt.geom.Rectangle2D
+import java.awt.geom.Ellipse2D
+import java.io.File
 import scala.swing.BorderPanel
 import scala.swing.BorderPanel.Position._
+import scala.swing.FileChooser
 import scala.swing.Frame
 import scala.swing.Graphics2D
-import scala.swing.Panel
-import javax.swing.SwingUtilities
-import javax.swing.WindowConstants.EXIT_ON_CLOSE
-import java.awt.geom.Ellipse2D
 import scala.swing.Menu
 import scala.swing.MenuBar
 import scala.swing.MenuItem
-import scala.swing.FileChooser
-import scala.swing.FileChooser.Result
-import scala.swing.Action
-import java.io.File
-import database.DatabaseConnection
+import scala.swing.Panel
 import scala.swing.TextArea
-import scala.swing.FlowPanel
 import scala.swing.TextField
-import javax.swing.JOptionPane
-import database.DatabaseRequest
-
 import org.squeryl.PrimitiveTypeMode._
+import javax.swing.SwingUtilities
+import javax.swing.WindowConstants.EXIT_ON_CLOSE
+import javax.swing.JOptionPane
+import scala.swing.Action
 
 object Starter {
   def main(args: Array[String]) {
@@ -33,14 +27,12 @@ object Starter {
     val username = "sodb"
     val password = "sodb"
 
-    val saveImage = false
     val levels = 15
+    val offset = 0
+    val pageLength = 1000
+    val keywords = List("&lt;android&gt;", "&lt;php&gt;")//, "&lt;javascript&gt;&lt;jquery&gt;", "&lt;java&gt;", "&lt;javascript&gt;", "&lt;jquery&gt;", "&lt;c#&gt;")
     
-    val points = getPoint(url, username, password).map { cv => (cv.id, new Point(cv.x, cv.y) * 100) }.toMap
-
-    val model = new Model(points, levels, 2)
-    //    val locations = model.computeModel()
-    //    val gradient = model.getGradient(levels)
+    val model = new Model(url, username, password, offset, pageLength, keywords, levels)
 
     SwingUtilities.invokeLater(new Runnable {
       def run {
@@ -51,17 +43,13 @@ object Starter {
     })
 
   }
+}
 
-  def getPoint(url: String, username: String, password: String) = {
-    val cpds = DatabaseRequest.openConnection(url, username, password)
-
-    val contextVectors = inTransaction {
-    	DatabaseRequest.retrievePoints()
-    }
-
-    cpds.close()
-    contextVectors
-  }
+class JOptionPaneChangeModel(val url: String, val username: String, val password: String) {
+  val offset = new TextArea("new offset")
+  val pageLength = new TextArea("new pageLength")
+  val keywords = new TextArea("new keywords")
+  
 }
 
 class View(val model: Model, val levels: Int, var nrDiscussion: Int = 5000) extends Frame {
@@ -76,17 +64,9 @@ class View(val model: Model, val levels: Int, var nrDiscussion: Int = 5000) exte
   val chooser = new FileChooser(new File("/Users/nicolaslatorre/Documents/USI/Tesi/Datasets"))
   menuBar = new MenuBar {
     contents += new Menu("File") {
-      contents += new MenuItem(Action("Open") {
+      contents += new MenuItem(Action("Change Model") {
         println("Action '" + title + "' invoked")
-        chooser.showOpenDialog(this) match {
-          case Result.Approve =>
-//            val otherModel = new Model(chooser.selectedFile.toString(), levels, nrDiscussion)
-//
-//            panel.canvas.setModel(otherModel)
-//            panel.canvas.repaint()
-          case Result.Cancel => println("Cancelled")
-          case Result.Error => System.err.println("An error occured opening the following file " + chooser.selectedFile.toString())
-        }
+        JOptionPane.showInputDialog("Ciao")
       })
 
       contents += new MenuItem(Action("Change size") {
@@ -133,9 +113,9 @@ class Canvas(var model: Model) extends Panel {
     super.paintComponent(g)
 
     val locationsRays = drawModelInfo(model)
-    val locations = model.locations
+    val locations = model.locations.filter { location => inScreen(location.center) }
     val gradient = model.gradient
-    val centers = model.locations.map { x => x.center }
+    val centers = locations.map { x => x.center }//model.locations.map { x => x.center }
 
     val levels = (0 until gradient.size).toStream
 
@@ -201,7 +181,8 @@ class Canvas(var model: Model) extends Panel {
 
   def inScreen(point: Point) = {
     val size = preferredSize
-    if (point.x + offsetX < 0 || point.y + offsetY < 0 || point.x + offsetX > size.width * zoomFactor || point.y + offsetY > size.height * zoomFactor) false
+    val p = (point + Point(offsetX, offsetY)) * zoomFactor
+    if ((p.x < 0) || p.y < 0 || p.x > size.width || p.y > size.height) false
     else true
   }
 
