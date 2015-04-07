@@ -12,6 +12,7 @@ object StackExchangeSchema extends Schema {
   val votes = table[Vote]("votes")
   val postsHistory = table[PostsHistory]("posts_history")
   val badges = table[Badge]("badges")
+  val post2tag = table[Post2Tag]("post2tag")
 //  val termsEntropy = table[TermEntropy]("terms_entropy")
 //  val postsMetric = table[PostMetric]("posts_metrics")
   val badPosts = table[BadPosts]("bad_posts")
