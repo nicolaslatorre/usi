@@ -5,9 +5,9 @@ import java.io.PrintWriter
 import com.github.tototoshi.csv.CSVReader
 import mdsj.MDSJ
 import visualization.Point
-import com.jujutsu.tsne.FastTSne;
-import com.jujutsu.tsne.MatrixOps;
-import com.jujutsu.tsne.TSne;
+//import com.jujutsu.tsne.FastTSne;
+//import com.jujutsu.tsne.MatrixOps;
+//import com.jujutsu.tsne.TSne;
 
 class MultiDimensionalScaling {
 
@@ -107,19 +107,19 @@ object MultiDimensionalScaling {
     val mds = new MultiDimensionalScaling
     val dissimilarityMatrix = mds.computeDissimilarityMatrix(documents)
     
-    val initialDims = 50
-    val perplexity = 20.0
-    val tsne = new FastTSne()
+//    val initialDims = 50
+//    val perplexity = 20.0
+//    val tsne = new FastTSne()
 
-    println("Computing TSne")
-    val pointsArray = tsne.tsne(dissimilarityMatrix, 2, initialDims, perplexity, 50)
-    val pointsList = pointsArray.map { x => x.toList }.toList
-    val points = adjustPoints(pointsList)
-
-//    println("Computing MDS")
-//    val pointsArray = MDSJ.classicalScaling(dissimilarityMatrix)
+//    println("Computing TSne")
+//    val pointsArray = tsne.tsne(dissimilarityMatrix, 2, initialDims, perplexity, 50)
 //    val pointsList = pointsArray.map { x => x.toList }.toList
 //    val points = adjustPoints(pointsList)
+
+    println("Computing MDS")
+    val pointsArray = MDSJ.classicalScaling(dissimilarityMatrix)
+    val pointsList = pointsArray.map { x => x.toList }.toList
+    val points = adjustPoints(pointsList)
 
     points zip documents
   }

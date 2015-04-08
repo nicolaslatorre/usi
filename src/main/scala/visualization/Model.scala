@@ -7,15 +7,31 @@ import scala.util.Random
 import database.Discussion
 import multidimensionalscaling.Document
 import com.github.tototoshi.csv.CSVReader
+import database.TagFactory
+import database.DatabaseRequest
+import org.squeryl.PrimitiveTypeMode._
+import database.DataManagement
+import database.TagTree
 
-class Model(val path: String, val levels: Int, size: Int) {
+
+class Model(val url: String, val username: String, val password: String, val offset: Int, val pageLength: Int, val keywords: List[String], val levels: Int) {
   
-  val dataset = openDataset(path, size)
+//  val dataset = openDataset(path, size)
   val locations = computeModel
   val gradient = getGradient(levels)
 
   def computeModel() = {
-    val pointsAndDiscussions = MultiDimensionalScaling.getPointAndDiscussions(dataset)
+    val mainVector = TagFactory.mainTagVector(url, username, password)
+    val tree = TagTree.createTree(mainVector)
+    
+    val ls = tree.filter{ case(key, value) => key.split(" ").length == 1}.toList.sortBy{case(key, value) => value}
+    
+    
+    
+    
+    
+    
+    val pointsAndDiscussions = MultiDimensionalScaling.getPointAndDiscussions(List())
     
     val discussions = pointsAndDiscussions.map{ case(p, d) => d}
     val tagOccurences = getStringTagOccurrences(discussions)
@@ -31,6 +47,31 @@ class Model(val path: String, val levels: Int, size: Int) {
     }
     println("Model Computed")
     locations
+  }
+  
+  def getIds() = {
+    val cpds = DatabaseRequest.openConnection(url, username, password)
+
+    val ids = inTransaction {
+      keywords.flatMap { keyword => DatabaseRequest.retrieveSpecificIds(offset, pageLength, keyword) }.toSet
+    }.toSet
+
+    cpds.close()
+    ids
+  }
+  
+  def getDiscussions(ids: Set[Int]) = {
+    val cpds = DatabaseRequest.openConnection(url, username, password)
+
+    val discussions = inTransaction {
+      val questions = DatabaseRequest.retrieveQuestionsAndComments(ids)
+      val answers = DatabaseRequest.retrieveAnswersAndComments(ids)
+
+      DataManagement.buildDiscussions(questions, answers)
+    }
+
+    cpds.close()
+    discussions
   }
   
   def getGradient(levels: Int) = {

@@ -131,5 +131,23 @@ object DatabaseRequest {
       post2tag.insert(p2t)
     }
   }
-
+  
+  /**
+   * Retrieve tag2post
+   */
+   def retrieveTag2Post() = {
+     inTransaction {
+       from(post2tag)(pt => select(pt.id, pt.tags)).page(0, 10000)
+     }.toMap.map{ case(id, tags) => (id, tags.split(" ").toList)}
+   }
+   
+   /**
+    * Get occurrences of a tag
+    */
+   def getTagOccurrences(tag: String) = {
+     val occurrence = inTransaction {
+       from(posts)(p => where((p.postTypeId === 1) and (p.tags like "%&lt;"+tag+"&gt;%")) select(p.id)).toList.size
+     }
+     (tag, occurrence)
+   }
 }

@@ -37,7 +37,7 @@ object Starter {
     val saveImage = false
     val levels = 15
     
-    val model = new Model(dataset, levels, 2)
+    val model = new Model(url, username, password, 0, 0, List(), 0)
 //    val locations = model.computeModel()
 //    val gradient = model.getGradient(levels)
 
@@ -68,10 +68,10 @@ class View(val model: Model, val levels: Int, var nrDiscussion: Int = 5000) exte
         println("Action '" + title + "' invoked")
         chooser.showOpenDialog(this) match {
           case Result.Approve =>
-            val otherModel = new Model(chooser.selectedFile.toString(), levels, nrDiscussion)
-            
-            panel.canvas.setModel(otherModel)
-            panel.canvas.repaint()
+//            val otherModel = new Model(chooser.selectedFile.toString(), levels, nrDiscussion)
+//            
+//            panel.canvas.setModel(otherModel)
+//            panel.canvas.repaint()
           case Result.Cancel => println("Cancelled")
           case Result.Error => System.err.println("An error occured opening the following file " + chooser.selectedFile.toString())
         }
