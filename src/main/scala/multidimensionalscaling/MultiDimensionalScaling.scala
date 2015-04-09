@@ -105,7 +105,7 @@ class MultiDimensionalScaling {
 object MultiDimensionalScaling {
   def getPointAndDiscussions(documents: List[Document]) = {
     val mds = new MultiDimensionalScaling
-    val dissimilarityMatrix = mds.computeDissimilarityMatrix(documents)
+    val dissimilarityMatrix = mds.computeDissimilarityMatrix(List())
     
 //    val initialDims = 50
 //    val perplexity = 20.0

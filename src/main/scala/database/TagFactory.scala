@@ -11,7 +11,7 @@ object TagFactory {
 
     //    populateTags(url, username, password)
     val tagVector = mainTagVector(url, username, password)
-    println(tagVector)
+    //println(tagVector)
   }
 
   def populateTags(url: String, username: String, password: String) = {

@@ -80,6 +80,16 @@ object DatabaseRequest {
       mapPostsWithComments(questionsAndAnswers.toList)
     }.toMap
   }
+  
+  /**
+   * Retrieve a post by tags
+   */
+  def retrieveIdsByTag(tags: List[String]) = {
+    inTransaction {
+      val ts = tags.map { tag => "&lt;"+tag+"&gt;" }.mkString("")
+      from(posts)(p => where(p.tags like ts) select(p.id)).toList
+    }
+  }
 
   /**
    * Retrieve answers with respective comments
@@ -137,7 +147,7 @@ object DatabaseRequest {
    */
    def retrieveTag2Post() = {
      inTransaction {
-       from(post2tag)(pt => select(pt.id, pt.tags)).page(0, 10000)
+       from(post2tag)(pt => select(pt.id, pt.tags)).page(0, 1000000)
      }.toMap.map{ case(id, tags) => (id, tags.split(" ").toList)}
    }
    

@@ -24,8 +24,7 @@ class Model(val url: String, val username: String, val password: String, val off
     val mainVector = TagFactory.mainTagVector(url, username, password)
     val tree = TagTree.createTree(mainVector)
     
-    val ls = tree.filter{ case(key, value) => key.split(" ").length == 1}.toList.sortBy{case(key, value) => value}
-    
+//    val ls = tree.filter{ case(key, value) => key.split(" ").length == 1}.toList.sortBy{case(key, value) => value}
     
     
     
