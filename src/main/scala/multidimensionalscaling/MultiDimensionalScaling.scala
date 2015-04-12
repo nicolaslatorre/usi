@@ -5,35 +5,36 @@ import java.io.PrintWriter
 import com.github.tototoshi.csv.CSVReader
 import mdsj.MDSJ
 import visualization.Point
+import mdsj.ClassicalScaling
 //import com.jujutsu.tsne.FastTSne;
 //import com.jujutsu.tsne.MatrixOps;
 //import com.jujutsu.tsne.TSne;
 
 class MultiDimensionalScaling {
 
-  def computeDissimilarityMatrix(input: List[Document]) = {
+  def computeDissimilarityMatrix(input: List[(Int, Int)]) = {
     println("Computing dissimilarity")
-    val id2Doc: Map[Int, Document] = Stream.from(0) zip input toMap
+    val id2Doc: Map[Int, (Int, Int)] = (Stream.from(0) zip input) toMap
     val rows = 0 until input.size
     val cols = rows
-    
+
     val dissimilarity: Array[Array[Double]] = Array.fill(rows.size)(Array.fill(rows.size)(0.0))
-        rows.par.foreach { row =>
-          cols.foreach { col =>
-            val rowDoc = id2Doc(row)
-            val colDoc = id2Doc(col)
-            if (row < col) {
-              val distance = computeDistanceTag(euclideanDistanceTag, rowDoc.topicDistribution, colDoc.topicDistribution) * 3000
-              dissimilarity(col)(row) = distance
-              dissimilarity(row)(col) = distance
-            }
-          }
+    rows.par.foreach { row =>
+      cols.foreach { col =>
+        val rowDoc = id2Doc(row)
+        val colDoc = id2Doc(col)
+        if (row < col) {
+          val distance = computeDistanceTag(euclideanDistanceTag, List(rowDoc), List(colDoc))
+          dissimilarity(col)(row) = distance
+          dissimilarity(row)(col) = distance
         }
+      }
+    }
     dissimilarity
   }
 
   def computeDistance(callback: (List[Double], List[Double]) => Double, x: List[Double], y: List[Double]) = callback(x, y)
-  
+
   def computeDistanceTag(callback: (List[(Int, Int)], List[(Int, Int)]) => Double, x: List[(Int, Int)], y: List[(Int, Int)]) = callback(x, y)
 
   //
@@ -48,11 +49,20 @@ class MultiDimensionalScaling {
     }.foldLeft(0.0)((x, y) => x + y)
     Math.sqrt(distance)
   }
-  
+
   def euclideanDistanceTag(first: List[(Int, Int)], second: List[(Int, Int)]) = {
-    val distance = (first ::: second).groupBy(_._2).mapValues(x => x.map(y => y._1)).map{ case(x, y) =>
-      if(y.size == 1) 1
-      else 0
+    //    val distance = (first ::: second).groupBy(_._2).mapValues(x => x.map(y => y._1)).map{ case(x, y) =>
+    //      if(y.size == 1) 1
+    //      else 0
+    //    }.toList.sum
+    val distance = (first ::: second).groupBy(_._2).mapValues(x => x.map { y => y._1 }).map {
+      case (x, y) =>
+        y match {
+          case x :: Nil => x * x
+          case xs =>
+            val (a, b) = (xs(0), xs(1))
+            (a - b) * (a - b)
+        }
     }.toList.sum
     Math.sqrt(distance)
   }
@@ -103,25 +113,29 @@ class MultiDimensionalScaling {
 }
 
 object MultiDimensionalScaling {
-  def getPointAndDiscussions(documents: List[Document]) = {
+  def getPointAndDiscussions(vector: List[(Int, Int)]) = {
     val mds = new MultiDimensionalScaling
-    val dissimilarityMatrix = mds.computeDissimilarityMatrix(List())
-    
-//    val initialDims = 50
-//    val perplexity = 20.0
-//    val tsne = new FastTSne()
+    val dissimilarityMatrix = mds.computeDissimilarityMatrix(vector)
 
-//    println("Computing TSne")
-//    val pointsArray = tsne.tsne(dissimilarityMatrix, 2, initialDims, perplexity, 50)
-//    val pointsList = pointsArray.map { x => x.toList }.toList
-//    val points = adjustPoints(pointsList)
+    //    val initialDims = 50
+    //    val perplexity = 20.0
+    //    val tsne = new FastTSne()
+
+    //    println("Computing TSne")
+    //    val pointsArray = tsne.tsne(dissimilarityMatrix, 2, initialDims, perplexity, 50)
+    //    val pointsList = pointsArray.map { x => x.toList }.toList
+    //    val points = adjustPoints(pointsList)
 
     println("Computing MDS")
+    val r = List.fill(vector.size)(0.0).toArray
+//    val pointsArray = List.fill(2)(r).toArray
+//    
+//    ClassicalScaling.pivotmds(dissimilarityMatrix, pointsArray)
     val pointsArray = MDSJ.classicalScaling(dissimilarityMatrix)
     val pointsList = pointsArray.map { x => x.toList }.toList
     val points = adjustPoints(pointsList)
 
-    points zip documents
+    points zip vector
   }
 
   def adjustPoints(pointsList: List[List[Double]]) = {

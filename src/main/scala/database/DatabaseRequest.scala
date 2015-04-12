@@ -147,7 +147,7 @@ object DatabaseRequest {
    */
    def retrieveTag2Post() = {
      inTransaction {
-       from(post2tag)(pt => select(pt.id, pt.tags)).page(0, 1000000)
+       from(post2tag)(pt => select(pt.id, pt.tags)).page(0, 500000)
      }.toMap.map{ case(id, tags) => (id, tags.split(" ").toList)}
    }
    

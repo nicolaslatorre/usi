@@ -25,7 +25,7 @@ class Control(val model: Model, val view: View) {
       if (e.peer.getButton == java.awt.event.MouseEvent.BUTTON3) {
         val point = new Point(e.point.getX, e.point.getY) // + Point(canvas.offsetX, canvas.offsetY)) * canvas.zoomFactor
         val locations = canvas.model.locations
-        val ls = locations.flatMap { x => isInLocation(point, x, x.ray)
+        val ls = locations.flatMap { x => isInLocation(point, null, 0)
         }
 
         if (ls.size > 0) {
@@ -106,27 +106,27 @@ class Control(val model: Model, val view: View) {
 
       view.repaint()
 
-    case e: MouseEvent =>
-      val point = e.point
-      //      println("(" + point.getX + ", " + point.getY + ")")
-
-      val locations = canvas.model.locations
-      val ls = locations.filter { x =>
-        isInLocation(new Point(point.getX, point.getY), x, x.ray) match {
-          case Some(l) => true
-          case None => false
-        }
-      }
-
-      if (ls.size > 0) {
-        val infos = ls.map { location =>
-          "Id: " + location.id + "<br>Title: " + location.title + "<br>Tags: " + location.tags + "<br>answers: " + location.answerCount + "<br>Creation Date: " + location.date + "<br><br>"
-        }.mkString("")
-        canvas.tooltip = "<html>" + infos + "</html>"
-
-      } else {
-        canvas.tooltip = null
-      }
+//    case e: MouseEvent =>
+//      val point = e.point
+//      //      println("(" + point.getX + ", " + point.getY + ")")
+//
+//      val locations = canvas.model.locations
+//      val ls = locations.filter { x =>
+//        isInLocation(new Point(point.getX, point.getY), x, x.ray) match {
+//          case Some(l) => true
+//          case None => false
+//        }
+//      }
+//
+//      if (ls.size > 0) {
+//        val infos = ls.map { location =>
+//          "Id: " + location.id + "<br>Title: " + location.title + "<br>Tags: " + location.tags + "<br>answers: " + location.answerCount + "<br>Creation Date: " + location.date + "<br><br>"
+//        }.mkString("")
+//        canvas.tooltip = "<html>" + infos + "</html>"
+//
+//      } else {
+//        canvas.tooltip = null
+//      }
 
     case KeyPressed(_, Key.R, _, _) =>
       println("Reset")

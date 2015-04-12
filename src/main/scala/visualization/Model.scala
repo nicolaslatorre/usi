@@ -12,37 +12,30 @@ import database.DatabaseRequest
 import org.squeryl.PrimitiveTypeMode._
 import database.DataManagement
 import database.TagTree
+import java.awt.Color
+import database.TagManager
 
 
 class Model(val url: String, val username: String, val password: String, val offset: Int, val pageLength: Int, val keywords: List[String], val levels: Int) {
-  
-//  val dataset = openDataset(path, size)
   val locations = computeModel
-  val gradient = getGradient(levels)
+  val gradient: Map[Int, Color] = getGradient(levels)
 
   def computeModel() = {
     val mainVector = TagFactory.mainTagVector(url, username, password)
+    println("Vector length: " + mainVector.size)
     val tree = TagTree.createTree(mainVector)
     
-//    val ls = tree.filter{ case(key, value) => key.split(" ").length == 1}.toList.sortBy{case(key, value) => value}
+    val firstLevel = tree.root :: tree.root.children
+    val javaWorld = firstLevel(firstLevel.map { node => node.key.mkString(" ") }.indexOf("java"))
+    val javaLevel = javaWorld :: javaWorld.children
     
-    
-    
-    
-    
-    val pointsAndDiscussions = MultiDimensionalScaling.getPointAndDiscussions(List())
-    
-    val discussions = pointsAndDiscussions.map{ case(p, d) => d}
-    val tagOccurences = getStringTagOccurrences(discussions)
-    
-    val locations = pointsAndDiscussions.map {
-      case (x, y) =>
-        val initial = 3
-        val ray = y.answerCount + initial
+    val locations = javaLevel.map {
+      node =>
+        val initial = 30
+        val ray = initial//y.answerCount + initial
 
-        val tags = y.tags.split(" ").toList.sorted.mkString(" ")
-        val height = tagOccurences.get(tags).get
-        new Location(y.id, y.title, y.tags, y.date, y.answerCount, x, ray, height)
+        val height = 30.0//tagOccurences.get(tags).get
+        new Location("", "", node.key.mkString(" "), "", node.occurrences, new Point(0.0, 0.0), ray, height)
     }
     println("Model Computed")
     locations
