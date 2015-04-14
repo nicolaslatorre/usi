@@ -7,7 +7,7 @@
 		revision="1.0"
 		conf="runtime"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool"
-		date="20150407112853"/>
+		date="20150412211436"/>
 	<dependencies>
 		<module organisation="com.github.tototoshi" name="scala-csv_2.11">
 			<revision name="1.2.0" status="release" pubdate="20150211072604" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://github.com/tototoshi/scala-csv" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="12">

@@ -1,29 +1,38 @@
 package visualization
 
 import java.awt.Color
+import java.awt.Dimension
 import java.awt.Toolkit
+import java.awt.geom.Arc2D
+import java.awt.geom.Ellipse2D
 import java.awt.geom.Rectangle2D
+import java.io.File
+import java.util.ArrayList
+
+import scala.collection.JavaConversions._
+import scala.swing.Action
 import scala.swing.BorderPanel
 import scala.swing.BorderPanel.Position._
+import scala.swing.BoxPanel
+import scala.swing.EditorPane
+import scala.swing.FileChooser
+import scala.swing.FileChooser.Result
+import scala.swing.FlowPanel
 import scala.swing.Frame
 import scala.swing.Graphics2D
-import scala.swing.Panel
-import javax.swing.SwingUtilities
-import javax.swing.WindowConstants.EXIT_ON_CLOSE
-import java.awt.geom.Ellipse2D
+import scala.swing.Label
 import scala.swing.Menu
 import scala.swing.MenuBar
 import scala.swing.MenuItem
-import scala.swing.FileChooser
-import scala.swing.FileChooser.Result
-import scala.swing.Action
-import java.io.File
-import database.DatabaseConnection
-import multidimensionalscaling.Document
+import scala.swing.Panel
+import scala.swing.ScrollPane
 import scala.swing.TextArea
-import scala.swing.FlowPanel
 import scala.swing.TextField
+
 import javax.swing.JOptionPane
+import javax.swing.SwingUtilities
+import javax.swing.WindowConstants.EXIT_ON_CLOSE
+import multidimensionalscaling.Document
 
 object Starter {
   def main(args: Array[String]) {
@@ -57,7 +66,22 @@ class View(val model: Model, val levels: Int, var nrDiscussion: Int = 5000) exte
 
   val panel = new BorderPanel {
     val canvas = new Canvas(model)
-    layout(canvas) = Center
+    val menuEast = new FlowPanel() {
+      preferredSize = new Dimension(1440, 30)
+      val label = new Label("Current tag: ")
+      val text = new Label("Stack Overflow")
+      val labelTag = new Label("\tOccurrences: ")
+      val occurrences = new Label(model.tree.root.occurrences.toString)
+      contents += label
+      contents += text
+      contents += labelTag
+      contents += occurrences
+    }
+    val scrollPane = new ScrollPane() {
+      contents = canvas
+    }
+    layout(scrollPane) = Center
+    layout(menuEast) = North
   }
 
   val chooser = new FileChooser(new File("/Users/nicolaslatorre/Documents/USI/Tesi/Datasets"))
@@ -92,9 +116,13 @@ class Canvas(var model: Model) extends Panel {
   requestFocus()
   preferredSize = Toolkit.getDefaultToolkit.getScreenSize
   println(preferredSize.getWidth + ", " + preferredSize.getHeight)
-  val backgroundColor = new Color(0, 128, 255)
+  val backgroundColor = Color.WHITE //new Color(0, 128, 255)
   opaque = true
   background = backgroundColor
+
+  var locations = model.locations
+
+  var tree = model.locations
 
   def setModel(other: Model) = {
     model = other
@@ -120,50 +148,75 @@ class Canvas(var model: Model) extends Panel {
     super.paintComponent(g)
 
     val locationsRays = drawModelInfo(model)
-    val locations = model.locations
+    //val locations = model.locations
     val gradient = model.gradient
     val centers = model.locations.map { x => x.center }
-    val tree = model.locations
+
     println("Total location: " + locations.size)
 
     val size = Toolkit.getDefaultToolkit.getScreenSize
 
-    val rows = (0 to 5).toList
     val currentNodeChildrens = tree.tail
 
-    val r1 = currentNodeChildrens.filter { location => location.answerCount >= 10000 && location.answerCount < 100000 }
-    val r2 = currentNodeChildrens.filter { location => location.answerCount >= 1000 && location.answerCount < 10000 }
-    val r3 = currentNodeChildrens.filter { location => location.answerCount >= 100 && location.answerCount < 1000 }
-    val r4 = currentNodeChildrens.filter { location => location.answerCount >= 10 && location.answerCount < 100 }
-    //val r5 = currentNodeChildrens.filter { location => location.answerCount >= 2 && location.answerCount < 10 }
-    //val r6 = currentNodeChildrens.filter { location => location.answerCount == 1}
-
-    val screenCenter = new Point(size.getWidth / 2, size.getHeight / 2)
-
-    val width, height = Math.sqrt(tree.head.answerCount)
-
-    g.setColor(Color.BLACK)
-    val point = (screenCenter - Point(width / 2, height / 2))
-    g.fill(new Ellipse2D.Double(point.x, point.y, width, height))
-    g.setColor(Color.YELLOW)
-    g.drawString(tree.head.tags, screenCenter.x.toInt - 3, screenCenter.y.toInt - 3)
-
-    g.setColor(Color.BLACK)
-
-    drawOrbit(screenCenter, g, (width+100).toInt, (height+100).toInt)
-    drawPlanetsOnOrbit(screenCenter, ((width+100)/2).toInt, r2, 30, g)
+//    val r1 = currentNodeChildrens.filter { location => location.answerCount >= 100000 && location.answerCount < 1000000 }
+//    val r2 = currentNodeChildrens.filter { location => location.answerCount >= 10000 && location.answerCount < 100000 }
+//    val r3 = currentNodeChildrens.filter { location => location.answerCount >= 1000 && location.answerCount < 10000 }
+//    val r4 = currentNodeChildrens.filter { location => location.answerCount >= 100 && location.answerCount < 1000 }
+//    val r5 = currentNodeChildrens.filter { location => location.answerCount >= 10 && location.answerCount < 100 }
+//    val r6 = currentNodeChildrens.filter { location => location.answerCount >= 1 && location.answerCount < 10 }
     
-    drawOrbit(screenCenter, g, 400, 400)
-    drawPlanetsOnOrbit(screenCenter, 400/2, r3, 2, g)
+    val rs = getPartitions(currentNodeChildrens)
     
-    drawOrbit(screenCenter, g, 600, 600)
-    drawPlanetsOnOrbit(screenCenter, 600/2, r4, 1.2, g)
-    
-    drawOrbit(screenCenter, g, 800, 800)
-    //drawPlanetsOnOrbit(screenCenter, 800/2, r5, 10, 10, 1.2, g)
-    
-    drawOrbit(screenCenter, g, 1000, 1000)
-    //drawPlanetsOnOrbit(screenCenter, 1000/2, r6, 10, 10, 1.1, g)
+    val rectanglePacker: RectanglePacker[Location] = new RectanglePacker(size.getWidth.toInt * 2, size.getHeight.toInt * 2, 0)
+
+    val rectangles: java.util.List[Rectangle] = new ArrayList();
+
+    println("prima: " + rectangles.size())
+
+    currentNodeChildrens.foreach { node =>
+      val width, height = {
+        getHeight(node, rs)
+      }
+      rectanglePacker.insert(width, height, node)
+    }
+
+    rectanglePacker.inspectRectangles(rectangles)
+    println("dopo: " + rectangles.size())
+
+    currentNodeChildrens.foreach { location =>
+      val rect = rectanglePacker.findRectangle(location)
+
+      if (rect != null) {
+        val index = tree.indexOf(location)
+        tree(index).rect = rect
+        g.setColor(Color.BLACK)
+        g.draw(new Rectangle2D.Double(rect.x, rect.y, rect.width, rect.height))
+        g.setColor(getColor(rect))
+        g.fill(new Rectangle2D.Double(rect.x, rect.y, rect.width, rect.height))
+        g.setColor(Color.BLACK)
+
+        val tagIndex = location.tags.lastIndexOf(" ")
+        val message = {
+          if (tagIndex == -1) location.tags
+          else location.tags.substring(tagIndex, location.tags.length)
+        }
+        if(rect.width >= 75) g.drawString(message.toString, rect.x, rect.y + rect.height / 2)
+      } else {
+        println(location.tags + " is null with occurrences: " + location.answerCount)
+      }
+    }
+    println("Drawed squares")
+
+    //    for(node <- rectangles) {
+    //      g.setColor(Color.BLACK)
+    //      g.draw(new Rectangle2D.Double(node.x, node.y, node.width, node.height))
+    //      g.setColor(Color.GRAY)
+    //      g.fill(new Rectangle2D.Double(node.x, node.y, node.width, node.height))
+    //      g.setColor(Color.YELLOW)
+    //      
+    //      val message = currentNodeChildrens(rectangles.indexOf(node)).tags
+    //      g.drawString(message.toString, node.x + node.width/2, node.y + node.height/2)
+    //    }
 
     //    val levels = (0 until gradient.size).toStream
     //
@@ -268,13 +321,13 @@ class Canvas(var model: Model) extends Panel {
     while ((interval * counter) < height) counter += 1
     counter
   }
-  
+
   def drawOrbit(screenCenter: Point, g: Graphics2D, width: Int, height: Int) = {
     g.setColor(Color.BLACK)
     val orbit = (screenCenter - Point(width / 2, height / 2))
     g.draw(new Ellipse2D.Double(orbit.x, orbit.y, width, width))
   }
-  
+
   def drawPlanetsOnOrbit(screenCenter: Point, ray: Int, planets: List[Location], distance: Double, g: Graphics2D) = {
     val maxWidth = Math.sqrt(planets.head.answerCount) + 100
     planets.foreach { location =>
@@ -284,13 +337,81 @@ class Canvas(var model: Model) extends Panel {
 
       val x = screenCenter.x + (ray * Math.cos(angle))
       val y = screenCenter.y + (ray * Math.sin(angle))
-      
+
       val width, height = Math.sqrt(location.answerCount)
 
-      g.fill(new Ellipse2D.Double(x - (width/2), y - (height/2), width, height))
+      g.fill(new Ellipse2D.Double(x - (width / 2), y - (height / 2), width, height))
       g.setColor(Color.YELLOW)
       g.drawString(location.tags, x.toInt - 3, y.toInt - 3)
     }
   }
+
+  def drawPie(screenCenter: Point, g: Graphics2D, width: Double, height: Double, start: Double, extent: Double, color: Color) = {
+    g.setColor(Color.BLACK)
+
+    g.draw(new Arc2D.Double(screenCenter.x - (width / 2), screenCenter.y - (height / 2), width, height, start, extent, Arc2D.PIE))
+
+    g.setColor(color)
+    g.fill(new Arc2D.Double(screenCenter.x - (width / 2), screenCenter.y - (height / 2), width, height, start, extent, Arc2D.PIE))
+  }
+
+  def drawPieChart(screenCenter: Point, g: Graphics2D, data: List[Location], color: Color, width: Double, height: Double) = {
+    val total = data.map { x => x.answerCount }.sum.toDouble
+
+    println("data size: " + data.size)
+    println("t: " + total)
+    var value = 0.0
+    data.foreach { x =>
+      val startAngle = (value * 360) / total
+      val angle = (x.answerCount * 360) / total
+
+      //      println("angle: " + angle)
+      //      println("startAngle: " + startAngle)
+
+      drawPie(screenCenter, g, width, height, startAngle, angle, color)
+      value += x.answerCount
+    }
+  }
+
+  def getColor(rect: Rectangle) = {
+    rect.width match {
+      case 90 => new Color(255, 0, 0)
+      case 75 => new Color(255, 60, 60)
+      case 60 => new Color(255, 120, 120)
+      case 45 => new Color(255, 180, 180)
+      case 30 => new Color(255, 210, 210)
+      case 15 => new Color(255, 230, 230)
+    }
+  }
+  
+  def getPartitions(nodes: List[Location]) = {
+    val levels = {
+      val max = nodes.head.answerCount
+      if(max >= 100000) 6
+      else if(max >= 10000 && max < 100000) 5
+      else if(max >= 1000 && max < 10000) 4
+      else if(max >= 100 && max < 1000) 3
+      else if(max >= 10 && max < 100) 2
+      else 1
+    }
+    
+    val ls = (0 until levels).toList
+    
+    ls.map { level => 
+      nodes.filter { node => node.answerCount >= Math.pow(10, level) && node.answerCount < Math.pow(10, level+1)}
+    }.reverse
+  }
+  
+  def getHeight(node: Location, fs: List[List[Location]]) = {
+    val level = fs.size
+    val maxHeight = 90
+    
+    val rX = fs.filter { r => r.contains(node) }.head
+    val index = fs.indexOf(rX)
+    
+    maxHeight - (15*index)
+    
+  }
+   
 
 }
