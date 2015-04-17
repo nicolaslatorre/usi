@@ -12,6 +12,9 @@ libraryDependencies += "c3p0" % "c3p0" % "0.9.0.4"
 // JSOUP
 libraryDependencies += "org.jsoup" % "jsoup" % "1.8.1"
 
+// NSCALA-TIME
+libraryDependencies += "com.github.nscala-time" %% "nscala-time" % "1.8.0"
+
 // SCALA-CSV
 resolvers +=
   "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"

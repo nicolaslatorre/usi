@@ -3,6 +3,7 @@ package database
 import scala.collection.immutable.TreeMap
 import java.io.PrintWriter
 import java.io.File
+import java.util.Date
 
 object TagTree {
   def main(args: Array[String]) = {
@@ -13,50 +14,43 @@ object TagTree {
     println("Vector length: " + mainVector.size)
 
     val treeTag = createTree(mainVector)
-    val writer = new PrintWriter(new File("../tree.txt"))
+    val writer = new PrintWriter(new File("../treeAll.txt"))
 
     writer.write(treeTag.toString())
     writer.close()
-    
+
     println("First Level Size: " + treeTag.root.children.size)
     val f = treeTag.root.children
-    println("Java childrens: " + f.find{node => node.key.mkString(" ") == "java"}.get.children.size)
-    val res = f.sortBy { node => node.occurrences }.map{node => (node.key, node.occurrences)}
-    //println(res)
-
+    println("Java childrens: " + f.find { node => node.tag.tags.mkString(" ") == "java" }.get.children.size)
   }
 
-  def createTree(vector: List[(List[String], Int)]) = {
-    val tree = new Tree(new Node(List(), 0, List()))
-    val l1 = vector.map { case (key, value) => (key, value) }.sortBy { case (key, value) => key.size } //.filter{case(key, value) => key.size == 1}
+  def createTree(vector: List[Tag]) = {
+    val tree = new Tree(new Node(new Tag(List(), Map(), 0), List()))
+    val l1 = vector.sortBy { tag => tag.tags.size }
 
-    l1.map { case (key, value) => tree.insert(key, value) }
+    l1.map { tag => tree.insert(tag) }
     println("Habemus Tree")
     tree
-
-    //    val l1 = vector.groupBy { case (key, value) => key.split(" ").toList(0) }
-    //    l1.foreach{case(key, value) => value.par.foreach{ case(k, v) => tree.insert(k.split(" ").toList, v)}}
-    //    println("Habemus Tree")
-    //    tree
   }
 
 }
 
 class Tree(val root: Node) {
 
-  def insert(key: List[String], value: Int): Unit = {
-    val sentinel = root.key.length + 1
-    if (sentinel == key.length) root.children = root.children :+ new Node(key, value, List())
-    else if (sentinel < key.length) {
-      val target = search(root, key)
+  def insert(tag: Tag): Unit = {
+    val sentinel = root.tag.tags.length + 1
+    if (sentinel == tag.tags.length) {
+      root.children = root.children :+ new Node(tag, List())
+    } else if (sentinel < tag.tags.length) {
+      val target = search(root, tag.tags)
 
-      if ((target.key.length == key.length - 1)) {
-        target.children = target.children :+ new Node(key, value, List())
+      if ((target.tag.tags.length == tag.tags.length - 1)) {
+        target.children = target.children :+ new Node(tag, List())
       } else { // this should never happen
-        val levels = target.key.size + 1
-        val node = new Node(key.take(levels), 0, List())
+        val levels = target.tag.tags.size + 1
+        val node = new Node(new Tag(tag.tags.take(levels), Map(), 0), List())
         target.children = node :: target.children
-        insert(key, value)
+        insert(tag)
       }
 
     }
@@ -64,8 +58,8 @@ class Tree(val root: Node) {
   }
 
   def search(current: Node, key: List[String]): Node = {
-    val level = current.key.length + 1
-    val res = current.children.find { child => child.key == key.take(level) }
+    val level = current.tag.tags.length + 1
+    val res = current.children.find { child => child.tag.tags == key.take(level) }
     res match {
       case Some(n) => search(n, key)
       case None => current
@@ -77,9 +71,9 @@ class Tree(val root: Node) {
 
 }
 
-case class Node(val key: List[String], val occurrences: Int, var children: List[Node]) {
+case class Node(val tag: Tag, var children: List[Node]) {
   override def toString() = {
-    key.mkString(" ") + " (" + occurrences + ")\n" + children.map { child => "\t" * key.length + child.toString() }.mkString("")
+    tag.tags.mkString(" ") + " (" + tag.count + ")\n" + children.map { child => "\t" * tag.tags.length + child.toString() }.mkString("")
   }
 }
 

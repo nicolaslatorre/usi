@@ -45,8 +45,8 @@ object DatabaseRequest {
    */
   def retrieveQuestionsIds(n: Int, pageLength: Int) = {
     inTransaction {
-      from(posts)(p => where(p.postTypeId === 1) select (p.id) orderBy (p.creationDate asc)).page(pageLength * n, pageLength)
-    }.toSet
+      from(posts)(p => where(p.postTypeId === 1) select (p.id) orderBy (p.creationDate asc)).page(pageLength * n, pageLength).toSet
+    }
   }
 
   /**
@@ -80,14 +80,14 @@ object DatabaseRequest {
       mapPostsWithComments(questionsAndAnswers.toList)
     }.toMap
   }
-  
+
   /**
    * Retrieve a post by tags
    */
   def retrieveIdsByTag(tags: List[String]) = {
     inTransaction {
-      val ts = tags.map { tag => "&lt;"+tag+"&gt;" }.mkString("")
-      from(posts)(p => where(p.tags like ts) select(p.id)).toList
+      val ts = tags.map { tag => "&lt;" + tag + "&gt;" }.mkString("")
+      from(posts)(p => where(p.tags like ts) select (p.id)).toList
     }
   }
 
@@ -136,28 +136,37 @@ object DatabaseRequest {
    */
   def insertTags(postsTags: Map[Int, List[String]]) = {
     inTransaction {
-      val p2t = postsTags.map{ case(id, tags) => new Post2Tag(id, tags.mkString(" "))}.toList
+      val p2t = postsTags.map { case (id, tags) => new Post2Tag(id, tags.mkString(" ")) }.toList
       println("Ready to insert")
       post2tag.insert(p2t)
     }
   }
-  
+
   /**
    * Retrieve tag2post
    */
-   def retrieveTag2Post() = {
-     inTransaction {
-       from(post2tag)(pt => select(pt.id, pt.tags)).page(0, 2000000)
-     }.toMap.map{ case(id, tags) => (id, tags.split(" ").toList)}
-   }
-   
-   /**
-    * Get occurrences of a tag
-    */
-   def getTagOccurrences(tag: String) = {
-     val occurrence = inTransaction {
-       from(posts)(p => where((p.postTypeId === 1) and (p.tags like "%&lt;"+tag+"&gt;%")) select(p.id)).toList.size
-     }
-     (tag, occurrence)
-   }
+  def retrieveTag2Post() = {
+    inTransaction {
+      from(post2tag)(pt => select(pt.id, pt.tags)) //.page(0, 500000)
+    }.toMap.map { case (id, tags) => (id, tags.split(" ").toList) }
+  }
+
+  def retrieveTag2PostWithDate() = {
+    inTransaction {
+      join(posts, post2tag)((p, pt) =>
+        where((p.postTypeId === 1))
+          select (pt, p.creationDate)
+          on (p.id === pt.id)).page(0, 500000).toList
+    }
+  }
+
+  /**
+   * Get occurrences of a tag
+   */
+  def getTagOccurrences(tag: String) = {
+    val occurrence = inTransaction {
+      from(posts)(p => where((p.postTypeId === 1) and (p.tags like "%&lt;" + tag + "&gt;%")) select (p.id)).toList.size
+    }
+    (tag, occurrence)
+  }
 }

@@ -12,5 +12,11 @@ class Discussion(val id: Int, val title: String, val creationDate: Date, val bod
 
     title + "\n" + body + "\n" + commentsString + "\n" + answersString + "\n"
   }
+  
+  def getFreshCreationDate() = {
+    val answersDate = answers.map{ answer => answer.getFreshCreationDate()}
+    val commentsDate = comments.map{ comment => comment.creationDate}
+    (creationDate :: (answersDate ::: commentsDate)).max
+  }
 
 }

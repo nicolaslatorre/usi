@@ -11,11 +11,16 @@ import scala.sys.process._
 import scala.swing.event.MouseEvent
 import scala.swing.event.KeyReleased
 import scala.swing.event.MouseReleased
+import scala.swing.event.ButtonClicked
+import java.util.Date
+import com.github.nscala_time.time.Imports._
+import scala.swing.event.ValueChanged
 
 class Control(val model: Model, val view: View) {
   val canvas = view.panel.canvas
 
-  view.listenTo(canvas, canvas.mouse.clicks, canvas.mouse.moves, canvas.mouse.wheel, view.panel.canvas.keys)
+  view.listenTo(canvas, canvas.mouse.clicks, canvas.mouse.moves, canvas.mouse.wheel, view.panel.canvas.keys, view.panel.sliderPanel.playButton, view.panel.sliderPanel.resetButton, 
+      view.panel.sliderPanel.slider)
   var x = 0
   var y = 0
 
@@ -23,7 +28,7 @@ class Control(val model: Model, val view: View) {
     case e: MouseClicked =>
       if (e.peer.getButton == java.awt.event.MouseEvent.BUTTON1) {
         val point = new Point(e.point.getX, e.point.getY) // + Point(canvas.offsetX, canvas.offsetY)) * canvas.zoomFactor
-        val locations = canvas.tree
+        val locations = canvas.locations
 
         val ls = locations.filter { x => x.rect != null }.flatMap { x =>
           isInRectangle(point, x, x.rect)
@@ -33,28 +38,29 @@ class Control(val model: Model, val view: View) {
           println("Square in point: " + ls.size)
           ls.foreach { x =>
             println("Jumping into " + x.tags)
-            canvas.tree = canvas.model.computeModel(x.tags)
+            canvas.locations = canvas.model.computeModel(x.tags, canvas.model.startDate)
 
             view.panel.menuEast.text.peer.setText(x.tags)
-            view.panel.menuEast.occurrences.peer.setText(x.answerCount.toString)
+            view.panel.menuEast.occurrences.peer.setText(x.count.toString)
 
             view.repaint()
           }
         }
 
-      } else if (e.peer.getButton == java.awt.event.MouseEvent.BUTTON3) {
-        val point = new Point(e.point.getX, e.point.getY) // + Point(canvas.offsetX, canvas.offsetY)) * canvas.zoomFactor
-        val locations = canvas.model.locations
-        val ls = locations.flatMap { x => isInLocation(point, x, 0)
-        }
-
-        if (ls.size > 0) {
-          ls.foreach { x =>
-            val process: Process = Process("open -a Firefox http://www.stackoverflow.com/questions/" + x.id).run()
-            println(process.exitValue())
-          }
-        }
       }
+    //      else if (e.peer.getButton == java.awt.event.MouseEvent.BUTTON3) {
+    //        val point = new Point(e.point.getX, e.point.getY) // + Point(canvas.offsetX, canvas.offsetY)) * canvas.zoomFactor
+    //        val locations = canvas.model.locations
+    //        val ls = locations.flatMap { x => isInLocation(point, x, 0)
+    //        }
+    //
+    //        if (ls.size > 0) {
+    //          ls.foreach { x =>
+    //            val process: Process = Process("open -a Firefox http://www.stackoverflow.com/questions/" + x.id).run()
+    //            println(process.exitValue())
+    //          }
+    //        }
+    //      }
 
     case MousePressed(_, p, _, _, _) =>
       x = p.x
@@ -130,7 +136,7 @@ class Control(val model: Model, val view: View) {
       val point = e.point
       //      println("(" + point.getX + ", " + point.getY + ")")
 
-      val locations = canvas.tree.filter { x => x.rect != null }
+      val locations = canvas.locations.filter { x => x.rect != null }
       val ls = locations.filter { x =>
         isInRectangle(new Point(point.getX, point.getY), x, x.rect) match {
           case Some(l) => true
@@ -140,7 +146,7 @@ class Control(val model: Model, val view: View) {
 
       if (ls.size > 0) {
         val infos = ls.map { location =>
-          "tag: " + location.tags + "<br>occurrences: " + location.answerCount
+          "tag: " + location.tags + "<br>occurrences: " + location.count
         }.mkString("")
         canvas.tooltip = "<html>" + infos + "</html>"
 
@@ -150,9 +156,9 @@ class Control(val model: Model, val view: View) {
 
     case KeyPressed(_, Key.R, _, _) =>
       println("Reset")
-      canvas.offsetX = 0.0
-      canvas.offsetY = 0.0
-      canvas.zoomFactor = 0.1
+      canvas.locations = canvas.model.computeModel("", new LocalDate(2008, 8, 31))
+      view.panel.menuEast.text.peer.setText("Stack Overflow")
+      view.panel.menuEast.occurrences.peer.setText(canvas.locations.head.count.toString)
       view.repaint()
 
     case KeyPressed(_, Key.M, _, _) =>
@@ -176,29 +182,44 @@ class Control(val model: Model, val view: View) {
       view.repaint()
 
     case KeyReleased(_, Key.BackSpace, _, _) =>
-      val head = canvas.tree.head
+      val head = canvas.locations.head
       val index = head.tags.lastIndexOf(" ")
       if (index == -1) {
-        canvas.tree = canvas.model.computeModel("")
+        canvas.locations = canvas.model.computeModel("", canvas.model.startDate)
         view.panel.menuEast.text.peer.setText("Stack Overflow")
-        view.panel.menuEast.occurrences.peer.setText(canvas.tree.head.answerCount.toString)
+        view.panel.menuEast.occurrences.peer.setText(canvas.locations.head.count.toString)
       } else {
-        canvas.tree = canvas.model.computeModel(head.tags.substring(0, index))
-        view.panel.menuEast.text.peer.setText(canvas.tree.head.tags)
-        view.panel.menuEast.occurrences.peer.setText(canvas.tree.head.answerCount.toString)
+        canvas.locations = canvas.model.computeModel(head.tags.substring(0, index), canvas.model.startDate)
+        view.panel.menuEast.text.peer.setText(canvas.locations.head.tags)
+        view.panel.menuEast.occurrences.peer.setText(canvas.locations.head.count.toString)
       }
 
       view.repaint()
 
+    case ButtonClicked(b) =>
+      if (b == view.panel.sliderPanel.playButton) {
+        val head = canvas.locations.head
+        println("Play")
+        canvas.model.startDate = canvas.model.startDate.plusDays(1)
+        canvas.locations = canvas.model.computeModel(head.tags, canvas.model.startDate)
+        view.repaint()
+      }
+
+      if (b == view.panel.sliderPanel.resetButton) {
+        println("Reset")
+        canvas.model.startDate = new LocalDate(2008, 8, 31)
+        canvas.locations = canvas.model.computeModel("", canvas.model.startDate)
+        view.panel.menuEast.text.peer.setText("Stack Overflow")
+        view.panel.menuEast.occurrences.peer.setText(canvas.locations.head.count.toString)
+        view.repaint()
+      }
+      
+    case ValueChanged(view.panel.sliderPanel.slider) => 
+      println("Changed mf")
+
   }
 
   view.panel.canvas.focusable = true
-
-  def isInLocation(point: Point, location: Location, ray: Int): Option[Location] = {
-    val distance = point.distance((location.center + Point(canvas.offsetX, canvas.offsetY)) * canvas.zoomFactor)
-    if (distance <= (ray * canvas.zoomFactor)) Some(location)
-    else None
-  }
 
   def isInRectangle(point: Point, location: Location, rect: Rectangle): Option[Location] = {
 

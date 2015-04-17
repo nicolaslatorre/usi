@@ -10,5 +10,10 @@ class Answer(val id: Int, val parentId: Int, val creationDate: Date, val body: S
     
     body ++ "\n" ++ commentsString
   }
+  
+  def getFreshCreationDate() = {
+    val commentsDates = comments.map{ comment => comment.creationDate}
+    (creationDate :: commentsDates).max
+  }
 
 }
