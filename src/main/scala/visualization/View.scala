@@ -3,39 +3,32 @@ package visualization
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.Toolkit
-import java.awt.geom.Arc2D
-import java.awt.geom.Ellipse2D
 import java.awt.geom.Rectangle2D
-import java.io.File
-import java.util.ArrayList
-import scala.collection.JavaConversions._
-import scala.swing.Action
+import java.util.Date
+
 import scala.swing.BorderPanel
-import scala.swing.BorderPanel.Position._
+import scala.swing.BorderPanel.Position.Center
+import scala.swing.BorderPanel.Position.North
+import scala.swing.BorderPanel.Position.South
 import scala.swing.BoxPanel
-import scala.swing.EditorPane
-import scala.swing.FileChooser
-import scala.swing.FileChooser.Result
+import scala.swing.Button
 import scala.swing.FlowPanel
 import scala.swing.Frame
 import scala.swing.Graphics2D
 import scala.swing.Label
-import scala.swing.Menu
-import scala.swing.MenuBar
-import scala.swing.MenuItem
+import scala.swing.Orientation
 import scala.swing.Panel
 import scala.swing.ScrollPane
-import scala.swing.TextArea
-import scala.swing.TextField
-import javax.swing.JOptionPane
+import scala.swing.Slider
+
+import com.github.nscala_time.time.Imports.Interval
+import com.github.nscala_time.time.Imports.LocalDate
+import com.github.nscala_time.time.Imports.richAbstractPartial
+import com.github.nscala_time.time.Imports.richDate
+
+import javax.swing.ImageIcon
 import javax.swing.SwingUtilities
 import javax.swing.WindowConstants.EXIT_ON_CLOSE
-import multidimensionalscaling.Document
-import scala.swing.Slider
-import scala.swing.Button
-import com.github.nscala_time.time.Imports._
-import java.util.Date
-import org.joda.time.Instant
 
 object Starter {
   def main(args: Array[String]) {
@@ -80,38 +73,53 @@ class View(val model: Model, val levels: Int) extends Frame {
       contents += occurrences
     }
 
-    val sliderPanel = new FlowPanel() {
-    	preferredSize = new Dimension(1440, 60)
+    val sliderPanel = new BoxPanel(Orientation.Vertical) {
+      preferredSize = new Dimension(1440, 80)
       val slider = new Slider() {
-        preferredSize = new Dimension(1440, 30)
+        preferredSize = new Dimension(1440, 40)
         val start = new LocalDate(2008, 7, 31)
-        val end = new LocalDate(2015, 3, 8)
+        val end = new LocalDate(2015, 3, 9)
         val interval = new Interval(start.toDate().getTime, end.toDate().getTime)
-        
-        
-        min = 0 //2008-7-31
-        max = interval.toDuration().getStandardDays.toInt// 2015-3-8
-        
+
+        min = 0
+        max = interval.toDuration().getStandardDays.toInt
+
         labels = Map(min -> new Label("0"), max -> new Label(max.toString()))
         paintLabels = true
-        
+        paintTicks = true
+
         println("Max: " + max)
         val valueDate = start.plusDays(30)
         value = new Interval(start.toDate.getTime, valueDate.toDate().getTime).toDuration().getStandardDays.toInt
         majorTickSpacing = 1 // one day
       }
 
-      val playButton = new Button {
-        text = "Play"
-      }
-      
-      val resetButton = new Button {
-        text = "Reset"
+      val buttonPanel = new BoxPanel(Orientation.Horizontal) {
+        val startButton = new Button {
+          icon = new ImageIcon(new ImageIcon("../Images/mono-player-start.png").getImage.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH))
+        }
+
+        val playButton = new Button {
+          icon = new ImageIcon(new ImageIcon("../Images/mono-player-play.png").getImage.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH))
+        }
+
+        val stopButton = new Button {
+          icon = new ImageIcon(new ImageIcon("../Images/mono-player-stop.png").getImage.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH))
+        }
+        
+        val endButton = new Button {
+          icon = new ImageIcon(new ImageIcon("../Images/mono-player-end.png").getImage.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH))
+        }
+
+        contents += startButton
+        contents += playButton
+        contents += stopButton
+        contents += endButton
+
       }
 
       contents += slider
-      contents += playButton
-      contents += resetButton
+      contents += buttonPanel
     }
 
     layout(scrollPane) = Center
@@ -180,21 +188,11 @@ class Canvas(val model: Model) extends Panel {
     }
   }
 
-  //  def getColor(rect: Rectangle) = {
-  //    rect.width match {
-  //      case 90 => new Color(255, 0, 0)
-  //      case 75 => new Color(255, 60, 60)
-  //      case 60 => new Color(255, 120, 120)
-  //      case 45 => new Color(255, 180, 180)
-  //      case 30 => new Color(255, 210, 210)
-  //      case 15 => new Color(255, 230, 230)
-  //    }
-  //  }
-
   def getColor(ids: Map[Int, Date], date: LocalDate) = {
-	  val initial = date.minusMonths(1) 
-    val inInterval = ids.filter{case(id, d) => 
-      d.toLocalDate >= initial && d.toLocalDate < date
+    val initial = date.minusMonths(1)
+    val inInterval = ids.filter {
+      case (id, d) =>
+        d.toLocalDate >= initial && d.toLocalDate < date
     }
 
     val colorStart = new Color(0, 0, 255)
@@ -229,16 +227,16 @@ class Canvas(val model: Model) extends Panel {
           }
       }
     }.toMap
-    
-    val maxDate = inInterval.toList.maxBy{ case(id, date) => date}._2.toLocalDate
-    
+
+    val maxDate = inInterval.toList.maxBy { case (id, date) => date }._2.toLocalDate
+
     val interval = new Interval(initial.toDate.getTime, maxDate.toDate.getTime)
     val day = interval.toDuration().getStandardDays.toInt
-    
-    println("Da day: " + day)
-    
+
+//    println("Da day: " + day)
+
     gradient.get(day).get
-    
+
   }
 
   def updateColor(start: Int, end: Int, step: Int) = {

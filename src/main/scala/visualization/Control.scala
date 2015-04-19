@@ -1,33 +1,33 @@
 package visualization
 
-import java.awt.MouseInfo
 import scala.swing.event.MouseClicked
+import scala.swing.event.MouseEvent
+import com.github.nscala_time.time.Imports._
+import scala.swing.event.ButtonClicked
 import scala.swing.event.MousePressed
 import scala.swing.event.MouseDragged
+import scala.swing.event.ValueChanged
+import scala.swing.event.KeyReleased
+import scala.swing.event.MouseReleased
 import scala.swing.event.MouseWheelMoved
 import scala.swing.event.KeyPressed
 import scala.swing.event.Key
-import scala.sys.process._
-import scala.swing.event.MouseEvent
-import scala.swing.event.KeyReleased
-import scala.swing.event.MouseReleased
-import scala.swing.event.ButtonClicked
-import java.util.Date
-import com.github.nscala_time.time.Imports._
-import scala.swing.event.ValueChanged
 
 class Control(val model: Model, val view: View) {
   val canvas = view.panel.canvas
+  val buttons = view.panel.sliderPanel.buttonPanel
+  val slider = view.panel.sliderPanel.slider
+  var isRunning = false
 
-  view.listenTo(canvas, canvas.mouse.clicks, canvas.mouse.moves, canvas.mouse.wheel, view.panel.canvas.keys, view.panel.sliderPanel.playButton, view.panel.sliderPanel.resetButton, 
-      view.panel.sliderPanel.slider)
+  view.listenTo(canvas, canvas.mouse.clicks, canvas.mouse.moves, canvas.mouse.wheel, view.panel.canvas.keys, buttons.playButton,
+    buttons.startButton, buttons.endButton, buttons.stopButton, buttons.stopButton, slider)
   var x = 0
   var y = 0
 
   view.reactions += {
     case e: MouseClicked =>
       if (e.peer.getButton == java.awt.event.MouseEvent.BUTTON1) {
-        val point = new Point(e.point.getX, e.point.getY) // + Point(canvas.offsetX, canvas.offsetY)) * canvas.zoomFactor
+        val point = new Point(e.point.getX, e.point.getY)
         val locations = canvas.locations
 
         val ls = locations.filter { x => x.rect != null }.flatMap { x =>
@@ -197,24 +197,74 @@ class Control(val model: Model, val view: View) {
       view.repaint()
 
     case ButtonClicked(b) =>
-      if (b == view.panel.sliderPanel.playButton) {
-        val head = canvas.locations.head
+      if (b == view.panel.sliderPanel.buttonPanel.playButton) {
+        isRunning = true
         println("Play")
-        canvas.model.startDate = canvas.model.startDate.plusDays(1)
-        canvas.locations = canvas.model.computeModel(head.tags, canvas.model.startDate)
+        val thread = new Thread {
+          override def run {
+            while (isRunning && (canvas.model.startDate < new LocalDate(2015, 3, 9))) {
+              val head = canvas.locations.head
+              canvas.model.startDate = canvas.model.startDate.plusDays(1)
+
+              val interval = new Interval(slider.start.toDate().getTime, canvas.model.startDate.toDate().getTime)
+              slider.value = interval.toDuration().getStandardDays.toInt
+
+              canvas.locations = canvas.model.computeModel(head.tags, canvas.model.startDate)
+              canvas.requestFocus()
+              view.repaint()
+            }
+
+          }
+        }.start
+
+      }
+
+      if (b == view.panel.sliderPanel.buttonPanel.stopButton) {
+        println("Stop")
+        isRunning = false
+        canvas.requestFocus()
         view.repaint()
       }
 
-      if (b == view.panel.sliderPanel.resetButton) {
-        println("Reset")
+      if (b == view.panel.sliderPanel.buttonPanel.startButton) {
+        println("Start")
+        val head = canvas.locations.head
         canvas.model.startDate = new LocalDate(2008, 8, 31)
-        canvas.locations = canvas.model.computeModel("", canvas.model.startDate)
-        view.panel.menuEast.text.peer.setText("Stack Overflow")
-        view.panel.menuEast.occurrences.peer.setText(canvas.locations.head.count.toString)
+
+        canvas.locations = canvas.model.computeModel(head.tags, canvas.model.startDate)
+
+        if (head.tags == "") view.panel.menuEast.text.peer.setText("Stack Overflow") else view.panel.menuEast.text.peer.setText(head.tags)
+        view.panel.menuEast.occurrences.peer.setText(head.count.toString)
+
+        //        canvas.locations = canvas.model.computeModel("", canvas.model.startDate)
+        //        view.panel.menuEast.text.peer.setText("Stack Overflow")
+        //        view.panel.menuEast.occurrences.peer.setText(canvas.locations.head.count.toString)
+
+        val interval = new Interval(slider.start.toDate().getTime, canvas.model.startDate.toDate().getTime)
+        slider.value = interval.toDuration().getStandardDays.toInt
+        canvas.requestFocus()
         view.repaint()
       }
-      
-    case ValueChanged(view.panel.sliderPanel.slider) => 
+
+      if (b == view.panel.sliderPanel.buttonPanel.endButton) {
+        println("End")
+        val head = canvas.locations.head
+        canvas.model.startDate = new LocalDate(2015, 3, 9)
+
+        canvas.locations = canvas.model.computeModel(head.tags, canvas.model.startDate)
+
+        if (head.tags == "") view.panel.menuEast.text.peer.setText("Stack Overflow") else view.panel.menuEast.text.peer.setText(head.tags)
+
+        view.panel.menuEast.occurrences.peer.setText(head.count.toString)
+        //        view.panel.menuEast.text.peer.setText("Stack Overflow")
+        //        view.panel.menuEast.occurrences.peer.setText(canvas.locations.head.count.toString)
+
+        slider.value = slider.max
+        canvas.requestFocus()
+        view.repaint()
+      }
+
+    case ValueChanged(view.panel.sliderPanel.slider) =>
       println("Changed mf")
 
   }
