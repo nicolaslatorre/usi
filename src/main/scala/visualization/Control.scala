@@ -12,15 +12,17 @@ import scala.swing.event.MouseReleased
 import scala.swing.event.MouseWheelMoved
 import scala.swing.event.KeyPressed
 import scala.swing.event.Key
+import java.awt.Graphics2D
 
 class Control(val model: Model, val view: View) {
   val canvas = view.panel.canvas
   val buttons = view.panel.sliderPanel.buttonPanel
   val slider = view.panel.sliderPanel.slider
+  
   var isRunning = false
 
   view.listenTo(canvas, canvas.mouse.clicks, canvas.mouse.moves, canvas.mouse.wheel, view.panel.canvas.keys, buttons.playButton,
-    buttons.startButton, buttons.endButton, buttons.stopButton, buttons.stopButton, slider)
+    buttons.startButton, buttons.endButton, buttons.stopButton, buttons.stopButton, slider, buttons.monthInterval.monthValue.keys)
   var x = 0
   var y = 0
 
@@ -38,7 +40,7 @@ class Control(val model: Model, val view: View) {
           println("Square in point: " + ls.size)
           ls.foreach { x =>
             println("Jumping into " + x.tags)
-            canvas.locations = canvas.model.computeModel(x.tags, canvas.model.startDate)
+            canvas.locations = model.computeModel(x.tags, model.startDate)
 
             view.panel.menuEast.text.peer.setText(x.tags)
             view.panel.menuEast.occurrences.peer.setText(x.count.toString)
@@ -62,76 +64,6 @@ class Control(val model: Model, val view: View) {
     //        }
     //      }
 
-    case MousePressed(_, p, _, _, _) =>
-      x = p.x
-      y = p.y
-      if (canvas.changingViewPort) {
-        canvas.viewPortX = x
-        canvas.viewPortY = y
-      }
-    case MouseDragged(_, p, _) =>
-      if (!canvas.changingViewPort) {
-        val dx = p.x - x
-        val dy = p.y - y
-
-        canvas.offsetX += dx
-        canvas.offsetY += dy
-
-        x += dx
-        y += dy
-
-        view.repaint()
-
-      } else if (canvas.changingViewPort) {
-        val dx = p.x - x
-        val dy = p.y - y
-
-        println("possibleZoom: " + (canvas.preferredSize.getWidth / dx))
-
-        canvas.viewPortWidth = dx
-        canvas.viewPortHeight = ((canvas.preferredSize.getHeight * dx) / canvas.preferredSize.getWidth).toInt
-
-        view.repaint()
-      }
-
-    case MouseReleased(_, p, _, _, _) =>
-      if (canvas.changingViewPort) {
-        val dx = p.x - x
-        val dy = p.y - y
-
-        canvas.offsetX -= (x / canvas.zoomFactor)
-        canvas.offsetY -= (y / canvas.zoomFactor)
-
-        val width = canvas.preferredSize.getWidth
-        val height = canvas.preferredSize.getHeight
-
-        val d = width / height
-        val h = (height * dx) / width
-
-        //val steps = ((width - dx)/100).toInt
-        val steps = width / dx
-        val steps2 = dy * (height / dy)
-
-        println("new zoom: " + steps)
-        canvas.zoomFactor += 0.1 * steps
-
-        resetViewPortSelection()
-
-        view.repaint()
-
-      }
-
-    case MouseWheelMoved(_, p, _, r) =>
-      if (r > 0) {
-        canvas.zoomFactor -= 0.1
-      } else {
-        canvas.zoomFactor += 0.1
-      }
-
-      println("CURRENT ZOOM: " + canvas.zoomFactor)
-
-      view.repaint()
-
     case e: MouseEvent =>
       val point = e.point
       //      println("(" + point.getX + ", " + point.getY + ")")
@@ -154,42 +86,15 @@ class Control(val model: Model, val view: View) {
         canvas.tooltip = null
       }
 
-    case KeyPressed(_, Key.R, _, _) =>
-      println("Reset")
-      canvas.locations = canvas.model.computeModel("", new LocalDate(2008, 8, 31))
-      view.panel.menuEast.text.peer.setText("Stack Overflow")
-      view.panel.menuEast.occurrences.peer.setText(canvas.locations.head.count.toString)
-      view.repaint()
-
-    case KeyPressed(_, Key.M, _, _) =>
-      println("Draw messages")
-      canvas.drawMessages = !canvas.drawMessages
-      view.repaint()
-
-    case KeyPressed(_, Key.A, _, _) =>
-      println("Draw all messages")
-      canvas.drawAllMessages = !canvas.drawAllMessages
-      view.repaint()
-
-    case KeyPressed(_, Key.C, _, _) =>
-      println("Changing viewport")
-      canvas.changingViewPort = true
-      view.repaint()
-
-    case KeyReleased(_, Key.C, _, _) =>
-      println("Stop changing viewport")
-      canvas.changingViewPort = false
-      view.repaint()
-
     case KeyReleased(_, Key.BackSpace, _, _) =>
       val head = canvas.locations.head
       val index = head.tags.lastIndexOf(" ")
       if (index == -1) {
-        canvas.locations = canvas.model.computeModel("", canvas.model.startDate)
+        canvas.locations = model.computeModel("", model.startDate)
         view.panel.menuEast.text.peer.setText("Stack Overflow")
         view.panel.menuEast.occurrences.peer.setText(canvas.locations.head.count.toString)
       } else {
-        canvas.locations = canvas.model.computeModel(head.tags.substring(0, index), canvas.model.startDate)
+        canvas.locations = model.computeModel(head.tags.substring(0, index), model.startDate)
         view.panel.menuEast.text.peer.setText(canvas.locations.head.tags)
         view.panel.menuEast.occurrences.peer.setText(canvas.locations.head.count.toString)
       }
@@ -202,16 +107,21 @@ class Control(val model: Model, val view: View) {
         println("Play")
         val thread = new Thread {
           override def run {
-            while (isRunning && (canvas.model.startDate < new LocalDate(2015, 3, 9))) {
+            while (isRunning && (model.startDate < new LocalDate(2015, 3, 8).minusMonths(1))) {
               val head = canvas.locations.head
-              canvas.model.startDate = canvas.model.startDate.plusDays(1)
+              model.startDate = model.startDate.plusDays(1)
 
-              val interval = new Interval(slider.start.toDate().getTime, canvas.model.startDate.toDate().getTime)
+              val interval = new Interval(slider.start.toDate().getTime, model.startDate.plusMonths(model.interval).toDate().getTime)
               slider.value = interval.toDuration().getStandardDays.toInt
 
-              canvas.locations = canvas.model.computeModel(head.tags, canvas.model.startDate)
+              canvas.locations = model.computeModel(head.tags, model.startDate)
+
+              buttons.dateLabel.peer.setText(model.startDate.toString)
               canvas.requestFocus()
-              view.repaint()
+              //canvas.peer.paintImmediately(0, 0, 1440, 900)
+              canvas.peer.paintImmediately(0, 0, canvas.preferredSize.getWidth.toInt, canvas.preferredSize.getHeight.toInt)
+              
+              Thread.sleep(200)
             }
 
           }
@@ -222,6 +132,14 @@ class Control(val model: Model, val view: View) {
       if (b == view.panel.sliderPanel.buttonPanel.stopButton) {
         println("Stop")
         isRunning = false
+
+        val head = canvas.locations.head
+        //canvas.peer.paintImmediately(0, 0, 1440, 900)
+        if (head.tags == "") view.panel.menuEast.text.peer.setText("Stack Overflow") else view.panel.menuEast.text.peer.setText(head.tags)
+        view.panel.menuEast.occurrences.peer.setText(head.count.toString)
+        val interval = new Interval(slider.start.toDate().getTime, model.startDate.toDate().getTime)
+        slider.value = interval.toDuration().getStandardDays.toInt
+
         canvas.requestFocus()
         view.repaint()
       }
@@ -229,9 +147,9 @@ class Control(val model: Model, val view: View) {
       if (b == view.panel.sliderPanel.buttonPanel.startButton) {
         println("Start")
         val head = canvas.locations.head
-        canvas.model.startDate = new LocalDate(2008, 8, 31)
+        model.startDate = new LocalDate(2008, 7, 31)
 
-        canvas.locations = canvas.model.computeModel(head.tags, canvas.model.startDate)
+        canvas.locations = model.computeModel(head.tags, model.startDate)
 
         if (head.tags == "") view.panel.menuEast.text.peer.setText("Stack Overflow") else view.panel.menuEast.text.peer.setText(head.tags)
         view.panel.menuEast.occurrences.peer.setText(head.count.toString)
@@ -240,7 +158,7 @@ class Control(val model: Model, val view: View) {
         //        view.panel.menuEast.text.peer.setText("Stack Overflow")
         //        view.panel.menuEast.occurrences.peer.setText(canvas.locations.head.count.toString)
 
-        val interval = new Interval(slider.start.toDate().getTime, canvas.model.startDate.toDate().getTime)
+        val interval = new Interval(slider.start.toDate().getTime, model.startDate.toDate().getTime)
         slider.value = interval.toDuration().getStandardDays.toInt
         canvas.requestFocus()
         view.repaint()
@@ -249,9 +167,9 @@ class Control(val model: Model, val view: View) {
       if (b == view.panel.sliderPanel.buttonPanel.endButton) {
         println("End")
         val head = canvas.locations.head
-        canvas.model.startDate = new LocalDate(2015, 3, 9)
+        model.startDate = model.endDate.minusMonths(model.interval)
 
-        canvas.locations = canvas.model.computeModel(head.tags, canvas.model.startDate)
+        canvas.locations = model.computeModel(head.tags, model.startDate)
 
         if (head.tags == "") view.panel.menuEast.text.peer.setText("Stack Overflow") else view.panel.menuEast.text.peer.setText(head.tags)
 
@@ -265,8 +183,23 @@ class Control(val model: Model, val view: View) {
       }
 
     case ValueChanged(view.panel.sliderPanel.slider) =>
-      println("Changed mf")
+      println("Changed slider")
+      model.startDate = slider.start.plusDays(slider.value)
+      buttons.dateLabel.peer.setText(model.startDate.toString)
+      view.repaint()
 
+    case KeyPressed(_, Key.Enter, _, _) =>
+      println("Changed month interval")
+      val head = canvas.locations.head
+      val value = buttons.monthInterval.monthValue.peer.getText
+      model.interval = buttons.monthInterval.monthValue.peer.getText.toInt
+
+      canvas.locations = model.computeModel(head.tags, model.startDate)
+
+      buttons.dateLabel.peer.setText(model.startDate.toString)
+
+      canvas.requestFocus()
+      view.repaint()
   }
 
   view.panel.canvas.focusable = true
@@ -281,12 +214,4 @@ class Control(val model: Model, val view: View) {
     if (coordinates.contains((point.x.toInt, point.y.toInt))) Some(location)
     else None
   }
-
-  def resetViewPortSelection() = {
-    canvas.viewPortX = 0
-    canvas.viewPortY = 0
-    canvas.viewPortWidth = 0
-    canvas.viewPortHeight = 0
-  }
-
 }

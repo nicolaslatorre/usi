@@ -37,24 +37,16 @@ object TagFactory {
 
   def mainTagVector(url: String, username: String, password: String) = {
     val cpds = DatabaseRequest.openConnection(url, username, password)
-    val pages = (0 to 30000).grouped(3000).toList
 
     val vector = inTransaction {
-//      val ids = pages.par.flatMap { page =>
-//        val index = pages.indexOf(page)
-//        DatabaseRequest.retrieveQuestionsIds(index, 3000)
-//      }.toSet.seq
 
-      val post2tag = DatabaseRequest.retrieveTag2PostWithDate().map{ case(pt, date) => (pt.id, (pt.tags.split(" ").toList, date))}.toMap
-      
-      
-      
-      
-      val v1 = post2tag.groupBy { case (x, (y, z)) => y.take(1) }.mapValues { x => x.map{ case(id, (tags, date)) => (id, date)} }.toList
-      val v2 = post2tag.filter { case (x, (y, z)) => y.size > 1 }.groupBy { case (x, (y, z)) => y.take(2) }.mapValues { x => x.map{ case(id, (tags, date)) => (id, date)} }.toList
-      val v3 = post2tag.filter { case (x, (y, z)) => y.size > 2 }.groupBy { case (x, (y, z)) => y.take(3) }.mapValues { x => x.map{ case(id, (tags, date)) => (id, date)} }.toList
-      val v4 = post2tag.filter { case (x, (y, z)) => y.size > 3 }.groupBy { case (x, (y, z)) => y.take(4) }.mapValues { x => x.map{ case(id, (tags, date)) => (id, date)} }.toList
-      val v5 = post2tag.filter { case (x, (y, z)) => y.size > 4 }.groupBy { case (x, (y, z)) => y.take(5) }.mapValues { x => x.map{ case(id, (tags, date)) => (id, date)} }.toList
+      val post2tag = DatabaseRequest.retrieveTag2PostWithDate().map { case (pt, date) => (pt.id, (pt.tags.split(" ").toList, date)) }.toMap
+
+      val v1 = post2tag.groupBy { case (x, (y, z)) => y.take(1) }.mapValues { x => x.map { case (id, (tags, date)) => (id, date) } }.toList
+      val v2 = post2tag.filter { case (x, (y, z)) => y.size > 1 }.groupBy { case (x, (y, z)) => y.take(2) }.mapValues { x => x.map { case (id, (tags, date)) => (id, date) } }.toList
+      val v3 = post2tag.filter { case (x, (y, z)) => y.size > 2 }.groupBy { case (x, (y, z)) => y.take(3) }.mapValues { x => x.map { case (id, (tags, date)) => (id, date) } }.toList
+      val v4 = post2tag.filter { case (x, (y, z)) => y.size > 3 }.groupBy { case (x, (y, z)) => y.take(4) }.mapValues { x => x.map { case (id, (tags, date)) => (id, date) } }.toList
+      val v5 = post2tag.filter { case (x, (y, z)) => y.size > 4 }.groupBy { case (x, (y, z)) => y.take(5) }.mapValues { x => x.map { case (id, (tags, date)) => (id, date) } }.toList
       println("Retrieved post2tag")
       List(v1, v2, v3, v4, v5).flatMap { x => x }
     }.toList

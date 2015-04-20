@@ -20,16 +20,18 @@ import database.Node
 import com.github.nscala_time.time.Imports._
 import java.util.Date
 
-class Model(val url: String, val username: String, val password: String, val levels: Int, var startDate: LocalDate) {
+class Model(val url: String, val username: String, val password: String, var startDate: LocalDate, var interval: Int, val endDate: LocalDate) {
   val mainVector = TagFactory.mainTagVector(url, username, password)
   println("Vector length: " + mainVector.size)
+  
   val tree = TagTree.createTree(mainVector)
   val locations = computeModel("", startDate)
-  val gradient: Map[Int, Color] = getGradient(levels)
 
   val size = Toolkit.getDefaultToolkit.getScreenSize
 
-  def computeModel(tag: String, date: LocalDate): List[Location] = {
+  def computeModel(tag: String, startDate: LocalDate): List[Location] = {
+    val date = startDate.plusMonths(interval)
+    
     val firstLevel = tree.root :: tree.root.children
 
     val level = {
@@ -48,8 +50,13 @@ class Model(val url: String, val username: String, val password: String, val lev
 
     val head = new Location(level.head.tag.tags.mkString(" "), level.head.tag.ids, level.head.tag.count, null) // sorry for the null, should change to Option
 
-    println("Total children: " + childrens.size)
-    val locations = childrens.filter { node => checkDate(node, date).size > 0 }.map { node =>
+    println("(Model) Total childrens: " + childrens.size)
+    rectanglePacker.clear()
+    rectanglePacker.inspectRectangles(rectangles)
+    println("prima: " + rectangles.size())
+    val inTime = childrens.filter { n => checkDate(n, date).size > 0 }
+    
+    val locations = inTime.map{ node =>
       val width, height = {
         getHeight(node, rs)
       }
@@ -57,7 +64,7 @@ class Model(val url: String, val username: String, val password: String, val lev
       new Location(node.tag.tags.mkString(" "), node.tag.ids, node.tag.count, rect)
     }
 
-    println("Childrens in time interval: " + locations.size)
+    println("(Model) Childrens in time interval: " + locations.size)
 
     rectanglePacker.inspectRectangles(rectangles)
     println("dopo: " + rectangles.size())
@@ -113,10 +120,9 @@ class Model(val url: String, val username: String, val password: String, val lev
   }
 
   def checkDate(node: Node, date: LocalDate) = {
-    val initial = date.minusMonths(1)
     node.tag.ids.filter {
       case (id, d) =>
-        d.toLocalDate >= initial && d.toLocalDate < date
+        d.toLocalDate >= startDate && d.toLocalDate < date
     }
   }
 }
