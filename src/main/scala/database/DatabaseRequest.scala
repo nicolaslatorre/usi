@@ -156,7 +156,7 @@ object DatabaseRequest {
       join(posts, post2tag)((p, pt) =>
         where((p.postTypeId === 1))
           select (pt, p.creationDate)
-          on (p.id === pt.id)).page(0, 500000).toList
+          on (p.id === pt.id)).page(0, 100000).toList
     }
   }
 

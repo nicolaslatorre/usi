@@ -5,14 +5,6 @@ import scala.util.Random
 
 object TagFactory {
 
-  def main(args: Array[String]) = {
-    val url = "jdbc:postgresql://localhost:5432/stackoverflow_dump"
-    val username = "sodb"
-    val password = "sodb"
-
-    val tagVector = mainTagVector(url, username, password)
-  }
-
   def populateTags(url: String, username: String, password: String) = {
     val cpds = DatabaseRequest.openConnection(url, username, password)
 
@@ -55,39 +47,6 @@ object TagFactory {
 
     cpds.close()
     println("Main vector created")
-    mainVector.map { case (tags, x) => new Tag(tags, x, x.size) }
+    mainVector.map { case (tags, idsAndDates) => new Tag(tags, idsAndDates, idsAndDates.size) }
   }
-
-  def buildVectorTag(vector: List[(String, Int)], url: String, username: String, password: String) = {
-    val cpds = DatabaseRequest.openConnection(url, username, password)
-
-    val vectors = inTransaction {
-      val post2tag = DatabaseRequest.retrieveTag2Post()
-      post2tag.map { case (id, tags) => (id, tags.map { tag => vector.indexOf(tag) }) }
-    }.toList
-
-    cpds.close()
-    vectors
-  }
-
-  def buildVectorTag(postTags: List[String], tagList: List[String]) = {
-    val vectorsTag = postTags.map { tag =>
-      val index = tagList.indexOf(tag.trim)
-      if (index == -1) {
-        //System.err.println("index: " + index)
-        0
-      }
-      val end = (tagList.size - 1) - index
-      if (index == 0) List(1) ::: List.fill(end - 1)(0)
-      else Stream.continually(0).take(index).toList ::: List(1) ::: List.fill(end)(0)
-    }
-
-    val vectorTag = vectorsTag.foldLeft(List.fill(tagList.size)(0))((x, y) => x zip y map {
-      case (a, b) =>
-        if (a >= b) a
-        else b
-    })
-    vectorTag.zipWithIndex.filter { case (x, y) => x > 0 }
-  }
-
 }

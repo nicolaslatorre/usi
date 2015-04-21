@@ -35,6 +35,8 @@ object Starter {
     val password = "sodb"
 
     val startDate = new LocalDate(2008, 7, 31)
+    
+    println(startDate.plusMonths(3))
     val endDate = new LocalDate(2015, 3, 9)
     val interval = 1
     
@@ -156,6 +158,7 @@ class Canvas(val model: Model) extends Panel {
   background = backgroundColor
 
   var locations = model.locations
+  val gradient = model.gradient
 
   override def paintComponent(g: Graphics2D) = {
     super.paintComponent(g)
@@ -169,7 +172,8 @@ class Canvas(val model: Model) extends Panel {
       if (rect != null) {
         g.setColor(Color.BLACK)
         g.draw(new Rectangle2D.Double(rect.x, rect.y, rect.width, rect.height))
-        g.setColor(getColor(location.ids, model.startDate, model.interval))
+        val key = (location.count/model.maxHeight.toDouble) * 30
+        g.setColor(gradient.get(key.toInt).get)
         g.fill(new Rectangle2D.Double(rect.x, rect.y, rect.width, rect.height))
         g.setColor(Color.BLACK)
 

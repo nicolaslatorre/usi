@@ -109,7 +109,7 @@ class Control(val model: Model, val view: View) {
           override def run {
             while (isRunning && (model.startDate < new LocalDate(2015, 3, 8).minusMonths(1))) {
               val head = canvas.locations.head
-              model.startDate = model.startDate.plusDays(1)
+              model.startDate = model.startDate.plusMonths(1)//.plusDays(1)
 
               val interval = new Interval(slider.start.toDate().getTime, model.startDate.plusMonths(model.interval).toDate().getTime)
               slider.value = interval.toDuration().getStandardDays.toInt
