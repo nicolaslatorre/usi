@@ -23,7 +23,7 @@ class Tag(val tags: List[String], val ids: Map[Int, Date], val count: Int) {
   def getSingleMonthCount(start: LocalDate, monthNumber: Int) = {
     val end = start.plusMonths(1)
 
-    val counts = ids.filter {
+    val counts = ids.par.filter {
       case(id, date) =>
         date.getTime >= start.toDate.getTime && date.getTime < end.toDate().getTime
     }

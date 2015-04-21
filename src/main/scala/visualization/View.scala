@@ -37,7 +37,7 @@ object Starter {
     val startDate = new LocalDate(2008, 7, 31)
     
     println(startDate.plusMonths(3))
-    val endDate = new LocalDate(2015, 3, 9)
+    val endDate = new LocalDate(2015, 3, 28)
     val interval = 1
     
     val model = new Model(url, username, password, startDate, interval, endDate)
@@ -96,6 +96,11 @@ class View(val model: Model) extends Frame {
       }
 
       val buttonPanel = new BoxPanel(Orientation.Horizontal) {
+        val selectionButton = new Button {
+          text = "Select"
+          visible = false
+        } 
+        
         val startButton = new Button {
           icon = new ImageIcon(new ImageIcon("../Images/mono-player-start.png").getImage.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH))
         }
@@ -121,18 +126,19 @@ class View(val model: Model) extends Frame {
             text = "Window interval length in months: "
           }
 
-          val monthValue = new TextField("1", 20)
+          val monthValue = new TextField("1", 10)
 
           contents += monthLabel
           contents += monthValue
         }
 
-        contents += monthInterval
+        contents += selectionButton
         contents += startButton
         contents += playButton
         contents += stopButton
         contents += endButton
         contents += dateLabel
+        contents += monthInterval
 
       }
 
@@ -159,6 +165,7 @@ class Canvas(val model: Model) extends Panel {
 
   var locations = model.locations
   val gradient = model.gradient
+  var rectangles: List[Rectangle2D.Double] = List()
 
   override def paintComponent(g: Graphics2D) = {
     super.paintComponent(g)
@@ -174,8 +181,12 @@ class Canvas(val model: Model) extends Panel {
         g.draw(new Rectangle2D.Double(rect.x, rect.y, rect.width, rect.height))
         val key = (location.count/model.maxHeight.toDouble) * 30
         g.setColor(gradient.get(key.toInt).get)
-        g.fill(new Rectangle2D.Double(rect.x, rect.y, rect.width, rect.height))
-        g.setColor(Color.BLACK)
+        
+        val toPaintRect = new Rectangle2D.Double(rect.x, rect.y, rect.width, rect.height)
+        g.fill(toPaintRect)
+        
+        if(key > 15) g.setColor(Color.WHITE) else g.setColor(Color.BLACK)
+        
 
         val tagIndex = location.tags.lastIndexOf(" ")
         val message = {
@@ -183,6 +194,10 @@ class Canvas(val model: Model) extends Panel {
           else location.tags.substring(tagIndex, location.tags.length)
         }
         if (rect.width >= 75) g.drawString(message.toString, rect.x, rect.y + rect.height / 2)
+        if(location.selected) {
+          g.setColor(Color.RED)
+          g.fillOval(rect.x, rect.y, 8, 8)
+        }
       } else {
         println(location.tags + " is null with occurrences: " + location.count)
       }

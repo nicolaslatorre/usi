@@ -25,31 +25,35 @@ import org.joda.time.Months
 class Model(val url: String, val username: String, val password: String, var startDate: LocalDate, var interval: Int, val endDate: LocalDate) {
   val mainVector = TagFactory.mainTagVector(url, username, password)
   println("Vector length: " + mainVector.size)
-  
+
   val tree = TagTree.createTree(mainVector)
-  
+
   val maxHeight = getMaxCount(mainVector)
-  
+
   println("(Model) max height: " + maxHeight)
-  
+
   val gradient = createGradient(maxHeight)
-  
-  val months = getMonthsMapping(new LocalDate(2008, 7, 31), new LocalDate(2015, 3, 8))
-  
+
+  val months = getMonthsMapping(new LocalDate(2008, 7, 31), new LocalDate(2015, 3, 28))
+
   def getMonthsMapping(start: LocalDate, end: LocalDate) = {
     val months = Months.monthsBetween(start, end)
     val ms = (0 to months.getMonths)
     var tempDate = start
-    ms.map{ month => 
+    val res = ms.map { month =>
       tempDate = tempDate.plusMonths(1)
-//      println("(Model) tempDate: " + tempDate.plusMonths(month))
-      tempDate -> month}.toMap 
+      tempDate -> month
+    }.toMap
+    
+    println("(Model) last tempDate: " + tempDate)
+    
+    res
   }
-  
+
   val locations = computeModel("", startDate)
   val size = Toolkit.getDefaultToolkit.getScreenSize
 
-  def computeModel(tag: String, startDate: LocalDate): List[Location] = {
+  def computeModel(tag: String, startDate: LocalDate, filteredLocations: List[String] = Nil): List[Location] = {
     val date = startDate.plusMonths(1)
     val firstLevel = tree.root :: tree.root.children
     val level = getLevel(tag, firstLevel)
@@ -60,26 +64,36 @@ class Model(val url: String, val username: String, val password: String, var sta
     val rectanglePacker: RectanglePacker[Node] = new RectanglePacker(1440, 900, 0)
     val rectangles: java.util.List[Rectangle] = new ArrayList();
 
-    val head = new Location(level.head.tag.tags.mkString(" "), level.head.tag.ids, level.head.tag.count, null) // sorry for the null, should change to Option
+    val head = new Location(level.head.tag.tags.mkString(" "), level.head.tag.ids, level.head.tag.count, null, false) // sorry for the null, should change to Option
 
     println("(Model) Total childrens: " + childrens.size)
     rectanglePacker.clear()
     rectanglePacker.inspectRectangles(rectangles)
     println("prima: " + rectangles.size())
-    val inTime = childrens.filter { n => checkDate(n, date).size > 0 }
-    
-    val locations = inTime.map{ node =>
+
+    val filteredChildrens = {
+      if (filteredLocations.size > 0) {
+        childrens.filter(child => filteredLocations.contains(child.tag.tags.mkString(" ")))
+      } else childrens
+    }
+
+    val inTime = filteredChildrens.filter { n => checkDate(n, date).size > 0 }
+
+    val locations = inTime.map { node =>
       val width, height = {
         getHeight(node, rs)
       }
       val rect = rectanglePacker.insert(width, height, node)
-      
+
       val index = months.get(date).get
-      
+
       val count = node.tag.counts.get(index).get
-      
-      
-      new Location(node.tag.tags.mkString(" "), node.tag.ids, count, rect)
+
+      if(filteredLocations.size > 0) {
+    	  new Location(node.tag.tags.mkString(" "), node.tag.ids, count, rect, true)        
+      } else {
+        new Location(node.tag.tags.mkString(" "), node.tag.ids, count, rect, false)
+      }
     }
 
     println("(Model) Childrens in time interval: " + locations.size)
@@ -88,7 +102,13 @@ class Model(val url: String, val username: String, val password: String, var sta
     println("dopo: " + rectangles.size())
 
     println("Model Computed")
+
     head :: locations
+  }
+  
+  def inFiltered(filteredLocations: List[Location], child: Node) = {
+    val res = filteredLocations.filter { location => child.tag.tags.mkString(" ") == location.tags }
+    res.size > 0
   }
 
   def getDiscussions(ids: Set[Int]) = {
@@ -104,13 +124,13 @@ class Model(val url: String, val username: String, val password: String, var sta
     cpds.close()
     discussions
   }
-  
+
   def getLevel(tag: String, firstLevel: List[Node]) = {
     if (tag == "") firstLevel
-      else {
-        val node = tree.search(tree.root, tag.split(" ").toList)
-        node :: node.children
-      }
+    else {
+      val node = tree.search(tree.root, tag.split(" ").toList)
+      node :: node.children
+    }
   }
 
   def getGradient(levels: Int) = {
@@ -151,11 +171,11 @@ class Model(val url: String, val username: String, val password: String, var sta
         d.toLocalDate >= startDate && d.toLocalDate < date
     }
   }
-  
+
   def createGradient(maxHeight: Int) = {
     val colorStart = new Color(255, 255, 255)
     val colorEnd = new Color(0, 0, 0)
-    
+
     val levels = 30
 
     val ls = (0 to levels)
@@ -198,9 +218,9 @@ class Model(val url: String, val username: String, val password: String, var sta
     if (start > end) start - step
     else start + step
   }
-  
+
   def getMaxCount(tags: List[Tag]) = {
-    val cs = tags.map{ tag => tag.getMaxCount()}
+    val cs = tags.map { tag => tag.getMaxCount() }
     cs.max
   }
 }
