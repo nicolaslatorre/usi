@@ -4,16 +4,12 @@ import scala.swing.event.MouseClicked
 import scala.swing.event.MouseEvent
 import com.github.nscala_time.time.Imports._
 import scala.swing.event.ButtonClicked
-import scala.swing.event.MousePressed
-import scala.swing.event.MouseDragged
 import scala.swing.event.ValueChanged
 import scala.swing.event.KeyReleased
-import scala.swing.event.MouseReleased
-import scala.swing.event.MouseWheelMoved
 import scala.swing.event.KeyPressed
-import scala.swing.event.Key
-import java.awt.Graphics2D
 import java.awt.Color
+import scala.swing.event.Key
+import scala.sys.process._
 
 class Control(val model: Model, val view: View) {
   val canvas = view.panel.canvas
@@ -37,8 +33,8 @@ class Control(val model: Model, val view: View) {
         val point = new Point(e.point.getX, e.point.getY)
         val locations = canvas.locations
 
-        val ls = locations.filter { x => x.rect != null }.flatMap { x =>
-          isInRectangle(point, x, x.rect)
+        val ls = locations.filter { x => x.rectangle != null }.flatMap { x =>
+          isInRectangle(point, x, x.rectangle)
         }
 
         if (ls.size > 0) {
@@ -47,8 +43,7 @@ class Control(val model: Model, val view: View) {
             println("Jumping into " + x.tags)
             canvas.locations = model.computeModel(x.tags, model.startDate)
 
-            view.panel.menuEast.text.peer.setText(x.tags)
-            view.panel.menuEast.occurrences.peer.setText(x.count.toString)
+            updateMenu(x.tags, x.count.toString)
 
             view.repaint()
           }
@@ -59,8 +54,8 @@ class Control(val model: Model, val view: View) {
         val point = new Point(e.point.getX, e.point.getY)
         val locations = canvas.locations
 
-        val ls = locations.filter { x => x.rect != null }.flatMap { x =>
-          isInRectangle(point, x, x.rect)
+        val ls = locations.filter { x => x.rectangle != null }.flatMap { x =>
+          isInRectangle(point, x, x.rectangle)
         }
 
         if (ls.size > 0) {
@@ -70,7 +65,7 @@ class Control(val model: Model, val view: View) {
             x.selected = !x.selected
 
             val g = canvas.peer.getGraphics
-            val rect = x.rect
+            val rect = x.rectangle
             if (x.selected) {
               g.setColor(Color.RED)
               g.fillOval(rect.x, rect.y, 8, 8)
@@ -91,56 +86,26 @@ class Control(val model: Model, val view: View) {
 
         }
       }
-    //      else if (e.peer.getButton == java.awt.event.MouseEvent.BUTTON3) {
+    //      if (e.peer.getButton == java.awt.event.MouseEvent.BUTTON3) {
     //        val point = new Point(e.point.getX, e.point.getY) // + Point(canvas.offsetX, canvas.offsetY)) * canvas.zoomFactor
     //        val locations = canvas.model.locations
-    //        val ls = locations.flatMap { x => isInLocation(point, x, 0)
+    //        val ls = locations.filter{location => location.rectangle != null}.flatMap { x => isInRectangle(point, x, x.rectangle)
     //        }
     //
     //        if (ls.size > 0) {
-    //          ls.foreach { x =>
-    //            val process: Process = Process("open -a Firefox http://www.stackoverflow.com/questions/" + x.id).run()
+    //          ls.head.ids.foreach { case(id, date) =>
+    //            val process: Process = Process("open -a Firefox http://www.stackoverflow.com/questions/" + id).run()
     //            println(process.exitValue())
     //          }
     //        }
     //      }
 
-    //    case MousePressed(source, e, _, _, _) =>
-    //      inSelection = true
-    //      val point = new Point(e.getX, e.getY)
-    //      val locations = canvas.locations
-    //
-    //      val ls = locations.filter { x => x.rect != null }.flatMap { x =>
-    //        isInRectangle(point, x, x.rect)
-    //      }
-    //
-    //      if (ls.size > 0) {
-    //        println("Square in point: " + ls.size)
-    //        ls.foreach { x =>
-    //          println("Selected " + x.tags)
-    //          x.selected = !x.selected
-    //
-    //          val g = canvas.peer.getGraphics
-    //          val rect = x.rect
-    //          if (x.selected) {
-    //            g.setColor(Color.RED)
-    //            g.fillOval(rect.x, rect.y, 8, 8)
-    //          } else {
-    //            canvas.repaint()
-    //          }
-    //        }
-    //
-    //        buttons.selectionButton.visible = true
-    //
-    //      }
-
     case e: MouseEvent =>
       val point = e.point
-      //      println("(" + point.getX + ", " + point.getY + ")")
 
-      val locations = canvas.locations.filter { x => x.rect != null }
+      val locations = canvas.locations.filter { x => x.rectangle != null }
       val ls = locations.filter { x =>
-        isInRectangle(new Point(point.getX, point.getY), x, x.rect) match {
+        isInRectangle(new Point(point.getX, point.getY), x, x.rectangle) match {
           case Some(l) => true
           case None => false
         }
@@ -161,8 +126,7 @@ class Control(val model: Model, val view: View) {
       val index = head.tags.lastIndexOf(" ")
       if (index == -1) {
         canvas.locations = model.computeModel("", model.startDate)
-        view.panel.menuEast.text.peer.setText("Stack Overflow")
-        view.panel.menuEast.occurrences.peer.setText(canvas.locations.head.count.toString)
+        updateMenu("Stack Overflow", canvas.locations.head.count.toString)
       } else {
 
         //Retrieve the tags
@@ -172,8 +136,7 @@ class Control(val model: Model, val view: View) {
           tags.substring(0, index)
         }
         canvas.locations = model.computeModel(head.tags.substring(0, index), model.startDate, filteredTags)
-        view.panel.menuEast.text.peer.setText(canvas.locations.head.tags)
-        view.panel.menuEast.occurrences.peer.setText(canvas.locations.head.count.toString)
+        updateMenu(canvas.locations.head.tags, canvas.locations.head.count.toString)
       }
 
       view.repaint()
@@ -205,18 +168,20 @@ class Control(val model: Model, val view: View) {
         println("Play")
         val thread = new Thread {
           override def run {
-            while (isRunning && (model.startDate < (model.endDate.minusMonths(1)))) {
+            while (isRunning && (model.startDate < model.endDate)) {
               val head = canvas.locations.head
               model.startDate = model.startDate.plusMonths(1) //.plusDays(1)
 
-              val interval = new Interval(slider.start.toDate().getTime, model.startDate.plusMonths(model.interval).toDate().getTime)
-              slider.value = interval.toDuration().getStandardDays.toInt
+              val valueDate = model.startDate
+              slider.value = model.months.get(valueDate).get
 
               val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
+              println("(Control) tags: " + filteredTags)
 
               canvas.locations = model.computeModel(head.tags, model.startDate, filteredTags)
 
               buttons.dateLabel.peer.setText(model.startDate.toString)
+              updateMenu(head.tags, head.count.toString)
               canvas.requestFocus()
               //canvas.peer.paintImmediately(0, 0, 1440, 900)
               canvas.peer.paintImmediately(0, 0, canvas.preferredSize.getWidth.toInt, canvas.preferredSize.getHeight.toInt)
@@ -235,10 +200,9 @@ class Control(val model: Model, val view: View) {
 
         val head = canvas.locations.head
         //canvas.peer.paintImmediately(0, 0, 1440, 900)
-        if (head.tags == "") view.panel.menuEast.text.peer.setText("Stack Overflow") else view.panel.menuEast.text.peer.setText(head.tags)
-        view.panel.menuEast.occurrences.peer.setText(head.count.toString)
-        val interval = new Interval(slider.start.toDate().getTime, model.startDate.toDate().getTime)
-        slider.value = interval.toDuration().getStandardDays.toInt
+        if (head.tags == "") updateMenu("Stack Overflow", head.count.toString) else updateMenu(head.tags, head.count.toString)
+        val valueDate = model.startDate
+        slider.value = model.months.getOrElse(valueDate, 0)
 
         canvas.requestFocus()
         view.repaint()
@@ -247,7 +211,7 @@ class Control(val model: Model, val view: View) {
       if (b == view.panel.sliderPanel.buttonPanel.startButton) {
         println("Start")
         val head = canvas.locations.head
-        model.startDate = new LocalDate(2008, 7, 31)
+        model.startDate = new LocalDate(2008, 7, 31).withDayOfMonth(1)
 
         val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
 
@@ -255,15 +219,14 @@ class Control(val model: Model, val view: View) {
 
         //        canvas.locations = model.computeModel(head.tags, model.startDate)
 
-        if (head.tags == "") view.panel.menuEast.text.peer.setText("Stack Overflow") else view.panel.menuEast.text.peer.setText(head.tags)
-        view.panel.menuEast.occurrences.peer.setText(head.count.toString)
+        if (head.tags == "") updateMenu("Stack Overflow", head.count.toString) else updateMenu(head.tags, head.count.toString)
 
         //        canvas.locations = canvas.model.computeModel("", canvas.model.startDate)
         //        view.panel.menuEast.text.peer.setText("Stack Overflow")
         //        view.panel.menuEast.occurrences.peer.setText(canvas.locations.head.count.toString)
 
-        val interval = new Interval(slider.start.toDate().getTime, model.startDate.toDate().getTime)
-        slider.value = interval.toDuration().getStandardDays.toInt
+        val valueDate = model.startDate
+        slider.value = model.months.getOrElse(valueDate, 0)
         canvas.requestFocus()
         view.repaint()
       }
@@ -271,7 +234,7 @@ class Control(val model: Model, val view: View) {
       if (b == view.panel.sliderPanel.buttonPanel.endButton) {
         println("End")
         val head = canvas.locations.head
-        model.startDate = model.endDate.minusMonths(1)
+        model.startDate = model.endDate
 
         val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
 
@@ -279,9 +242,7 @@ class Control(val model: Model, val view: View) {
 
         //        canvas.locations = model.computeModel(head.tags, model.startDate)
 
-        if (head.tags == "") view.panel.menuEast.text.peer.setText("Stack Overflow") else view.panel.menuEast.text.peer.setText(head.tags)
-
-        view.panel.menuEast.occurrences.peer.setText(head.count.toString)
+        if (head.tags == "") updateMenu("Stack Overflow", head.count.toString) else updateMenu(head.tags, head.count.toString)
         //        view.panel.menuEast.text.peer.setText("Stack Overflow")
         //        view.panel.menuEast.occurrences.peer.setText(canvas.locations.head.count.toString)
 
@@ -292,12 +253,15 @@ class Control(val model: Model, val view: View) {
 
     case ValueChanged(view.panel.sliderPanel.slider) =>
       println("Changed slider")
-      model.startDate = slider.start.plusDays(slider.value)
+      model.startDate = slider.start.plusMonths(slider.value)
       buttons.dateLabel.peer.setText(model.startDate.toString)
 
       val head = canvas.locations.head
       val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
       canvas.locations = model.computeModel(head.tags, model.startDate, filteredTags)
+      if (head.tags == "") updateMenu("Stack Overflow", head.count.toString) else updateMenu(head.tags, head.count.toString)
+      
+      canvas.requestFocus()
       view.repaint()
 
     case KeyPressed(_, Key.Enter, _, _) =>
@@ -337,6 +301,11 @@ class Control(val model: Model, val view: View) {
 
   def existSelected() = {
     canvas.locations.filter { location => location.selected }.size > 0
+  }
+
+  def updateMenu(text: String, count: String) = {
+    view.panel.menuEast.text.peer.setText(text)
+    view.panel.menuEast.occurrences.peer.setText(count)
   }
 
 }

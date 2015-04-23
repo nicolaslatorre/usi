@@ -25,7 +25,8 @@ object TagTree {
   }
 
   def createTree(vector: List[Tag]) = {
-    val tree = new Tree(new Node(new Tag(List(), Map(), 0), List()))
+    val total = vector.filter{v => v.tags.size == 1}.map { v => v.count }.sum
+    val tree = new Tree(new Node(new Tag(List(), Map(), total), List()))
     val l1 = vector.sortBy { tag => tag.tags.size }
 
     l1.map { tag => tree.insert(tag) }

@@ -27,6 +27,7 @@ import javax.swing.ImageIcon
 import javax.swing.SwingUtilities
 import javax.swing.WindowConstants.EXIT_ON_CLOSE
 import scala.swing.TextField
+import org.joda.time.Months
 
 object Starter {
   def main(args: Array[String]) {
@@ -34,13 +35,16 @@ object Starter {
     val username = "sodb"
     val password = "sodb"
 
-    val startDate = new LocalDate(2008, 7, 31)
-    
-    println(startDate.plusMonths(3))
-    val endDate = new LocalDate(2015, 3, 28)
+    val startDate = new LocalDate(2008, 7, 31).withDayOfMonth(1)
+    val endDate = new LocalDate(2015, 3, 8).withDayOfMonth(1)
     val interval = 1
     
-    val model = new Model(url, username, password, startDate, interval, endDate)
+    
+    
+//    val months = Months.monthsBetween(startDate, endDate)
+//    println("(Starter) months: " + months.getMonths)
+    
+    val model = new Model(url, username, password, startDate, endDate, interval)
 
     SwingUtilities.invokeLater(new Runnable {
       def run {
@@ -80,18 +84,21 @@ class View(val model: Model) extends Frame {
       val slider = new Slider() {
         preferredSize = new Dimension(1440, 40)
 
-        val start = new LocalDate(2008, 7, 31)
-        val end = new LocalDate(2015, 3, 9)
-        val interval = new Interval(start.toDate().getTime, end.toDate().getTime)
+        val start = model.startDate
+        val end = model.endDate
+        val numberOfMonths = Months.monthsBetween(start, end)
+        val months = (0 to numberOfMonths.getMonths).toStream
 
         min = 0
-        max = interval.toDuration().getStandardDays.toInt
-        labels = Map(min -> new Label("0"), max -> new Label(max.toString()))
+        max = numberOfMonths.getMonths
+        
+        val checkpoints = (months.filter { month => month%10 == 0 } :+ max).distinct
+        labels = checkpoints.map { month => month -> new Label(month.toString) }.toMap
         paintLabels = true
         paintTicks = true
 
-        val valueDate = start.plusMonths(1)
-        value = new Interval(start.toDate.getTime, valueDate.toDate().getTime).toDuration().getStandardDays.toInt
+        val valueDate = start.plusMonths(0)
+        value = model.months.getOrElse(valueDate, 0)
         majorTickSpacing = 1 // one day
       }
 
@@ -138,7 +145,7 @@ class View(val model: Model) extends Frame {
         contents += stopButton
         contents += endButton
         contents += dateLabel
-        contents += monthInterval
+//        contents += monthInterval
 
       }
 
@@ -175,14 +182,15 @@ class Canvas(val model: Model) extends Panel {
     val currentNodeChildrens = locations.tail
 
     currentNodeChildrens.foreach { location =>
-      val rect = location.rect
-      if (rect != null) {
+      val rect = location.rectangle
+      if (rect != null && location.count > 0) {
         g.setColor(Color.BLACK)
         g.draw(new Rectangle2D.Double(rect.x, rect.y, rect.width, rect.height))
         val key = (location.count/model.maxHeight.toDouble) * 30
         g.setColor(gradient.get(key.toInt).get)
         
         val toPaintRect = new Rectangle2D.Double(rect.x, rect.y, rect.width, rect.height)
+        
         g.fill(toPaintRect)
         
         if(key > 15) g.setColor(Color.WHITE) else g.setColor(Color.BLACK)

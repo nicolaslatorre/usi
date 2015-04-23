@@ -47,6 +47,8 @@ object TagFactory {
 
     cpds.close()
     println("Main vector created")
-    mainVector.map { case (tags, idsAndDates) => new Tag(tags, idsAndDates, idsAndDates.size) }
+    val tags = mainVector.par.map { case (tags, idsAndDates) => new Tag(tags, idsAndDates, idsAndDates.size) }
+    println("Vector length: " + tags.size)
+    tags.toList
   }
 }
