@@ -58,7 +58,7 @@ class Model(val url: String, val username: String, val password: String, var sta
     val childrenInInterval = filteredChildrens.filter { node => checkDate(node, date, tags).size > 0 }
     val totalCurrent = getCurrentTotal(level.head, childrenInInterval, date)
     val total = childrens.map { node => node.tag.count }.sum
-    
+
     println("(Model) childrenInInterval size: " + childrenInInterval.size)
 
     val head = new Location(level.head.tag.tags.mkString(" "), level.head.tag.ids, totalCurrent, null, false, total) // sorry for the null, should change to Option
@@ -84,46 +84,21 @@ class Model(val url: String, val username: String, val password: String, var sta
   }
 
   def createLocation(childrenInInterval: List[Node], partitions: List[List[Node]], date: LocalDate, tags: List[String], total: Double) = {
-    val rectanglePacker: RectanglePacker[Node] = new RectanglePacker(1400.0, 800, 0)
-    val rectangles: java.util.List[Rectangle] = new ArrayList();
 
-    val sorted = childrenInInterval//.sortBy { node => node.tag.counts.get(date).get }.reverse
+    val sorted = childrenInInterval //.sortBy { node => node.tag.counts.get(date).get }.reverse
     val percentages = sorted.map { node => (node.tag.counts.get(date).get / total.toDouble) }
-//    println("(Model) percentages: " + percentages)
 
-    val (width, height) = (1400.0, 800.0)
-    val direction = false
+    val (width, height) = (1400.0, 850.0)
 
-//    val rects = getHeightAndWidth(percentages, width, height, direction)
-    
-    val buckets =  percentages.foldLeft(List[List[Double]]()){(acc, elem) =>
-      acc match{
-        case head::tail => 
-          if(head.sum <= 0.2) (head :+ elem) :: tail 
-          else List(elem) :: acc
-        case Nil => List(elem) :: acc
-      }
-    }.reverse
-    
-//    val buckets = List(List(0.1, 0.2, 0.25), List(0.1, 0.05, 0.3))
-    
-    val rects = buckets.zipWithIndex.flatMap{ case(bucket, index) => 
-      println("(Model) bucket percentage: " + bucket.sum)
-      val others = buckets.take(index).map{x=>x.sum}.sum
-      println("(Model) width*others = " + width*others)
-      getHeightAndWidth(bucket, width*others, 0.0, width*bucket.sum, height, direction) 
-      
-    }
-    
-    println("(Model) buckets: " + buckets)
-    println("(Model) buckets: " + buckets.size)
+    val buckets = createBuckets(percentages, 0.2)
+    val rects = createRectangles(buckets, 0.0, 0.0, width, height, true)
 
     val locations = sorted.map { node =>
       val index = sorted.indexOf(node)
-      val count = node.tag.counts.get(date).getOrElse(0)
-      
-      val rect = rects(index)//rectanglePacker.insert(rects(index).width, rects(index).height, node)
-      
+      val count = node.tag.counts.get(date).getOrElse(0.0)
+
+      val rect = rects(index)
+
       val ids = getIdsInDate(node, date)
 
       if (tags.size > 0) {
@@ -133,10 +108,46 @@ class Model(val url: String, val username: String, val password: String, var sta
       }
 
     }
-
-    rectanglePacker.inspectRectangles(rectangles)
-    println("(Model) rectangles: " + rectangles.size())
     locations
+  }
+
+  def createRectangles(buckets: List[List[Double]], x: Double, y: Double, width: Double, height: Double, dir: Boolean): List[Rectangle] = {
+    val direction = false
+
+    val rects = buckets.zipWithIndex.flatMap {
+      case (bucket, index) =>
+        if (bucket.size > 4) {
+          val others = buckets.take(index).map { x => x.sum }.sum
+          val total = bucket.sum
+          val newBs = bucket.foldLeft(List[List[Double]]()) { (acc, elem) =>
+            if (acc.size > 0 && acc.last.size < 4) acc.take(acc.size - 1) :+ (acc.last :+ elem)
+            else acc :+ List(elem)
+          }.map { x => x.map{y => y / total} }
+          createRectangles(newBs, width*others, 0.0, width * bucket.sum, height, false)
+        } else {
+
+          if (dir) {
+            val others = buckets.take(index).map { x => x.sum }.sum
+            new Bucket(bucket, width * others, 0.0, width * bucket.sum, height, direction).rectangles
+          } else {
+            val others = buckets.take(index).map { x => x.sum }.sum
+            new Bucket(bucket, x, height * others, width, height * bucket.sum, direction).rectangles
+          }
+        }
+
+    }
+    rects
+  }
+
+  def createBuckets(percentages: List[Double], threshold: Double) = {
+    percentages.foldLeft(List[List[Double]]()) { (acc, elem) =>
+      acc match {
+        case head :: tail =>
+          if (head.sum <= threshold) (head :+ elem) :: tail
+          else List(elem) :: acc
+        case Nil => List(elem) :: acc
+      }
+    }.reverse
   }
 
   def getIdsInDate(node: Node, date: LocalDate) = {
@@ -156,20 +167,17 @@ class Model(val url: String, val username: String, val password: String, var sta
       case x :: xs =>
         val p = x / (x :: xs).sum
         if (direction) {
-          println("true x: " + xCor + " y: " + yCor)
           val w = width * p
           new Rectangle(xCor, yCor, w, height) :: getHeightAndWidth(xs, xCor + w, yCor, width - w, height, !direction)
         } else {
           val h = height * p
-          println("false x: " + xCor + " y: " + yCor)
           new Rectangle(xCor, yCor, width, h) :: getHeightAndWidth(xs, xCor, yCor + h, width, height - h, !direction)
+
         }
       case Nil => List()
     }
   }
 
-
-    
   def getDiscussions(ids: Set[Int]) = {
     val cpds = DatabaseRequest.openConnection(url, username, password)
 

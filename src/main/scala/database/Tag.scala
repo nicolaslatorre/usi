@@ -15,8 +15,8 @@ class Tag(val tags: List[String], val ids: Map[Int, Date], val count: Int) {
     val months = Months.monthsBetween(start, end)
     val ms = (0 to months.getMonths)
 
-    ms.map { month => getSingleMonthCount(start.plusMonths(month)) }.toMap
-//    ms.map { month => start.plusMonths(month) -> getAverageMonthCount(start.plusMonths(month)) }.toMap
+//    ms.map { month => getSingleMonthCount(start.plusMonths(month)) }.toMap
+    ms.map { month => start.plusMonths(month) -> getAverageMonthCount(start.plusMonths(month)) }.toMap
   }
 
   def getAverageMonthCount(start: LocalDate) = {
