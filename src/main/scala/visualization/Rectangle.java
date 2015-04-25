@@ -10,24 +10,24 @@ public class Rectangle {
 	/**
 	 * 
 	 */
-	public final int x;
+	public final double x;
 	
 	/**
 	 * 
 	 */
-	public final int y;
+	public final double y;
 	
 	/**
 	 * 
 	 */
-	public final int width;
+	public final double width;
 	
 	/**
 	 * 
 	 */
-	public final int height;
+	public final double height;
 	
-	public Rectangle(int x, int y, int width, int height) {
+	public Rectangle(double x, double y, double width, double height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;

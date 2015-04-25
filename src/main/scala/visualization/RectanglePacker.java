@@ -78,7 +78,7 @@ public class RectanglePacker<P> {
    * @param border
    *            The border to preserve between packed items
    */
-  public RectanglePacker(int width, int height, int border) {
+  public RectanglePacker(double width, double height, int border) {
     root = new NodeRectangle(new Rectangle(0, 0, width, height));
     this.border = border;
   }
@@ -124,7 +124,7 @@ public class RectanglePacker<P> {
    *            The item to pack
    * @return The packed location, or null if it will not fit.
    */
-  public Rectangle insert(int width, int height, P o) {
+  public Rectangle insert(double width, double height, P o) {
     NodeRectangle n = root.insert(width + 2 * border, height + 2 * border, o);
 
     if (n != null) {
@@ -154,7 +154,7 @@ public class RectanglePacker<P> {
    * 
    * @return the width of this packer
    */
-  public int getWidth() {
+  public double getWidth() {
     return root.rect.width;
   }
 
@@ -163,7 +163,7 @@ public class RectanglePacker<P> {
    * 
    * @return The height of this packer
    */
-  public int getHeight() {
+  public double getHeight() {
     return root.rect.height;
   }
 
@@ -198,7 +198,7 @@ public class RectanglePacker<P> {
       }
     }
 
-    private NodeRectangle insert(int width, int height, P o) {
+    private NodeRectangle insert(double width, double height, P o) {
       if (!isLeaf()) {
         NodeRectangle r = left.insert(width, height, o);
 
@@ -276,9 +276,9 @@ public class RectanglePacker<P> {
       }
     }
 
-    private void split(int width, int height) {
-      int dw = rect.width - width;
-      int dh = rect.height - height;
+    private void split(double width, double height) {
+      double dw = rect.width - width;
+      double dh = rect.height - height;
 
       assert dw >= 0;
       assert dh >= 0;
@@ -300,7 +300,7 @@ public class RectanglePacker<P> {
       right = new NodeRectangle(r);
     }
 
-    private Fit fits(int width, int height) {
+    private Fit fits(double width, double height) {
       if (width <= rect.width && height <= rect.height) {
         if (width == rect.width && height == rect.height) {
           return Fit.PERFECT;

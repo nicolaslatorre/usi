@@ -201,10 +201,10 @@ class Canvas(val model: Model) extends Panel {
           if (tagIndex == -1) location.tags
           else location.tags.substring(tagIndex, location.tags.length)
         }
-        if (rect.width >= 75) g.drawString(message.toString, rect.x, rect.y + rect.height / 2)
+        if (rect.width >= 75) g.drawString(message.toString, rect.x.toInt, rect.y.toInt + rect.height.toInt / 2)
         if(location.selected) {
           g.setColor(Color.RED)
-          g.fillOval(rect.x, rect.y, 8, 8)
+          g.fillOval(rect.x.toInt, rect.y.toInt, 8, 8)
         }
       } else {
         println(location.tags + " is null with occurrences: " + location.count)

@@ -68,7 +68,7 @@ class Control(val model: Model, val view: View) {
             val rect = x.rectangle
             if (x.selected) {
               g.setColor(Color.RED)
-              g.fillOval(rect.x, rect.y, 8, 8)
+              g.fillOval(rect.x.toInt, rect.y.toInt, 8, 8)
             } else {
               canvas.repaint()
             }
@@ -113,7 +113,7 @@ class Control(val model: Model, val view: View) {
 
       if (ls.size > 0) {
         val infos = ls.map { location =>
-          "tag: " + location.tags + "<br>occurrences: " + location.count
+          "tag: " + location.tags + "<br>occurrences: " + location.count + "<br>total occurrences: " + location.totalCount + "<br>ids: " + location.ids.map{ case(id, d) => "<br> " + id.toString()}
         }.mkString("")
         canvas.tooltip = "<html>" + infos + "</html>"
 
@@ -282,8 +282,8 @@ class Control(val model: Model, val view: View) {
 
   def isInRectangle(point: Point, location: Location, rect: Rectangle): Option[Location] = {
 
-    val xs = (rect.x to (rect.x + rect.width)).toStream
-    val ys = (rect.y to (rect.y + rect.height)).toStream
+    val xs = (rect.x.toInt to (rect.x + rect.width).toInt).toStream
+    val ys = (rect.y.toInt to (rect.y + rect.height).toInt).toStream
 
     val coordinates = xs.flatMap { x => Stream.continually(x) zip ys }.toSet
 

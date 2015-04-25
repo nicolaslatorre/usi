@@ -29,7 +29,7 @@ class Model(val url: String, val username: String, val password: String, var sta
   val tree = TagTree.createTree(mainVector)
 
   val maxHeight = getMaxCount(mainVector)
-  val gradient = createGradient(maxHeight)
+  val gradient = createGradient(maxHeight.toInt)
 
   println("(Model) max height: " + maxHeight)
 
@@ -56,10 +56,13 @@ class Model(val url: String, val username: String, val password: String, var sta
     val filteredChildrens = filterChildrens(childrens, tags)
 
     val childrenInInterval = filteredChildrens.filter { node => checkDate(node, date, tags).size > 0 }
-    val total = getCurrentTotal(level.head, childrenInInterval, date)
+    val totalCurrent = getCurrentTotal(level.head, childrenInInterval, date)
+    val total = childrens.map { node => node.tag.count }.sum
     
-    val head = new Location(level.head.tag.tags.mkString(" "), level.head.tag.ids, total, null, false) // sorry for the null, should change to Option
-    val locations = createLocation(childrenInInterval, partitions, startDate, tags, total)
+    println("(Model) childrenInInterval size: " + childrenInInterval.size)
+
+    val head = new Location(level.head.tag.tags.mkString(" "), level.head.tag.ids, totalCurrent, null, false, total) // sorry for the null, should change to Option
+    val locations = createLocation(childrenInInterval, partitions, startDate, tags, totalCurrent)
 
     println("(Model) Childrens in time interval: " + locations.size)
     println("Model Computed")
@@ -80,28 +83,55 @@ class Model(val url: String, val username: String, val password: String, var sta
     } else childrens
   }
 
-  def createLocation(childrenInInterval: List[Node], partitions: List[List[Node]], date: LocalDate, tags: List[String], total: Int) = {
-    val rectanglePacker: RectanglePacker[Node] = new RectanglePacker(1440, 900, 0)
+  def createLocation(childrenInInterval: List[Node], partitions: List[List[Node]], date: LocalDate, tags: List[String], total: Double) = {
+    val rectanglePacker: RectanglePacker[Node] = new RectanglePacker(1400.0, 800, 0)
     val rectangles: java.util.List[Rectangle] = new ArrayList();
 
-    val locations = childrenInInterval.map { node =>
-      val area = ((node.tag.counts.get(date).get / total.toDouble) * 100)
-      println("(Model) count: " + node.tag.counts.get(date).get + " area: " + area)
-//      val width = {
-//        getHeight(node, partitions)
-//      }
+    val sorted = childrenInInterval//.sortBy { node => node.tag.counts.get(date).get }.reverse
+    val percentages = sorted.map { node => (node.tag.counts.get(date).get / total.toDouble) }
+//    println("(Model) percentages: " + percentages)
 
-      val width = (1440 / 100) * area
-      val height = (900 / 100) * area
-      println("(Model) height: " + height)
-      val rect = rectanglePacker.insert(width.toInt, height.toInt, node)
+    val (width, height) = (1400.0, 800.0)
+    val direction = false
+
+//    val rects = getHeightAndWidth(percentages, width, height, direction)
+    
+    val buckets =  percentages.foldLeft(List[List[Double]]()){(acc, elem) =>
+      acc match{
+        case head::tail => 
+          if(head.sum <= 0.2) (head :+ elem) :: tail 
+          else List(elem) :: acc
+        case Nil => List(elem) :: acc
+      }
+    }.reverse
+    
+//    val buckets = List(List(0.1, 0.2, 0.25), List(0.1, 0.05, 0.3))
+    
+    val rects = buckets.zipWithIndex.flatMap{ case(bucket, index) => 
+      println("(Model) bucket percentage: " + bucket.sum)
+      val others = buckets.take(index).map{x=>x.sum}.sum
+      println("(Model) width*others = " + width*others)
+      getHeightAndWidth(bucket, width*others, 0.0, width*bucket.sum, height, direction) 
+      
+    }
+    
+    println("(Model) buckets: " + buckets)
+    println("(Model) buckets: " + buckets.size)
+
+    val locations = sorted.map { node =>
+      val index = sorted.indexOf(node)
       val count = node.tag.counts.get(date).getOrElse(0)
+      
+      val rect = rects(index)//rectanglePacker.insert(rects(index).width, rects(index).height, node)
+      
+      val ids = getIdsInDate(node, date)
 
       if (tags.size > 0) {
-        new Location(node.tag.tags.mkString(" "), node.tag.ids, count, rect, true)
+        new Location(node.tag.tags.mkString(" "), ids, count, rect, true, node.tag.count)
       } else {
-        new Location(node.tag.tags.mkString(" "), node.tag.ids, count, rect, false)
+        new Location(node.tag.tags.mkString(" "), ids, count, rect, false, node.tag.count)
       }
+
     }
 
     rectanglePacker.inspectRectangles(rectangles)
@@ -109,6 +139,37 @@ class Model(val url: String, val username: String, val password: String, var sta
     locations
   }
 
+  def getIdsInDate(node: Node, date: LocalDate) = {
+    node.tag.ids.filter {
+      case (id, idDate) =>
+        idDate.toLocalDate >= startDate && idDate.toLocalDate < date
+    }
+  }
+
+  /**
+   * Compute height and weight for the current index
+   * @param percentage
+   * @param index
+   */
+  def getHeightAndWidth(percentages: List[Double], xCor: Double, yCor: Double, width: Double, height: Double, direction: Boolean): List[Rectangle] = {
+    percentages match {
+      case x :: xs =>
+        val p = x / (x :: xs).sum
+        if (direction) {
+          println("true x: " + xCor + " y: " + yCor)
+          val w = width * p
+          new Rectangle(xCor, yCor, w, height) :: getHeightAndWidth(xs, xCor + w, yCor, width - w, height, !direction)
+        } else {
+          val h = height * p
+          println("false x: " + xCor + " y: " + yCor)
+          new Rectangle(xCor, yCor, width, h) :: getHeightAndWidth(xs, xCor, yCor + h, width, height - h, !direction)
+        }
+      case Nil => List()
+    }
+  }
+
+
+    
   def getDiscussions(ids: Set[Int]) = {
     val cpds = DatabaseRequest.openConnection(url, username, password)
 
