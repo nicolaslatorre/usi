@@ -67,6 +67,15 @@ class Tree(val root: Node) {
 
     }
   }
+  
+  def getLevel(tag: String) = {
+    val firstLevel = root :: root.children
+    if (tag == "") firstLevel
+    else {
+      val node = search(root, tag.split(" ").toList)
+      node :: node.children
+    }
+  }
 
   override def toString() = root.toString()
 

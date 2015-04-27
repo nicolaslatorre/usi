@@ -9,6 +9,7 @@ import scala.swing.BorderPanel
 import scala.swing.BorderPanel.Position.Center
 import scala.swing.BorderPanel.Position.North
 import scala.swing.BorderPanel.Position.South
+import scala.swing.BorderPanel.Position.East
 import scala.swing.BoxPanel
 import scala.swing.Button
 import scala.swing.FlowPanel
@@ -28,6 +29,7 @@ import javax.swing.SwingUtilities
 import javax.swing.WindowConstants.EXIT_ON_CLOSE
 import scala.swing.TextField
 import org.joda.time.Months
+import scala.swing.ListView
 
 object Starter {
   def main(args: Array[String]) {
@@ -73,10 +75,23 @@ class View(val model: Model) extends Frame {
       val text = new Label("Stack Overflow")
       val labelTag = new Label("\tOccurrences: ")
       val occurrences = new Label(model.tree.root.tag.count.toString)
+      val showList = new Button("Show List")
       contents += label
       contents += text
       contents += labelTag
       contents += occurrences
+      contents += showList
+    }
+    
+    val selectionMenu = new BoxPanel(Orientation.Horizontal) {
+      preferredSize = new Dimension(200, 800)
+      val list = new ListView(model.locations.map { location => location.tags }.sorted)
+      val scrollPane = new ScrollPane() {
+        contents = list
+      }
+      contents += scrollPane
+      
+      visible = false
     }
 
     val sliderPanel = new BoxPanel(Orientation.Vertical) {
@@ -156,6 +171,7 @@ class View(val model: Model) extends Frame {
     layout(scrollPane) = Center
     layout(menuEast) = North
     layout(sliderPanel) = South
+    layout(selectionMenu) = East
   }
   contents = panel
   pack
@@ -172,7 +188,7 @@ class Canvas(val model: Model) extends Panel {
 
   var locations = model.locations
   val gradient = model.gradient
-  var rectangles: List[Rectangle2D.Double] = List()
+  
 
   override def paintComponent(g: Graphics2D) = {
     super.paintComponent(g)
@@ -212,60 +228,25 @@ class Canvas(val model: Model) extends Panel {
     }
     println("(View) Drew squares")
   }
-
-  def getColor(ids: Map[Int, Date], date: LocalDate, monthInterval: Int) = {
-    val end = date.plusMonths(monthInterval)
-    val inInterval = ids.filter {
-      case (id, d) =>
-//        d.toLocalDate >= initial && d.toLocalDate < date
-        d.toLocalDate >= date && d.toLocalDate < end
-    }
-
-    val colorStart = new Color(0, 0, 255)
-    val colorEnd = new Color(255, 0, 0)
-    val levels = new Interval(date.toDate.getTime, end.toDate().getTime).toDuration().getStandardDays.toInt
-    
-    println("(View) levels: " + levels)
-
-    val ls = (0 to levels)
-
-    var red1 = colorStart.getRed
-    var blue1 = colorStart.getBlue
-
-    val red2 = colorEnd.getRed
-    val blue2 = colorEnd.getBlue
-
-    val stepRed = Math.abs(red1 - red2) / levels
-    val stepBlue = Math.abs(blue1 - blue2) / levels
-
-    val gradient = ls.map { x =>
-      x match {
-        case 0 => (0, colorStart)
-        case x =>
-          if (x == levels) (levels, colorEnd)
-          else {
-
-            val newRed = updateColor(red1, red2, stepRed)
-            val newBlue = updateColor(blue1, blue2, stepBlue)
-
-            red1 = newRed
-            blue1 = newBlue
-
-            (x, new Color(newRed, 0, newBlue))
-          }
-      }
-    }.toMap
-
-    val dates = inInterval.toList
-
-    val maxDate = dates.maxBy { case (id, date) => date }._2.toLocalDate
-    val interval = new Interval(date.toDate.getTime, maxDate.toDate.getTime)
-    val day = interval.toDuration().getStandardDays.toInt
-    gradient.get(day).getOrElse(new Color(0, 255, 0))
-  }
-
-  def updateColor(start: Int, end: Int, step: Int) = {
-    if (start > end) start - step
-    else start + step
-  }
+  
+//  def createShapeComponents() = {
+//    println("(Model) stanno costruendo...")
+//    val childrens = locations.tail
+//
+//    childrens.flatMap { location =>
+//      val rectangle = location.rectangle
+//      if (rectangle != null) {
+//        val key = (location.count/model.maxHeight.toDouble) * 30
+//        val color = gradient.get(key.toInt).getOrElse(Color.WHITE)
+//        val shape = new Rectangle2D.Double(rectangle.x, rectangle.y, rectangle.width, rectangle.height)
+//        
+//        
+//        Some(new ShapeComponent(shape, color, location, key.toInt))
+//      } else {
+//        println(location.tags + " is null with occurrences: " + location.count)
+//        None
+//      }
+//    }
+//  }
+  
 }

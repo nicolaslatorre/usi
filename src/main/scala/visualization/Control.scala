@@ -10,16 +10,19 @@ import scala.swing.event.KeyPressed
 import java.awt.Color
 import scala.swing.event.Key
 import scala.sys.process._
+import scala.swing.event.SelectionChanged
 
 class Control(val model: Model, val view: View) {
   val canvas = view.panel.canvas
   val buttons = view.panel.sliderPanel.buttonPanel
   val slider = view.panel.sliderPanel.slider
+  val selectionMenu = view.panel.selectionMenu
+  val showButton = view.panel.menuEast.showList
 
   var isRunning = false
   var inSelection = false
 
-  view.listenTo(canvas, canvas.mouse.clicks, canvas.mouse.moves, canvas.mouse.wheel, view.panel.canvas.keys, buttons.playButton,
+  view.listenTo(canvas, canvas.mouse.clicks, canvas.mouse.moves, canvas.mouse.wheel, view.panel.canvas.keys, showButton, selectionMenu.list.selection, buttons.playButton,
     buttons.startButton, buttons.endButton, buttons.stopButton, buttons.stopButton, buttons.selectionButton, slider, buttons.monthInterval.monthValue.keys)
   var x = 0
   var y = 0
@@ -42,6 +45,7 @@ class Control(val model: Model, val view: View) {
           ls.foreach { x =>
             println("Jumping into " + x.tags)
             canvas.locations = model.computeModel(x.tags, model.startDate)
+            selectionMenu.list.listData = canvas.locations.map { location => location.tags }.sorted
 
             updateMenu(x.tags, x.count.toString)
 
@@ -83,7 +87,6 @@ class Control(val model: Model, val view: View) {
             inSelection = true
             buttons.selectionButton.visible = true
           }
-
         }
       }
     //      if (e.peer.getButton == java.awt.event.MouseEvent.BUTTON3) {
@@ -113,7 +116,7 @@ class Control(val model: Model, val view: View) {
 
       if (ls.size > 0) {
         val infos = ls.map { location =>
-          "tag: " + location.tags + "<br>occurrences: " + location.count + "<br>total occurrences: " + location.totalCount + "<br>ids: " + location.ids.map{ case(id, d) => "<br> " + id.toString()}
+          "tag: " + location.tags + "<br>occurrences: " + location.count + "<br>total occurrences: " + location.totalCount + "<br>ids: " + location.ids.map { case (id, d) => "<br> " + id.toString() }
         }.mkString("")
         canvas.tooltip = "<html>" + infos + "</html>"
 
@@ -126,6 +129,7 @@ class Control(val model: Model, val view: View) {
       val index = head.tags.lastIndexOf(" ")
       if (index == -1) {
         canvas.locations = model.computeModel("", model.startDate)
+        selectionMenu.list.listData = canvas.locations.map { location => location.tags }.sorted
         updateMenu("Stack Overflow", canvas.locations.head.count.toString)
       } else {
 
@@ -136,6 +140,7 @@ class Control(val model: Model, val view: View) {
           tags.substring(0, index)
         }
         canvas.locations = model.computeModel(head.tags.substring(0, index), model.startDate, filteredTags)
+        selectionMenu.list.listData = canvas.locations.map { location => location.tags }.sorted
         updateMenu(canvas.locations.head.tags, canvas.locations.head.count.toString)
       }
 
@@ -147,6 +152,7 @@ class Control(val model: Model, val view: View) {
         location
       }
 
+      
       updateModel()
       buttons.selectionButton.visible = false
       view.repaint()
@@ -179,6 +185,7 @@ class Control(val model: Model, val view: View) {
               println("(Control) tags: " + filteredTags)
 
               canvas.locations = model.computeModel(head.tags, model.startDate, filteredTags)
+              selectionMenu.list.listData = canvas.locations.map { location => location.tags }.sorted
 
               buttons.dateLabel.peer.setText(model.startDate.toString)
               updateMenu(head.tags, head.count.toString)
@@ -216,6 +223,7 @@ class Control(val model: Model, val view: View) {
         val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
 
         canvas.locations = model.computeModel(head.tags, model.startDate, filteredTags)
+        selectionMenu.list.listData = canvas.locations.map { location => location.tags }.sorted
 
         //        canvas.locations = model.computeModel(head.tags, model.startDate)
 
@@ -239,6 +247,7 @@ class Control(val model: Model, val view: View) {
         val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
 
         canvas.locations = model.computeModel(head.tags, model.startDate, filteredTags)
+        selectionMenu.list.listData = canvas.locations.map { location => location.tags }.sorted
 
         //        canvas.locations = model.computeModel(head.tags, model.startDate)
 
@@ -251,6 +260,14 @@ class Control(val model: Model, val view: View) {
         view.repaint()
       }
 
+      if (b == showButton) {
+        println("Showing list")
+        selectionMenu.visible = !selectionMenu.visible
+
+        canvas.requestFocus()
+        view.repaint()
+      }
+
     case ValueChanged(view.panel.sliderPanel.slider) =>
       println("Changed slider")
       model.startDate = slider.start.plusMonths(slider.value)
@@ -259,8 +276,9 @@ class Control(val model: Model, val view: View) {
       val head = canvas.locations.head
       val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
       canvas.locations = model.computeModel(head.tags, model.startDate, filteredTags)
+      selectionMenu.list.listData = canvas.locations.map { location => location.tags }.sorted
       if (head.tags == "") updateMenu("Stack Overflow", head.count.toString) else updateMenu(head.tags, head.count.toString)
-      
+
       canvas.requestFocus()
       view.repaint()
 
@@ -276,6 +294,39 @@ class Control(val model: Model, val view: View) {
 
       canvas.requestFocus()
       view.repaint()
+
+    case SelectionChanged(selectionMenu.list) if(selectionMenu.list.selection.adjusting) =>
+      
+      val item = selectionMenu.list.selection.items(0)
+      println("Selected from list: " + item)
+
+      val locations = canvas.locations.map { location => location.tags -> location }.toMap
+      val location = locations.get(item).get
+
+      println("Selected " + location.tags)
+      location.selected = !location.selected
+
+      val g = canvas.peer.getGraphics
+      val rect = location.rectangle
+      if (location.selected) {
+        g.setColor(Color.RED)
+        g.fillOval(rect.x.toInt, rect.y.toInt, 8, 8)
+      } else {
+        canvas.requestFocus()
+        canvas.repaint()
+      }
+
+      if (!existSelected()) {
+        inSelection = false
+        buttons.selectionButton.visible = false
+        updateModel()
+        canvas.requestFocus()
+        canvas.repaint()
+      } else {
+        canvas.requestFocus()
+        inSelection = true
+        buttons.selectionButton.visible = true
+      }
   }
 
   view.panel.canvas.focusable = true
@@ -295,6 +346,7 @@ class Control(val model: Model, val view: View) {
     val head = canvas.locations.head
     val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
     canvas.locations = model.computeModel(head.tags, model.startDate, filteredTags)
+    selectionMenu.list.listData = canvas.locations.map { location => location.tags }.sorted
     if (head.tags == "") view.panel.menuEast.text.peer.setText("Stack Overflow") else view.panel.menuEast.text.peer.setText(head.tags)
     view.panel.menuEast.occurrences.peer.setText(head.count.toString)
   }
