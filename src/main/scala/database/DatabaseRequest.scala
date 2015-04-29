@@ -1,16 +1,19 @@
 package database
 
+import org.joda.time.LocalDate
+import com.github.nscala_time.time.Imports._
+import org.jsoup.Jsoup
 import org.squeryl.PrimitiveTypeMode._
+import org.squeryl.Session
 import org.squeryl.SessionFactory
 import org.squeryl.adapters.PostgreSqlAdapter
-import org.squeryl.Session
-import squeryl.StackExchangeSchema._
+
 import com.mchange.v2.c3p0._
-import squeryl.Post
+
 import squeryl.Comment
+import squeryl.Post
 import squeryl.Post2Tag
-import scala.collection.immutable.TreeSet
-import org.jsoup.Jsoup
+import squeryl.StackExchangeSchema._
 
 object DatabaseRequest {
 
@@ -151,12 +154,24 @@ object DatabaseRequest {
     }.toMap.map { case (id, tags) => (id, tags.split(" ").toList) }
   }
 
-  def retrieveTag2PostWithDate() = {
+  def retrieveTag2PostWithDate(n: Int, pageLength: Int) = {
     inTransaction {
       join(posts, post2tag)((p, pt) =>
         where((p.postTypeId === 1))
-          select (pt, p.creationDate)
-          on (p.id === pt.id)).page(0, 1000000).toList
+          select (pt, p.creationDate) orderBy(p.creationDate)
+          on (p.id === pt.id)).page(n, pageLength).toList
+    }
+  }
+  
+  /**
+   * Retrieve all elements from tag2post corresponding to the given tag
+   */
+  def retrieveTag2PostWithTag(n: Int, pageLength: Int, tags: String) = {
+    inTransaction {
+      join(posts, post2tag)((p, pt) =>
+        where((p.postTypeId === 1) and (p.tags like "&lt;"+tags+"&gt;%"))
+          select (pt, p.creationDate) orderBy(p.creationDate)
+          on (p.id === pt.id)).page(n, pageLength).toList
     }
   }
 

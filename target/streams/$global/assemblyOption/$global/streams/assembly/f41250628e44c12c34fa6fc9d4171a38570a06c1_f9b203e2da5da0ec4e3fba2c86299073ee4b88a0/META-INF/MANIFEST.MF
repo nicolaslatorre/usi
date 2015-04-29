@@ -1,0 +1,98 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.2
+Created-By: 1.6.0_21-b07 (Sun Microsystems Inc.)
+Company: JIDE Software, Inc.
+Main-Class: com.jidesoft.utils.Lm
+Build-Date: 20130803
+Build-Time: 0013
+Jide-Version: 3.5.7
+Export-Package: com.jidesoft.comparator, com.jidesoft.converter, com.j
+ idesoft.dialog, com.jidesoft.grouper, com.jidesoft.hints, com.jidesof
+ t.icons, com.jidesoft.list, com.jidesoft.popup, com.jidesoft.spinner,
+  com.jidesoft.swing, com.jidesoft.swing.event, com.jidesoft.tree, com
+ .jidesoft.utils, com.jidesoft.validation, com.jidesoft.plaf, com.jide
+ soft.plaf.aqua, com.jidesoft.plaf.basic, com.jidesoft.plaf.eclipse, c
+ om.jidesoft.plaf.metal, com.jidesoft.plaf.office2003, com.jidesoft.pl
+ af.vsnet, com.jidesoft.plaf.windows, com.jidesoft.plaf.xerto
+
+Name: com/jidesoft/swing/JideButton.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/JideToggleButton.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/JideSplitButton.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/JideToggleSplitButton.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/JideLabel.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/JideComboBox.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/JideTabbedPane.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/JideSplitPane.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/JideMenu.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/AutoCompletionComboBox.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/AutoResizingTextArea.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/CheckBoxList.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/CheckBoxTree.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/JideScrollPane.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/MarqueePane.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/LabeledTextField.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/RangeSlider.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/StyledLabel.class
+Java-Bean: True
+
+Name: com/jidesoft/spinner/DateSpinner.class
+Java-Bean: True
+
+Name: com/jidesoft/spinner/PointSpinner.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/OverlayableCheckBox.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/OverlayableComboBox.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/OverlayablePasswordField.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/OverlayableTextField.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/OverlayableRadioButton.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/OverlayableTextArea.class
+Java-Bean: True
+
+Name: com/jidesoft/swing/TristateCheckBox.class
+Java-Bean: True
+

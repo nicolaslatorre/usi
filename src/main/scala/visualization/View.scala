@@ -83,12 +83,15 @@ class View(val model: Model) extends Frame {
       contents += showList
     }
     
-    val selectionMenu = new BoxPanel(Orientation.Horizontal) {
+    val selectionMenu = new BoxPanel(Orientation.Vertical) {
       preferredSize = new Dimension(200, 800)
+    	val number = new Label("Number of tags: " + model.tree.root.children.size.toString)
+      contents += number
       val list = new ListView(model.locations.map { location => location.tags }.sorted)
       val scrollPane = new ScrollPane() {
         contents = list
       }
+      contents += number
       contents += scrollPane
       
       visible = false
@@ -96,23 +99,22 @@ class View(val model: Model) extends Frame {
 
     val sliderPanel = new BoxPanel(Orientation.Vertical) {
       preferredSize = new Dimension(1440, 80)
+      
       val slider = new Slider() {
         preferredSize = new Dimension(1440, 40)
-
-        val start = model.startDate
-        val end = model.endDate
-        val numberOfMonths = Months.monthsBetween(start, end)
-        val months = (0 to numberOfMonths.getMonths).toStream
+        val life = new Life(model.startDate, model.endDate)
+        
+        val steps = life.getSteps(life.months)
 
         min = 0
-        max = numberOfMonths.getMonths
+        max = steps.size - 1
         
-        val checkpoints = (months.filter { month => month%10 == 0 } :+ max).distinct
-        labels = checkpoints.map { month => month -> new Label(month.toString) }.toMap
+        val checkpoints = (steps.filter { month => month%10 == 0 } :+ max).distinct
+        labels = checkpoints.map { step => step -> new Label(step.toString) }.toMap
         paintLabels = true
         paintTicks = true
 
-        val valueDate = start.plusMonths(0)
+        val valueDate = life.start
         value = model.months.getOrElse(valueDate, 0)
         majorTickSpacing = 1 // one day
       }

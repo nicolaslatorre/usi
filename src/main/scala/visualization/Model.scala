@@ -29,8 +29,8 @@ class Model(val url: String, val username: String, val password: String, var sta
   val endColor = new Color(0, 0, 0)
   val levels = 30
 
-  val mainVector = TagFactory.mainTagVector(url, username, password)
-  val tree = TagTree.createTree(mainVector)
+  val mainVector = TagFactory.mainTagVector(url, username, password, interval)
+  val tree = TagTree.createTree(mainVector, interval)
 
   val maxHeight = getMaxCount(mainVector)
   val gradient = new Gradient(startColor, endColor, levels).createGradient(maxHeight.toInt)
@@ -42,8 +42,8 @@ class Model(val url: String, val username: String, val password: String, var sta
 
   def getMonthsMapping(start: LocalDate, end: LocalDate) = {
     val numberOfMonths = Months.monthsBetween(start, end)
-    val ms = (0 to numberOfMonths.getMonths).toStream
-    val date2number = ms.map { month =>
+    val ms = (0 to numberOfMonths.getMonths).filter{month => month%interval == 0}.toStream
+    val date2number = ms.zipWithIndex.map { case(month, index) =>
       val date = start.plusMonths(month)
       date -> month
     }.toMap
@@ -51,7 +51,7 @@ class Model(val url: String, val username: String, val password: String, var sta
   }
 
   def computeModel(tag: String, startDate: LocalDate, tags: List[String] = Nil): List[Location] = {
-    val date = startDate.plusMonths(1)
+    val date = startDate.plusMonths(interval)
     val level = tree.getLevel(tag)
     val childrens = level.tail
     val partitions = getPartitions(childrens)
@@ -90,7 +90,7 @@ class Model(val url: String, val username: String, val password: String, var sta
   def createLocation(childrenInInterval: List[Node], partitions: List[List[Node]], date: LocalDate, tags: List[String], total: Double) = {
 
     val sorted = childrenInInterval //.sortBy { node => node.tag.counts.get(date).get }.reverse
-    val percentages = sorted.map { node => (node.tag.counts.get(date).get / total.toDouble) }
+    val percentages = sorted.map { node => (node.tag.getCount(date) / total.toDouble) }
 
     val (width, height) = (1400.0, 700.0)
 
@@ -105,7 +105,7 @@ class Model(val url: String, val username: String, val password: String, var sta
 
       val rect = rects(index)
 
-      val ids = tag.getIdsInDate(startDate , date)
+      val ids = tag.getIdsInDate(date , date.plusMonths(1))
 
       if (tags.size > 0) {
         new Location(tag.getTagsAsString(), ids, count, rect, true, tag.count)
@@ -209,7 +209,7 @@ class Model(val url: String, val username: String, val password: String, var sta
 
   def checkDate(node: Node, endDate: LocalDate, tags: List[String]) = {
     if (tags.size > 0) node.tag.ids
-    else node.tag.getIdsInInterval(startDate, endDate)
+    else node.tag.getIdsInDate(startDate, endDate)
   }
   
   def getMaxCount(tags: List[Tag]) = {
