@@ -44,7 +44,7 @@ class Control(val model: Model, val view: View) {
           println("Square in point: " + ls.size)
           ls.foreach { x =>
             println("Jumping into " + x.tags)
-            canvas.locations = model.computeModel(x.tags, model.startDate)
+            canvas.locations = model.computeModel(x.tags, model.currentDate)
             updateSelectionMenu()
             updateMenu(x.tags, x.count.toString)
 
@@ -132,7 +132,7 @@ class Control(val model: Model, val view: View) {
       val head = canvas.locations.head
       val index = head.tags.lastIndexOf(" ")
       if (index == -1) {
-        canvas.locations = model.computeModel("", model.startDate)
+        canvas.locations = model.computeModel("", model.currentDate)
         updateSelectionMenu()
         updateMenu("Stack Overflow", canvas.locations.head.count.toString)
       } else {
@@ -143,7 +143,7 @@ class Control(val model: Model, val view: View) {
           val index = tags.lastIndexOf(" ")
           tags.substring(0, index)
         }
-        canvas.locations = model.computeModel(head.tags.substring(0, index), model.startDate, filteredTags)
+        canvas.locations = model.computeModel(head.tags.substring(0, index), model.currentDate, filteredTags)
         updateSelectionMenu()
         updateMenu(canvas.locations.head.tags, canvas.locations.head.count.toString)
       }
@@ -177,20 +177,20 @@ class Control(val model: Model, val view: View) {
         println("Play")
         val thread = new Thread {
           override def run {
-            while (isRunning && (model.startDate < model.endDate)) {
+            val life = model.life
+            while (isRunning && (model.currentDate < life.end)) {
+              slider.value += 1
+              
               val head = canvas.locations.head
-              model.startDate = model.startDate.plusMonths(model.interval) //.plusDays(1)
-
-              val valueDate = model.startDate
-              slider.value = model.months.get(valueDate).get
+              model.currentDate = incrementDate()
 
               val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
               println("(Control) tags: " + filteredTags)
 
-              canvas.locations = model.computeModel(head.tags, model.startDate, filteredTags)
+              canvas.locations = model.computeModel(head.tags, model.currentDate, filteredTags)
               updateSelectionMenu()
 
-              buttons.dateLabel.peer.setText(model.startDate.toString)
+              buttons.dateLabel.peer.setText(model.currentDate.toString)
               updateMenu(head.tags, head.count.toString)
               canvas.requestFocus()
               //canvas.peer.paintImmediately(0, 0, 1440, 900)
@@ -209,10 +209,9 @@ class Control(val model: Model, val view: View) {
         isRunning = false
 
         val head = canvas.locations.head
-        //canvas.peer.paintImmediately(0, 0, 1440, 900)
         if (head.tags == "") updateMenu("Stack Overflow", head.count.toString) else updateMenu(head.tags, head.count.toString)
-        val valueDate = model.startDate
-        slider.value = model.months.getOrElse(valueDate, 0)
+//        val valueDate = model.startDate
+//        slider.value = model.months.getOrElse(valueDate, 0)
 
         canvas.requestFocus()
         view.repaint()
@@ -220,24 +219,18 @@ class Control(val model: Model, val view: View) {
 
       if (b == view.panel.sliderPanel.buttonPanel.startButton) {
         println("Start")
+        val life = model.life
         val head = canvas.locations.head
-        model.startDate = new LocalDate(2008, 7, 31).withDayOfMonth(1)
+        model.currentDate = life.start
 
         val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
 
-        canvas.locations = model.computeModel(head.tags, model.startDate, filteredTags)
+        canvas.locations = model.computeModel(head.tags, model.currentDate, filteredTags)
         updateSelectionMenu()
-
-        //        canvas.locations = model.computeModel(head.tags, model.startDate)
 
         if (head.tags == "") updateMenu("Stack Overflow", head.count.toString) else updateMenu(head.tags, head.count.toString)
 
-        //        canvas.locations = canvas.model.computeModel("", canvas.model.startDate)
-        //        view.panel.menuEast.text.peer.setText("Stack Overflow")
-        //        view.panel.menuEast.occurrences.peer.setText(canvas.locations.head.count.toString)
-
-        val valueDate = model.startDate
-        slider.value = model.months.getOrElse(valueDate, 0)
+        slider.value = slider.min
         canvas.requestFocus()
         view.repaint()
       }
@@ -245,18 +238,15 @@ class Control(val model: Model, val view: View) {
       if (b == view.panel.sliderPanel.buttonPanel.endButton) {
         println("End")
         val head = canvas.locations.head
-        model.startDate = model.endDate
+        val life = model.life
+        model.currentDate = life.end
 
         val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
 
-        canvas.locations = model.computeModel(head.tags, model.startDate, filteredTags)
+        canvas.locations = model.computeModel(head.tags, model.currentDate, filteredTags)
         updateSelectionMenu()
 
-        //        canvas.locations = model.computeModel(head.tags, model.startDate)
-
         if (head.tags == "") updateMenu("Stack Overflow", head.count.toString) else updateMenu(head.tags, head.count.toString)
-        //        view.panel.menuEast.text.peer.setText("Stack Overflow")
-        //        view.panel.menuEast.occurrences.peer.setText(canvas.locations.head.count.toString)
 
         slider.value = slider.max
         canvas.requestFocus()
@@ -274,28 +264,15 @@ class Control(val model: Model, val view: View) {
     case ValueChanged(view.panel.sliderPanel.slider) =>
       println("Changed slider")
       val life = slider.life
-      model.startDate = life.increment(life.incrementByMonth, slider.value * model.interval)
+      model.currentDate = incrementDate()
       
-      buttons.dateLabel.peer.setText(model.startDate.toString)
+      buttons.dateLabel.peer.setText(model.currentDate.toString)
 
       val head = canvas.locations.head
       val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
-      canvas.locations = model.computeModel(head.tags, model.startDate, filteredTags)
+      canvas.locations = model.computeModel(head.tags, model.currentDate, filteredTags)
       updateSelectionMenu()
       if (head.tags == "") updateMenu("Stack Overflow", head.count.toString) else updateMenu(head.tags, head.count.toString)
-
-      canvas.requestFocus()
-      view.repaint()
-
-    case KeyPressed(_, Key.Enter, _, _) =>
-      println("Changed month interval")
-      val head = canvas.locations.head
-      val value = buttons.monthInterval.monthValue.peer.getText
-      model.interval = buttons.monthInterval.monthValue.peer.getText.toInt
-
-      canvas.locations = model.computeModel(head.tags, model.startDate)
-
-      buttons.dateLabel.peer.setText(model.startDate.toString)
 
       canvas.requestFocus()
       view.repaint()
@@ -350,7 +327,7 @@ class Control(val model: Model, val view: View) {
   def updateModel() = {
     val head = canvas.locations.head
     val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
-    canvas.locations = model.computeModel(head.tags, model.startDate, filteredTags)
+    canvas.locations = model.computeModel(head.tags, model.currentDate, filteredTags)
     updateSelectionMenu()
     if (head.tags == "") view.panel.menuEast.text.peer.setText("Stack Overflow") else view.panel.menuEast.text.peer.setText(head.tags)
     view.panel.menuEast.occurrences.peer.setText(head.count.toString)
@@ -372,5 +349,10 @@ class Control(val model: Model, val view: View) {
   
   def updateSlider() = {
     
+  }
+  
+  def incrementDate() = {
+    val life = model.life
+    life.increment(slider.value * life.interval)
   }
 }

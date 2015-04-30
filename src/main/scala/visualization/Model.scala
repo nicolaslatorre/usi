@@ -22,36 +22,27 @@ import java.util.Date
 import database.Tag
 import org.joda.time.Months
 
-class Model(val url: String, val username: String, val password: String, var startDate: LocalDate, val endDate: LocalDate, var interval: Int) {
-  val months = getMonthsMapping(startDate, endDate)
+class Model(val url: String, val username: String, val password: String, val life: Life) {
+  val date2step = life.getStepsMapping()
+  var currentDate = life.start
   
   val startColor = new Color(255, 255, 255)
   val endColor = new Color(0, 0, 0)
   val levels = 30
 
-  val mainVector = TagFactory.mainTagVector(url, username, password, interval)
-  val tree = TagTree.createTree(mainVector, interval)
+  val mainVector = TagFactory.mainTagVector(url, username, password, life, date2step)
+  val tree = TagTree.createTree(mainVector, life.interval)
 
   val maxHeight = getMaxCount(mainVector)
   val gradient = new Gradient(startColor, endColor, levels).createGradient(maxHeight.toInt)
 
   println("(Model) max height: " + maxHeight)
 
-  val locations = computeModel("", startDate)
+  val locations = computeModel("", life.start)
   val size = Toolkit.getDefaultToolkit.getScreenSize
 
-  def getMonthsMapping(start: LocalDate, end: LocalDate) = {
-    val numberOfMonths = Months.monthsBetween(start, end)
-    val ms = (0 to numberOfMonths.getMonths).filter{month => month%interval == 0}.toStream
-    val date2number = ms.zipWithIndex.map { case(month, index) =>
-      val date = start.plusMonths(month)
-      date -> month
-    }.toMap
-    date2number
-  }
-
   def computeModel(tag: String, startDate: LocalDate, tags: List[String] = Nil): List[Location] = {
-    val date = startDate.plusMonths(interval)
+    val date = life.incrementDate(startDate)
     val level = tree.getLevel(tag)
     val childrens = level.tail
     val partitions = getPartitions(childrens)
@@ -76,7 +67,7 @@ class Model(val url: String, val username: String, val password: String, var sta
 
   def getCurrentTotal(head: Node, childrens: List[Node]) = {
     val counts = childrens.map {
-      node => node.tag.getCount(startDate)
+      node => node.tag.getCount(currentDate)
     }
     counts.sum
   }
@@ -209,7 +200,7 @@ class Model(val url: String, val username: String, val password: String, var sta
 
   def checkDate(node: Node, endDate: LocalDate, tags: List[String]) = {
     if (tags.size > 0) node.tag.ids
-    else node.tag.getIdsInDate(startDate, endDate)
+    else node.tag.getIdsInDate(currentDate, endDate)
   }
   
   def getMaxCount(tags: List[Tag]) = {

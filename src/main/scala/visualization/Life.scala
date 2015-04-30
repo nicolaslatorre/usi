@@ -5,53 +5,36 @@ import org.joda.time.Months
 import org.joda.time.Weeks
 import org.joda.time.Days
 
+class Life(val start: LocalDate, val end: LocalDate, val interval: Int) {
 
+  def increment(value: Int) = {
+    start.plusDays(value)
+  }
+  
+  def incrementDate(date: LocalDate) = {
+    date.plusDays(interval)
+  }
 
-class Life(val start: LocalDate, val end: LocalDate) {
-  type IncrementStrategy = Int => LocalDate
-  type StepStrategy = Stream[Int]
-  
-  def increment(strategy: IncrementStrategy, value: Int) = {
-    strategy(value)
-  }
-  
-  def incrementByMonth: IncrementStrategy = {
-    start.plusMonths(_)
-  }
-  
-  def incrementByWeek: IncrementStrategy = {
-    start.plusWeeks(_)
-  }
-  
-  def incrementByDay: IncrementStrategy = {
-    start.plusDays(_)
-  }
-  
-  
-  
-  
-
-  def getSteps(strategy: StepStrategy) = {
-    strategy
-  }
-  
-  def months: StepStrategy = {
-    val ms = Months.monthsBetween(start, end)
-    val nrSteps = ms.getMonths
-    (0 to nrSteps).toStream
-  }
-  
-  def weeks: StepStrategy = {
-    val ws = Weeks.weeksBetween(start, end)
-    val nrSteps = ws.getWeeks
-    (0 to nrSteps).toStream
-  }
-  
-  def days: StepStrategy = {
+  def days = {
     val ds = Days.daysBetween(start, end)
     val nrSteps = ds.getDays
     (0 to nrSteps).toStream
   }
-  
+
+  /**
+   * Mapping
+   */
+  def getStepsMapping() = {
+    val steps = days
+    val monthSteps = steps.grouped(interval).toList
+
+    monthSteps.zipWithIndex.map { case(steps, index) =>
+      steps.map {
+        step =>
+          val date = increment(step)
+          date -> index
+      }.toMap
+    }.foldLeft(Map[LocalDate, Int]())((m1, m2) => m1 ++ m2)
+  }
 
 }

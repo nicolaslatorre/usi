@@ -37,16 +37,12 @@ object Starter {
     val username = "sodb"
     val password = "sodb"
 
-    val startDate = new LocalDate(2008, 7, 31).withDayOfMonth(1)
-    val endDate = new LocalDate(2015, 3, 8).withDayOfMonth(1)
+    val startDate = new LocalDate(2008, 7, 31)
+    val endDate = new LocalDate(2015, 3, 8)
     val interval = 1
+    val life = new Life(startDate, endDate, interval)
     
-    
-    
-//    val months = Months.monthsBetween(startDate, endDate)
-//    println("(Starter) months: " + months.getMonths)
-    
-    val model = new Model(url, username, password, startDate, endDate, interval)
+    val model = new Model(url, username, password, life)
 
     SwingUtilities.invokeLater(new Runnable {
       def run {
@@ -102,21 +98,21 @@ class View(val model: Model) extends Frame {
       
       val slider = new Slider() {
         preferredSize = new Dimension(1440, 40)
-        val life = new Life(model.startDate, model.endDate)
+        val life = model.life
         
-        val steps = life.getSteps(life.months)
+        val steps = life.days.grouped(life.interval).zipWithIndex.map{case(step, index) => index }.toList // horrible
 
         min = 0
         max = steps.size - 1
         
-        val checkpoints = (steps.filter { month => month%10 == 0 } :+ max).distinct
+        val checkpoints = (steps.filter { step => step%100 == 0 } :+ max).distinct
         labels = checkpoints.map { step => step -> new Label(step.toString) }.toMap
         paintLabels = true
         paintTicks = true
 
-        val valueDate = life.start
-        value = model.months.getOrElse(valueDate, 0)
-        majorTickSpacing = 1 // one day
+        //val valueDate = life.start
+        value = min//model.date2step.getOrElse(valueDate, 0)
+        majorTickSpacing = 1 // one step
       }
 
       val buttonPanel = new BoxPanel(Orientation.Horizontal) {
@@ -142,7 +138,8 @@ class View(val model: Model) extends Frame {
         }
 
         val dateLabel = new Label {
-          text = slider.valueDate.toString()
+          val life = slider.life
+          text = life.start.toString()
         }
 
         val monthInterval = new FlowPanel {
