@@ -39,7 +39,7 @@ object Starter {
 
     val startDate = new LocalDate(2008, 7, 31)
     val endDate = new LocalDate(2015, 3, 8)
-    val interval = 1
+    val interval = 7
     val life = new Life(startDate, endDate, interval)
     
     val model = new Model(url, username, password, life)

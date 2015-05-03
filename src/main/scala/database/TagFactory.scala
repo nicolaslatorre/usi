@@ -19,11 +19,11 @@ object TagFactory {
     val url = "jdbc:postgresql://localhost:5432/stackoverflow_dump"
     val username = "sodb"
     val password = "sodb"
-    val savePath = "../dayCounts100000.csv"
+    val savePath = "../dayCounts1000000.csv"
 
     val start = new LocalDate(2008, 7, 31) //.withDayOfMonth(1)
     val end = new LocalDate(2015, 3, 8) //.withDayOfMonth(1)
-    val interval = 7
+    val interval = 1
     val life = new Life(start, end, interval)
 
     val date2step = life.getStepsMapping()
@@ -77,9 +77,9 @@ object TagFactory {
 
     cpds.close()
 
-    println("Main vector created")
+   
 
-    val file = new File("../dayCounts100000.csv")
+    val file = new File("../dayCounts1000000.csv")
     val reader = CSVReader.open(file).all.map { line =>
       val tags = line.head.split(" ").toList
 
@@ -87,14 +87,12 @@ object TagFactory {
         case (cell) =>
           val Array(step, count) = cell.split(" ") // daily steps, we need to adapt them
           val date = life.increment(step.toInt)
-          println(date)
           val key = date2step.get(date).get // retrieve actual step
           key -> count.toInt
       }.groupBy { case (step, count) => step }.mapValues { counts =>
         val c = counts.map { case (step, count) => count }.sum
         c
       }.map{case(step, count) => 
-//        if(tags.mkString(" ") == "c#") println("step: " + step + " date: " + start.pl)
         life.increment(step*life.interval) -> count}
       tags -> counts
     }.toMap
@@ -102,6 +100,7 @@ object TagFactory {
 
 
     val mainVector = reader.toList.sortBy { case (x, y) => y.values.max }.reverse
+     println("Main vector created")
 
     val tags = mainVector.par.map { case (tags, datesAndIds) => new Tag(tags, datesAndIds, datesAndIds.values.sum, life.interval, reader.get(tags).get) }
     println("Vector length: " + tags.size)
@@ -115,7 +114,7 @@ object TagFactory {
     val life = new Life(start, end, interval)
 
     val vectors = inTransaction {
-      val post2tag = DatabaseRequest.retrieveTag2PostWithDate(0, 100000).map { case (pt, date) => (pt.id, (pt.tags.split(" ").toList, date)) }.toMap
+      val post2tag = DatabaseRequest.retrieveTag2PostWithDate(0, 1000000).map { case (pt, date) => (pt.id, (pt.tags.split(" ").toList, date)) }.toMap
       println("posts: " + post2tag.size)
       ls.par.map { level =>
         post2tag.filter {
