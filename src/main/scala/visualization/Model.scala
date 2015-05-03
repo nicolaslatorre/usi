@@ -45,19 +45,21 @@ class Model(val url: String, val username: String, val password: String, val lif
     val date = life.incrementDate(startDate)
     val level = tree.getLevel(tag)
     val childrens = level.tail
-    val partitions = getPartitions(childrens)
     println("(Model) Total childrens: " + childrens.size)
 
     val filteredChildrens = filterChildrens(childrens, tags)
 
     val childrenInInterval = filteredChildrens.filter { node => checkDate(node, date, tags).size > 0 }
     val totalCurrent = getCurrentTotal(level.head, childrenInInterval)
+//    val totalCurrent = childrens.map { node => node.tag.getMaxCount() }.sum
     val total = childrens.map { node => node.tag.count }.sum
 
     println("(Model) childrenInInterval size: " + childrenInInterval.size)
+    println("(Model) current total: " + totalCurrent)
+    println("(Model) total: " + total)
 
     val head = new Location(level.head.tag.getTagsAsString(), level.head.tag.ids, totalCurrent, null, false, total) // sorry for the null, should change to Option
-    val locations = createLocation(childrenInInterval, partitions, startDate, tags, totalCurrent)
+    val locations = createLocation(childrenInInterval, startDate, tags, totalCurrent)
 
     println("(Model) Childrens in time interval: " + locations.size)
     println("Model Computed")
@@ -78,14 +80,15 @@ class Model(val url: String, val username: String, val password: String, val lif
     } else childrens
   }
 
-  def createLocation(childrenInInterval: List[Node], partitions: List[List[Node]], date: LocalDate, tags: List[String], total: Double) = {
+  def createLocation(childrenInInterval: List[Node], date: LocalDate, tags: List[String], total: Double) = {
 
     val sorted = childrenInInterval //.sortBy { node => node.tag.counts.get(date).get }.reverse
     val percentages = sorted.map { node => (node.tag.getCount(date) / total.toDouble) }
 
-    val (width, height) = (1400.0, 700.0)
+    val (width, height) = (1800.0, 1000.0)
 
     val buckets = createBuckets(percentages, 0.1)
+    println("Bucket: " + buckets.size)
     val rects = createRectangles(buckets, 0.0, 0.0, width, height, true)
 
     val locations = sorted.map { node =>

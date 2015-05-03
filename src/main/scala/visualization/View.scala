@@ -178,7 +178,7 @@ class View(val model: Model) extends Frame {
 
 class Canvas(val model: Model) extends Panel {
   requestFocus()
-  preferredSize = Toolkit.getDefaultToolkit.getScreenSize
+  preferredSize = new Dimension(2000, 1500)//Toolkit.getDefaultToolkit.getScreenSize
   println(preferredSize.getWidth + ", " + preferredSize.getHeight)
 
   val backgroundColor = Color.WHITE
@@ -198,7 +198,7 @@ class Canvas(val model: Model) extends Panel {
 
     currentNodeChildrens.foreach { location =>
       val rect = location.rectangle
-      if (rect != null && location.count > 0) {
+      if (rect != null) {
         g.setColor(Color.BLACK)
         g.draw(new Rectangle2D.Double(rect.x, rect.y, rect.width, rect.height))
         val key = (location.count/model.maxHeight.toDouble) * 30
