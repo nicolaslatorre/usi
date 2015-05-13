@@ -7,8 +7,67 @@
 		revision="1.0"
 		conf="test-internal"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool"
-		date="20150416143201"/>
+		date="20150506142109"/>
 	<dependencies>
+		<module organisation="com.github.wookietreiber" name="scala-chart_2.11">
+			<revision name="0.4.2" status="release" pubdate="20140418143953" resolver="public" artresolver="public" homepage="https://github.com/wookietreiber/scala-chart" extra-info.apiURL="http://wookietreiber.github.io/scala-chart/latest/api/" downloaded="true" searched="true" default="false" conf="default(compile), default, compile, runtime, master" position="16">
+				<license name="GNU Lesser General Public Licence" url="http://www.gnu.org/licenses/lgpl.txt"/>
+				<metadata-artifact status="successful" details="" size="2612" time="356" location="/Users/nicolaslatorre/.ivy2/cache/com.github.wookietreiber/scala-chart_2.11/ivy-0.4.2.xml" searched="true" original-local-location="/Users/nicolaslatorre/.ivy2/cache/com.github.wookietreiber/scala-chart_2.11/ivy-0.4.2.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/com/github/wookietreiber/scala-chart_2.11/0.4.2/scala-chart_2.11-0.4.2.pom"/>
+				<caller organisation="stackoverflowviewer" name="stackoverflowviewer_2.11" conf="test-internal, test, optional, compile, provided, runtime" rev="latest.integration" rev-constraint-default="latest.integration" rev-constraint-dynamic="latest.integration" callerrev="1.0"/>
+				<artifacts>
+					<artifact name="scala-chart_2.11" type="jar" ext="jar" status="successful" details="" size="406967" time="463" location="/Users/nicolaslatorre/.ivy2/cache/com.github.wookietreiber/scala-chart_2.11/jars/scala-chart_2.11-0.4.2.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/com/github/wookietreiber/scala-chart_2.11/0.4.2/scala-chart_2.11-0.4.2.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.scala-lang.modules" name="scala-swing_2.11">
+			<revision name="1.0.1" status="release" pubdate="20140416112627" resolver="public" artresolver="public" homepage="http://www.scala-lang.org/" downloaded="true" searched="true" default="false" conf="compile, runtime, compile(*), runtime(*), master(compile), master" position="20">
+				<license name="BSD 3-clause" url="http://opensource.org/licenses/BSD-3-Clause"/>
+				<metadata-artifact status="successful" details="" size="1692" time="300" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang.modules/scala-swing_2.11/ivy-1.0.1.xml" searched="true" original-local-location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang.modules/scala-swing_2.11/ivy-1.0.1.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-lang/modules/scala-swing_2.11/1.0.1/scala-swing_2.11-1.0.1.pom"/>
+				<caller organisation="com.github.wookietreiber" name="scala-chart_2.11" conf="default, compile, runtime, master" rev="1.0.1" rev-constraint-default="1.0.1" rev-constraint-dynamic="1.0.1" callerrev="0.4.2"/>
+				<artifacts>
+					<artifact name="scala-swing_2.11" type="bundle" ext="jar" status="successful" details="" size="726500" time="397" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang.modules/scala-swing_2.11/bundles/scala-swing_2.11-1.0.1.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/scala-lang/modules/scala-swing_2.11/1.0.1/scala-swing_2.11-1.0.1.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.jfree" name="jfreechart">
+			<revision name="1.0.17" status="release" pubdate="20140211152710" resolver="public" artresolver="public" homepage="http://www.jfree.org/jfreechart/" downloaded="true" searched="true" default="false" conf="compile, runtime, compile(*), runtime(*), master(compile), master" position="17">
+				<license name="GNU Lesser General Public Licence" url="http://www.gnu.org/licenses/lgpl.txt"/>
+				<metadata-artifact status="successful" details="" size="7850" time="376" location="/Users/nicolaslatorre/.ivy2/cache/org.jfree/jfreechart/ivy-1.0.17.xml" searched="true" original-local-location="/Users/nicolaslatorre/.ivy2/cache/org.jfree/jfreechart/ivy-1.0.17.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/jfree/jfreechart/1.0.17/jfreechart-1.0.17.pom"/>
+				<caller organisation="com.github.wookietreiber" name="scala-chart_2.11" conf="default, compile, runtime, master" rev="1.0.17" rev-constraint-default="1.0.17" rev-constraint-dynamic="1.0.17" callerrev="0.4.2"/>
+				<artifacts>
+					<artifact name="jfreechart" type="jar" ext="jar" status="successful" details="" size="1544449" time="632" location="/Users/nicolaslatorre/.ivy2/cache/org.jfree/jfreechart/jars/jfreechart-1.0.17.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/jfree/jfreechart/1.0.17/jfreechart-1.0.17.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="xml-apis" name="xml-apis">
+			<revision name="1.3.04" status="release" pubdate="20061222143752" resolver="public" artresolver="public" homepage="http://xml.apache.org/commons/components/external/" downloaded="true" searched="true" default="false" conf="compile, runtime, compile(*), runtime(*), master(compile), master" position="19">
+				<metadata-artifact status="successful" details="" size="1822" time="312" location="/Users/nicolaslatorre/.ivy2/cache/xml-apis/xml-apis/ivy-1.3.04.xml" searched="true" original-local-location="/Users/nicolaslatorre/.ivy2/cache/xml-apis/xml-apis/ivy-1.3.04.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04.pom"/>
+				<caller organisation="org.jfree" name="jfreechart" conf="compile, runtime" rev="1.3.04" rev-constraint-default="1.3.04" rev-constraint-dynamic="1.3.04" callerrev="1.0.17"/>
+				<artifacts>
+					<artifact name="xml-apis" type="jar" ext="jar" status="successful" details="" size="194354" time="317" location="/Users/nicolaslatorre/.ivy2/cache/xml-apis/xml-apis/jars/xml-apis-1.3.04.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="org.jfree" name="jcommon">
+			<revision name="1.0.21" status="release" pubdate="20140212083439" resolver="public" artresolver="public" homepage="http://www.jfree.org/jcommon/" downloaded="true" searched="true" default="false" conf="compile, runtime, compile(*), runtime(*), master(compile), master" position="18">
+				<license name="GNU Lesser General Public Licence" url="http://www.gnu.org/licenses/lgpl.txt"/>
+				<metadata-artifact status="successful" details="" size="6731" time="303" location="/Users/nicolaslatorre/.ivy2/cache/org.jfree/jcommon/ivy-1.0.21.xml" searched="true" original-local-location="/Users/nicolaslatorre/.ivy2/cache/org.jfree/jcommon/ivy-1.0.21.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/jfree/jcommon/1.0.21/jcommon-1.0.21.pom"/>
+				<caller organisation="org.jfree" name="jfreechart" conf="compile, runtime" rev="1.0.21" rev-constraint-default="1.0.21" rev-constraint-dynamic="1.0.21" callerrev="1.0.17"/>
+				<artifacts>
+					<artifact name="jcommon" type="jar" ext="jar" status="successful" details="" size="323663" time="368" location="/Users/nicolaslatorre/.ivy2/cache/org.jfree/jcommon/jars/jcommon-1.0.21.jar">
+						<origin-location is-local="false" location="https://repo1.maven.org/maven2/org/jfree/jcommon/1.0.21/jcommon-1.0.21.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
 		<module organisation="com.github.tototoshi" name="scala-csv_2.11">
 			<revision name="1.2.0" status="release" pubdate="20150211072604" resolver="sbt-chain" artresolver="sbt-chain" homepage="http://github.com/tototoshi/scala-csv" downloaded="false" searched="false" default="false" conf="default(compile), default, compile, runtime, master" position="15">
 				<license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/LICENSE-2.0.html"/>
@@ -193,10 +252,12 @@
 				<license name="BSD 3-Clause" url="http://www.scala-lang.org/license.html"/>
 				<metadata-artifact status="no" details="" size="2653" time="0" location="/Users/nicolaslatorre/.ivy2/cache/org.scala-lang/scala-library/ivy-2.11.5.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.5/scala-library-2.11.5.pom"/>
 				<caller organisation="com.github.nscala-time" name="nscala-time_2.11" conf="default, compile, runtime, master" rev="2.11.5" rev-constraint-default="2.11.5" rev-constraint-dynamic="2.11.5" callerrev="1.8.0"/>
+				<caller organisation="org.scala-lang.modules" name="scala-swing_2.11" conf="compile, runtime" rev="2.11.0" rev-constraint-default="2.11.0" rev-constraint-dynamic="2.11.0" callerrev="1.0.1"/>
 				<caller organisation="org.scala-lang" name="scala-reflect" conf="compile, runtime" rev="2.11.1" rev-constraint-default="2.11.1" rev-constraint-dynamic="2.11.1" callerrev="2.11.1"/>
 				<caller organisation="org.scala-lang.modules" name="scala-xml_2.11" conf="compile, runtime" rev="2.11.1" rev-constraint-default="2.11.1" rev-constraint-dynamic="2.11.1" callerrev="1.0.2"/>
 				<caller organisation="org.scala-lang.modules" name="scala-parser-combinators_2.11" conf="compile, runtime" rev="2.11.0" rev-constraint-default="2.11.0" rev-constraint-dynamic="2.11.0" callerrev="1.0.1"/>
 				<caller organisation="org.scala-lang" name="scala-compiler" conf="compile, runtime" rev="2.11.1" rev-constraint-default="2.11.1" rev-constraint-dynamic="2.11.1" callerrev="2.11.1"/>
+				<caller organisation="com.github.wookietreiber" name="scala-chart_2.11" conf="default, compile, runtime, master" rev="2.11.0" rev-constraint-default="2.11.0" rev-constraint-dynamic="2.11.0" callerrev="0.4.2"/>
 				<caller organisation="com.github.tototoshi" name="scala-csv_2.11" conf="default, compile, runtime, master" rev="2.11.4" rev-constraint-default="2.11.4" rev-constraint-dynamic="2.11.4" callerrev="1.2.0"/>
 				<caller organisation="org.squeryl" name="squeryl_2.11" conf="default, compile, runtime, master" rev="2.11.1" rev-constraint-default="2.11.1" rev-constraint-dynamic="2.11.1" callerrev="0.9.5-7"/>
 				<caller organisation="stackoverflowviewer" name="stackoverflowviewer_2.11" conf="test-internal, test, optional, compile, provided, runtime" rev="2.11.5" rev-constraint-default="2.11.5" rev-constraint-dynamic="2.11.5" callerrev="1.0"/>
@@ -214,7 +275,9 @@
 			</revision>
 			<revision name="2.11.0" evicted="latest-revision" evicted-reason="" downloaded="false" searched="false" conf="compile, runtime, compile(*), runtime(*), master(compile), master" position="-1">
 				<evicted-by rev="2.11.5"/>
+				<caller organisation="org.scala-lang.modules" name="scala-swing_2.11" conf="compile, runtime" rev="2.11.0" rev-constraint-default="2.11.0" rev-constraint-dynamic="2.11.0" callerrev="1.0.1"/>
 				<caller organisation="org.scala-lang.modules" name="scala-parser-combinators_2.11" conf="compile, runtime" rev="2.11.0" rev-constraint-default="2.11.0" rev-constraint-dynamic="2.11.0" callerrev="1.0.1"/>
+				<caller organisation="com.github.wookietreiber" name="scala-chart_2.11" conf="default, compile, runtime, master" rev="2.11.0" rev-constraint-default="2.11.0" rev-constraint-dynamic="2.11.0" callerrev="0.4.2"/>
 				<artifacts>
 				</artifacts>
 			</revision>

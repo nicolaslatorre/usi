@@ -5,6 +5,7 @@ import org.joda.time.Months
 import org.joda.time.Weeks
 import org.joda.time.Days
 
+
 class Life(val start: LocalDate, val end: LocalDate, val interval: Int) {
 
   def increment(value: Int) = {
@@ -19,6 +20,15 @@ class Life(val start: LocalDate, val end: LocalDate, val interval: Int) {
     val ds = Days.daysBetween(start, end)
     val nrSteps = ds.getDays
     (0 to nrSteps).toStream
+  }
+  
+  def dates = {
+    val steps = days
+    val intervalSteps = steps.grouped(interval).toList
+    
+    intervalSteps.zipWithIndex.map { case(step, index) => 
+      start.plusDays(index*interval)  
+    }
   }
 
   /**

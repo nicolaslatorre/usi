@@ -71,15 +71,10 @@ object TagFactory {
   }
 
   def mainTagVector(url: String, username: String, password: String, life: Life, date2step: Map[LocalDate, Int]) = {
-    val cpds = DatabaseRequest.openConnection(url, username, password)
     val levels = 5
     //    val vector = getVectorsFromTag(url, username, password, levels, date2step, interval)
 
-    cpds.close()
-
-   
-
-    val file = new File("../dayCounts1000000.csv")
+    val file = new File("../dayCounts.csv")
     val reader = CSVReader.open(file).all.map { line =>
       val tags = line.head.split(" ").toList
 
@@ -92,15 +87,15 @@ object TagFactory {
       }.groupBy { case (step, count) => step }.mapValues { counts =>
         val c = counts.map { case (step, count) => count }.sum
         c
-      }.map{case(step, count) => 
-        life.increment(step*life.interval) -> count}
+      }.map {
+        case (step, count) =>
+          life.increment(step * life.interval) -> count
+      }
       tags -> counts
     }.toMap
 
-
-
     val mainVector = reader.toList.sortBy { case (x, y) => y.values.max }.reverse
-     println("Main vector created")
+    println("Main vector created")
 
     val tags = mainVector.par.map { case (tags, datesAndIds) => new Tag(tags, datesAndIds, datesAndIds.values.sum, life.interval, reader.get(tags).get) }
     println("Vector length: " + tags.size)
@@ -144,17 +139,17 @@ object TagFactory {
 
     vectors.flatMap { x => x }.toList
   }
-  
+
   def buildVectorFromDB() = {
     //    val reader = vector.map { line =>
-//      val tags = line._1
-//
-//      val counts = line._2.map {
-//        case (cell) =>
-//          val (step, count) = cell
-//          start.plusDays(step.toInt) -> count.toInt
-//      }.toMap
-//      tags -> counts
-//    }.toMap
+    //      val tags = line._1
+    //
+    //      val counts = line._2.map {
+    //        case (cell) =>
+    //          val (step, count) = cell
+    //          start.plusDays(step.toInt) -> count.toInt
+    //      }.toMap
+    //      tags -> counts
+    //    }.toMap
   }
 }

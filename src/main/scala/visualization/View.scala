@@ -41,7 +41,7 @@ object Starter {
     val endDate = new LocalDate(2015, 3, 8)
     val interval = 7
     val life = new Life(startDate, endDate, interval)
-    
+
     val model = new Model(url, username, password, life)
 
     SwingUtilities.invokeLater(new Runnable {
@@ -78,10 +78,10 @@ class View(val model: Model) extends Frame {
       contents += occurrences
       contents += showList
     }
-    
+
     val selectionMenu = new BoxPanel(Orientation.Vertical) {
       preferredSize = new Dimension(200, 800)
-    	val number = new Label("Number of tags: " + model.tree.root.children.size.toString)
+      val number = new Label("Number of tags: " + model.tree.root.children.size.toString)
       contents += number
       val list = new ListView(model.locations.map { location => location.tags }.sorted)
       val scrollPane = new ScrollPane() {
@@ -89,29 +89,29 @@ class View(val model: Model) extends Frame {
       }
       contents += number
       contents += scrollPane
-      
+
       visible = false
     }
 
     val sliderPanel = new BoxPanel(Orientation.Vertical) {
       preferredSize = new Dimension(1440, 80)
-      
+
       val slider = new Slider() {
         preferredSize = new Dimension(1440, 40)
         val life = model.life
-        
-        val steps = life.days.grouped(life.interval).zipWithIndex.map{case(step, index) => index }.toList // horrible
+
+        val steps = life.days.grouped(life.interval).zipWithIndex.map { case (step, index) => index }.toList // horrible
 
         min = 0
         max = steps.size - 1
-        
-        val checkpoints = (steps.filter { step => step%100 == 0 } :+ max).distinct
+
+        val checkpoints = (steps.filter { step => step % 100 == 0 } :+ max).distinct
         labels = checkpoints.map { step => step -> new Label(step.toString) }.toMap
         paintLabels = true
         paintTicks = true
 
         //val valueDate = life.start
-        value = min//model.date2step.getOrElse(valueDate, 0)
+        value = min //model.date2step.getOrElse(valueDate, 0)
         majorTickSpacing = 1 // one step
       }
 
@@ -119,8 +119,12 @@ class View(val model: Model) extends Frame {
         val selectionButton = new Button {
           text = "Select"
           visible = false
-        } 
+        }
         
+        val graphLineButton = new Button("Line Chart")
+        
+        val graphButton = new Button("Bar Chart")
+
         val startButton = new Button {
           icon = new ImageIcon(new ImageIcon("../Images/mono-player-start.png").getImage.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH))
         }
@@ -153,13 +157,15 @@ class View(val model: Model) extends Frame {
           contents += monthValue
         }
 
+        contents += graphLineButton
+        contents += graphButton
         contents += selectionButton
         contents += startButton
         contents += playButton
         contents += stopButton
         contents += endButton
         contents += dateLabel
-//        contents += monthInterval
+        //        contents += monthInterval
 
       }
 
@@ -178,16 +184,21 @@ class View(val model: Model) extends Frame {
 
 class Canvas(val model: Model) extends Panel {
   requestFocus()
-  preferredSize = new Dimension(2000, 1500)//Toolkit.getDefaultToolkit.getScreenSize
+  preferredSize = new Dimension(2000, 2000) //Toolkit.getDefaultToolkit.getScreenSize
   println(preferredSize.getWidth + ", " + preferredSize.getHeight)
 
   val backgroundColor = Color.WHITE
   opaque = true
   background = backgroundColor
+  var zoomFactor = 1.0
+  var offsetX = 0.0
+  var offsetY = 0.0
 
   var locations = model.locations
-  val gradient = model.gradient
-  
+  val currentGradient = model.currentGradient
+
+  var changingViewPort = false
+  var drawBorders = true
 
   override def paintComponent(g: Graphics2D) = {
     super.paintComponent(g)
@@ -196,30 +207,45 @@ class Canvas(val model: Model) extends Panel {
     val size = Toolkit.getDefaultToolkit.getScreenSize
     val currentNodeChildrens = locations.tail
 
-    currentNodeChildrens.foreach { location =>
+    currentNodeChildrens.filter{ node => isInRectangle(node, node.rectangle)}.foreach { location =>
       val rect = location.rectangle
+      val sub = location.internalRectangle
       if (rect != null) {
+        val offset = new Point(offsetX, offsetY)
+        val pointExternal = (new Point(rect.x, rect.y) + offset) * zoomFactor
+
+        if (drawBorders) {
+          g.setColor(Color.BLACK)
+          g.draw(new Rectangle2D.Double(pointExternal.x, pointExternal.y, rect.width * zoomFactor, rect.height * zoomFactor))
+        }
+
         g.setColor(Color.BLACK)
-        g.draw(new Rectangle2D.Double(rect.x, rect.y, rect.width, rect.height))
-        val key = (location.count/model.maxHeight.toDouble) * 30
-        g.setColor(gradient.get(key.toInt).get)
-        
-        val toPaintRect = new Rectangle2D.Double(rect.x, rect.y, rect.width, rect.height)
-        
+        val pointInternal = (new Point(sub.x, sub.y) + offset) * zoomFactor
+        g.draw(new Rectangle2D.Double(pointInternal.x, pointInternal.y, sub.width * zoomFactor, sub.height * zoomFactor))
+
+        val key = (location.count / model.maxHeight.toDouble) * 30
+        g.setColor(currentGradient.get(key.toInt).get)
+
+        //        val toPaintRect = new Rectangle2D.Double(rect.x, rect.y, rect.width, rect.height)
+        val toPaintRect = new Rectangle2D.Double(pointInternal.x, pointInternal.y, sub.width * zoomFactor, sub.height * zoomFactor)
+
         g.fill(toPaintRect)
-        
-        if(key > 15) g.setColor(Color.WHITE) else g.setColor(Color.BLACK)
-        
+
+        if (key > 15) g.setColor(Color.WHITE) else g.setColor(Color.BLACK)
 
         val tagIndex = location.tags.lastIndexOf(" ")
         val message = {
           if (tagIndex == -1) location.tags
           else location.tags.substring(tagIndex, location.tags.length)
         }
-        if (rect.width >= 75) g.drawString(message.toString, rect.x.toInt, rect.y.toInt + rect.height.toInt / 2)
-        if(location.selected) {
+        if (rect.width >= 50) {
+          val pointMessage = new Point(pointInternal.x, pointExternal.y) + new Point(0.0, (rect.height/2) * zoomFactor)
+         g.drawString(message.toString, pointMessage.x.toInt, pointMessage.y.toInt) 
+        }
+        if (location.selected) {
           g.setColor(Color.RED)
-          g.fillOval(rect.x.toInt, rect.y.toInt, 8, 8)
+          g.fillOval(pointExternal.x.toInt, pointExternal.y.toInt, 8, 8)
+          g.draw(new Rectangle2D.Double(pointExternal.x, pointExternal.y, (rect.width-1) * zoomFactor, (rect.height-1) * zoomFactor))
         }
       } else {
         println(location.tags + " is null with occurrences: " + location.count)
@@ -228,24 +254,17 @@ class Canvas(val model: Model) extends Panel {
     println("(View) Drew squares")
   }
   
-//  def createShapeComponents() = {
-//    println("(Model) stanno costruendo...")
-//    val childrens = locations.tail
-//
-//    childrens.flatMap { location =>
-//      val rectangle = location.rectangle
-//      if (rectangle != null) {
-//        val key = (location.count/model.maxHeight.toDouble) * 30
-//        val color = gradient.get(key.toInt).getOrElse(Color.WHITE)
-//        val shape = new Rectangle2D.Double(rectangle.x, rectangle.y, rectangle.width, rectangle.height)
-//        
-//        
-//        Some(new ShapeComponent(shape, color, location, key.toInt))
-//      } else {
-//        println(location.tags + " is null with occurrences: " + location.count)
-//        None
-//      }
-//    }
-//  }
-  
+  def isInRectangle(location: Location, rect: Rectangle) = {
+    val offset = new Point(offsetX, offsetY)
+    val zoom = zoomFactor
+    val size = Toolkit.getDefaultToolkit.getScreenSize
+
+    val topLeft = (new Point(rect.x, rect.y) + offset) * zoom
+    val bottomRight = (new Point(rect.x + rect.width, rect.y + rect.height) + offset) * zoom
+
+    if (topLeft.x > size.getWidth || bottomRight.x < 0.0) false
+    else if (topLeft.y > size.getHeight|| bottomRight.y < 0.0) false
+    else true
+  }
+
 }

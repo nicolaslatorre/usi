@@ -11,10 +11,39 @@ object TagTree {
     val total = vector.filter{v => v.tags.size == 1}.map { v => v.count }.sum
     val tree = new Tree(new Node(new Tag(List(), Map(), total, interval, Map()), List()))
     val l1 = vector.sortBy { tag => tag.tags.size }
-
-    l1.map { tag => tree.insert(tag, interval) }
+    
+//    val subtrees = vector.par.groupBy { v => v.tags.head }.mapValues { tags => 
+//      val sortedTags = tags.seq.sortBy { tag => tag.tags.size }
+//      val subtree = new Tree(new Node(sortedTags.head, List()))
+//      sortedTags.tail.map{ tag => subtree.insert(tag, interval) }
+//      subtree
+//    }
+//
+//    val root = tree.root
+//    root.children = subtrees.values.map { subtree => subtree.root }.toList.sortBy { node => node.tag.getMaxCount() }.reverse
+    
+    val subtrees = createSubTree(vector, interval, 0, tree)
+    tree.root.children = subtrees
     println("Habemus Tree")
     tree
+  }
+  
+  def createSubTree(tags: List[Tag], interval: Int, level: Int, tree: Tree): List[Node] = {
+    tags match {
+      case Nil => List()
+      case x::Nil => List(new Node(x, List()))
+      case x::xs =>
+        val subtrees = tags.par.filter { tag => tag.tags.size > level }.groupBy { v => v.tags.take(level + 1) }.mapValues { tags =>
+          val sortedTags = tags.seq.sortBy { tag => tag.tags.size }
+          val subtree = new Tree(new Node(sortedTags.head, List()))
+          val subsubtree = createSubTree(sortedTags.toList.tail, interval, level + 1, subtree)
+          
+          val subroot = subtree.root
+          subroot.children = subsubtree
+          subtree
+        }
+        subtrees.values.map { subtree => subtree.root }.toList.sortBy { node => node.tag.getMaxCount() }.reverse
+    }
   }
 
 }

@@ -10,28 +10,42 @@ public class Rectangle {
 	/**
 	 * 
 	 */
-	public final double x;
+	public double x;
 	
 	/**
 	 * 
 	 */
-	public final double y;
+	public double y;
 	
 	/**
 	 * 
 	 */
-	public final double width;
+	public double width;
 	
 	/**
 	 * 
 	 */
-	public final double height;
+	public double height;
+	
+	/**
+	 * 
+	 */
+	public double right;
+	
+	/**
+	 * 
+	 */
+	public double bottom;
+	
+	public int id;
 	
 	public Rectangle(double x, double y, double width, double height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.right = x + width;
+		this.bottom = y + height;
 	}
 	
 	public Rectangle(Rectangle r) {
@@ -39,6 +53,24 @@ public class Rectangle {
 		this.y = r.y;
 		this.width = r.width;
 		this.height = r.height;
+		this.right = r.right;
+		this.bottom = r.bottom;
+	}
+	
+	public void setX(double x) {
+		this.x = x;
+	}
+	
+	public void setY(double y) {
+		this.y = y;
+	}
+	
+	public void setWidth(double width) {
+		this.width = width;
+	}
+	
+	public void setHeight(double height) {
+		this.height = height;
 	}
 	
 	@Override

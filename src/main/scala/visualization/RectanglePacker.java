@@ -1,325 +1,467 @@
 package visualization;
-/*
- * Copyright (c) 2007, Ryan McNally All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met: Redistributions of source code must retain the above
- * copyright notice, this list of conditions and the following
- * disclaimer. Redistributions in binary form must reproduce the above
- * copyright notice, this list of conditions and the following
- * disclaimer in the documentation and/or other materials provided
- * with the distribution. Neither the name of the <ORGANIZATION> nor
- * the names of its contributors may be used to endorse or promote
- * products derived from this software without specific prior written
- * permission. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
- * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
- * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
- * BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,
- * OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
- * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
- * DAMAGE.
- */
-
-//package com.ryanm.droid.rugl.util;
-
-import java.util.List;
-import visualization.Rectangle;
 
 /**
- * Tries to pack rectangles as tightly as possible. An implementation of the
- * algorithm described at http://www.blackpawn.com/texts/lightmaps/default.html
- * 
- * @author ryanm
- * @param <P>
- *            The type of items to be held
+ * Rectangle Packer v1.3.0
+ *
+ * Copyright 2012 Ville Koskela. All rights reserved.
+ *
+ * Email: ville@villekoskela.org
+ * Blog: http://villekoskela.org
+ * Twitter: @villekoskelaorg
+ *
+ * You may redistribute, use and/or modify this source code freely
+ * but this copyright statement must not be removed from the source files.
+ *
+ * The package structure of the source code must remain unchanged.
+ * Mentioning the author in the binary distributions is highly appreciated.
+ *
+ * If you use this utility it would be nice to hear about it so feel free to drop
+ * an email.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. *
+ *
  */
-public class RectanglePacker<P> {
 
-  /**
-   * Determines the outcome of a rectangle-fitting test
-   * 
-   * @author ryanm
-   */
-  private static enum Fit {
-    /**
-     * Indicates that the rectangle did not fit
-     */
-    FAIL,
-    /**
-     * Indicates that the rectangle fitted perfectly
-     */
-    PERFECT,
-    /**
-     * Indicates that the rectangle fitted with room to spare
-     */
-    FIT
-  };
+import java.util.ArrayList;
 
-  private NodeRectangle root;
+/**
+ * Class used to pack rectangles within container rectangle with close to
+ * optimal solution.
+ */
+public class RectanglePacker {
 
-  /**
-   * The border to leave around rectangles
-   */
-  private int border = 0;
+	private double mWidth = 0;
+	private double mHeight = 0;
+	private int mPadding = 8;
 
-  /**
-   * Builds a new {@link RectanglePacker}
-   * 
-   * @param width
-   *            The width of the space available to pack into
-   * @param height
-   *            The height of the space available to pack into
-   * @param border
-   *            The border to preserve between packed items
-   */
-  public RectanglePacker(double width, double height, int border) {
-    root = new NodeRectangle(new Rectangle(0, 0, width, height));
-    this.border = border;
-  }
+	private double mPackedWidth = 0;
+	private double mPackedHeight = 0;
 
-  /**
-   * Builds a list of all {@link Rectangle}s in the tree, for debugging
-   * purposes
-   * 
-   * @param rectangles
-   *            The list to add the tree's {@link Rectangle}s to
-   */
-  public void inspectRectangles(List<Rectangle> rectangles) {
-    root.getRectangles(rectangles);
-  }
+	private ArrayList<SortableSize> mInsertList = new ArrayList<SortableSize>();
 
-  /**
-   * Finds the {@link Rectangle} where an item is stored
-   * 
-   * @param item
-   *            The item to search for
-   * @return The {@link Rectangle} where that item resides, or null if not
-   *         found
-   */
-  public Rectangle findRectangle(P item) {
-    return root.findRectangle(item);
-  }
+	private ArrayList<Rectangle> mInsertedRectangles = new ArrayList<Rectangle>();
+	private ArrayList<Rectangle> mFreeAreas = new ArrayList<Rectangle>();
+	private ArrayList<Rectangle> mNewFreeAreas = new ArrayList<Rectangle>();
 
-  /**
-   * Clears the packer of all items
-   */
-  public void clear() {
-    root = new NodeRectangle(root.rect);
-  }
+	private Rectangle mOutsideRectangle;
 
-  /**
-   * Attempts to pack an item of the supplied dimensions
-   * 
-   * @param width
-   *            The width of the item
-   * @param height
-   *            The height of the item
-   * @param o
-   *            The item to pack
-   * @return The packed location, or null if it will not fit.
-   */
-  public Rectangle insert(double width, double height, P o) {
-    NodeRectangle n = root.insert(width + 2 * border, height + 2 * border, o);
+	private ArrayList<SortableSize> mSortableSizeStack = new ArrayList<SortableSize>();
+	private ArrayList<Rectangle> mRectangleStack = new ArrayList<Rectangle>();
 
-    if (n != null) {
-      Rectangle r = new Rectangle(n.rect.x + border, n.rect.y + border,
-          n.rect.width - 2 * border, n.rect.height - 2 * border);
-      return r;
-    } else {
-      return null;
-    }
-  }
+	public int getRectangleCount() {
+		return mInsertedRectangles.size();
+	}
 
-  /**
-   * Removes an item from the tree, consolidating the space if possible. The
-   * space can easily become fragmented, so don't rely on this to work as
-   * cleverly as you would like.
-   * 
-   * @param o
-   *            the item to remove
-   * @return <code>true</code> if the item was found, false otherwise
-   */
-  public boolean remove(P o) {
-    return root.remove(o);
-  }
+	public double getPackedWidth() {
+		return mPackedWidth;
+	}
 
-  /**
-   * Gets the width of this packer
-   * 
-   * @return the width of this packer
-   */
-  public double getWidth() {
-    return root.rect.width;
-  }
+	public double getPackedHeight() {
+		return mPackedHeight;
+	}
 
-  /**
-   * Gets the height of this packer
-   * 
-   * @return The height of this packer
-   */
-  public double getHeight() {
-    return root.rect.height;
-  }
+	public int getPadding() {
+		return mPadding;
+	}
+	
+	public ArrayList<Rectangle> getInsertedRectangle() {
+		return mInsertedRectangles;
+	}
 
-  private class NodeRectangle {
-    private Rectangle rect;
+	/**
+	 * Constructs new rectangle packer
+	 * 
+	 * @param width
+	 *            the width of the main rectangle
+	 * @param height
+	 *            the height of the main rectangle
+	 */
+	public RectanglePacker(double width, double height, int padding) {
+		mOutsideRectangle = new Rectangle(width + 1, height + 1, 0, 0);
+		reset(width, height, padding);
+	}
 
-    private P occupier = null;
+	/**
+	 * Resets the rectangle packer with given dimensions
+	 * 
+	 * @param width
+	 * @param height
+	 */
+	public void reset(double width, double height, int padding) {
+		while (mInsertedRectangles.size() > 0) {
+			int index = mInsertedRectangles.size() - 1;
+			freeRectangle(mInsertedRectangles.remove(index));
+		}
 
-    private NodeRectangle left = null;
+		while (mFreeAreas.size() > 0) {
+			int index = mFreeAreas.size() - 1;
+			freeRectangle(mFreeAreas.remove(index));
+		}
 
-    private NodeRectangle right = null;
+		mWidth = width;
+		mHeight = height;
 
-    private NodeRectangle(Rectangle r) {
-      this.rect = r;
-    }
+		mPackedWidth = 0;
+		mPackedHeight = 0;
 
-    private Rectangle findRectangle(P item) {
-      if (isLeaf()) {
-        if (item == occupier) {
-          return rect;
-        } else {
-          return null;
-        }
-      } else {
-        Rectangle l = left.findRectangle(item);
+		mFreeAreas.add(0, allocateRectangle(0, 0, mWidth, mHeight));
 
-        if (l != null) {
-          return l;
-        } else {
-          return right.findRectangle(item);
-        }
-      }
-    }
+		while (mInsertList.size() > 0) {
+			int index = mInsertList.size() - 1;
+			freeSize(mInsertList.remove(index));
+		}
 
-    private NodeRectangle insert(double width, double height, P o) {
-      if (!isLeaf()) {
-        NodeRectangle r = left.insert(width, height, o);
+		mPadding = padding;
+	}
 
-        if (r == null) {
-          r = right.insert(width, height, o);
-        }
+	/**
+	 * Gets the position of the rectangle in given index in the main rectangle
+	 * 
+	 * @param index
+	 *            the index of the rectangle
+	 * @param rectangle
+	 *            an instance where to set the rectangle's values
+	 * @return
+	 */
+	public Rectangle getRectangle(int index, Rectangle rectangle) {
+		Rectangle inserted = mInsertedRectangles.get(index);
+		if (rectangle != null) {
+			rectangle.x = inserted.x;
+			rectangle.y = inserted.y;
+			rectangle.width = inserted.width;
+			rectangle.height = inserted.height;
+			return rectangle;
+		}
 
-        return r;
-      } else {
-        if (occupier != null) {
-          return null;
-        }
+		return new Rectangle(inserted.x, inserted.y, inserted.width,
+				inserted.height);
+	}
 
-        Fit fit = fits(width, height);
+	/**
+	 * Gets the original id for the inserted rectangle in given index
+	 * 
+	 * @param index
+	 * @return
+	 */
+	public int getRectangleId(int index) {
+		Rectangle inserted = mInsertedRectangles.get(index);
+		return inserted.id;
+	}
 
-        switch (fit) {
-        case FAIL:
-          return null;
-        case PERFECT:
-          occupier = o;
-          return this;
-        case FIT:
-          split(width, height);
-          break;
-        }
+	/**
+	 * Add a rectangle to be packed into the packer
+	 * 
+	 * @width the width of inserted rectangle
+	 * @height the height of inserted rectangle
+	 * @id the identifier for this rectangle
+	 * @return true if inserted successfully
+	 */
+	public void insertRectangle(double width, double height, int id) {
+		SortableSize sortableSize = allocateSize(width, height, id);
+		mInsertList.add(sortableSize);
+	}
 
-        return left.insert(width, height, o);
-      }
-    }
+	/**
+	 * Packs the rectangles inserted
+	 * 
+	 * @param sort
+	 *            boolean defining whether to sort the inserted rectangles
+	 *            before packing
+	 * @return the number of the packed rectangles
+	 */
+	public int packRectangles(boolean sort) {
 
-    private boolean isLeaf() {
-      return left == null;
-    }
+		while (mInsertList.size() > 0) {
+			int lastIndex = mInsertList.size() - 1;
+			SortableSize sortableSize = mInsertList.remove(lastIndex);
+			double width = sortableSize.width();
+			double height = sortableSize.height();
 
-    /**
-     * Determines if this NodeRectangle contains an item, even many levels below
-     * 
-     * @return <code>true</code> if this NodeRectangle or any of it's descendants
-     *         holds an item
-     */
-    private boolean isOccupied() {
-      return occupier != null || !isLeaf();
-    }
+			int index = getFreeAreaIndex(width, height);
+			if (index >= 0) {
+				Rectangle freeArea = mFreeAreas.get(index);
+				Rectangle target = allocateRectangle(freeArea.x, freeArea.y,
+						width, height);
+				target.id = sortableSize.id();
 
-    /**
-     * Removes an item, and consolidates the tree if possible
-     * 
-     * @param o
-     *            the item to remove
-     * @return <code>true</code> if the item was found, <code>false</code>
-     *         otherwise
-     */
-    private boolean remove(P o) {
-      if (isLeaf()) {
-        if (occupier == o) {
-          occupier = null;
+				// Generate the new free areas, these are parts of the old ones
+				// intersected or touched by the target
+				generateNewFreeAreas(target, mFreeAreas, mNewFreeAreas);
 
-          return true;
-        }
-        return false;
-      } else {
-        boolean found = left.remove(o);
-        if (!found) {
-          found = right.remove(o);
-        }
+				while (mNewFreeAreas.size() > 0) {
+					int lastFreeArea = mNewFreeAreas.size() - 1;
+					Rectangle free = mNewFreeAreas.remove(lastFreeArea);
+					mFreeAreas.add(free);
+				}
 
-        if (found) {
-          if (!left.isOccupied() && !right.isOccupied()) {
-            left = null;
-            right = null;
-          }
-        }
+				mInsertedRectangles.add(target);
+				if ((target.x + target.width) > mPackedWidth) {
+					mPackedWidth = target.x + target.width;
+				}
+				if ((target.y + target.height) > mPackedHeight) {
+					mPackedHeight = (target.y + target.height);
+				}
+			}
 
-        return found;
-      }
-    }
+			freeSize(sortableSize);
+		}
 
-    private void split(double width, double height) {
-      double dw = rect.width - width;
-      double dh = rect.height - height;
+		return getRectangleCount();
+	}
 
-      assert dw >= 0;
-      assert dh >= 0;
+	/**
+	 * Removes rectangles from the filteredAreas that are sub rectangles of any
+	 * rectangle in areas.
+	 * 
+	 * @param areas
+	 *            rectangles from which the filtering is performed
+	 */
+	private void filterSelfSubAreas(ArrayList<Rectangle> areas) {
+		for (int i = areas.size() - 1; i >= 0; i--) {
+			Rectangle filtered = areas.get(i);
+			for (int j = areas.size() - 1; j >= 0; j--) {
+				if (i != j) {
+					Rectangle area = areas.get(j);
+					if (filtered.x >= area.x
+							&& filtered.y >= area.y
+							&& (filtered.x + filtered.width) <= (area.y + area.height)
+							&& (filtered.y + filtered.height) <= (area.y + area.height)) {
+						freeRectangle(filtered);
+						int index = areas.size() - 1;
+						Rectangle topOfStack = areas.remove(index);
+						if (i < areas.size()) {
+							// Move the one on the top to the freed position
+							areas.add(i, topOfStack);
+						}
+						break;
+					}
+				}
+			}
+		}
+	}
 
-      Rectangle r, l;
-      if (dw > dh) {
-        l = new Rectangle(rect.x, rect.y, width, rect.height);
+	/**
+	 * Checks what areas the given rectangle intersects, removes those areas and
+	 * returns the list of new areas those areas are divided into
+	 * 
+	 * @param target
+	 *            the new rectangle that is dividing the areas
+	 * @param areas
+	 *            the areas to be divided
+	 * @return list of new areas
+	 */
+	private void generateNewFreeAreas(Rectangle target,
+			ArrayList<Rectangle> areas, ArrayList<Rectangle> results) {
+		// Increase dimensions by one to get the areas on right / bottom this
+		// rectangle touches
+		// Also add the padding here
+		double x = target.x;
+		double y = target.y;
+		double right = (target.x + target.width) + 1 + mPadding;
+		double bottom = (target.y + target.height) + 1 + mPadding;
 
-        r = new Rectangle(l.x + width, rect.y, rect.width - width,
-            rect.height);
-      } else {
-        l = new Rectangle(rect.x, rect.y, rect.width, height);
+		Rectangle targetWithPadding = null;
+		if (mPadding == 0) {
+			targetWithPadding = target;
+		}
 
-        r = new Rectangle(rect.x, l.y + height, rect.width, rect.height
-            - height);
-      }
+		for (int i = areas.size() - 1; i >= 0; i--) {
+			Rectangle area = areas.get(i);
+			if (!(x >= (area.x + area.width) || right <= area.x
+					|| y >= (area.y + area.height) || bottom <= area.y)) {
+				if (targetWithPadding == null) {
+					targetWithPadding = allocateRectangle(target.x, target.y,
+							target.width + mPadding, target.height + mPadding);
+				}
 
-      left = new NodeRectangle(l);
-      right = new NodeRectangle(r);
-    }
+				generateDividedAreas(targetWithPadding, area, results);
+				int lastArea = areas.size() - 1;
+				Rectangle topOfStack = areas.remove(lastArea);
+				if (i < areas.size()) {
+					// Move the one on the top to the freed position
+					areas.add(i, topOfStack);
+				}
+			}
+		}
 
-    private Fit fits(double width, double height) {
-      if (width <= rect.width && height <= rect.height) {
-        if (width == rect.width && height == rect.height) {
-          return Fit.PERFECT;
-        } else {
-          return Fit.FIT;
-        }
-      }
+		if (targetWithPadding != null && targetWithPadding != target) {
+			freeRectangle(targetWithPadding);
+		}
 
-      return Fit.FAIL;
-    }
+		filterSelfSubAreas(results);
+	}
 
-    private void getRectangles(List<Rectangle> rectangles) {
-      rectangles.add(rect);
+	/**
+	 * Divides the area into new sub areas around the divider.
+	 * 
+	 * @param divider
+	 *            rectangle that intersects the area
+	 * @param area
+	 *            rectangle to be divided into sub areas around the divider
+	 * @param results
+	 *            vector for the new sub areas around the divider
+	 */
+	private void generateDividedAreas(Rectangle divider, Rectangle area,
+			ArrayList<Rectangle> results) {
+		int count = 0;
+		double rightDelta = (area.x + area.width) - (divider.x + divider.width);
+		if (rightDelta > 0) {
+			results.add(allocateRectangle((divider.x + divider.width), area.y,
+					rightDelta, area.height));
+			count++;
+		}
 
-      if (!isLeaf()) {
-        left.getRectangles(rectangles);
-        right.getRectangles(rectangles);
-      }
-    }
-  }
+		double leftDelta = divider.x - area.x;
+		if (leftDelta > 0) {
+			results.add(allocateRectangle(area.x, area.y, leftDelta,
+					area.height));
+			count++;
+		}
 
+		double bottomDelta = (area.y + area.height)
+				- (divider.y + divider.height);
+		if (bottomDelta > 0) {
+			results.add(allocateRectangle(area.x, (divider.y + divider.height),
+					area.width, bottomDelta));
+			count++;
+		}
+
+		double topDelta = divider.y - area.y;
+		if (topDelta > 0) {
+			results.add(allocateRectangle(area.x, area.y, area.width, topDelta));
+			count++;
+		}
+
+		if (count == 0
+				&& (divider.width < area.width || divider.height < area.height)) {
+			// Only touching the area, store the area itself
+			results.add(area);
+		} else {
+			freeRectangle(area);
+		}
+	}
+
+	/**
+	 * Gets the index of the best free area for the given rectangle
+	 * 
+	 * @width the width of inserted rectangle
+	 * @height the height of inserted rectangle
+	 * @return index of the best free area or -1 if no suitable free area
+	 *         available
+	 */
+	private int getFreeAreaIndex(double width, double height) {
+		Rectangle best = mOutsideRectangle;
+		int index = -1;
+
+		double paddedWidth = width + mPadding;
+		double paddedHeight = height + mPadding;
+
+		int count = mFreeAreas.size();
+		for (int i = count - 1; i >= 0; i--) {
+			Rectangle free = mFreeAreas.get(i);
+			if (free.x < mPackedWidth || free.y < mPackedHeight) {
+				// Within the packed area, padding required
+				if (free.x < best.x && paddedWidth <= free.width
+						&& paddedHeight <= free.height) {
+					index = i;
+					if ((paddedWidth == free.width && free.width <= free.height && (free.x + free.width) < mWidth)
+							|| (paddedHeight == free.height && free.height <= free.width)) {
+						break;
+					}
+					best = free;
+				}
+			} else {
+				// Outside the current packed area, no padding required
+				if (free.x < best.x && width <= free.width
+						&& height <= free.height) {
+					index = i;
+					if ((width == free.width && free.width <= free.height && (free.x + free.width) < mWidth)
+							|| (height == free.height && free.height <= free.width)) {
+						break;
+					}
+					best = free;
+				}
+			}
+		}
+
+		return index;
+	}
+
+	/**
+	 * Allocates new rectangle. If one available in stack uses that, otherwise
+	 * new.
+	 * 
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @return
+	 */
+	private Rectangle allocateRectangle(double x, double y, double width,
+			double height) {
+		if (mRectangleStack.size() > 0) {
+			int index = mRectangleStack.size() - 1;
+			Rectangle rectangle = mRectangleStack.remove(index);
+			rectangle.x = x;
+			rectangle.y = y;
+			rectangle.width = width;
+			rectangle.height = height;
+
+			return rectangle;
+		}
+
+		return new Rectangle(x, y, width, height);
+	}
+
+	/**
+	 * Pushes the freed rectangle to rectangle stack. Make sure not to push same
+	 * rectangle twice!
+	 * 
+	 * @param rectangle
+	 */
+	private void freeRectangle(Rectangle rectangle) {
+		mRectangleStack.add(rectangle);
+	}
+
+	/**
+	 * Allocates new sortable size instance. If one available in stack uses
+	 * that, otherwise new.
+	 * 
+	 * @param width
+	 * @param height
+	 * @param id
+	 * @return
+	 */
+	private SortableSize allocateSize(double width, double height, int id) {
+		if (mSortableSizeStack.size() > 0) {
+			int index = mSortableSizeStack.size() - 1;
+			SortableSize size = mSortableSizeStack.remove(index);
+			size.setWidth(width);
+			size.setHeight(height);
+			size.setId(id);
+
+			return size;
+		}
+
+		return new SortableSize(width, height, id);
+	}
+
+	/**
+	 * Pushes the freed sortable size to size stack. Make sure not to push same
+	 * size twice!
+	 * 
+	 * @param size
+	 */
+	private void freeSize(SortableSize size) {
+		mSortableSizeStack.add(size);
+	}
 }
