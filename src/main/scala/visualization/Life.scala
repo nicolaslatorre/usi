@@ -32,14 +32,14 @@ class Life(val start: LocalDate, val end: LocalDate, val interval: Int) {
   }
 
   /**
-   * Mapping
+   * Mapping between a date and the index of a step
    */
   def getStepsMapping() = {
     val steps = days
-    val monthSteps = steps.grouped(interval).toList
+    val intervalSteps = steps.grouped(interval)
 
-    monthSteps.zipWithIndex.map { case(steps, index) =>
-      steps.map {
+    intervalSteps.zipWithIndex.map { case(steps, index) =>
+      steps.par.map {
         step =>
           val date = increment(step)
           date -> index

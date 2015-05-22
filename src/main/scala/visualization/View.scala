@@ -72,6 +72,8 @@ class View(val model: Model) extends Frame {
       val labelTag = new Label("\tOccurrences: ")
       val occurrences = new Label(model.tree.root.tag.count.toString)
       val showList = new Button("Show List")
+      
+      
       contents += label
       contents += text
       contents += labelTag

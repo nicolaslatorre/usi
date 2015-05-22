@@ -2,7 +2,7 @@ package database
 
 import org.squeryl.PrimitiveTypeMode._
 import scala.util.Random
-import org.joda.time.LocalDate
+import com.github.nscala_time.time.Imports.LocalDate
 import com.github.tototoshi.csv.CSVWriter
 import java.io.File
 import org.joda.time.Months
@@ -72,27 +72,56 @@ object TagFactory {
 
   def mainTagVector(url: String, username: String, password: String, life: Life, date2step: Map[LocalDate, Int]) = {
     val levels = 5
-    //    val vector = getVectorsFromTag(url, username, password, levels, date2step, interval)
+    val path = "../dayCounts.csv"
+    val file = new File(path)
 
-    val file = new File("../dayCounts.csv")
-    val reader = CSVReader.open(file).all.map { line =>
-      val tags = line.head.split(" ").toList
+    //    val lines = CSVReader.open(file).iterator.grouped(500000)
+    val iterator = CSVReader.open(file).iterator.grouped(1000000)
+    println("Opened File")
 
-      val counts = line.tail.map {
-        case (cell) =>
-          val Array(step, count) = cell.split(" ") // daily steps, we need to adapt them
-          val date = life.increment(step.toInt)
-          val key = date2step.get(date).get // retrieve actual step
-          key -> count.toInt
-      }.groupBy { case (step, count) => step }.mapValues { counts =>
-        val c = counts.map { case (step, count) => count }.sum
-        c
-      }.map {
-        case (step, count) =>
-          life.increment(step * life.interval) -> count
+    val reader = iterator.flatMap { lines =>
+      lines.par.map { line =>
+        val firstCell = line.head
+        val tags = firstCell.split(" ").toList
+
+        val counts = line.tail.map {
+          cell =>
+            val Array(step, count) = cell.split(" ") // daily steps, we need to adapt them to the desired interval
+            val date = life.increment(step.toInt)
+            val index = date2step.get(date).getOrElse(0) // retrieve actual step
+            index -> count.toInt
+        }.groupBy { case (step, count) => step }.mapValues { counts =>
+          val c = counts.map { case (step, count) => count }.sum
+          c
+        }.map {
+          case (step, count) =>
+            life.increment(step * life.interval) -> count
+        }.toMap
+        tags -> counts
       }
-      tags -> counts
-    }.toMap
+    }.toMap//.foldLeft(Map[List[String], Map[LocalDate, Int]]())((m1, m2) => m1 ++ m2)
+
+    // For some mistery reasons, lines.iterator.toList at this point, speed up the whole computation dramatically.
+    // If we put it in the declaration of the variable lines, it is slower.
+//    val reader = iterator.toList.par.map { line =>
+//      val firstCell = line.head
+//      val tags = firstCell.split(" ").toList
+//
+//      val counts = line.tail.map {
+//        cell =>
+//          val Array(step, count) = cell.split(" ") // daily steps, we need to adapt them
+//          val date = life.increment(step.toInt)
+//          val key = date2step.get(date).getOrElse(0) // retrieve actual step
+//          key -> count.toInt
+//      }.groupBy { case (step, count) => step }.mapValues { counts =>
+//        val c = counts.map { case (step, count) => count }.sum
+//        c
+//      }.map {
+//        case (step, count) =>
+//          life.increment(step * life.interval) -> count
+//      }.toList.toMap
+//      tags -> counts
+//    }.toMap
 
     val mainVector = reader.toList.sortBy { case (x, y) => y.values.max }.reverse
     println("Main vector created")
