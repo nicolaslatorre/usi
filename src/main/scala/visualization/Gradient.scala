@@ -2,9 +2,9 @@ package visualization
 
 import java.awt.Color
 
-class Gradient(val startColor: Color, val endColor: Color, val levels: Int) {
+object Gradient {
 
-  def createGradient(maxHeight: Int) = {
+  def createGradient(startColor: Color, endColor: Color, levels: Int) = {
     val ls = (0 to levels)
 
     var red1 = startColor.getRed

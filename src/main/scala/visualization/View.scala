@@ -2,34 +2,36 @@ package visualization
 
 import java.awt.Color
 import java.awt.Dimension
+import java.awt.Font
 import java.awt.Toolkit
 import java.awt.geom.Rectangle2D
-import java.util.Date
+
 import scala.swing.BorderPanel
 import scala.swing.BorderPanel.Position.Center
+import scala.swing.BorderPanel.Position.East
 import scala.swing.BorderPanel.Position.North
 import scala.swing.BorderPanel.Position.South
-import scala.swing.BorderPanel.Position.East
 import scala.swing.BoxPanel
 import scala.swing.Button
 import scala.swing.FlowPanel
 import scala.swing.Frame
 import scala.swing.Graphics2D
 import scala.swing.Label
+import scala.swing.ListView
 import scala.swing.Orientation
 import scala.swing.Panel
 import scala.swing.ScrollPane
 import scala.swing.Slider
+import scala.swing.TextField
+
 import com.github.nscala_time.time.Imports.Interval
 import com.github.nscala_time.time.Imports.LocalDate
 import com.github.nscala_time.time.Imports.richAbstractPartial
 import com.github.nscala_time.time.Imports.richDate
+
 import javax.swing.ImageIcon
 import javax.swing.SwingUtilities
 import javax.swing.WindowConstants.EXIT_ON_CLOSE
-import scala.swing.TextField
-import org.joda.time.Months
-import scala.swing.ListView
 
 object Starter {
   def main(args: Array[String]) {
@@ -41,8 +43,9 @@ object Starter {
     val endDate = new LocalDate(2015, 3, 8)
     val interval = 7
     val life = new Life(startDate, endDate, interval)
+    val name = "StackOverflow"
 
-    val model = new Model(url, username, password, life)
+    val model = new Model(url, username, password, life, name)
 
     SwingUtilities.invokeLater(new Runnable {
       def run {
@@ -56,52 +59,59 @@ object Starter {
 }
 
 class View(val model: Model) extends Frame {
-  title = "StackOverflow Viewer"
+  title = "StackOverflow Dataset Almanac"
   peer.setDefaultCloseOperation(EXIT_ON_CLOSE)
+  val life = model.life
 
-  val panel = new BorderPanel {
-    val canvas = new Canvas(model)
+  val mainPanel = new BorderPanel {
     val scrollPane = new ScrollPane() {
+      val canvas = new Canvas(model)
       contents = canvas
     }
 
-    val menuEast = new FlowPanel() {
-      preferredSize = new Dimension(1440, 30)
-      val label = new Label("Path: ")
-      val text = new Label("Stack Overflow")
-      val labelTag = new Label("\tOccurrences: ")
-      val occurrences = new Label(model.tree.root.tag.count.toString)
-      val showList = new Button("Show List")
-      
-      
-      contents += label
-      contents += text
-      contents += labelTag
-      contents += occurrences
-      contents += showList
+    val northPanel = new BoxPanel(Orientation.Vertical) {
+      preferredSize = new Dimension(1440, 100)
+
+      val menuPanel = createMenuPanel()
+
+      val homePanel = createHomePanel()
+
+      val buttonPanel = new BoxPanel(Orientation.Horizontal) {
+        val intervalSelection = new FlowPanel {
+          val intervalLabel = new Label {
+            text = "Interval length in days: "
+          }
+
+          val intervalValue = new TextField("1", 10)
+
+          contents += intervalLabel
+          contents += intervalValue
+        }
+
+        //        contents += monthInterval
+
+      }
+
+      contents += menuPanel
+      contents += homePanel
     }
 
-    val selectionMenu = new BoxPanel(Orientation.Vertical) {
+    val tagListPanel = new BoxPanel(Orientation.Vertical) {
       preferredSize = new Dimension(200, 800)
-      val number = new Label("Number of tags: " + model.tree.root.children.size.toString)
-      contents += number
-      val list = new ListView(model.locations.map { location => location.tags }.sorted)
+      val list = new ListView(model.locations.map { location => location.getTagsAsString() }.sorted)
       val scrollPane = new ScrollPane() {
         contents = list
       }
-      contents += number
       contents += scrollPane
-
       visible = false
     }
 
-    val sliderPanel = new BoxPanel(Orientation.Vertical) {
-      preferredSize = new Dimension(1440, 80)
+    val playerPanel = new BoxPanel(Orientation.Vertical) {
+      preferredSize = new Dimension(1440, 120)
 
       val slider = new Slider() {
         preferredSize = new Dimension(1440, 40)
         val life = model.life
-
         val steps = life.days.grouped(life.interval).zipWithIndex.map { case (step, index) => index }.toList // horrible
 
         min = 0
@@ -112,83 +122,201 @@ class View(val model: Model) extends Frame {
         paintLabels = true
         paintTicks = true
 
-        //val valueDate = life.start
-        value = min //model.date2step.getOrElse(valueDate, 0)
+        value = min
         majorTickSpacing = 1 // one step
       }
 
-      val buttonPanel = new BoxPanel(Orientation.Horizontal) {
-        val selectionButton = new Button {
-          text = "Select"
-          visible = false
-        }
-        
-        val graphLineButton = new Button("Line Chart")
-        
-        val graphButton = new Button("Bar Chart")
+      val playerButtonPanel = new BoxPanel(Orientation.Horizontal) {
+        val startButton = createButtonWithImage("../Images/mono-player-start.png", 24, 24)
+        val playButton = createButtonWithImage("../Images/mono-player-play.png", 24, 24)
+        val stopButton = createButtonWithImage("../Images/mono-player-stop.png", 24, 24)
+        val endButton = createButtonWithImage("../Images/mono-player-end.png", 24, 24)
 
-        val startButton = new Button {
-          icon = new ImageIcon(new ImageIcon("../Images/mono-player-start.png").getImage.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH))
-        }
-
-        val playButton = new Button {
-          icon = new ImageIcon(new ImageIcon("../Images/mono-player-play.png").getImage.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH))
-        }
-
-        val stopButton = new Button {
-          icon = new ImageIcon(new ImageIcon("../Images/mono-player-stop.png").getImage.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH))
-        }
-
-        val endButton = new Button {
-          icon = new ImageIcon(new ImageIcon("../Images/mono-player-end.png").getImage.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH))
-        }
-
-        val dateLabel = new Label {
-          val life = slider.life
-          text = life.start.toString()
-        }
-
-        val monthInterval = new FlowPanel {
-          val monthLabel = new Label {
-            text = "Window interval length in months: "
+        val intervalSelection = new FlowPanel(FlowPanel.Alignment.Center)() {
+          val intervalLabel = new Label {
+            text = "Interval length in days: "
           }
 
-          val monthValue = new TextField("1", 10)
+          val intervalValue = new TextField("1", 10)
 
-          contents += monthLabel
-          contents += monthValue
+          contents += intervalLabel
+          contents += intervalValue
         }
 
-        contents += graphLineButton
-        contents += graphButton
-        contents += selectionButton
         contents += startButton
         contents += playButton
         contents += stopButton
         contents += endButton
-        contents += dateLabel
-        //        contents += monthInterval
+      }
 
+      val datePanel = new FlowPanel(FlowPanel.Alignment.Center)() {
+        val dateLabel = new Label {
+          text = life.start.toString()
+          font = new Font("Ariel", java.awt.Font.BOLD, 20)
+        }
+        contents += dateLabel
       }
 
       contents += slider
-      contents += buttonPanel
+      contents += playerButtonPanel
+      contents += datePanel
+      visible = false
     }
 
     layout(scrollPane) = Center
-    layout(menuEast) = North
-    layout(sliderPanel) = South
-    layout(selectionMenu) = East
+    layout(northPanel) = North
+    layout(playerPanel) = South
+    layout(tagListPanel) = East
   }
-  contents = panel
+  contents = mainPanel
   pack
+
+  def createButtonWithImage(path: String, width: Int, height: Int) = {
+    new Button {
+      icon = new ImageIcon(new ImageIcon(path).getImage.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH))
+    }
+  }
+
+  def createMenuPanel() = {
+    new FlowPanel(FlowPanel.Alignment.Left)() {
+      val player = new Button("Player")
+      val charts = new Button("Charts")
+      val tagList = new Button("Tag List")
+
+      contents += player
+      contents += charts
+      contents += tagList
+    }
+  }
+
+  def createHomePanel() = {
+    new FlowPanel(FlowPanel.Alignment.Left)() {
+
+      // MAIN PANEL
+      val mainInfoPanel = new BoxPanel(Orientation.Vertical) {
+
+        // Name Panel
+        val namePanel = new FlowPanel(FlowPanel.Alignment.Left)() {
+          val datasetNameLabel = new Label("Dataset: ")
+          val datasetName = new Label(model.name)
+
+          contents += datasetNameLabel
+          contents += datasetName
+        }
+
+        // Path Panel
+        val pathInfoPanel = new FlowPanel(FlowPanel.Alignment.Left)() {
+          val pathLabel = new Label("Current Tag Path: ")
+          val path = new Label("Root")
+
+          contents += pathLabel
+          contents += path
+        }
+
+        // Add to Panel
+        contents += namePanel
+        contents += pathInfoPanel
+      }
+
+      // TOTAL PANEL
+      val totalInfoPanel = new BoxPanel(Orientation.Vertical) {
+
+        // Tags Panel
+        val totalTagsPanel = new FlowPanel(FlowPanel.Alignment.Left)() {
+          val totalTagLabel = new Label("Total Number Of Tags: ")
+          val totalTag = new Label() {
+            val total = model.getTotalDataset()
+            text = total.toString
+          }
+
+          contents += totalTagLabel
+          contents += totalTag
+        }
+
+        // Discussion Panel
+        val totalDiscussionsPanel = new FlowPanel(FlowPanel.Alignment.Left)() {
+          val totalDiscussionsLabel = new Label("Total Discussions: ")
+          val totalDiscussions = new Label() {
+            val total = model.getTotalOccurrences
+            text = total.toString
+          }
+
+          contents += totalDiscussionsLabel
+          contents += totalDiscussions
+        }
+
+        // Add to Panel
+        contents += totalTagsPanel
+        contents += totalDiscussionsPanel
+
+      }
+
+      // CURRENT PANEL
+      val currentInfoPanel = new BoxPanel(Orientation.Vertical) {
+        // Tags Panel
+        val currentTagsPanel = new FlowPanel(FlowPanel.Alignment.Left)() {
+          val currentTagLabel = new Label("Tags in Interval: ")
+          val currentTag = new Label() {
+            val total = model.getTagNumberInInterval()
+            text = total.toString
+          }
+
+          contents += currentTagLabel
+          contents += currentTag
+        }
+
+        // Discussion Panel
+        val currentDiscussionsPanel = new FlowPanel(FlowPanel.Alignment.Left)() {
+          val currentDiscussionsLabel = new Label("Discussions in Interval: ")
+          val currentDiscussions = new Label() {
+            val total = model.getCurrentTotalOccurences(life.start)
+            text = total.toString
+          }
+
+          contents += currentDiscussionsLabel
+          contents += currentDiscussions
+        }
+
+        // Add to Panel
+        contents += currentTagsPanel
+        contents += currentDiscussionsPanel
+      }
+
+      // NAVIGATION PANEL
+      val navigationPanel = new BoxPanel(Orientation.Vertical) {
+
+        val inspectButton = new Button("Inspect") {
+          enabled = false
+        }
+
+        val clearButton = new Button("Clear")
+
+        contents += inspectButton
+        contents += clearButton
+      }
+
+      // CHART PANEL
+      val chartsPanel = new BoxPanel(Orientation.Vertical) {
+        val lineChartButton = new Button("Line Chart")
+        val barChartButton = new Button("Bar Chart")
+
+        contents += lineChartButton
+        contents += barChartButton
+        visible = false
+      }
+
+      contents += mainInfoPanel
+      contents += totalInfoPanel
+      contents += currentInfoPanel
+      contents += navigationPanel
+      contents += chartsPanel
+
+    }
+  }
 }
 
 class Canvas(val model: Model) extends Panel {
-  requestFocus()
   preferredSize = new Dimension(2000, 2000) //Toolkit.getDefaultToolkit.getScreenSize
-  println(preferredSize.getWidth + ", " + preferredSize.getHeight)
-
   val backgroundColor = Color.WHITE
   opaque = true
   background = backgroundColor
@@ -197,28 +325,27 @@ class Canvas(val model: Model) extends Panel {
   var offsetY = 0.0
 
   var locations = model.locations
-  val currentGradient = model.currentGradient
+  val gradient = model.gradient
 
   var changingViewPort = false
   var drawBorders = true
 
   override def paintComponent(g: Graphics2D) = {
     super.paintComponent(g)
-    println("(View) Total location: " + locations.size)
 
     val size = Toolkit.getDefaultToolkit.getScreenSize
     val currentNodeChildrens = locations.tail
 
-    currentNodeChildrens.filter{ node => isInRectangle(node, node.rectangle)}.foreach { location =>
-      val rect = location.rectangle
-      val sub = location.internalRectangle
-      if (rect != null) {
+    currentNodeChildrens.filter { location => isInRectangle(location, location.getRectangle()) }.foreach { location =>
+      val rectangle = location.getRectangle()
+      val sub = location.getInternalRectangle()
+      if (rectangle != null) {
         val offset = new Point(offsetX, offsetY)
-        val pointExternal = (new Point(rect.x, rect.y) + offset) * zoomFactor
+        val pointExternal = (new Point(rectangle.x, rectangle.y) + offset) * zoomFactor
 
         if (drawBorders) {
           g.setColor(Color.BLACK)
-          g.draw(new Rectangle2D.Double(pointExternal.x, pointExternal.y, rect.width * zoomFactor, rect.height * zoomFactor))
+          g.draw(new Rectangle2D.Double(pointExternal.x, pointExternal.y, rectangle.width * zoomFactor, rectangle.height * zoomFactor))
         }
 
         g.setColor(Color.BLACK)
@@ -226,7 +353,7 @@ class Canvas(val model: Model) extends Panel {
         g.draw(new Rectangle2D.Double(pointInternal.x, pointInternal.y, sub.width * zoomFactor, sub.height * zoomFactor))
 
         val key = (location.count / model.maxHeight.toDouble) * 30
-        g.setColor(currentGradient.get(key.toInt).get)
+        g.setColor(gradient.get(key.toInt).get)
 
         //        val toPaintRect = new Rectangle2D.Double(rect.x, rect.y, rect.width, rect.height)
         val toPaintRect = new Rectangle2D.Double(pointInternal.x, pointInternal.y, sub.width * zoomFactor, sub.height * zoomFactor)
@@ -235,37 +362,38 @@ class Canvas(val model: Model) extends Panel {
 
         if (key > 15) g.setColor(Color.WHITE) else g.setColor(Color.BLACK)
 
-        val tagIndex = location.tags.lastIndexOf(" ")
+        val tags = location.getTagsAsString()
+        val tagIndex = tags.lastIndexOf(" ")
         val message = {
-          if (tagIndex == -1) location.tags
-          else location.tags.substring(tagIndex, location.tags.length)
+          if (tagIndex == -1) tags
+          else tags.substring(tagIndex, tags.length)
         }
-        if (rect.width >= 50) {
-          val pointMessage = new Point(pointInternal.x, pointExternal.y) + new Point(0.0, (rect.height/2) * zoomFactor)
-         g.drawString(message.toString, pointMessage.x.toInt, pointMessage.y.toInt) 
+        if (rectangle.width >= 50) {
+          val pointMessage = new Point(pointInternal.x, pointExternal.y) + new Point(0.0, (rectangle.height / 2) * zoomFactor)
+          g.drawString(message.toString, pointMessage.x.toInt, pointMessage.y.toInt)
         }
         if (location.selected) {
           g.setColor(Color.RED)
           g.fillOval(pointExternal.x.toInt, pointExternal.y.toInt, 8, 8)
-          g.draw(new Rectangle2D.Double(pointExternal.x, pointExternal.y, (rect.width-1) * zoomFactor, (rect.height-1) * zoomFactor))
+          g.draw(new Rectangle2D.Double(pointExternal.x, pointExternal.y, (rectangle.width - 1) * zoomFactor, (rectangle.height - 1) * zoomFactor))
         }
       } else {
-        println(location.tags + " is null with occurrences: " + location.count)
+        println(location.getTagsAsString() + " is null with occurrences: " + location.count)
       }
     }
     println("(View) Drew squares")
   }
-  
-  def isInRectangle(location: Location, rect: Rectangle) = {
+
+  def isInRectangle(location: Location, rectangle: ScalaRectangle) = {
     val offset = new Point(offsetX, offsetY)
     val zoom = zoomFactor
     val size = Toolkit.getDefaultToolkit.getScreenSize
 
-    val topLeft = (new Point(rect.x, rect.y) + offset) * zoom
-    val bottomRight = (new Point(rect.x + rect.width, rect.y + rect.height) + offset) * zoom
+    val topLeft = (new Point(rectangle.x, rectangle.y) + offset) * zoom
+    val bottomRight = (new Point(rectangle.x + rectangle.width, rectangle.y + rectangle.height) + offset) * zoom
 
     if (topLeft.x > size.getWidth || bottomRight.x < 0.0) false
-    else if (topLeft.y > size.getHeight|| bottomRight.y < 0.0) false
+    else if (topLeft.y > size.getHeight || bottomRight.y < 0.0) false
     else true
   }
 

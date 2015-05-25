@@ -15,6 +15,10 @@ class Life(val start: LocalDate, val end: LocalDate, val interval: Int) {
   def incrementDate(date: LocalDate) = {
     date.plusDays(interval)
   }
+  
+  def incrementByInterval(value: Int) = {
+    increment(value * interval)
+  }
 
   def days = {
     val ds = Days.daysBetween(start, end)
@@ -38,13 +42,13 @@ class Life(val start: LocalDate, val end: LocalDate, val interval: Int) {
     val steps = days
     val intervalSteps = steps.grouped(interval)
 
-    intervalSteps.zipWithIndex.map { case(steps, index) =>
+    intervalSteps.zipWithIndex.flatMap { case(steps, index) =>
       steps.par.map {
         step =>
-          val date = increment(step)
-          date -> index
+//          val date = increment(step)
+          step -> index
       }.toMap
-    }.foldLeft(Map[LocalDate, Int]())((m1, m2) => m1 ++ m2)
+    }.toMap//.foldLeft(Map[Int, Int]())((m1, m2) => m1 ++ m2)
   }
 
 }

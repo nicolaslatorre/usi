@@ -25,91 +25,93 @@ import org.jfree.chart.JFreeChart
 import java.awt.geom.Rectangle2D
 
 class Control(val model: Model, val view: View) {
-  val canvas = view.panel.canvas
-  val buttons = view.panel.sliderPanel.buttonPanel
-  val slider = view.panel.sliderPanel.slider
-  val selectionMenu = view.panel.selectionMenu
-  val showButton = view.panel.menuEast.showList
+  //PANELS
+  val panel = view.mainPanel
+
+  // Player Panel
+  val playerPanel = panel.playerPanel
+  val slider = playerPanel.slider
+  val playerButtonsPanel = playerPanel.playerButtonPanel
+  val datePanel = playerPanel.datePanel
+
+  // North Panel
+  val northPanel = panel.northPanel
+
+  // Home Panel
+  val homePanel = northPanel.homePanel
+  val mainInfoPanel = homePanel.mainInfoPanel
+  val currentInfoPanel = homePanel.currentInfoPanel
+  val navigationPanel = homePanel.navigationPanel
+  val chartsPanel = homePanel.chartsPanel
+
+  // Menu Panel
+  val menuPanel = northPanel.menuPanel
+
+  // Canvas Panel
+  val scrollPane = panel.scrollPane
+  val canvas = scrollPane.canvas
+
+  // Tag List Panel
+  val tagListPanel = panel.tagListPanel
+
+  // BUTTONS
+  // Tag list button
+  val showTagsButton = menuPanel.tagList
+
+  // Navigation buttons
+  val inspectButton = navigationPanel.inspectButton
+  val clearButton = navigationPanel.clearButton
+
+  // Player buttons
+  val player = menuPanel.player
+  val playButton = playerButtonsPanel.playButton
+  val stopButton = playerButtonsPanel.stopButton
+  val startButton = playerButtonsPanel.startButton
+  val endButton = playerButtonsPanel.endButton
+
+  // Chart buttons
+  val chartsButton = menuPanel.charts
+  val lineChartButton = chartsPanel.lineChartButton
+  val barChartButton = chartsPanel.barChartButton
 
   var isRunning = false
   var inSelection = false
-
-  view.listenTo(canvas, canvas.mouse.clicks, canvas.mouse.moves, canvas.mouse.wheel, view.panel.canvas.keys, showButton, selectionMenu.list.selection, buttons.playButton,
-    buttons.startButton, buttons.endButton, buttons.stopButton, buttons.stopButton, buttons.selectionButton, slider, buttons.monthInterval.monthValue.keys, buttons.graphButton,
-    buttons.graphLineButton)
+  var currentDate = model.life.start
   var x = 0
   var y = 0
+
+  view.listenTo(canvas, canvas.mouse.clicks, canvas.mouse.moves, canvas.mouse.wheel, canvas.keys, slider, showTagsButton, tagListPanel.list.selection, playButton,
+    startButton, endButton, stopButton, player, inspectButton, clearButton, chartsButton, lineChartButton, barChartButton)
 
   view.reactions += {
 
     case e: MouseClicked =>
-      val nrClicks = e.clicks
-      if (e.peer.getButton == java.awt.event.MouseEvent.BUTTON1 && nrClicks == 2) { // jump
+      val peer = e.peer
+      val clicks = e.clicks
+      val point = e.point
+      val clicked = new Point(point.getX, point.getY)
+      val locations = canvas.locations
+      val clickedLocations = locations.filter { location => location.rectangle != None }.flatMap { location =>
+        isInRectangle(clicked, location, location.getRectangle())
+      }
 
-        val point = new Point(e.point.getX, e.point.getY)
-        val locations = canvas.locations
-
-        val ls = locations.filter { x => x.rectangle != null }.flatMap { x =>
-          isInRectangle(point, x, x.rectangle)
-        }
-
-        if (ls.size > 0) {
-          println("Square in point: " + ls.size)
-          ls.foreach { x =>
-            println("Jumping into " + x.tags)
-            val tree = model.tree
-            val node = tree.search(tree.root, x.getTagsAsList())
-            updateGradient(node)
-            canvas.locations = model.computeModel(x.tags, model.currentDate)
-            updateSelectionMenu()
-            updateMenu(x.tags, x.count.toString)
-
-            view.repaint()
+      if (peer.getButton == java.awt.event.MouseEvent.BUTTON1 && clicks == 2) { // jump
+        if (clickedLocations.size > 0) {
+          clickedLocations.foreach { location =>
+            updateModel(Some(location))
           }
         }
 
       }
-      if (e.peer.getButton == java.awt.event.MouseEvent.BUTTON1 && nrClicks == 1) { // select
-        val point = new Point(e.point.getX, e.point.getY)
-        val locations = canvas.locations
+      if (peer.getButton == java.awt.event.MouseEvent.BUTTON3 && clicks == 1) { // select
 
-        val ls = locations.filter { x => x.rectangle != null }.flatMap { x =>
-          isInRectangle(point, x, x.rectangle)
-        }
+        if (clickedLocations.size > 0) {
+          println("Square in point: " + clickedLocations.size)
+          val location = clickedLocations.head
+          location.selected = !location.selected
+          val tags = location.getTagsAsString()
 
-        if (ls.size > 0) {
-          println("Square in point: " + ls.size)
-          ls.foreach { x =>
-            println("Selected " + x.tags)
-            x.selected = !x.selected
-
-            val g = canvas.peer.getGraphics
-            val rect = x.rectangle
-            if (x.selected) {
-              val offset = getOffset()
-              val zoom = getZoom()
-
-              val pointOval = (new Point(rect.x, rect.y) + offset) * zoom
-
-              g.setColor(Color.RED)
-              g.fillOval(pointOval.x.toInt, pointOval.y.toInt, 8, 8)
-              val width = (x.rectangle.width-1) * canvas.zoomFactor
-              val height = (x.rectangle.height-1) * canvas.zoomFactor
-              g.drawRect(pointOval.x.toInt, pointOval.y.toInt, width.toInt, height.toInt)
-            } else {
-              canvas.repaint()
-            }
-          }
-
-          if (!existSelected()) {
-            inSelection = false
-            buttons.selectionButton.visible = false
-            updateModel()
-            canvas.repaint()
-          } else {
-            inSelection = true
-            buttons.selectionButton.visible = true
-          }
+          updateSelectionInCanvas(location)
         }
       }
     //      if (e.peer.getButton == java.awt.event.MouseEvent.BUTTON3) {
@@ -132,9 +134,6 @@ class Control(val model: Model, val view: View) {
       } else {
         canvas.zoomFactor += 0.1
       }
-
-      println("CURRENT ZOOM: " + canvas.zoomFactor)
-
       view.repaint()
 
     case MousePressed(_, p, _, _, _) =>
@@ -167,9 +166,9 @@ class Control(val model: Model, val view: View) {
     case e: MouseEvent =>
       val point = e.point
 
-      val locations = canvas.locations.filter { x => x.rectangle != null }
-      val ls = locations.filter { x =>
-        isInRectangle(new Point(point.getX, point.getY), x, x.rectangle) match {
+      val locations = canvas.locations.filter { location => location.rectangle != None }
+      val ls = locations.filter { location =>
+        isInRectangle(new Point(point.getX, point.getY), location, location.getRectangle()) match {
           case Some(l) => true
           case None => false
         }
@@ -177,7 +176,9 @@ class Control(val model: Model, val view: View) {
 
       if (ls.size > 0) {
         val infos = ls.map { location =>
-          "tag: " + location.tags + "<br>occurrences: " + location.count + "<br>total occurrences: " + location.totalCount + "<br>ids: " //+ 
+          val tags = location.getTagsAsString()
+          val totalCount = location.getTotalCount()
+          "Tag: " + tags + "<br>Discussions: " + location.count + "<br>Total Discussions: " + totalCount + "<br>ids: " //+ 
           //          location.ids.map { 
           //            case (date, id) =>
           //              "<br> " + id.map { i => i.toString }.toList.mkString("<br>")
@@ -192,246 +193,166 @@ class Control(val model: Model, val view: View) {
 
     case KeyReleased(_, Key.BackSpace, _, _) =>
       val head = canvas.locations.head
-      val index = head.tags.lastIndexOf(" ")
-
+      val headTags = head.getTagsAsString()
+      val index = headTags.lastIndexOf(" ")
       val tree = model.tree
 
       if (index == -1) {
         updateGradient(tree.root)
-        canvas.locations = model.computeModel("", model.currentDate)
+        canvas.locations = model.computeModel(Nil, currentDate)
 
-        updateSelectionMenu()
-        updateMenu("Stack Overflow", canvas.locations.head.count.toString)
+        updateSelectionMenu(canvas.locations)
+
+        val discussionCount = canvas.locations.head.count
+        val tagCount = canvas.locations.drop(1).size
+        updateMenu(List("Root"), tagCount.toString, discussionCount.toString)
       } else {
 
         //Retrieve the tags
-        val filteredTags = canvas.locations.filter { location => location.selected }.map { loc =>
-          val tags = loc.tags
+        val filteredTags = canvas.locations.filter { location => location.selected }.map { location =>
+          val tags = location.getTagsAsString()
           val index = tags.lastIndexOf(" ")
           tags.substring(0, index)
         }
-        val node = tree.search(tree.root, head.tags.substring(0, index).split(" ").toList)
+        val node = tree.search(tree.root, headTags.substring(0, index).split(" ").toList)
         updateGradient(node)
-        canvas.locations = model.computeModel(head.tags.substring(0, index), model.currentDate, filteredTags)
-        updateSelectionMenu()
-        updateMenu(canvas.locations.head.tags, canvas.locations.head.count.toString)
+        canvas.locations = model.computeModel(headTags.substring(0, index).split(" ").toList, currentDate, filteredTags)
+        updateSelectionMenu(canvas.locations)
+        val tagCount = canvas.locations.drop(1).size
+        val discussionCount = canvas.locations.head.count
+        updateMenu(headTags.substring(0, index).split(" ").toList, tagCount.toString, discussionCount.toString)
       }
 
       view.repaint()
 
     case KeyReleased(_, Key.C, _, _) =>
-      canvas.locations = canvas.locations.map { location =>
-        location.selected = false
-        location
-      }
-
-      updateModel()
-      buttons.selectionButton.visible = false
-      view.repaint()
+      clearSelection()
 
     case KeyReleased(_, Key.M, _, _) =>
       canvas.drawBorders = !canvas.drawBorders
-
       updateModel()
-      view.repaint()
 
     case KeyReleased(_, Key.R, _, _) =>
       canvas.offsetX = 0.0
       canvas.offsetY = 0.0
       canvas.zoomFactor = 1.0
-
       updateModel()
-      view.repaint()
 
     case ButtonClicked(b) =>
-      if (b == buttons.selectionButton) {
-        println("Selection")
+      if (b == inspectButton) {
         inSelection = false
         updateModel()
-
-        buttons.selectionButton.visible = false
-
-        canvas.requestFocus()
-        view.repaint()
-
+        inspectButton.enabled = false
       }
-      if (b == view.panel.sliderPanel.buttonPanel.playButton) {
+
+      if (b == clearButton) {
+        clearSelection()
+      }
+
+      if (b == chartsButton) {
+        chartsPanel.visible = !chartsPanel.visible
+        canvas.requestFocus()
+      }
+
+      if (b == player) {
+        playerPanel.visible = !playerPanel.visible
+        canvas.requestFocus()
+      }
+
+      if (b == playButton) {
         isRunning = true
         println("Play")
         val thread = new Thread {
           override def run {
             val life = model.life
-            while (isRunning && (model.currentDate < life.end)) {
+            while (isRunning && (currentDate < life.end)) {
               slider.value += 1
-
-              val head = canvas.locations.head
-              model.currentDate = incrementDate()
-
-              val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
-              println("(Control) tags: " + filteredTags)
-
-              canvas.locations = model.computeModel(head.tags, model.currentDate, filteredTags)
-              updateSelectionMenu()
-
-              buttons.dateLabel.peer.setText(model.currentDate.toString)
-              updateMenu(head.tags, head.count.toString)
-              canvas.requestFocus()
-              //canvas.peer.paintImmediately(0, 0, 1440, 900)
+              currentDate = incrementDate()
+              datePanel.dateLabel.peer.setText(currentDate.toString)
+              updateModel()
               canvas.peer.paintImmediately(0, 0, canvas.preferredSize.getWidth.toInt, canvas.preferredSize.getHeight.toInt)
-
               Thread.sleep(200)
             }
-
           }
         }.start
 
       }
 
-      if (b == view.panel.sliderPanel.buttonPanel.stopButton) {
+      if (b == stopButton) {
         println("Stop")
         isRunning = false
-
-        val head = canvas.locations.head
-        if (head.tags == "") updateMenu("Stack Overflow", head.count.toString) else updateMenu(head.tags, head.count.toString)
-        //        val valueDate = model.startDate
-        //        slider.value = model.months.getOrElse(valueDate, 0)
-
-        canvas.requestFocus()
-        view.repaint()
+        updateModel()
       }
 
-      if (b == view.panel.sliderPanel.buttonPanel.startButton) {
+      if (b == startButton) {
         println("Start")
         val life = model.life
-        val head = canvas.locations.head
-        model.currentDate = life.start
-
-        val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
-
-        canvas.locations = model.computeModel(head.tags, model.currentDate, filteredTags)
-        updateSelectionMenu()
-
-        if (head.tags == "") updateMenu("Stack Overflow", head.count.toString) else updateMenu(head.tags, head.count.toString)
-
+        currentDate = life.start
+        updateModel()
         slider.value = slider.min
-        canvas.requestFocus()
-        view.repaint()
       }
 
-      if (b == view.panel.sliderPanel.buttonPanel.endButton) {
+      if (b == endButton) {
         println("End")
-        val head = canvas.locations.head
         val life = model.life
-        model.currentDate = life.end
-
-        val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
-
-        canvas.locations = model.computeModel(head.tags, model.currentDate, filteredTags)
-        updateSelectionMenu()
-
-        if (head.tags == "") updateMenu("Stack Overflow", head.count.toString) else updateMenu(head.tags, head.count.toString)
-
+        currentDate = life.end
+        updateModel()
         slider.value = slider.max
-        canvas.requestFocus()
-        view.repaint()
       }
 
-      if (b == buttons.graphLineButton) {
-        println("Line")
+      if (b == lineChartButton) {
         val head = canvas.locations.head
         val life = model.life
         val selected = canvas.locations.filter { location => location.selected }
 
         val chart = Graph.drawLineCharGraph(selected, life)
         buildFrame(chart)
-
-        canvas.requestFocus()
       }
 
-      if (b == buttons.graphButton) {
-        println("Bar")
+      if (b == barChartButton) {
         val head = canvas.locations.head
         val life = model.life
         val selected = canvas.locations.filter { location => location.selected }
 
         val chart = Graph.drawBarCharGraph(selected, life)
         buildFrame(chart)
-
-        canvas.requestFocus()
       }
 
-      if (b == showButton) {
-        println("Showing list")
-        selectionMenu.visible = !selectionMenu.visible
-
+      if (b == showTagsButton) {
+        tagListPanel.visible = !tagListPanel.visible
         canvas.requestFocus()
         view.repaint()
       }
 
-    case ValueChanged(view.panel.sliderPanel.slider) =>
+    case ValueChanged(playerPanel.slider) =>
       println("Changed slider")
       val life = slider.life
-      model.currentDate = incrementDate()
+      currentDate = incrementDate()
+      datePanel.dateLabel.peer.setText(currentDate.toString)
+      updateModel()
 
-      buttons.dateLabel.peer.setText(model.currentDate.toString)
+    case SelectionChanged(tagListPanel.list) if (tagListPanel.list.selection.adjusting) =>
 
-      val head = canvas.locations.head
-      val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
-      canvas.locations = model.computeModel(head.tags, model.currentDate, filteredTags)
-      updateSelectionMenu()
-      if (head.tags == "") updateMenu("Stack Overflow", head.count.toString) else updateMenu(head.tags, head.count.toString)
-
-      canvas.requestFocus()
-      view.repaint()
-
-    case SelectionChanged(selectionMenu.list) if (selectionMenu.list.selection.adjusting) =>
-
-      val item = selectionMenu.list.selection.items(0)
+      val item = tagListPanel.list.selection.items(0)
       println("Selected from list: " + item)
 
-      val locations = canvas.locations.map { location => location.tags -> location }.toMap
+      val locations = canvas.locations.map { location => location.getTagsAsString() -> location }.toMap
       val location = locations.get(item).get
 
-      println("Selected " + location.tags)
+      println("Selected " + location.getTagsAsString())
       location.selected = !location.selected
 
-      val g = canvas.peer.getGraphics
-      val rect = location.rectangle
-      if (location.selected) {
-        val offset = new Point(canvas.offsetX, canvas.offsetY)
-        val point = (new Point(rect.x, rect.y) + offset) * canvas.zoomFactor
-        
-        g.setColor(Color.RED)
-        g.fillOval(point.x.toInt, point.y.toInt, 8, 8)
-        val width = (rect.width-1) * canvas.zoomFactor
-        val height = (rect.height-1) * canvas.zoomFactor
-        g.drawRect(point.x.toInt, point.y.toInt, width.toInt, height.toInt)
-      } else {
-        canvas.requestFocus()
-        canvas.repaint()
-      }
-
-      if (!existSelected()) {
-        inSelection = false
-        buttons.selectionButton.visible = false
-        updateModel()
-        canvas.requestFocus()
-        canvas.repaint()
-      } else {
-        canvas.requestFocus()
-        inSelection = true
-        buttons.selectionButton.visible = true
-      }
+      updateSelectionInCanvas(location)
   }
 
-  view.panel.canvas.focusable = true
+  canvas.focusable = true
 
-  def isInRectangle(point: Point, location: Location, rect: Rectangle): Option[Location] = {
+  def isInRectangle(point: Point, location: Location, rectangle: ScalaRectangle): Option[Location] = {
     val offset = getOffset()
     val zoom = getZoom()
 
-    val topLeft = (new Point(rect.x, rect.y) + offset) * zoom
-    val bottomRight = (new Point(rect.x + rect.width, rect.y + rect.height) + offset) * zoom
+    val topLeft = (new Point(rectangle.x, rectangle.y) + offset) * zoom
+    val bottomRight = (new Point(rectangle.x + rectangle.width, rectangle.y + rectangle.height) + offset) * zoom
 
     if (point.x < topLeft.x || point.x > bottomRight.x) None
     else if (point.y < topLeft.y || point.y > bottomRight.y) None
@@ -448,55 +369,65 @@ class Control(val model: Model, val view: View) {
     canvas.zoomFactor
   }
 
-  def updateModel() = {
-    val head = canvas.locations.head
-    val filteredTags = canvas.locations.filter { location => location.selected }.map { loc => loc.tags }
+  def updateModel(root: Option[Location] = None) = {
+    val locations = canvas.locations
+
+    val head = root match {
+      case None => locations.head
+      case Some(location) => location
+    }
+
+    val tags = head.getTagsAsList()
+    val filteredTags = locations.filter { location => location.selected }.map { location => location.getTagsAsString() }
 
     val tree = model.tree
     val node = tree.search(tree.root, head.getTagsAsList())
     updateGradient(node, filteredTags)
 
-    canvas.locations = model.computeModel(head.tags, model.currentDate, filteredTags)
-    updateSelectionMenu()
-    if (head.tags == "") view.panel.menuEast.text.peer.setText("Stack Overflow") else view.panel.menuEast.text.peer.setText(head.tags)
-    view.panel.menuEast.occurrences.peer.setText(head.count.toString)
+    canvas.locations = model.computeModel(tags, currentDate, filteredTags)
+    updateSelectionMenu(canvas.locations)
+
+    val tagCount = canvas.locations.drop(1).size
+    val discussionCount = canvas.locations.head.count
+    if (tags == Nil) updateMenu(List("Root"), tagCount.toString, discussionCount.toString) else updateMenu(tags, tagCount.toString, discussionCount.toString)
+    canvas.requestFocus()
+    canvas.repaint()
   }
 
   def existSelected() = {
     canvas.locations.filter { location => location.selected }.size > 0
   }
 
-  def updateMenu(text: String, count: String) = {
-    view.panel.menuEast.text.peer.setText(text)
-    view.panel.menuEast.occurrences.peer.setText(count)
+  def updateMenu(tags: List[String], tagsCount: String, discussionCount: String) = {
+
+    val pathInfoPanel = mainInfoPanel.pathInfoPanel
+    val path = pathInfoPanel.path
+
+    val tagsPanel = currentInfoPanel.currentTagsPanel
+    val currentTags = tagsPanel.currentTag
+
+    val discussionsPanel = currentInfoPanel.currentDiscussionsPanel
+    val currentDiscussions = discussionsPanel.currentDiscussions
+
+    val text = tags.mkString(" ")
+    path.peer.setText(text)
+    currentTags.peer.setText(tagsCount)
+    currentDiscussions.peer.setText(discussionCount)
   }
 
-  def updateSelectionMenu() = {
-    selectionMenu.list.listData = canvas.locations.drop(1).map { location => location.tags }.sorted
-    selectionMenu.number.peer.setText("Number of tags: " + canvas.locations.drop(1).size)
-  }
-
-  def updateSlider() = {
-
+  def updateSelectionMenu(locations: List[Location]) = {
+    tagListPanel.list.listData = locations.drop(1).map { location => location.getTagsAsString() }.sorted
   }
 
   def updateGradient(node: Node, tags: List[String] = Nil) = {
     if (tags.size > 0) {
-
       val tree = model.tree
       val nodes = tags.map { tag => tree.search(tree.root, tag.split(" ").toList) }
-      model.tot = nodes.map { node => node.tag.getMaxCount() }.sum
-      model.fixedRectangles = model.createFixedRectangles(nodes, model.tot)
-
+      model.fixedRectangles = model.createFixedRectangles(nodes)
       model.maxHeight = model.getMaxCount(nodes)
-      model.currentGradient = model.gradient.createGradient(model.maxHeight)
     } else {
-      model.tot = node.children.map { node => node.tag.getMaxCount() }.sum
-      model.fixedRectangles = model.createFixedRectangles(node.children, model.tot)
-
+      model.fixedRectangles = model.createFixedRectangles(node.children)
       model.maxHeight = model.getMaxCount(node.children)
-      model.currentGradient = model.gradient.createGradient(model.maxHeight)
-
     }
   }
 
@@ -514,6 +445,44 @@ class Control(val model: Model, val view: View) {
       peer.setDefaultCloseOperation(DISPOSE_ON_CLOSE)
       peer.pack()
       peer.setVisible(true)
+      canvas.requestFocus()
+    }
+  }
+
+  def clearSelection() = {
+    canvas.locations = canvas.locations.map { location =>
+      location.selected = false
+      location
+    }
+    inspectButton.enabled = false
+    updateModel()
+  }
+
+  def updateSelectionInCanvas(location: Location) = {
+    val g = canvas.peer.getGraphics
+    val rectangle = location.getRectangle()
+    if (location.selected) {
+      val offset = new Point(canvas.offsetX, canvas.offsetY)
+      val point = (new Point(rectangle.x, rectangle.y) + offset) * canvas.zoomFactor
+
+      g.setColor(Color.RED)
+      g.fillOval(point.x.toInt, point.y.toInt, 8, 8)
+      val width = (rectangle.width - 1) * canvas.zoomFactor
+      val height = (rectangle.height - 1) * canvas.zoomFactor
+      g.drawRect(point.x.toInt, point.y.toInt, width.toInt, height.toInt)
+    } else {
+      canvas.requestFocus()
+      canvas.repaint()
+    }
+
+    if (!existSelected()) {
+      inSelection = false
+      inspectButton.enabled = false
+      updateModel()
+    } else {
+      canvas.requestFocus()
+      inSelection = true
+      inspectButton.enabled = true
     }
   }
 }

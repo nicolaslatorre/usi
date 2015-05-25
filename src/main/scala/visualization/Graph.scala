@@ -33,22 +33,12 @@ object Graph {
 
   def drawBarCharGraph(tags: List[Location], life: Life) = {
     val dates = life.dates
-//    val dataset = new org.jfree.data.category.DefaultCategoryDataset
     val dataset = new XYSeriesCollection
-
-//    dates.foreach { date =>
-//      tags.foreach { tag =>
-//        val value = tag.ids.get(date).getOrElse(0)
-//        val rowKey = tag.tags
-//        val columnKey = date.toString()
-//        dataset.addValue(value, rowKey, columnKey)
-//      }
-//    }
     
     tags.foreach{ tag => 
-      val s = new XYSeries(tag.tags)
+      val s = new XYSeries(tag.getTagsAsString())
       dates.zipWithIndex.foreach { case(date, index) => 
-        val value = tag.ids.get(date).getOrElse(0)
+        val value = tag.getDates2Counts().get(date).getOrElse(0)
         s.add(index, value)
       }
       dataset.addSeries(s)
@@ -56,7 +46,7 @@ object Graph {
     
     val renderer = new ClusteredXYBarRenderer()
     
-    val plot = new XYPlot(dataset, new NumberAxis("Dates"), new NumberAxis("Frequency"), renderer)
+    val plot = new XYPlot(dataset, new NumberAxis("Dates"), new NumberAxis("Discussions"), renderer)
     plot.setOrientation(PlotOrientation.VERTICAL)
 
 //    val chart = ChartFactory.createXYBarChart("Occurrences", "Date", true, "Frequency", dataset.to)
@@ -71,15 +61,15 @@ object Graph {
 
 
     tags.foreach{ tag => 
-      val s = new org.jfree.data.time.TimeSeries(tag.tags)
+      val s = new org.jfree.data.time.TimeSeries(tag.getTagsAsString())
       dates.foreach { date => 
-        val value = tag.ids.get(date).getOrElse(0)
+        val value = tag.getDates2Counts().get(date).getOrElse(0)
         s.add(new Day(date.toDate()), value)
       }
       dataset.addSeries(s)
     }
 
-    val chart = ChartFactory.createTimeSeriesChart("Occurrences", "Dates", "Frequency", dataset)
+    val chart = ChartFactory.createTimeSeriesChart("Occurrences", "Dates", "Discussions", dataset)
     chart.getXYPlot.getDomainAxis.setVerticalTickLabels(true)
     chart
   }
