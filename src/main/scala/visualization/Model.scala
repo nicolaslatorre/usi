@@ -22,31 +22,25 @@ import java.util.Date
 import database.Tag
 import org.joda.time.Months
 import scala.collection.JavaConversions._
-
-object Direction extends Enumeration {
-  val RIGHT = Value("RIGHT")
-  val LEFT = Value("LEFT")
-  val UP = Value("UP")
-  val DOWN = Value("DOWN")
-}
+import database.Tree
 
 class Model(val url: String, val username: String, val password: String, val life: Life, val name: String) {
-  val mainVector = TagFactory.mainTagVector(life)
-  val tree = TagTree.createTree(mainVector, life.interval)
-  val root = tree.root
-
   val startColor = new Color(255, 255, 255)
   val endColor = new Color(0, 0, 0)
   val levels = 30
+  val gradient = Gradient.createGradient(startColor, endColor, levels)
+  val totalone = 5284153
+
+  var mainVector = TagFactory.mainTagVector(url, username, password, life)
+  var tree = TagTree.createTree(mainVector)
+  var root = tree.root
 
   var maxHeight = getMaxCount(root.children)
-  val gradient = Gradient.createGradient(startColor, endColor, levels)
   println("(Model) max height: " + maxHeight)
 
   var fixedRectangles = createFixedRectangles(root.children)
 
-  //  val rootLocation = computeRootLocation(Nil, life.start)
-  val locations = computeModel(Nil, life.start)
+  var locations = computeModel(Nil, life.start)
 
   def computeModel(tag: List[String], currentDate: LocalDate, tags: List[String] = Nil): List[Location] = {
     val date = life.incrementDate(currentDate)
@@ -58,7 +52,7 @@ class Model(val url: String, val username: String, val password: String, val lif
     val totalCurrent = getCurrentTotal(level.head, filteredChildrens, currentDate)
     val total = childrens.map { node => node.tag.totalCount }.sum
 
-    val head = new Location(level.head.tag, totalCurrent, None, None, false)
+    val head = new Location(level.head.tag, totalCurrent, None, None, false, level.head.tag.dates2ids)
     val locations = createLocation(filteredChildrens, currentDate, tags, totalCurrent)
 
     println("Model Computed")
@@ -67,7 +61,7 @@ class Model(val url: String, val username: String, val password: String, val lif
   }
 
   def getCurrentTotal(head: Node, childrens: List[Node], currentDate: LocalDate) = {
-    if (head.tag.tags == Nil || (childrens.size < head.children.size) ) {
+    if (head.tag.tags == Nil || (childrens.size < head.children.size)) {
       childrens.map {
         node => node.tag.getCount(currentDate)
       }.sum
@@ -98,8 +92,9 @@ class Model(val url: String, val username: String, val password: String, val lif
     val (width, height) = (1900.0, 1400.0)
     val center = new Point(width / 2, height / 2)
     val buckets = createBuckets(percentages, 0.2, center)
-
-    createRectangles(buckets, width, height, total, percentages.head)
+    
+    if(percentages.size > 0) createRectangles(buckets, width, height, total, percentages.head)
+    else Nil
   }
 
   def createLocation(childrenInInterval: List[Node], date: LocalDate, tags: List[String], total: Double) = {
@@ -124,9 +119,9 @@ class Model(val url: String, val username: String, val password: String, val lif
       val rectangle = createInternalRectangle(tag.getMaxIntervalCount(), count, container)
 
       if (tags.size > 0) {
-        new Location(tag, count, Some(container), Some(rectangle), true)
+        new Location(tag, count, Some(container), Some(rectangle), true, tag.dates2ids)
       } else {
-        new Location(tag, count, Some(container), Some(rectangle), false)
+        new Location(tag, count, Some(container), Some(rectangle), false, tag.dates2ids)
       }
     }
     locations.toList //.filter { location => location.count > 0 }
@@ -237,10 +232,14 @@ class Model(val url: String, val username: String, val password: String, val lif
   }
 
   def getMaxCount(nodes: List[Node]) = {
-    nodes.map { node =>
-      val tag = node.tag
-      tag.getMaxIntervalCount()
-    }.max
+    if (nodes.size > 0) {
+    	nodes.map { node =>
+    	val tag = node.tag
+    	tag.getMaxIntervalCount()
+    	}.max      
+    } else {
+      0
+    }
   }
 
   def getTotalCount(nodes: List[Node]) = {
@@ -258,18 +257,22 @@ class Model(val url: String, val username: String, val password: String, val lif
   }
 
   def getTotalDataset() = {
+    val root = tree.root
     tree.getSize(root)
   }
 
   def getTotalOccurrences = {
+    val root = tree.root
     root.tag.totalCount.toString()
   }
 
   def getTagNumberInInterval() = {
+    val root = tree.root
     root.children.size
   }
 
   def getCurrentTotalOccurences(currentDate: LocalDate) = {
+    val root = tree.root
     root.children.map { child => child.tag.getCount(currentDate) }.sum
   }
 

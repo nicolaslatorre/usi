@@ -6,7 +6,7 @@ import org.joda.time.Weeks
 import org.joda.time.Days
 
 
-class Life(val start: LocalDate, val end: LocalDate, val interval: Int) {
+class Life(val start: LocalDate, val end: LocalDate, var interval: Int) {
 
   def increment(value: Int) = {
     start.plusDays(value)
@@ -34,9 +34,15 @@ class Life(val start: LocalDate, val end: LocalDate, val interval: Int) {
       start.plusDays(index*interval)  
     }
   }
+  
+  def steps = {
+    val steps = days
+    val intervalSteps = steps.grouped(interval).toList
+    intervalSteps.zipWithIndex.map{ case(ste, index) => index}
+  }
 
   /**
-   * Mapping between a date and the index of a step
+   * Mapping between a step and the index of a step
    */
   def getStepsMapping() = {
     val steps = days
@@ -45,10 +51,23 @@ class Life(val start: LocalDate, val end: LocalDate, val interval: Int) {
     intervalSteps.zipWithIndex.flatMap { case(steps, index) =>
       steps.par.map {
         step =>
-//          val date = increment(step)
           step -> index
       }.toMap
-    }.toMap//.foldLeft(Map[Int, Int]())((m1, m2) => m1 ++ m2)
+    }.toMap
   }
+  
+  /**
+   * Mapping between a step and the index of a step
+   */
+  def getDateMapping() = {
+    val steps = days
+    val intervalSteps = steps.grouped(interval)
 
+    intervalSteps.zipWithIndex.flatMap { case(steps, index) =>
+      steps.par.map {
+        step =>
+          increment(step) -> index
+      }.toMap
+    }.toMap
+  }
 }

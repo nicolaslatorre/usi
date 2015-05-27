@@ -23,8 +23,16 @@ import java.awt.Dimension
 import javax.swing.WindowConstants.DISPOSE_ON_CLOSE
 import org.jfree.chart.JFreeChart
 import java.awt.geom.Rectangle2D
+import database.TagFactory
+import database.TagTree
+import com.github.tototoshi.csv.CSVReader
+import java.io.File
+import scala.swing.Label
+import database.DatabaseRequest
 
 class Control(val model: Model, val view: View) {
+  view.peer.setVisible(true)
+
   //PANELS
   val panel = view.mainPanel
 
@@ -40,9 +48,17 @@ class Control(val model: Model, val view: View) {
   // Home Panel
   val homePanel = northPanel.homePanel
   val mainInfoPanel = homePanel.mainInfoPanel
+  val totalInfoPanel = homePanel.totalInfoPanel
   val currentInfoPanel = homePanel.currentInfoPanel
   val navigationPanel = homePanel.navigationPanel
   val chartsPanel = homePanel.chartsPanel
+  val loadingPanel = homePanel.loadingPanel
+
+  val intervalPanel = loadingPanel.intervalPanel
+  val intervalValue = intervalPanel.intervalValue
+
+  //  val progressPanel = loadingPanel.progressPanel
+  //  val progress = progressPanel.progress
 
   // Menu Panel
   val menuPanel = northPanel.menuPanel
@@ -51,10 +67,17 @@ class Control(val model: Model, val view: View) {
   val scrollPane = panel.scrollPane
   val canvas = scrollPane.canvas
 
+  // Discussion List Panel
+  val discussionPanel = panel.discussionsPanel
+
   // Tag List Panel
   val tagListPanel = panel.tagListPanel
 
   // BUTTONS
+
+  // Discussions list button
+  val discussionsListButton = menuPanel.discussionsList
+
   // Tag list button
   val showTagsButton = menuPanel.tagList
 
@@ -81,7 +104,8 @@ class Control(val model: Model, val view: View) {
   var y = 0
 
   view.listenTo(canvas, canvas.mouse.clicks, canvas.mouse.moves, canvas.mouse.wheel, canvas.keys, slider, showTagsButton, tagListPanel.list.selection, playButton,
-    startButton, endButton, stopButton, player, inspectButton, clearButton, chartsButton, lineChartButton, barChartButton)
+    startButton, endButton, stopButton, player, inspectButton, clearButton, chartsButton, lineChartButton, barChartButton, intervalValue.keys, discussionsListButton, 
+    discussionPanel.list.selection)
 
   view.reactions += {
 
@@ -178,12 +202,7 @@ class Control(val model: Model, val view: View) {
         val infos = ls.map { location =>
           val tags = location.getTagsAsString()
           val totalCount = location.getTotalCount()
-          "Tag: " + tags + "<br>Discussions: " + location.count + "<br>Total Discussions: " + totalCount + "<br>ids: " //+ 
-          //          location.ids.map { 
-          //            case (date, id) =>
-          //              "<br> " + id.map { i => i.toString }.toList.mkString("<br>")
-          //              
-          //          }
+          "Tag: " + tags + "<br>Discussions: " + location.count + "<br>Total Discussions: " + totalCount + "<br>Discussions in level: "
         }.mkString("")
         canvas.tooltip = "<html>" + infos + "</html>"
 
@@ -202,6 +221,7 @@ class Control(val model: Model, val view: View) {
         canvas.locations = model.computeModel(Nil, currentDate)
 
         updateSelectionMenu(canvas.locations)
+        updateDiscussionsList(canvas.locations)
 
         val discussionCount = canvas.locations.head.count
         val tagCount = canvas.locations.drop(1).size
@@ -218,6 +238,7 @@ class Control(val model: Model, val view: View) {
         updateGradient(node)
         canvas.locations = model.computeModel(headTags.substring(0, index).split(" ").toList, currentDate, filteredTags)
         updateSelectionMenu(canvas.locations)
+        updateDiscussionsList(canvas.locations)
         val tagCount = canvas.locations.drop(1).size
         val discussionCount = canvas.locations.head.count
         updateMenu(headTags.substring(0, index).split(" ").toList, tagCount.toString, discussionCount.toString)
@@ -237,6 +258,26 @@ class Control(val model: Model, val view: View) {
       canvas.offsetY = 0.0
       canvas.zoomFactor = 1.0
       updateModel()
+
+    case KeyPressed(_, Key.Enter, _, _) =>
+      intervalValue.editable = false
+      val life = model.life
+      val value = intervalValue.text
+      life.interval = value.toInt
+      val date2step = life.getStepsMapping()
+      updatePlayer()
+
+      model.tree.changeCounts(model.root, life, date2step)
+      val root = model.tree.root
+
+      model.maxHeight = model.getMaxCount(root.children)
+      println("(Model) max height: " + model.maxHeight)
+      model.fixedRectangles = model.createFixedRectangles(root.children)
+      model.locations = model.computeModel(Nil, life.start)
+
+      updateModel()
+
+      intervalValue.editable = true
 
     case ButtonClicked(b) =>
       if (b == inspectButton) {
@@ -324,6 +365,12 @@ class Control(val model: Model, val view: View) {
         view.repaint()
       }
 
+      if (b == discussionsListButton) {
+        discussionPanel.visible = !discussionPanel.visible
+        canvas.requestFocus()
+        view.repaint()
+      }
+
     case ValueChanged(playerPanel.slider) =>
       println("Changed slider")
       val life = slider.life
@@ -343,9 +390,47 @@ class Control(val model: Model, val view: View) {
       location.selected = !location.selected
 
       updateSelectionInCanvas(location)
+
+    case SelectionChanged(discussionPanel.list) if (discussionPanel.list.selection.adjusting) =>
+
+      val item = discussionPanel.list.selection.items(0)
+      println("Selected from list: " + item)
+
+      val process: Process = Process("open -a Firefox http://www.stackoverflow.com/questions/" + item).run()
+      println(process.exitValue())
   }
 
   canvas.focusable = true
+
+  //  def buffering(iterator: Iterator[Seq[Seq[String]]], isFirst: Boolean = true) = {
+  //    val thread = new Thread {
+  //      override def run {
+  //        val life = model.life
+  //        val date2step = life.getStepsMapping()
+  //        while (iterator.hasNext) {
+  //          updateProgress()
+  //          if (isFirst) {
+  //            val vector = TagFactory.mainTagVector(life, iterator.next())
+  //            val newVector = model.mainVector ::: vector
+  //            model.mainVector = newVector.sortBy { tag => tag.dates2counts.values.max }.reverse
+  //
+  //            model.tree = TagTree.createTree(model.mainVector)
+  //          } else {
+  //            iterator.next
+  //            model.tree.changeCounts(model.root, life, date2step)
+  //          }
+  //
+  //          val root = model.tree.root
+  //          model.maxHeight = model.getMaxCount(model.tree.root.children)
+  //          model.fixedRectangles = model.createFixedRectangles(model.tree.root.children)
+  //          model.locations = model.computeModel(Nil, life.start)
+  //          updateModel()
+  //        }
+  //
+  //        updateProgress()
+  //      }
+  //    }.start
+  //  }
 
   def isInRectangle(point: Point, location: Location, rectangle: ScalaRectangle): Option[Location] = {
     val offset = getOffset()
@@ -386,6 +471,7 @@ class Control(val model: Model, val view: View) {
 
     canvas.locations = model.computeModel(tags, currentDate, filteredTags)
     updateSelectionMenu(canvas.locations)
+    updateDiscussionsList(canvas.locations)
 
     val tagCount = canvas.locations.drop(1).size
     val discussionCount = canvas.locations.head.count
@@ -406,17 +492,41 @@ class Control(val model: Model, val view: View) {
     val tagsPanel = currentInfoPanel.currentTagsPanel
     val currentTags = tagsPanel.currentTag
 
+    val totalTagsPanel = totalInfoPanel.totalTagsPanel
+    val totalTags = totalTagsPanel.totalTag
+
     val discussionsPanel = currentInfoPanel.currentDiscussionsPanel
     val currentDiscussions = discussionsPanel.currentDiscussions
 
     val text = tags.mkString(" ")
+    val newTotalTags = model.getTotalDataset()
     path.peer.setText(text)
+    totalTags.peer.setText(newTotalTags.toString)
     currentTags.peer.setText(tagsCount)
     currentDiscussions.peer.setText(discussionCount)
   }
 
   def updateSelectionMenu(locations: List[Location]) = {
     tagListPanel.list.listData = locations.drop(1).map { location => location.getTagsAsString() }.sorted
+  }
+
+  def updateDiscussionsList(locations: List[Location]) = {
+//    discussionPanel.list.listData = locations.drop(1).flatMap { location => location.ids.getOrElse(currentDate, Set(0)) }.filter { elem => elem > 0 }
+    val url = model.url
+    val username = model.username
+    val password = model.password
+    val life = model.life
+    
+    val cpds = DatabaseRequest.openConnection(url, username, password)
+    val p2t = DatabaseRequest.retrieveTag2PostWithTagInInterval(0, 9000000, locations.head.getTagsAsList(), currentDate, life.interval)
+    val elements = p2t.map{ case(p2t, title) => p2t.id + " " + title.getOrElse("") + ""}
+    println(elements.size)
+//    discussionPanel.list.listData = locations.head.ids.getOrElse(currentDate, Set(0)).toList.filter{ elem => elem > 0}
+    
+    
+    
+    discussionPanel.list.listData = elements
+    cpds.close()
   }
 
   def updateGradient(node: Node, tags: List[String] = Nil) = {
@@ -484,5 +594,15 @@ class Control(val model: Model, val view: View) {
       inSelection = true
       inspectButton.enabled = true
     }
+  }
+
+  def updatePlayer() = {
+    val life = model.life
+    val steps = life.steps
+
+    slider.max = steps.size - 1
+
+    val checkpoints = (steps.filter { step => step % 50 == 0 } :+ slider.max).distinct
+    slider.labels = checkpoints.map { step => step -> new Label(step.toString) }.toMap
   }
 }

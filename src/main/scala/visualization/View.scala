@@ -11,6 +11,7 @@ import scala.swing.BorderPanel.Position.Center
 import scala.swing.BorderPanel.Position.East
 import scala.swing.BorderPanel.Position.North
 import scala.swing.BorderPanel.Position.South
+import scala.swing.BorderPanel.Position.West
 import scala.swing.BoxPanel
 import scala.swing.Button
 import scala.swing.FlowPanel
@@ -51,7 +52,6 @@ object Starter {
       def run {
         val view = new View(model)
         val control = new Control(model, view)
-        control.view.peer.setVisible(true)
       }
     })
 
@@ -70,27 +70,11 @@ class View(val model: Model) extends Frame {
     }
 
     val northPanel = new BoxPanel(Orientation.Vertical) {
-      preferredSize = new Dimension(1440, 100)
+      preferredSize = new Dimension(1440, 110)
 
       val menuPanel = createMenuPanel()
 
       val homePanel = createHomePanel()
-
-      val buttonPanel = new BoxPanel(Orientation.Horizontal) {
-        val intervalSelection = new FlowPanel {
-          val intervalLabel = new Label {
-            text = "Interval length in days: "
-          }
-
-          val intervalValue = new TextField("1", 10)
-
-          contents += intervalLabel
-          contents += intervalValue
-        }
-
-        //        contents += monthInterval
-
-      }
 
       contents += menuPanel
       contents += homePanel
@@ -112,7 +96,7 @@ class View(val model: Model) extends Frame {
       val slider = new Slider() {
         preferredSize = new Dimension(1440, 40)
         val life = model.life
-        val steps = life.days.grouped(life.interval).zipWithIndex.map { case (step, index) => index }.toList // horrible
+        val steps = life.steps
 
         min = 0
         max = steps.size - 1
@@ -132,17 +116,6 @@ class View(val model: Model) extends Frame {
         val stopButton = createButtonWithImage("../Images/mono-player-stop.png", 24, 24)
         val endButton = createButtonWithImage("../Images/mono-player-end.png", 24, 24)
 
-        val intervalSelection = new FlowPanel(FlowPanel.Alignment.Center)() {
-          val intervalLabel = new Label {
-            text = "Interval length in days: "
-          }
-
-          val intervalValue = new TextField("1", 10)
-
-          contents += intervalLabel
-          contents += intervalValue
-        }
-
         contents += startButton
         contents += playButton
         contents += stopButton
@@ -160,6 +133,16 @@ class View(val model: Model) extends Frame {
       contents += slider
       contents += playerButtonPanel
       contents += datePanel
+    }
+    
+    val discussionsPanel = new BoxPanel(Orientation.Vertical) {
+      preferredSize = new Dimension(200, 800)
+//      val list = new ListView(model.locations.flatMap { location => location.ids.getOrElse(life.start, Set(0)) }.filter { elem => elem > 0 })
+      val list = new ListView(List(""))
+      val scrollPane = new ScrollPane() {
+        contents = list
+      }
+      contents += scrollPane
       visible = false
     }
 
@@ -167,6 +150,7 @@ class View(val model: Model) extends Frame {
     layout(northPanel) = North
     layout(playerPanel) = South
     layout(tagListPanel) = East
+    layout(discussionsPanel) = West
   }
   contents = mainPanel
   pack
@@ -181,10 +165,12 @@ class View(val model: Model) extends Frame {
     new FlowPanel(FlowPanel.Alignment.Left)() {
       val player = new Button("Player")
       val charts = new Button("Charts")
+      val discussionsList = new Button("Discussions List")
       val tagList = new Button("Tag List")
 
       contents += player
       contents += charts
+      contents += discussionsList
       contents += tagList
     }
   }
@@ -304,12 +290,43 @@ class View(val model: Model) extends Frame {
         contents += barChartButton
         visible = false
       }
+      
+      // INTERVAL PANEL
+      val loadingPanel = new BoxPanel(Orientation.Vertical) {
+    	  val intervalPanel = new FlowPanel(FlowPanel.Alignment.Left)() {
+    		  val intervalLabel = new Label {
+    			  text = "Interval length in days: "
+    		  }
+    		  
+    		  val intervalValue = new TextField(life.interval.toString, 10)
+    		  
+    		  contents += intervalLabel
+    		  contents += intervalValue
+    	  }
+        
+//        val progressPanel = new FlowPanel(FlowPanel.Alignment.Left)() {
+//          val progressLabel = new Label("Loaded: ")
+//          val currentSize = model.mainVector.size
+//          val progress = new Label() {
+//        	  val percentages = (currentSize.toDouble / model.datasetSize) * 100
+//            text = BigDecimal(percentages).setScale(2, BigDecimal.RoundingMode.HALF_UP).toString + "%"
+//          }
+//          
+//          contents += progressLabel
+//          contents += progress
+//        }
+        
+        contents += intervalPanel
+//        contents += progressPanel
+        
+      }
 
       contents += mainInfoPanel
       contents += totalInfoPanel
       contents += currentInfoPanel
       contents += navigationPanel
       contents += chartsPanel
+      contents += loadingPanel
 
     }
   }

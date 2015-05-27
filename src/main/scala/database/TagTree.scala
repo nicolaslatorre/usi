@@ -4,19 +4,20 @@ import scala.collection.immutable.TreeMap
 import java.io.PrintWriter
 import java.io.File
 import java.util.Date
+import visualization.Life
 
 object TagTree {
 
-  def createTree(vector: List[Tag], interval: Int) = {
+  def createTree(vector: List[Tag]) = {
     val total = vector.filter { v => v.tags.size == 1 }.map { v => v.totalCount }.sum
 
-    val subtrees = createSubTree(vector, interval, 0)
-    val tree = new Tree(new Node(new Tag(List(), total, Map()), subtrees))
+    val subtrees = createSubTree(vector, 0)
+    val tree = new Tree(new Node(new Tag(List(), total, Map(), List(), Map(), Map()), subtrees))
     println("Habemus Tree")
     tree
   }
 
-  def createSubTree(tags: List[Tag], interval: Int, level: Int): List[Node] = {
+  def createSubTree(tags: List[Tag], level: Int): List[Node] = {
     tags match {
       case Nil => List()
       case x :: Nil => List(new Node(x, List()))
@@ -24,7 +25,7 @@ object TagTree {
         val subtrees = tags.par.filter { tag => tag.tags.size > level }.groupBy { v => v.tags.take(level + 1) }.mapValues { tagsInLevel =>
           val sortedTags = tagsInLevel.seq.sortBy { tag => tag.tags.size }
 
-          val subsubtree = createSubTree(sortedTags.toList.tail, interval, level + 1)
+          val subsubtree = createSubTree(sortedTags.toList.tail, level + 1)
           val subtree = new Tree(new Node(sortedTags.head, subsubtree))
           subtree
         }
@@ -35,28 +36,6 @@ object TagTree {
 }
 
 class Tree(val root: Node) {
-  def insert(tag: Tag, interval: Int): Unit = {
-    val sentinel = root.tag.tags.length + 1
-    if (sentinel == tag.tags.length) {
-      root.children = root.children :+ new Node(tag, List())
-    } else if (sentinel < tag.tags.length) {
-      val target = search(root, tag.tags)
-
-      if ((target.tag.tags.length == tag.tags.length - 1)) {
-        target.children = target.children :+ new Node(tag, List())
-      } else { // this should never happen
-        val levels = target.tag.tags.size + 1
-        val node = new Node(new Tag(tag.tags.take(levels), 0, Map()), List())
-        target.children = node :: target.children
-        insert(tag, interval)
-      }
-
-    }
-
-  }
-  
-  
-
   def search(current: Node, key: List[String]): Node = {
     val level = current.tag.tags.length + 1
     val res = current.children.find { child => child.tag.tags == key.take(level) }
@@ -82,6 +61,14 @@ class Tree(val root: Node) {
        childrens.size + childrens.map{ child => getSize(child) }.sum
     } else {
       0
+    }
+  }
+  
+  def changeCounts(node: Node, life: Life, date2step: Map[Int, Int]): Unit = { 
+    val childrens = node.children
+    childrens.par.foreach { child => 
+      child.tag.changeDates2Counts(life, date2step)
+      changeCounts(child, life, date2step)
     }
   }
 
