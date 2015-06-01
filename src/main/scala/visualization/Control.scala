@@ -104,7 +104,7 @@ class Control(val model: Model, val view: View) {
   var y = 0
 
   view.listenTo(canvas, canvas.mouse.clicks, canvas.mouse.moves, canvas.mouse.wheel, canvas.keys, slider, showTagsButton, tagListPanel.list.selection, playButton,
-    startButton, endButton, stopButton, player, inspectButton, clearButton, chartsButton, lineChartButton, barChartButton, intervalValue.keys, discussionsListButton, 
+    startButton, endButton, stopButton, player, inspectButton, clearButton, chartsButton, lineChartButton, barChartButton, intervalValue.keys, discussionsListButton,
     discussionPanel.list.selection)
 
   view.reactions += {
@@ -261,11 +261,11 @@ class Control(val model: Model, val view: View) {
 
     case KeyPressed(_, Key.Enter, _, _) =>
       intervalValue.editable = false
+
       val life = model.life
       val value = intervalValue.text
       life.interval = value.toInt
-      val date2step = life.getStepsMapping()
-      updatePlayer()
+      val date2step = life.getDateMapping()
 
       model.tree.changeCounts(model.root, life, date2step)
       val root = model.tree.root
@@ -273,11 +273,10 @@ class Control(val model: Model, val view: View) {
       model.maxHeight = model.getMaxCount(root.children)
       println("(Model) max height: " + model.maxHeight)
       model.fixedRectangles = model.createFixedRectangles(root.children)
-      model.locations = model.computeModel(Nil, life.start)
-
-      updateModel()
 
       intervalValue.editable = true
+      updatePlayer()
+      updateModel()
 
     case ButtonClicked(b) =>
       if (b == inspectButton) {
@@ -307,11 +306,11 @@ class Control(val model: Model, val view: View) {
           override def run {
             val life = model.life
             while (isRunning && (currentDate < life.end)) {
-              slider.value += 1
               currentDate = incrementDate()
               datePanel.dateLabel.peer.setText(currentDate.toString)
+              slider.value += 1
               updateModel()
-              canvas.peer.paintImmediately(0, 0, canvas.preferredSize.getWidth.toInt, canvas.preferredSize.getHeight.toInt)
+//              canvas.peer.paintImmediately(0, 0, canvas.preferredSize.getWidth.toInt, canvas.preferredSize.getHeight.toInt)
               Thread.sleep(200)
             }
           }
@@ -329,16 +328,16 @@ class Control(val model: Model, val view: View) {
         println("Start")
         val life = model.life
         currentDate = life.start
-        updateModel()
         slider.value = slider.min
+        updateModel()
       }
 
       if (b == endButton) {
         println("End")
         val life = model.life
         currentDate = life.end
-        updateModel()
         slider.value = slider.max
+        updateModel()
       }
 
       if (b == lineChartButton) {
@@ -372,11 +371,10 @@ class Control(val model: Model, val view: View) {
       }
 
     case ValueChanged(playerPanel.slider) =>
-      println("Changed slider")
-      val life = slider.life
-      currentDate = incrementDate()
-      datePanel.dateLabel.peer.setText(currentDate.toString)
-      updateModel()
+        println("Changed slider")
+        currentDate = incrementDate()
+        datePanel.dateLabel.peer.setText(currentDate.toString)
+        updateModel()
 
     case SelectionChanged(tagListPanel.list) if (tagListPanel.list.selection.adjusting) =>
 
@@ -398,6 +396,8 @@ class Control(val model: Model, val view: View) {
 
       val process: Process = Process("open -a Firefox http://www.stackoverflow.com/questions/" + item).run()
       println(process.exitValue())
+
+      canvas.requestFocus()
   }
 
   canvas.focusable = true
@@ -511,22 +511,8 @@ class Control(val model: Model, val view: View) {
   }
 
   def updateDiscussionsList(locations: List[Location]) = {
-//    discussionPanel.list.listData = locations.drop(1).flatMap { location => location.ids.getOrElse(currentDate, Set(0)) }.filter { elem => elem > 0 }
-    val url = model.url
-    val username = model.username
-    val password = model.password
-    val life = model.life
-    
-    val cpds = DatabaseRequest.openConnection(url, username, password)
-    val p2t = DatabaseRequest.retrieveTag2PostWithTagInInterval(0, 9000000, locations.head.getTagsAsList(), currentDate, life.interval)
-    val elements = p2t.map{ case(p2t, title) => p2t.id + " " + title.getOrElse("") + ""}
-    println(elements.size)
-//    discussionPanel.list.listData = locations.head.ids.getOrElse(currentDate, Set(0)).toList.filter{ elem => elem > 0}
-    
-    
-    
-    discussionPanel.list.listData = elements
-    cpds.close()
+    val elements = locations.head.getIds().getOrElse(currentDate, Set(0)).toList.filter { id => id > 0 }
+    discussionPanel.list.listData = elements.map { id => id.toString }
   }
 
   def updateGradient(node: Node, tags: List[String] = Nil) = {
@@ -599,8 +585,8 @@ class Control(val model: Model, val view: View) {
   def updatePlayer() = {
     val life = model.life
     val steps = life.steps
-
     slider.max = steps.size - 1
+    slider.value = slider.min
 
     val checkpoints = (steps.filter { step => step % 50 == 0 } :+ slider.max).distinct
     slider.labels = checkpoints.map { step => step -> new Label(step.toString) }.toMap

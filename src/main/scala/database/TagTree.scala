@@ -5,10 +5,12 @@ import java.io.PrintWriter
 import java.io.File
 import java.util.Date
 import visualization.Life
+import org.joda.time.LocalDate
 
 object TagTree {
 
   def createTree(vector: List[Tag]) = {
+    println("Its tree time bitch")
     val total = vector.filter { v => v.tags.size == 1 }.map { v => v.totalCount }.sum
 
     val subtrees = createSubTree(vector, 0)
@@ -58,16 +60,17 @@ class Tree(val root: Node) {
   def getSize(node: Node): Int = {
     val childrens = node.children
     if (childrens.size > 0) {
-       childrens.size + childrens.map{ child => getSize(child) }.sum
+       childrens.size + childrens.par.map{ child => getSize(child) }.sum
     } else {
       0
     }
   }
   
-  def changeCounts(node: Node, life: Life, date2step: Map[Int, Int]): Unit = { 
+  def changeCounts(node: Node, life: Life, date2step: Map[LocalDate, Int]): Unit = { 
     val childrens = node.children
     childrens.par.foreach { child => 
       child.tag.changeDates2Counts(life, date2step)
+      
       changeCounts(child, life, date2step)
     }
   }

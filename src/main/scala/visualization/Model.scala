@@ -29,34 +29,30 @@ class Model(val url: String, val username: String, val password: String, val lif
   val endColor = new Color(0, 0, 0)
   val levels = 30
   val gradient = Gradient.createGradient(startColor, endColor, levels)
-  val totalone = 5284153
 
-  var mainVector = TagFactory.mainTagVector(url, username, password, life)
-  var tree = TagTree.createTree(mainVector)
-  var root = tree.root
+//  val mainVector = TagFactory.mainTagVector(url, username, password, life, levels)
+//  val tree = TagTree.createTree(mainVector)
+  val tree = TagFactory.createVectorFromTags(url, username, password, life, 5)
+  val root = tree.root
 
   var maxHeight = getMaxCount(root.children)
   println("(Model) max height: " + maxHeight)
 
   var fixedRectangles = createFixedRectangles(root.children)
-
   var locations = computeModel(Nil, life.start)
 
   def computeModel(tag: List[String], currentDate: LocalDate, tags: List[String] = Nil): List[Location] = {
     val date = life.incrementDate(currentDate)
     val level = tree.getLevel(tag)
+    
     val childrens = level.tail
-
     val filteredChildrens = filterChildrens(childrens, tags)
 
     val totalCurrent = getCurrentTotal(level.head, filteredChildrens, currentDate)
-    val total = childrens.map { node => node.tag.totalCount }.sum
-
-    val head = new Location(level.head.tag, totalCurrent, None, None, false, level.head.tag.dates2ids)
+    val head = new Location(level.head.tag, totalCurrent, None, None, false)
     val locations = createLocation(filteredChildrens, currentDate, tags, totalCurrent)
 
     println("Model Computed")
-
     head :: locations
   }
 
@@ -99,7 +95,7 @@ class Model(val url: String, val username: String, val password: String, val lif
 
   def createLocation(childrenInInterval: List[Node], date: LocalDate, tags: List[String], total: Double) = {
 
-    val sorted = childrenInInterval //.sortBy { node => node.tag.counts.get(date).get }.reverse
+    val sorted = childrenInInterval.zipWithIndex.toMap //.sortBy { node => node.tag.counts.get(date).get }.reverse
     //    val percentages = sorted.map { node => (node.tag.getCount(date) / total.toDouble) }
     //    val percentages = sorted.map { node => node.tag.getMaxCount() / total.toDouble }
 
@@ -109,8 +105,7 @@ class Model(val url: String, val username: String, val password: String, val lif
     //    println("Bucket: " + buckets.size)
     //    val rects = createRectangles(buckets, 0.0, 0.0, width, height, true)
 
-    val locations = sorted.par.map { node =>
-      val index = sorted.indexOf(node)
+    val locations = sorted.par.map { case(node, index) =>
       val count = node.tag.dates2counts.get(date).getOrElse(0)
       val tag = node.tag
       val container = fixedRectangles(index)
@@ -119,9 +114,9 @@ class Model(val url: String, val username: String, val password: String, val lif
       val rectangle = createInternalRectangle(tag.getMaxIntervalCount(), count, container)
 
       if (tags.size > 0) {
-        new Location(tag, count, Some(container), Some(rectangle), true, tag.dates2ids)
+        new Location(tag, count, Some(container), Some(rectangle), true)
       } else {
-        new Location(tag, count, Some(container), Some(rectangle), false, tag.dates2ids)
+        new Location(tag, count, Some(container), Some(rectangle), false)
       }
     }
     locations.toList //.filter { location => location.count > 0 }

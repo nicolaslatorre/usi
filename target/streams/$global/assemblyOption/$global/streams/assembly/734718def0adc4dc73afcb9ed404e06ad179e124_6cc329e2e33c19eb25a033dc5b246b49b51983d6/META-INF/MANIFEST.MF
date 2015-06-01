@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Vendor: com.github.wookietreiber
+Implementation-Title: scala-chart
+Implementation-Version: 0.4.2
+Implementation-Vendor-Id: com.github.wookietreiber
+Specification-Vendor: com.github.wookietreiber
+Specification-Title: scala-chart
+Implementation-URL: https://github.com/wookietreiber/scala-chart
+Specification-Version: 0.4.2
+

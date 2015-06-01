@@ -42,7 +42,7 @@ object Starter {
 
     val startDate = new LocalDate(2008, 7, 31)
     val endDate = new LocalDate(2015, 3, 8)
-    val interval = 7
+    val interval = 1
     val life = new Life(startDate, endDate, interval)
     val name = "StackOverflow"
 
@@ -50,6 +50,7 @@ object Starter {
 
     SwingUtilities.invokeLater(new Runnable {
       def run {
+        println("DA VIEW")
         val view = new View(model)
         val control = new Control(model, view)
       }
@@ -350,7 +351,6 @@ class Canvas(val model: Model) extends Panel {
   override def paintComponent(g: Graphics2D) = {
     super.paintComponent(g)
 
-    val size = Toolkit.getDefaultToolkit.getScreenSize
     val currentNodeChildrens = locations.tail
 
     currentNodeChildrens.filter { location => isInRectangle(location, location.getRectangle()) }.foreach { location =>
@@ -371,10 +371,7 @@ class Canvas(val model: Model) extends Panel {
 
         val key = (location.count / model.maxHeight.toDouble) * 30
         g.setColor(gradient.get(key.toInt).get)
-
-        //        val toPaintRect = new Rectangle2D.Double(rect.x, rect.y, rect.width, rect.height)
         val toPaintRect = new Rectangle2D.Double(pointInternal.x, pointInternal.y, sub.width * zoomFactor, sub.height * zoomFactor)
-
         g.fill(toPaintRect)
 
         if (key > 15) g.setColor(Color.WHITE) else g.setColor(Color.BLACK)

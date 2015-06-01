@@ -5,8 +5,7 @@ import java.util.Date
 import org.joda.time.LocalDate
 import database.Tag
 
-case class Location(val tag: Tag, val count: Double, val rectangle: Option[ScalaRectangle], val internalRectangle: Option[ScalaRectangle], var selected: Boolean, 
-    ids: Map[LocalDate, Set[Int]]) {
+case class Location(val tag: Tag, val count: Double, val rectangle: Option[ScalaRectangle], val internalRectangle: Option[ScalaRectangle], var selected: Boolean) {
   
   /**
    * Get a list of tags
@@ -36,6 +35,10 @@ case class Location(val tag: Tag, val count: Double, val rectangle: Option[Scala
   
   def getDates2Counts() = {
     tag.dates2counts
+  }
+  
+  def getIds() = {
+    tag.dates2ids
   }
 
 }

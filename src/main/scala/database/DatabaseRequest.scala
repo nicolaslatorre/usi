@@ -51,14 +51,14 @@ object DatabaseRequest {
       from(posts)(p => where(p.postTypeId === 1) select (p.id) orderBy (p.creationDate asc)).page(pageLength * n, pageLength).toSet
     }
   }
-  
+
   /**
    * Retrieve the posts that are questions.
    */
   def retrieveQuestionsIdsInInterval(start: LocalDate, end: LocalDate, tags: List[String]) = {
     val sDate = start.toDate()
     val eDate = end.toDate()
-    val tag = tags.map { tag => "&lt;"+tag+"&gt;" }.mkString("")
+    val tag = tags.map { tag => "&lt;" + tag + "&gt;" }.mkString("")
     inTransaction {
       from(posts)(p => where((p.postTypeId === 1) and (p.creationDate >= sDate and p.creationDate < eDate) and (p.tags like tag)) select (p.id) orderBy (p.creationDate asc)).toSet
     }
@@ -168,35 +168,38 @@ object DatabaseRequest {
 
   def retrieveTag2PostWithDate(n: Int, pageLength: Int) = {
     inTransaction {
-      join(posts, post2tag)((p, pt) =>
+      val res = join(posts, post2tag)((p, pt) =>
         where((p.postTypeId === 1))
-          select (pt, p.title, p.creationDate) orderBy(p.creationDate)
+          select (pt, p.creationDate) orderBy (p.creationDate)
           on (p.id === pt.id)).page(n, pageLength).toList
+
+      println(res.size)
+      res
     }
   }
-  
+
   /**
    * Retrieve all elements from tag2post corresponding to the given tag
    */
   def retrieveTag2PostWithTag(n: Int, pageLength: Int, tags: List[String]) = {
-    val ts = tags.map{ tag => "&lt;"+tag+"&gt;"}.mkString("")
+    val ts = tags.map { tag => "&lt;" + tag + "&gt;" }.mkString("")
     inTransaction {
       join(posts, post2tag)((p, pt) =>
         where((p.postTypeId === 1) and (p.tags like ts))
-          select (pt, p.creationDate) orderBy(p.creationDate)
+          select (pt, p.creationDate) orderBy (p.creationDate)
           on (p.id === pt.id)).page(n, pageLength).toList
     }
   }
-  
+
   /**
    * Retrieve all elements from tag2post corresponding to the given tag
    */
   def retrieveTag2PostWithTagInInterval(n: Int, pageLength: Int, tags: List[String], startDate: LocalDate, interval: Int) = {
-    val ts = tags.map{ tag => "&lt;"+tag+"&gt;"}.mkString("")
+    val ts = tags.map { tag => "&lt;" + tag + "&gt;" }.mkString("")
     inTransaction {
       join(posts, post2tag)((p, pt) =>
         where((p.postTypeId === 1) and (p.tags like ts) and (p.creationDate >= startDate.toDate) and (p.creationDate < startDate.plusDays(interval).toDate))
-          select (pt, p.title) orderBy(p.creationDate)
+          select (pt, p.title) orderBy (p.creationDate)
           on (p.id === pt.id)).page(n, pageLength).toList
     }
   }
