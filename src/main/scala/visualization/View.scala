@@ -42,7 +42,7 @@ object Starter {
 
     val startDate = new LocalDate(2008, 7, 31)
     val endDate = new LocalDate(2015, 3, 8)
-    val interval = 1
+    val interval = 7
     val life = new Life(startDate, endDate, interval)
     val name = "StackOverflow"
 
@@ -50,7 +50,6 @@ object Starter {
 
     SwingUtilities.invokeLater(new Runnable {
       def run {
-        println("DA VIEW")
         val view = new View(model)
         val control = new Control(model, view)
       }
@@ -135,10 +134,10 @@ class View(val model: Model) extends Frame {
       contents += playerButtonPanel
       contents += datePanel
     }
-    
+
     val discussionsPanel = new BoxPanel(Orientation.Vertical) {
       preferredSize = new Dimension(200, 800)
-//      val list = new ListView(model.locations.flatMap { location => location.ids.getOrElse(life.start, Set(0)) }.filter { elem => elem > 0 })
+      //      val list = new ListView(model.locations.flatMap { location => location.ids.getOrElse(life.start, Set(0)) }.filter { elem => elem > 0 })
       val list = new ListView(List(""))
       val scrollPane = new ScrollPane() {
         contents = list
@@ -291,35 +290,35 @@ class View(val model: Model) extends Frame {
         contents += barChartButton
         visible = false
       }
-      
+
       // INTERVAL PANEL
       val loadingPanel = new BoxPanel(Orientation.Vertical) {
-    	  val intervalPanel = new FlowPanel(FlowPanel.Alignment.Left)() {
-    		  val intervalLabel = new Label {
-    			  text = "Interval length in days: "
-    		  }
-    		  
-    		  val intervalValue = new TextField(life.interval.toString, 10)
-    		  
-    		  contents += intervalLabel
-    		  contents += intervalValue
-    	  }
-        
-//        val progressPanel = new FlowPanel(FlowPanel.Alignment.Left)() {
-//          val progressLabel = new Label("Loaded: ")
-//          val currentSize = model.mainVector.size
-//          val progress = new Label() {
-//        	  val percentages = (currentSize.toDouble / model.datasetSize) * 100
-//            text = BigDecimal(percentages).setScale(2, BigDecimal.RoundingMode.HALF_UP).toString + "%"
-//          }
-//          
-//          contents += progressLabel
-//          contents += progress
-//        }
-        
+        val intervalPanel = new FlowPanel(FlowPanel.Alignment.Left)() {
+          val intervalLabel = new Label {
+            text = "Interval length in days: "
+          }
+
+          val intervalValue = new TextField(life.interval.toString, 10)
+
+          contents += intervalLabel
+          contents += intervalValue
+        }
+
+        //        val progressPanel = new FlowPanel(FlowPanel.Alignment.Left)() {
+        //          val progressLabel = new Label("Loaded: ")
+        //          val currentSize = model.mainVector.size
+        //          val progress = new Label() {
+        //        	  val percentages = (currentSize.toDouble / model.datasetSize) * 100
+        //            text = BigDecimal(percentages).setScale(2, BigDecimal.RoundingMode.HALF_UP).toString + "%"
+        //          }
+        //          
+        //          contents += progressLabel
+        //          contents += progress
+        //        }
+
         contents += intervalPanel
-//        contents += progressPanel
-        
+        //        contents += progressPanel
+
       }
 
       contents += mainInfoPanel
@@ -348,52 +347,37 @@ class Canvas(val model: Model) extends Panel {
   var changingViewPort = false
   var drawBorders = true
 
+  var shapes = computeShapes()
+
   override def paintComponent(g: Graphics2D) = {
     super.paintComponent(g)
 
-    val currentNodeChildrens = locations.tail
-
-    currentNodeChildrens.filter { location => isInRectangle(location, location.getRectangle()) }.foreach { location =>
-      val rectangle = location.getRectangle()
-      val sub = location.getInternalRectangle()
-      if (rectangle != null) {
-        val offset = new Point(offsetX, offsetY)
-        val pointExternal = (new Point(rectangle.x, rectangle.y) + offset) * zoomFactor
-
+    shapes.foreach {
+      case (externalOption, internal, key, message, pointMessage, selected) =>
+      val external = externalOption.getOrElse(new Rectangle2D.Double(0, 0, 0, 0))
+        
         if (drawBorders) {
           g.setColor(Color.BLACK)
-          g.draw(new Rectangle2D.Double(pointExternal.x, pointExternal.y, rectangle.width * zoomFactor, rectangle.height * zoomFactor))
+          g.draw(external)
         }
 
         g.setColor(Color.BLACK)
-        val pointInternal = (new Point(sub.x, sub.y) + offset) * zoomFactor
-        g.draw(new Rectangle2D.Double(pointInternal.x, pointInternal.y, sub.width * zoomFactor, sub.height * zoomFactor))
 
-        val key = (location.count / model.maxHeight.toDouble) * 30
+        g.draw(internal)
+
         g.setColor(gradient.get(key.toInt).get)
-        val toPaintRect = new Rectangle2D.Double(pointInternal.x, pointInternal.y, sub.width * zoomFactor, sub.height * zoomFactor)
-        g.fill(toPaintRect)
+        g.fill(internal)
 
         if (key > 15) g.setColor(Color.WHITE) else g.setColor(Color.BLACK)
 
-        val tags = location.getTagsAsString()
-        val tagIndex = tags.lastIndexOf(" ")
-        val message = {
-          if (tagIndex == -1) tags
-          else tags.substring(tagIndex, tags.length)
-        }
-        if (rectangle.width >= 50) {
-          val pointMessage = new Point(pointInternal.x, pointExternal.y) + new Point(0.0, (rectangle.height / 2) * zoomFactor)
+        if (external.width >= 50) {
           g.drawString(message.toString, pointMessage.x.toInt, pointMessage.y.toInt)
         }
-        if (location.selected) {
+        if (selected) {
           g.setColor(Color.RED)
-          g.fillOval(pointExternal.x.toInt, pointExternal.y.toInt, 8, 8)
-          g.draw(new Rectangle2D.Double(pointExternal.x, pointExternal.y, (rectangle.width - 1) * zoomFactor, (rectangle.height - 1) * zoomFactor))
+          g.fillOval(external.x.toInt, external.y.toInt, 8, 8)
+          g.draw(new Rectangle2D.Double(external.x, external.y, (external.width - 1) * zoomFactor, (external.height - 1) * zoomFactor))
         }
-      } else {
-        println(location.getTagsAsString() + " is null with occurrences: " + location.count)
-      }
     }
     println("(View) Drew squares")
   }
@@ -409,6 +393,38 @@ class Canvas(val model: Model) extends Panel {
     if (topLeft.x > size.getWidth || bottomRight.x < 0.0) false
     else if (topLeft.y > size.getHeight || bottomRight.y < 0.0) false
     else true
+  }
+
+  def computeShapes() = {
+    val currentNodeChildrens = locations.tail
+    val rectangles = currentNodeChildrens.par.filter { location => isInRectangle(location, location.getRectangle()) }.map { location =>
+      val rectangle = location.getRectangle()
+      val subRectangle = location.getInternalRectangle()
+
+      val offset = new Point(offsetX, offsetY)
+      val pointExternal = (new Point(rectangle.x, rectangle.y) + offset) * zoomFactor
+      val pointInternal = (new Point(subRectangle.x, subRectangle.y) + offset) * zoomFactor
+      val pointMessage = new Point(pointInternal.x, pointExternal.y) + new Point(0.0, (rectangle.height / 2) * zoomFactor)
+
+      val externalShape = if (drawBorders) {
+        val es = new Rectangle2D.Double(pointExternal.x, pointExternal.y, rectangle.width * zoomFactor, rectangle.height * zoomFactor)
+        Some(es)
+      } else None
+
+      val key = (location.count / model.maxHeight.toDouble) * 30
+
+      val internalShape = new Rectangle2D.Double(pointInternal.x, pointInternal.y, subRectangle.width * zoomFactor, subRectangle.height * zoomFactor)
+
+      val tags = location.getTagsAsString()
+      val tagIndex = tags.lastIndexOf(" ")
+      val message = {
+        if (tagIndex == -1) tags
+        else tags.substring(tagIndex, tags.length)
+      }
+
+      (externalShape, internalShape, key, message, pointMessage, location.selected)
+    }
+    rectangles.toList
   }
 
 }

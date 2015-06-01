@@ -28,7 +28,9 @@ object TagTree {
           val sortedTags = tagsInLevel.seq.sortBy { tag => tag.tags.size }
 
           val subsubtree = createSubTree(sortedTags.toList.tail, level + 1)
-          val subtree = new Tree(new Node(sortedTags.head, subsubtree))
+          val root = new Node(sortedTags.head, Nil)
+          root.children = subsubtree
+          val subtree = new Tree(root)
           subtree
         }
         subtrees.values.map { subtree => subtree.root }.toList.sortBy { node => node.tag.getMaxIntervalCount() }.reverse
@@ -55,6 +57,22 @@ class Tree(val root: Node) {
         val node = search(root, tags)
         node :: node.children
     }
+  }
+  
+  def update(tag: Tag) = {
+    val target = search(root, tag.tags)
+    val targetTag = target.tag
+    val previousCount = targetTag.totalCount
+    
+    targetTag.totalCount = previousCount + tag.totalCount
+    targetTag.days2counts = tag.days2counts ++ targetTag.days2counts
+    targetTag.dates2counts = tag.dates2counts ++ targetTag.dates2counts
+    
+    targetTag.ids = tag.ids ++ targetTag.ids
+    targetTag.dates2ids = tag.dates2ids ++ targetTag.dates2ids
+    
+    
+    
   }
 
   def getSize(node: Node): Int = {

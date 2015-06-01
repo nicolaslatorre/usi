@@ -33,6 +33,7 @@ class Model(val url: String, val username: String, val password: String, val lif
 //  val mainVector = TagFactory.mainTagVector(url, username, password, life, levels)
 //  val tree = TagTree.createTree(mainVector)
   val tree = TagFactory.createVectorFromTags(url, username, password, life, 5)
+//  TagFactory.updateTree(url, username, password, life, levels, tree)
   val root = tree.root
 
   var maxHeight = getMaxCount(root.children)
@@ -42,6 +43,7 @@ class Model(val url: String, val username: String, val password: String, val lif
   var locations = computeModel(Nil, life.start)
 
   def computeModel(tag: List[String], currentDate: LocalDate, tags: List[String] = Nil): List[Location] = {
+    println("Computing model")
     val date = life.incrementDate(currentDate)
     val level = tree.getLevel(tag)
     
@@ -68,7 +70,7 @@ class Model(val url: String, val username: String, val password: String, val lif
 
   def filterChildrens(childrens: List[Node], tags: List[String]) = {
     if (tags.size > 0) {
-      childrens.filter(child => tags.contains(child.tag.getTagsAsString()))
+      childrens.toSet.par.filter(child => tags.contains(child.tag.getTagsAsString())).toList
     } else childrens
   }
 

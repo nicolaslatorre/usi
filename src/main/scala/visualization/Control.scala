@@ -219,6 +219,7 @@ class Control(val model: Model, val view: View) {
       if (index == -1) {
         updateGradient(tree.root)
         canvas.locations = model.computeModel(Nil, currentDate)
+        canvas.shapes = canvas.computeShapes()
 
         updateSelectionMenu(canvas.locations)
         updateDiscussionsList(canvas.locations)
@@ -237,6 +238,8 @@ class Control(val model: Model, val view: View) {
         val node = tree.search(tree.root, headTags.substring(0, index).split(" ").toList)
         updateGradient(node)
         canvas.locations = model.computeModel(headTags.substring(0, index).split(" ").toList, currentDate, filteredTags)
+        canvas.shapes = canvas.computeShapes()
+        
         updateSelectionMenu(canvas.locations)
         updateDiscussionsList(canvas.locations)
         val tagCount = canvas.locations.drop(1).size
@@ -470,6 +473,7 @@ class Control(val model: Model, val view: View) {
     updateGradient(node, filteredTags)
 
     canvas.locations = model.computeModel(tags, currentDate, filteredTags)
+    canvas.shapes = canvas.computeShapes()
     updateSelectionMenu(canvas.locations)
     updateDiscussionsList(canvas.locations)
 

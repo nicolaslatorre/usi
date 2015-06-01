@@ -8,7 +8,7 @@ import com.github.nscala_time.time.Imports.LocalDate
 import com.github.nscala_time.time.Imports._
 import visualization.Life
 
-class Tag(val tags: List[String], val totalCount: Int, var dates2counts: Map[LocalDate, Int], val days2counts: List[(LocalDate, Int)], val ids: Map[LocalDate, Set[Int]],
+class Tag(val tags: List[String], var totalCount: Int, var dates2counts: Map[LocalDate, Int], var days2counts: List[(LocalDate, Int)], var ids: Map[LocalDate, Set[Int]],
   var dates2ids: Map[LocalDate, Set[Int]]) {
 
   /**
