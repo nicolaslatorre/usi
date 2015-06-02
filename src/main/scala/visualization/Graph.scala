@@ -38,7 +38,7 @@ object Graph {
     tags.foreach{ tag => 
       val s = new XYSeries(tag.getTagsAsString())
       dates.zipWithIndex.foreach { case(date, index) => 
-        val value = tag.getDates2Counts().get(date).getOrElse(0)
+        val value = tag.tag.days2counts.toMap.get(date).getOrElse(0)
         s.add(index, value)
       }
       dataset.addSeries(s)
@@ -63,7 +63,7 @@ object Graph {
     tags.foreach{ tag => 
       val s = new org.jfree.data.time.TimeSeries(tag.getTagsAsString())
       dates.foreach { date => 
-        val value = tag.getDates2Counts().get(date).getOrElse(0)
+        val value = tag.getDates2Counts().toMap.get(date).getOrElse(0)
         s.add(new Day(date.toDate()), value)
       }
       dataset.addSeries(s)

@@ -16,13 +16,12 @@ import java.awt.Color
 import database.TagManager
 import java.awt.Toolkit
 import java.util.ArrayList
-import database.Node
 import com.github.nscala_time.time.Imports._
 import java.util.Date
 import database.Tag
 import org.joda.time.Months
 import scala.collection.JavaConversions._
-import database.Tree
+import database.MTree
 
 class Model(val url: String, val username: String, val password: String, val life: Life, val name: String) {
   val startColor = new Color(255, 255, 255)
@@ -34,58 +33,49 @@ class Model(val url: String, val username: String, val password: String, val lif
 //  val tree = TagTree.createTree(mainVector)
   val tree = TagFactory.createVectorFromTags(url, username, password, life, 5)
 //  TagFactory.updateTree(url, username, password, life, levels, tree)
-  val root = tree.root
+  val root = tree.value
 
-  var maxHeight = getMaxCount(root.children)
+  var maxHeight = getMaxCount(tree.children)
   println("(Model) max height: " + maxHeight)
 
-  var fixedRectangles = createFixedRectangles(root.children)
-  var locations = computeModel(Nil, life.start)
+  var fixedRectangles = createFixedRectangles(tree.children)
+  var locations = computeModel(root, life.start)
 
-  def computeModel(tag: List[String], currentDate: LocalDate, tags: List[String] = Nil): List[Location] = {
+  def computeModel(tag: Tag, currentDate: LocalDate, tags: List[String] = Nil): List[Location] = {
     println("Computing model")
     val date = life.incrementDate(currentDate)
-    val level = tree.getLevel(tag)
+    val level = tree.search(tag)
     
-    val childrens = level.tail
-    val filteredChildrens = filterChildrens(childrens, tags)
+    val children = level.children
+    val filteredChildrens = filterChildrens(children, tags)
 
-    val totalCurrent = getCurrentTotal(level.head, filteredChildrens, currentDate)
-    val head = new Location(level.head.tag, totalCurrent, None, None, false)
+    val totalCurrent = getCurrentTotal(level, filteredChildrens, currentDate)
+    val head = new Location(level.value, totalCurrent, None, None, false)
     val locations = createLocation(filteredChildrens, currentDate, tags, totalCurrent)
 
     println("Model Computed")
     head :: locations
   }
 
-  def getCurrentTotal(head: Node, childrens: List[Node], currentDate: LocalDate) = {
-    if (head.tag.tags == Nil || (childrens.size < head.children.size)) {
-      childrens.map {
-        node => node.tag.getCount(currentDate)
+  def getCurrentTotal(head: MTree, children: List[MTree], currentDate: LocalDate) = {
+    if (head.value.tags == Nil || (children.size < head.children.size)) {
+      children.map {
+        tree => tree.value.getCount(currentDate)
       }.sum
     } else {
-      head.tag.getCount(currentDate)
+      head.value.getCount(currentDate)
     }
   }
 
-  def filterChildrens(childrens: List[Node], tags: List[String]) = {
+  def filterChildrens(children: List[MTree], tags: List[String]) = {
     if (tags.size > 0) {
-      childrens.toSet.par.filter(child => tags.contains(child.tag.getTagsAsString())).toList
-    } else childrens
+      children.toSet.par.filter(child => tags.contains(child.value.getTagsAsString())).toList
+    } else children
   }
 
-  def coumputeRootLocation(tags: List[String], currentDate: LocalDate) = {
-    val level = tree.getLevel(tags)
-    val childrens = level.tail
-
-    val filteredChildrens = filterChildrens(childrens, tags)
-
-    val totalCurrent = getCurrentTotal(level.head, filteredChildrens, currentDate)
-  }
-
-  def createFixedRectangles(childrens: List[Node]) = {
-    val total = getTotalCount(childrens)
-    val percentages = getPercentages(childrens, total)
+  def createFixedRectangles(children: List[MTree]) = {
+    val total = getTotalCount(children)
+    val percentages = getPercentages(children, total)
 
     val (width, height) = (1900.0, 1400.0)
     val center = new Point(width / 2, height / 2)
@@ -95,21 +85,13 @@ class Model(val url: String, val username: String, val password: String, val lif
     else Nil
   }
 
-  def createLocation(childrenInInterval: List[Node], date: LocalDate, tags: List[String], total: Double) = {
+  def createLocation(childrenInInterval: List[MTree], date: LocalDate, tags: List[String], total: Double) = {
 
-    val sorted = childrenInInterval.zipWithIndex.toMap //.sortBy { node => node.tag.counts.get(date).get }.reverse
-    //    val percentages = sorted.map { node => (node.tag.getCount(date) / total.toDouble) }
-    //    val percentages = sorted.map { node => node.tag.getMaxCount() / total.toDouble }
+    val sorted = childrenInInterval.zipWithIndex.toMap
 
-    //    val (width, height) = (1200.0, 1500.0)
-
-    //    val buckets = createBuckets(percentages, 0.1)
-    //    println("Bucket: " + buckets.size)
-    //    val rects = createRectangles(buckets, 0.0, 0.0, width, height, true)
-
-    val locations = sorted.par.map { case(node, index) =>
-      val count = node.tag.dates2counts.get(date).getOrElse(0)
-      val tag = node.tag
+    val locations = sorted.par.map { case(tree, index) =>
+      val count = tree.value.days2counts.toMap.get(date).getOrElse(0)
+      val tag = tree.value
       val container = fixedRectangles(index)
 
       // INTERNAL RECTANGLE
@@ -215,23 +197,12 @@ class Model(val url: String, val username: String, val password: String, val lif
     discussions
   }
 
-  def getPartitions(nodes: List[Node]) = {
-    val levels = {
-      val max = nodes.head.tag.totalCount
-      max.toString().length
-    }
+  
 
-    val ls = (0 until levels).toStream
-
-    ls.map { level =>
-      nodes.filter { node => node.tag.totalCount >= Math.pow(10, level) && node.tag.totalCount < Math.pow(10, level + 1) }
-    }.reverse.toList
-  }
-
-  def getMaxCount(nodes: List[Node]) = {
-    if (nodes.size > 0) {
-    	nodes.map { node =>
-    	val tag = node.tag
+  def getMaxCount(trees: List[MTree]) = {
+    if (trees.size > 0) {
+    	trees.map { tree =>
+        val tag = tree.value
     	tag.getMaxIntervalCount()
     	}.max      
     } else {
@@ -239,38 +210,35 @@ class Model(val url: String, val username: String, val password: String, val lif
     }
   }
 
-  def getTotalCount(nodes: List[Node]) = {
-    nodes.map { node =>
-      val tag = node.tag
+  def getTotalCount(trees: List[MTree]) = {
+    trees.map { tree =>
+      val tag = tree.value
       tag.getMaxIntervalCount()
     }.sum
   }
 
-  def getPercentages(nodes: List[Node], total: Int) = {
-    nodes.map { node =>
-      val tag = node.tag
+  def getPercentages(trees: List[MTree], total: Int) = {
+    trees.map { tree =>
+      val tag = tree.value
       tag.getMaxIntervalCount() / total.toDouble
     }
   }
 
   def getTotalDataset() = {
-    val root = tree.root
-    tree.getSize(root)
+    tree.getSize()
   }
 
   def getTotalOccurrences = {
-    val root = tree.root
-    root.tag.totalCount.toString()
+    val root = tree.value
+    root.totalCount.toString()
   }
 
   def getTagNumberInInterval() = {
-    val root = tree.root
-    root.children.size
+    tree.children.size
   }
 
   def getCurrentTotalOccurences(currentDate: LocalDate) = {
-    val root = tree.root
-    root.children.map { child => child.tag.getCount(currentDate) }.sum
+    tree.children.map { child => child.value.getCount(currentDate) }.sum
   }
 
 }

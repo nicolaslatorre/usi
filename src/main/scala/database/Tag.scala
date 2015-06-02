@@ -8,8 +8,8 @@ import com.github.nscala_time.time.Imports.LocalDate
 import com.github.nscala_time.time.Imports._
 import visualization.Life
 
-class Tag(val tags: List[String], var totalCount: Int, var dates2counts: Map[LocalDate, Int], var days2counts: List[(LocalDate, Int)], var ids: Map[LocalDate, Set[Int]],
-  var dates2ids: Map[LocalDate, Set[Int]]) {
+case class Tag(val tags: List[String], var totalCount: Int, val days2counts: List[(LocalDate, Int)], val ids: Map[LocalDate, Stream[Int]],
+  var dates2ids: Map[LocalDate, Stream[Int]]) {
 
   /**
    * Get a tag list as a string
@@ -26,35 +26,35 @@ class Tag(val tags: List[String], var totalCount: Int, var dates2counts: Map[Loc
    * Get specific count
    */
   def getCount(start: LocalDate) = {
-    dates2counts.getOrElse(start, 0)
+    days2counts.toMap.getOrElse(start, 0)
   }
 
   /**
    *  Get max count
    */
   def getMaxIntervalCount() = {
-    dates2counts.maxBy { case (month, count) => count }._2
+    days2counts.maxBy { case (month, count) => count }._2
   }
 
   def changeDates2Counts(life: Life, date2step: Map[LocalDate, Int]) = {
-    val d2c = days2counts.groupBy {
-      case (step, count) =>
-        val index = date2step.get(step).getOrElse(0) // retrieve actual step index respect to the interval
-        life.incrementByInterval(index)
-    }.mapValues { lineCounts =>
-      lineCounts.map { case (step, count) => count }.sum
-    }
+//    val d2c = days2counts.groupBy {
+//      case (step, count) =>
+//        val index = date2step.get(step).getOrElse(0) // retrieve actual step index respect to the interval
+//        life.incrementByInterval(index)
+//    }.mapValues { lineCounts =>
+//      lineCounts.map { case (step, count) => count }.sum
+//    }.toMap
+//
+//    val d2i = ids.groupBy {
+//      case (date, count) =>
+//        val index = date2step.get(date).getOrElse(0) // retrieve actual step index respect to the interval
+//        life.incrementByInterval(index)
+//    }.mapValues { values =>
+//      values.flatMap { case(date, id) => id }.toStream
+//    }.toMap
 
-    val d2i = ids.groupBy {
-      case (date, count) =>
-        val index = date2step.get(date).getOrElse(0) // retrieve actual step index respect to the interval
-        life.incrementByInterval(index)
-    }.mapValues { values =>
-      values.flatMap { case(date, id) => id }.toSet
-    }
-
-    dates2counts = d2c
-    dates2ids = d2i
+//    dates2counts = dates
+//    dates2ids = d2i
   }
 
 }

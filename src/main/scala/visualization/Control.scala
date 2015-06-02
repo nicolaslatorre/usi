@@ -15,7 +15,6 @@ import scala.swing.event.MouseWheelMoved
 import scala.swing.event.MouseDragged
 import scala.swing.event.MousePressed
 import scala.swing.event.MouseReleased
-import database.Node
 import java.awt.Graphics2D
 import org.jfree.chart.ChartPanel
 import scala.swing.Frame
@@ -29,6 +28,7 @@ import com.github.tototoshi.csv.CSVReader
 import java.io.File
 import scala.swing.Label
 import database.DatabaseRequest
+import database.MTree
 
 class Control(val model: Model, val view: View) {
   view.peer.setVisible(true)
@@ -133,24 +133,10 @@ class Control(val model: Model, val view: View) {
           println("Square in point: " + clickedLocations.size)
           val location = clickedLocations.head
           location.selected = !location.selected
-          val tags = location.getTagsAsString()
 
           updateSelectionInCanvas(location)
         }
       }
-    //      if (e.peer.getButton == java.awt.event.MouseEvent.BUTTON3) {
-    //        val point = new Point(e.point.getX, e.point.getY) // + Point(canvas.offsetX, canvas.offsetY)) * canvas.zoomFactor
-    //        val locations = canvas.model.locations
-    //        val ls = locations.filter{location => location.rectangle != null}.flatMap { x => isInRectangle(point, x, x.rectangle)
-    //        }
-    //
-    //        if (ls.size > 0) {
-    //          ls.head.ids.foreach { case(id, date) =>
-    //            val process: Process = Process("open -a Firefox http://www.stackoverflow.com/questions/" + id).run()
-    //            println(process.exitValue())
-    //          }
-    //        }
-    //      }
 
     case MouseWheelMoved(_, p, _, r) =>
       if (r > 0) {
@@ -158,6 +144,7 @@ class Control(val model: Model, val view: View) {
       } else {
         canvas.zoomFactor += 0.1
       }
+      canvas.shapes = canvas.computeShapes()
       view.repaint()
 
     case MousePressed(_, p, _, _, _) =>
@@ -175,6 +162,7 @@ class Control(val model: Model, val view: View) {
         x += dx
         y += dy
 
+        canvas.shapes = canvas.computeShapes()
         view.repaint()
 
       } else if (canvas.changingViewPort) {
@@ -217,8 +205,8 @@ class Control(val model: Model, val view: View) {
       val tree = model.tree
 
       if (index == -1) {
-        updateGradient(tree.root)
-        canvas.locations = model.computeModel(Nil, currentDate)
+        updateGradient(tree)
+        canvas.locations = model.computeModel(tree.value, currentDate)
         canvas.shapes = canvas.computeShapes()
 
         updateSelectionMenu(canvas.locations)
@@ -235,16 +223,17 @@ class Control(val model: Model, val view: View) {
           val index = tags.lastIndexOf(" ")
           tags.substring(0, index)
         }
-        val node = tree.search(tree.root, headTags.substring(0, index).split(" ").toList)
+        val target = headTags.substring(0, index).split(" ").toList
+        val node = tree.search(target) // ATTENTION
         updateGradient(node)
-        canvas.locations = model.computeModel(headTags.substring(0, index).split(" ").toList, currentDate, filteredTags)
+        canvas.locations = model.computeModel(node.value, currentDate, filteredTags) // ATTENTION
         canvas.shapes = canvas.computeShapes()
         
         updateSelectionMenu(canvas.locations)
         updateDiscussionsList(canvas.locations)
         val tagCount = canvas.locations.drop(1).size
         val discussionCount = canvas.locations.head.count
-        updateMenu(headTags.substring(0, index).split(" ").toList, tagCount.toString, discussionCount.toString)
+        updateMenu(target, tagCount.toString, discussionCount.toString)
       }
 
       view.repaint()
@@ -270,12 +259,12 @@ class Control(val model: Model, val view: View) {
       life.interval = value.toInt
       val date2step = life.getDateMapping()
 
-      model.tree.changeCounts(model.root, life, date2step)
-      val root = model.tree.root
+      model.tree.changeCounts(life, date2step)
+      val root = model.tree.value
 
-      model.maxHeight = model.getMaxCount(root.children)
+      model.maxHeight = model.getMaxCount(model.tree.children)
       println("(Model) max height: " + model.maxHeight)
-      model.fixedRectangles = model.createFixedRectangles(root.children)
+      model.fixedRectangles = model.createFixedRectangles(model.tree.children)
 
       intervalValue.editable = true
       updatePlayer()
@@ -469,10 +458,10 @@ class Control(val model: Model, val view: View) {
     val filteredTags = locations.filter { location => location.selected }.map { location => location.getTagsAsString() }
 
     val tree = model.tree
-    val node = tree.search(tree.root, head.getTagsAsList())
+    val node = tree.search(head.tag)
     updateGradient(node, filteredTags)
 
-    canvas.locations = model.computeModel(tags, currentDate, filteredTags)
+    canvas.locations = model.computeModel(head.tag, currentDate, filteredTags)
     canvas.shapes = canvas.computeShapes()
     updateSelectionMenu(canvas.locations)
     updateDiscussionsList(canvas.locations)
@@ -519,15 +508,15 @@ class Control(val model: Model, val view: View) {
     discussionPanel.list.listData = elements.map { id => id.toString }
   }
 
-  def updateGradient(node: Node, tags: List[String] = Nil) = {
+  def updateGradient(tree: MTree, tags: List[String] = Nil) = {
     if (tags.size > 0) {
       val tree = model.tree
-      val nodes = tags.map { tag => tree.search(tree.root, tag.split(" ").toList) }
+      val nodes = tags.map { tag => tree.search(tag.split(" ").toList) }
       model.fixedRectangles = model.createFixedRectangles(nodes)
       model.maxHeight = model.getMaxCount(nodes)
     } else {
-      model.fixedRectangles = model.createFixedRectangles(node.children)
-      model.maxHeight = model.getMaxCount(node.children)
+      model.fixedRectangles = model.createFixedRectangles(tree.children)
+      model.maxHeight = model.getMaxCount(tree.children)
     }
   }
 

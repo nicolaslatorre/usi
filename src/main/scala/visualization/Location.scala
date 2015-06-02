@@ -34,7 +34,7 @@ case class Location(val tag: Tag, val count: Double, val rectangle: Option[Scala
   }
   
   def getDates2Counts() = {
-    tag.dates2counts
+    tag.days2counts
   }
   
   def getIds() = {
