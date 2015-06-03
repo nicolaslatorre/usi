@@ -31,39 +31,39 @@ object Graph {
     chartLine.show()
   }
 
-  def drawBarCharGraph(tags: List[Location], life: Life) = {
+  def drawBarCharGraph(locations: List[Location], life: Life) = {
     val dates = life.dates
     val dataset = new XYSeriesCollection
-    
-    tags.foreach{ tag => 
-      val s = new XYSeries(tag.getTagsAsString())
-      dates.zipWithIndex.foreach { case(date, index) => 
-        val value = tag.tag.days2counts.toMap.get(date).getOrElse(0)
-        s.add(index, value)
+
+    locations.foreach { location =>
+      val s = new XYSeries(location.getTagsAsString())
+      dates.zipWithIndex.foreach {
+        case (date, index) =>
+          val value = location.getIntervalCount(date)
+          s.add(index, value)
       }
       dataset.addSeries(s)
     }
-    
+
     val renderer = new ClusteredXYBarRenderer()
-    
+
     val plot = new XYPlot(dataset, new NumberAxis("Dates"), new NumberAxis("Discussions"), renderer)
     plot.setOrientation(PlotOrientation.VERTICAL)
 
-//    val chart = ChartFactory.createXYBarChart("Occurrences", "Date", true, "Frequency", dataset.to)
+    //    val chart = ChartFactory.createXYBarChart("Occurrences", "Date", true, "Frequency", dataset.to)
     val chart = new JFreeChart("Occurrences", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
     chart
   }
 
-  def drawLineCharGraph(tags: List[Location], life: Life) = {
+  def drawLineCharGraph(locations: List[Location], life: Life) = {
 
     val dates = life.dates
     val dataset = new org.jfree.data.time.TimeSeriesCollection
 
-
-    tags.foreach{ tag => 
-      val s = new org.jfree.data.time.TimeSeries(tag.getTagsAsString())
-      dates.foreach { date => 
-        val value = tag.getDates2Counts().toMap.get(date).getOrElse(0)
+    locations.foreach { location =>
+      val s = new org.jfree.data.time.TimeSeries(location.getTagsAsString())
+      dates.foreach { date =>
+        val value = location.getIntervalCount(date)
         s.add(new Day(date.toDate()), value)
       }
       dataset.addSeries(s)

@@ -5,40 +5,28 @@ import java.util.Date
 import org.joda.time.LocalDate
 import database.Tag
 
-case class Location(val tag: Tag, val count: Double, val rectangle: Option[ScalaRectangle], val internalRectangle: Option[ScalaRectangle], var selected: Boolean) {
-  
-  /**
-   * Get a list of tags
-   */
-  def getTagsAsList() = {
-    tag.tags
-  }
-  
+case class Location(val tags: List[String], val total: Double, val currentCount: Double, val dates2ids: Map[LocalDate, (Int, Stream[Int])], 
+    val rectangle: Option[ScalaRectangle], val internalRectangle: Option[ScalaRectangle], var selected: Boolean) {
+
   /**
    * Get tags as a string
    */
   def getTagsAsString() = {
-    tag.getTagsAsString()
+    tags.mkString(" ")
   }
-  
+
   def getRectangle() = {
     rectangle.getOrElse(null)
   }
-  
+
   def getInternalRectangle() = {
     internalRectangle.getOrElse(null)
   }
   
-  def getTotalCount() = {
-    tag.totalCount
+  /**
+   * Get specific interval count
+   */
+  def getIntervalCount(start: LocalDate) = {
+    dates2ids.getOrElse(start, (0, Stream()))._1
   }
-  
-  def getDates2Counts() = {
-    tag.days2counts
-  }
-  
-  def getIds() = {
-    tag.dates2ids
-  }
-
 }

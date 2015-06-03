@@ -354,8 +354,8 @@ class Canvas(val model: Model) extends Panel {
 
     shapes.foreach {
       case (externalOption, internal, key, message, pointMessage, selected) =>
-      val external = externalOption.getOrElse(new Rectangle2D.Double(0, 0, 0, 0))
-        
+        val external = externalOption.getOrElse(new Rectangle2D.Double(0, 0, 0, 0))
+
         if (drawBorders) {
           g.setColor(Color.BLACK)
           g.draw(external)
@@ -396,34 +396,40 @@ class Canvas(val model: Model) extends Panel {
   }
 
   def computeShapes() = {
-    val currentNodeChildrens = locations.tail
-    val rectangles = currentNodeChildrens.par.filter { location => isInRectangle(location, location.getRectangle()) }.map { location =>
-      val rectangle = location.getRectangle()
-      val subRectangle = location.getInternalRectangle()
+    val currentNodeChildrens = locations.tail.toSet
 
-      val offset = new Point(offsetX, offsetY)
-      val pointExternal = (new Point(rectangle.x, rectangle.y) + offset) * zoomFactor
-      val pointInternal = (new Point(subRectangle.x, subRectangle.y) + offset) * zoomFactor
-      val pointMessage = new Point(pointInternal.x, pointExternal.y) + new Point(0.0, (rectangle.height / 2) * zoomFactor)
+    val chunks = currentNodeChildrens.grouped(1000).toSet
 
-      val externalShape = if (drawBorders) {
-        val es = new Rectangle2D.Double(pointExternal.x, pointExternal.y, rectangle.width * zoomFactor, rectangle.height * zoomFactor)
-        Some(es)
-      } else None
+    val rectangles = chunks.flatMap { chunk =>
+      chunk.par.filter { location => isInRectangle(location, location.getRectangle()) }.map { location =>
+        val rectangle = location.getRectangle()
+        val subRectangle = location.getInternalRectangle()
 
-      val key = (location.count / model.maxHeight.toDouble) * 30
+        val offset = new Point(offsetX, offsetY)
+        val pointExternal = (new Point(rectangle.x, rectangle.y) + offset) * zoomFactor
+        val pointInternal = (new Point(subRectangle.x, subRectangle.y) + offset) * zoomFactor
+        val pointMessage = new Point(pointInternal.x, pointExternal.y) + new Point(0.0, (rectangle.height / 2) * zoomFactor)
 
-      val internalShape = new Rectangle2D.Double(pointInternal.x, pointInternal.y, subRectangle.width * zoomFactor, subRectangle.height * zoomFactor)
+        val externalShape = if (drawBorders) {
+          val es = new Rectangle2D.Double(pointExternal.x, pointExternal.y, rectangle.width * zoomFactor, rectangle.height * zoomFactor)
+          Some(es)
+        } else None
 
-      val tags = location.getTagsAsString()
-      val tagIndex = tags.lastIndexOf(" ")
-      val message = {
-        if (tagIndex == -1) tags
-        else tags.substring(tagIndex, tags.length)
+        val key = (location.currentCount / model.maxHeight.toDouble) * 30
+
+        val internalShape = new Rectangle2D.Double(pointInternal.x, pointInternal.y, subRectangle.width * zoomFactor, subRectangle.height * zoomFactor)
+
+        val tags = location.getTagsAsString()
+        val tagIndex = tags.lastIndexOf(" ")
+        val message = {
+          if (tagIndex == -1) tags
+          else tags.substring(tagIndex, tags.length)
+        }
+
+        (externalShape, internalShape, key, message, pointMessage, location.selected)
       }
-
-      (externalShape, internalShape, key, message, pointMessage, location.selected)
     }
+
     rectangles.toList
   }
 

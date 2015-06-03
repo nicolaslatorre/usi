@@ -29,28 +29,25 @@ class Model(val url: String, val username: String, val password: String, val lif
   val levels = 30
   val gradient = Gradient.createGradient(startColor, endColor, levels)
 
-//  val mainVector = TagFactory.mainTagVector(url, username, password, life, levels)
-//  val tree = TagTree.createTree(mainVector)
-  val tree = TagFactory.createVectorFromTags(url, username, password, life, 5)
-//  TagFactory.updateTree(url, username, password, life, levels, tree)
-  val root = tree.value
+  var tree = TagFactory.createVectorFromTags(url, username, password, life, 5)
+  var root = tree.value
 
   var maxHeight = getMaxCount(tree.children)
   println("(Model) max height: " + maxHeight)
 
   var fixedRectangles = createFixedRectangles(tree.children)
-  var locations = computeModel(root, life.start)
+  var locations = computeModel(Nil, life.start)
 
-  def computeModel(tag: Tag, currentDate: LocalDate, tags: List[String] = Nil): List[Location] = {
+  def computeModel(tag: List[String], currentDate: LocalDate, tags: List[String] = Nil): List[Location] = {
     println("Computing model")
     val date = life.incrementDate(currentDate)
     val level = tree.search(tag)
-    
+
     val children = level.children
     val filteredChildrens = filterChildrens(children, tags)
 
     val totalCurrent = getCurrentTotal(level, filteredChildrens, currentDate)
-    val head = new Location(level.value, totalCurrent, None, None, false)
+    val head = new Location(level.value.tags, totalCurrent, 0, Map(), None, None, false)
     val locations = createLocation(filteredChildrens, currentDate, tags, totalCurrent)
 
     println("Model Computed")
@@ -60,10 +57,10 @@ class Model(val url: String, val username: String, val password: String, val lif
   def getCurrentTotal(head: MTree, children: List[MTree], currentDate: LocalDate) = {
     if (head.value.tags == Nil || (children.size < head.children.size)) {
       children.map {
-        tree => tree.value.getCount(currentDate)
+        tree => tree.getCurrentTotal(currentDate)
       }.sum
     } else {
-      head.value.getCount(currentDate)
+      head.value.getDayCount(currentDate)
     }
   }
 
@@ -80,8 +77,8 @@ class Model(val url: String, val username: String, val password: String, val lif
     val (width, height) = (1900.0, 1400.0)
     val center = new Point(width / 2, height / 2)
     val buckets = createBuckets(percentages, 0.2, center)
-    
-    if(percentages.size > 0) createRectangles(buckets, width, height, total, percentages.head)
+
+    if (percentages.size > 0) createRectangles(buckets, width, height, total, percentages.head)
     else Nil
   }
 
@@ -89,19 +86,21 @@ class Model(val url: String, val username: String, val password: String, val lif
 
     val sorted = childrenInInterval.zipWithIndex.toMap
 
-    val locations = sorted.par.map { case(tree, index) =>
-      val count = tree.value.days2counts.toMap.get(date).getOrElse(0)
-      val tag = tree.value
-      val container = fixedRectangles(index)
+    val locations = sorted.par.map {
+      case (tree, index) =>
+        val tag = tree.value
+        val count = tag.getDayCount(date)
+        val total = tag.total
+        val container = fixedRectangles(index)
 
-      // INTERNAL RECTANGLE
-      val rectangle = createInternalRectangle(tag.getMaxIntervalCount(), count, container)
+        // INTERNAL RECTANGLE
+        val rectangle = createInternalRectangle(tag.getMaxDayCount(), count, container)
 
-      if (tags.size > 0) {
-        new Location(tag, count, Some(container), Some(rectangle), true)
-      } else {
-        new Location(tag, count, Some(container), Some(rectangle), false)
-      }
+        if (tags.size > 0) {
+          new Location(tag.tags, total, count, tag.days2ids, Some(container), Some(rectangle), true)
+        } else {
+          new Location(tag.tags, total, count, tag.days2ids, Some(container), Some(rectangle), false)
+        }
     }
     locations.toList //.filter { location => location.count > 0 }
   }
@@ -197,14 +196,12 @@ class Model(val url: String, val username: String, val password: String, val lif
     discussions
   }
 
-  
-
   def getMaxCount(trees: List[MTree]) = {
     if (trees.size > 0) {
-    	trees.map { tree =>
+      trees.map { tree =>
         val tag = tree.value
-    	tag.getMaxIntervalCount()
-    	}.max      
+        tag.getMaxDayCount()
+      }.max
     } else {
       0
     }
@@ -213,14 +210,14 @@ class Model(val url: String, val username: String, val password: String, val lif
   def getTotalCount(trees: List[MTree]) = {
     trees.map { tree =>
       val tag = tree.value
-      tag.getMaxIntervalCount()
+      tag.getMaxDayCount()
     }.sum
   }
 
   def getPercentages(trees: List[MTree], total: Int) = {
     trees.map { tree =>
       val tag = tree.value
-      tag.getMaxIntervalCount() / total.toDouble
+      tag.getMaxDayCount() / total.toDouble
     }
   }
 
@@ -230,7 +227,7 @@ class Model(val url: String, val username: String, val password: String, val lif
 
   def getTotalOccurrences = {
     val root = tree.value
-    root.totalCount.toString()
+    root.total.toString()
   }
 
   def getTagNumberInInterval() = {
@@ -238,7 +235,7 @@ class Model(val url: String, val username: String, val password: String, val lif
   }
 
   def getCurrentTotalOccurences(currentDate: LocalDate) = {
-    tree.children.map { child => child.value.getCount(currentDate) }.sum
+    tree.children.map { child => child.value.getDayCount(currentDate) }.sum
   }
 
 }

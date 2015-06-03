@@ -248,11 +248,9 @@ object TagFactory {
 
   def createVectorFromTags(url: String, username: String, password: String, life: Life, levels: Int) = {
     val ls = (0 until levels).toList
-    val path = "../NewTags1000000"
+    val path = "../NewTags"
 
     val files = new java.io.File(path).listFiles.filter(_.getName.endsWith(".csv")).toSet
-    //    val bigs = files.filter { file => file.length() > 1048576 * 10 }
-    //    val littles = files.filter { file => file.length() <= 1048576 * 10}
     val date2step = life.getDateMapping()
 
     println("files: " + files.size)
@@ -279,36 +277,26 @@ object TagFactory {
             (date, count, ids)
           }.toList
 
-          val days2counts = infos.map { case (date, count, ids) => (date, count.toInt) }
           val dates2ids = infos.map {
             case (date, count, ids) =>
-              (date, ids.toStream)
+              (date, (count.toInt, ids.toStream))
           }
-          
 
-          val dates2counts = days2counts.groupBy {
-            case (index, count) =>
-              val i = date2step.get(index).getOrElse(0)
-              life.incrementByInterval(i)
-          }.mapValues { lineCounts =>
-            lineCounts.map { case (step, count) => count }.sum
-          }
-          
           val d2i = dates2ids.groupBy {
-            case (date, count) =>
+            case (date, (count, ids)) =>
               val index = date2step.get(date).getOrElse(0) // retrieve actual step index respect to the interval
               life.incrementByInterval(index)
           }.mapValues { values =>
-            //            values.toMap.values
-            values.flatMap { case (date, ids) => ids }.toStream
-          }
-          
+            val newCount = values.map { case (date, (count, ids)) => count }.sum
+            val newIds = values.flatMap { case (date, (count, ids)) => ids }.toStream
+            (newCount, newIds)
+          }.toMap.seq
 
-          new Tag(tags, total, dates2counts.toList, Map(), d2i.toMap)
-          //        }.toList
+          new Tag(tags, total, d2i.toMap)
 
         }.toList
         reader.close()
+        
         val sortedTags = tags.sortBy { tag => tag.tags.size }
         TagTree.createTree(sortedTags)
       }.toList
@@ -316,9 +304,9 @@ object TagFactory {
     }.toList
 
     println("Main vector created, vector length: " + tss.size)
-    val sortedTree = tss.filter { tree => tree.value.tags.size == 1 }.sortBy { tree => tree.value.getMaxIntervalCount() }.reverse
-    val total = tss.view.filter { tree => tree.value.tags.size == 1 }.map { tree => tree.value.totalCount }.sum
-    MTree(new Tag(List(), total, List(), Map(), Map()), sortedTree)
+    val sortedTree = tss.filter { tree => tree.value.tags.size == 1 }.sortBy { tree => tree.getMaxDayCount() }.reverse
+    val total = tss.view.filter { tree => tree.value.tags.size == 1 }.map { tree => tree.value.total }.sum
+    MTree(new Tag(List(), total, Map()), sortedTree)
   }
 
 //  def mainTagVector(url: String, username: String, password: String, life: Life, levels: Int) = {

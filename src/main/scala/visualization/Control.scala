@@ -189,8 +189,9 @@ class Control(val model: Model, val view: View) {
       if (ls.size > 0) {
         val infos = ls.map { location =>
           val tags = location.getTagsAsString()
-          val totalCount = location.getTotalCount()
-          "Tag: " + tags + "<br>Discussions: " + location.count + "<br>Total Discussions: " + totalCount + "<br>Discussions in level: "
+          val totalCount = location.total
+          val currentCount = location.currentCount
+          "Tag: " + tags + "<br>Discussions: " + currentCount + "<br>Total Discussions: " + totalCount + "<br>Discussions in level: "
         }.mkString("")
         canvas.tooltip = "<html>" + infos + "</html>"
 
@@ -206,13 +207,13 @@ class Control(val model: Model, val view: View) {
 
       if (index == -1) {
         updateGradient(tree)
-        canvas.locations = model.computeModel(tree.value, currentDate)
+        canvas.locations = model.computeModel(tree.value.tags, currentDate)
         canvas.shapes = canvas.computeShapes()
 
         updateSelectionMenu(canvas.locations)
         updateDiscussionsList(canvas.locations)
 
-        val discussionCount = canvas.locations.head.count
+        val discussionCount = canvas.locations.head.total
         val tagCount = canvas.locations.drop(1).size
         updateMenu(List("Root"), tagCount.toString, discussionCount.toString)
       } else {
@@ -226,13 +227,13 @@ class Control(val model: Model, val view: View) {
         val target = headTags.substring(0, index).split(" ").toList
         val node = tree.search(target) // ATTENTION
         updateGradient(node)
-        canvas.locations = model.computeModel(node.value, currentDate, filteredTags) // ATTENTION
+        canvas.locations = model.computeModel(node.value.tags, currentDate, filteredTags) // ATTENTION
         canvas.shapes = canvas.computeShapes()
         
         updateSelectionMenu(canvas.locations)
         updateDiscussionsList(canvas.locations)
         val tagCount = canvas.locations.drop(1).size
-        val discussionCount = canvas.locations.head.count
+        val discussionCount = canvas.locations.head.total
         updateMenu(target, tagCount.toString, discussionCount.toString)
       }
 
@@ -258,8 +259,10 @@ class Control(val model: Model, val view: View) {
       val value = intervalValue.text
       life.interval = value.toInt
       val date2step = life.getDateMapping()
+      
+      model.tree = TagFactory.createVectorFromTags("", "", "", life, 5)
 
-      model.tree.changeCounts(life, date2step)
+      model.root = model.tree.value
       val root = model.tree.value
 
       model.maxHeight = model.getMaxCount(model.tree.children)
@@ -454,20 +457,20 @@ class Control(val model: Model, val view: View) {
       case Some(location) => location
     }
 
-    val tags = head.getTagsAsList()
+    val tags = head.tags
     val filteredTags = locations.filter { location => location.selected }.map { location => location.getTagsAsString() }
 
     val tree = model.tree
-    val node = tree.search(head.tag)
+    val node = tree.search(head.tags)
     updateGradient(node, filteredTags)
 
-    canvas.locations = model.computeModel(head.tag, currentDate, filteredTags)
+    canvas.locations = model.computeModel(head.tags, currentDate, filteredTags)
     canvas.shapes = canvas.computeShapes()
     updateSelectionMenu(canvas.locations)
     updateDiscussionsList(canvas.locations)
 
     val tagCount = canvas.locations.drop(1).size
-    val discussionCount = canvas.locations.head.count
+    val discussionCount = canvas.locations.head.total
     if (tags == Nil) updateMenu(List("Root"), tagCount.toString, discussionCount.toString) else updateMenu(tags, tagCount.toString, discussionCount.toString)
     canvas.requestFocus()
     canvas.repaint()
@@ -504,7 +507,7 @@ class Control(val model: Model, val view: View) {
   }
 
   def updateDiscussionsList(locations: List[Location]) = {
-    val elements = locations.head.getIds().getOrElse(currentDate, Set(0)).toList.filter { id => id > 0 }
+    val elements = locations.head.dates2ids.getOrElse(currentDate, (0, Stream()))._2.filter { id => id > 0 }
     discussionPanel.list.listData = elements.map { id => id.toString }
   }
 

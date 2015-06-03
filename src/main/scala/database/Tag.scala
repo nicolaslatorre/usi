@@ -8,8 +8,7 @@ import com.github.nscala_time.time.Imports.LocalDate
 import com.github.nscala_time.time.Imports._
 import visualization.Life
 
-case class Tag(val tags: List[String], var totalCount: Int, val days2counts: List[(LocalDate, Int)], val ids: Map[LocalDate, Stream[Int]],
-  var dates2ids: Map[LocalDate, Stream[Int]]) {
+case class Tag(val tags: List[String], val total: Int, val days2ids: Map[LocalDate, (Int, Stream[Int])]) {
 
   /**
    * Get a tag list as a string
@@ -18,43 +17,37 @@ case class Tag(val tags: List[String], var totalCount: Int, val days2counts: Lis
     tags.mkString(" ")
   }
 
+  /**
+   * Return the number of tags
+   */
   def getTagSize() = {
     tags.size
   }
 
   /**
-   * Get specific count
+   * Get specific day count
    */
-  def getCount(start: LocalDate) = {
-    days2counts.toMap.getOrElse(start, 0)
+  def getDayCount(start: LocalDate) = {
+    days2ids.getOrElse(start, (0, Stream()))._1
   }
 
   /**
-   *  Get max count
+   * Get the maximum day count for a tag
    */
-  def getMaxIntervalCount() = {
-    days2counts.maxBy { case (month, count) => count }._2
+  def getMaxDayCount() = {
+    days2ids.maxBy { case (day, (count, ids)) => count }._2._1
   }
 
-  def changeDates2Counts(life: Life, date2step: Map[LocalDate, Int]) = {
-//    val d2c = days2counts.groupBy {
-//      case (step, count) =>
-//        val index = date2step.get(step).getOrElse(0) // retrieve actual step index respect to the interval
-//        life.incrementByInterval(index)
-//    }.mapValues { lineCounts =>
-//      lineCounts.map { case (step, count) => count }.sum
-//    }.toMap
-//
-//    val d2i = ids.groupBy {
-//      case (date, count) =>
+//  def getInterval2Ids(life: Life, date2step: Map[LocalDate, Int]) = {
+//    days2ids.par.groupBy {
+//      case (date, (count, ids)) =>
 //        val index = date2step.get(date).getOrElse(0) // retrieve actual step index respect to the interval
 //        life.incrementByInterval(index)
 //    }.mapValues { values =>
-//      values.flatMap { case(date, id) => id }.toStream
-//    }.toMap
-
-//    dates2counts = dates
-//    dates2ids = d2i
-  }
+//      val newCount = values.map { case (date, (count, ids)) => count }.sum
+//      val newIds = values.flatMap { case (date, (count, ids)) => ids }.toStream
+//      (newCount, newIds)
+//    }.toMap.seq
+//  }
 
 }

@@ -27,7 +27,7 @@ object TagTree {
           
           subtree
         }.values.toList
-        subtrees.sortBy { subtree => subtree.value.getMaxIntervalCount() }.reverse
+        subtrees.sortBy { subtree => subtree.getMaxDayCount() }.reverse
     }
   }
 }
@@ -55,6 +55,20 @@ case class MTree(var value: Tag, var children: List[MTree]) {
       case None => this
     }
   }
+  
+  def getTotal(date: LocalDate): Int = {
+    val count = value.getDayCount(date)
+    count + children.map{ child => child.getTotal(date)}.sum
+  }
+  
+  def getCurrentTotal(date: LocalDate): Int = {
+    val count = value.getDayCount(date)
+    count + children.map{ child => child.getCurrentTotal(date)}.sum
+  }
+  
+  def getMaxDayCount() = {
+    value.getMaxDayCount()
+  }
 
   def getLevel() = {
     value :: children.map { child => child.value }
@@ -64,11 +78,11 @@ case class MTree(var value: Tag, var children: List[MTree]) {
     1 + children.size + children.map { child => child.getSize() }.sum
   }
 
-  def changeCounts(life: Life, date2step: Map[LocalDate, Int]): Unit = {
-    value.changeDates2Counts(life, date2step)
-    children.par.foreach { child =>
-      child.value.changeDates2Counts(life, date2step)
-    }
+  def changeCounts(life: Life, date2step: Map[LocalDate, Int]) = {
+//    value.changeDates2Counts(life, date2step)
+//    children.par.foreach { child =>
+//      child.value.changeDates2Counts(life, date2step)
+//    }
   }
   
 //  def update(tag: Tag) = {
