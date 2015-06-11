@@ -96,6 +96,7 @@ class Control(val model: Model, val view: View) {
   val chartsButton = menuPanel.charts
   val lineChartButton = chartsPanel.lineChartButton
   val barChartButton = chartsPanel.barChartButton
+  val mountainChartButton = chartsPanel.mountainButton
 
   var isRunning = false
   var inSelection = false
@@ -104,8 +105,8 @@ class Control(val model: Model, val view: View) {
   var y = 0
 
   view.listenTo(canvas, canvas.mouse.clicks, canvas.mouse.moves, canvas.mouse.wheel, canvas.keys, slider, showTagsButton, tagListPanel.list.selection, playButton,
-    startButton, endButton, stopButton, player, inspectButton, clearButton, chartsButton, lineChartButton, barChartButton, intervalValue.keys, discussionsListButton,
-    discussionPanel.list.selection)
+    startButton, endButton, stopButton, player, inspectButton, clearButton, chartsButton, lineChartButton, barChartButton, mountainChartButton, intervalValue.keys, 
+    discussionsListButton, discussionPanel.list.selection)
 
   view.reactions += {
 
@@ -125,7 +126,6 @@ class Control(val model: Model, val view: View) {
             updateModel(Some(location))
           }
         }
-
       }
       if (peer.getButton == java.awt.event.MouseEvent.BUTTON3 && clicks == 1) { // select
 
@@ -134,7 +134,7 @@ class Control(val model: Model, val view: View) {
           val location = clickedLocations.head
           location.selected = !location.selected
 
-          updateSelectionInCanvas(location)
+          updateSelectionInCanvas()
         }
       }
 
@@ -145,7 +145,8 @@ class Control(val model: Model, val view: View) {
         canvas.zoomFactor += 0.1
       }
       canvas.shapes = canvas.computeShapes()
-      view.repaint()
+      canvas.requestFocus()
+      canvas.repaint()
 
     case MousePressed(_, p, _, _, _) =>
       x = p.x
@@ -260,7 +261,8 @@ class Control(val model: Model, val view: View) {
       life.interval = value.toInt
       val date2step = life.getDateMapping()
       
-      model.tree = TagFactory.createVectorFromTags("", "", "", life, 5)
+      val tree = model.tree.search(canvas.locations.head.tags)
+//      tree.changeCounts(life, date2step)
 
       model.root = model.tree.value
       val root = model.tree.value
@@ -275,8 +277,8 @@ class Control(val model: Model, val view: View) {
 
     case ButtonClicked(b) =>
       if (b == inspectButton) {
-        inSelection = false
         updateModel()
+        inSelection = false
         inspectButton.enabled = false
       }
 
@@ -340,7 +342,7 @@ class Control(val model: Model, val view: View) {
         val life = model.life
         val selected = canvas.locations.filter { location => location.selected }
 
-        val chart = Graph.drawLineCharGraph(selected, life)
+        val chart = Graph.drawLineChartGraph(selected, life)
         buildFrame(chart)
       }
 
@@ -349,7 +351,16 @@ class Control(val model: Model, val view: View) {
         val life = model.life
         val selected = canvas.locations.filter { location => location.selected }
 
-        val chart = Graph.drawBarCharGraph(selected, life)
+        val chart = Graph.drawBarChartGraph(selected, life)
+        buildFrame(chart)
+      }
+      
+      if (b == mountainChartButton) {
+        val head = canvas.locations.head
+        val life = model.life
+        val selected = canvas.locations.filter { location => location.selected }
+
+        val chart = Graph.drawAreaChartGraph(selected, life)
         buildFrame(chart)
       }
 
@@ -382,7 +393,7 @@ class Control(val model: Model, val view: View) {
       println("Selected " + location.getTagsAsString())
       location.selected = !location.selected
 
-      updateSelectionInCanvas(location)
+      updateSelectionInCanvas()
 
     case SelectionChanged(discussionPanel.list) if (discussionPanel.list.selection.adjusting) =>
 
@@ -507,7 +518,7 @@ class Control(val model: Model, val view: View) {
   }
 
   def updateDiscussionsList(locations: List[Location]) = {
-    val elements = locations.head.dates2ids.getOrElse(currentDate, (0, Stream()))._2.filter { id => id > 0 }
+    val elements = locations.head.dates2ids.getOrElse(currentDate, (0, Stream()))._2.filter { id => id > 0 }.toList
     discussionPanel.list.listData = elements.map { id => id.toString }
   }
 
@@ -547,30 +558,19 @@ class Control(val model: Model, val view: View) {
       location
     }
     inspectButton.enabled = false
-    updateModel()
+    
+    if(!inSelection) updateModel()
+    else updateSelectionInCanvas()
   }
 
-  def updateSelectionInCanvas(location: Location) = {
-    val g = canvas.peer.getGraphics
-    val rectangle = location.getRectangle()
-    if (location.selected) {
-      val offset = new Point(canvas.offsetX, canvas.offsetY)
-      val point = (new Point(rectangle.x, rectangle.y) + offset) * canvas.zoomFactor
-
-      g.setColor(Color.RED)
-      g.fillOval(point.x.toInt, point.y.toInt, 8, 8)
-      val width = (rectangle.width - 1) * canvas.zoomFactor
-      val height = (rectangle.height - 1) * canvas.zoomFactor
-      g.drawRect(point.x.toInt, point.y.toInt, width.toInt, height.toInt)
-    } else {
-      canvas.requestFocus()
-      canvas.repaint()
-    }
+  def updateSelectionInCanvas() = {
+    canvas.shapes = canvas.computeShapes()
+    canvas.requestFocus()
+    canvas.repaint()
 
     if (!existSelected()) {
       inSelection = false
       inspectButton.enabled = false
-      updateModel()
     } else {
       canvas.requestFocus()
       inSelection = true

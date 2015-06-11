@@ -38,16 +38,18 @@ case class Tag(val tags: List[String], val total: Int, val days2ids: Map[LocalDa
     days2ids.maxBy { case (day, (count, ids)) => count }._2._1
   }
 
-//  def getInterval2Ids(life: Life, date2step: Map[LocalDate, Int]) = {
-//    days2ids.par.groupBy {
-//      case (date, (count, ids)) =>
-//        val index = date2step.get(date).getOrElse(0) // retrieve actual step index respect to the interval
-//        life.incrementByInterval(index)
-//    }.mapValues { values =>
-//      val newCount = values.map { case (date, (count, ids)) => count }.sum
-//      val newIds = values.flatMap { case (date, (count, ids)) => ids }.toStream
-//      (newCount, newIds)
-//    }.toMap.seq
-//  }
+  def getInterval2Ids(life: Life, date2step: Map[LocalDate, Int]) = {
+    val newIds = days2ids.par.groupBy {
+      case (date, (count, ids)) =>
+        val index = date2step.get(date).getOrElse(0) // retrieve actual step index respect to the interval
+        life.incrementByInterval(index)
+    }.mapValues { values =>
+      val newCount = values.map { case (date, (count, ids)) => count }.sum
+      val newIds = values.flatMap { case (date, (count, ids)) => ids }.toStream
+      (newCount, newIds)
+    }.toMap.seq
+    
+    newIds
+  }
 
 }

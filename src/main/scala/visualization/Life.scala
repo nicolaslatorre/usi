@@ -1,6 +1,6 @@
 package visualization
 
-import org.joda.time.LocalDate
+import com.github.nscala_time.time.Imports._
 import org.joda.time.Months
 import org.joda.time.Weeks
 import org.joda.time.Days

@@ -42,20 +42,23 @@ class Model(val url: String, val username: String, val password: String, val lif
     println("Computing model")
     val date = life.incrementDate(currentDate)
     val level = tree.search(tag)
+    val date2step = life.getDateMapping()
 
     val children = level.children
     val filteredChildrens = filterChildrens(children, tags)
 
     val totalCurrent = getCurrentTotal(level, filteredChildrens, currentDate)
-    val head = new Location(level.value.tags, totalCurrent, 0, Map(), None, None, false)
+    val head = new Location(level.value.tags, totalCurrent, 0, level.value.days2ids, None, None, false)
     val locations = createLocation(filteredChildrens, currentDate, tags, totalCurrent)
 
+    head.getInterval2Ids(life, date2step)
+    locations.foreach { location => location.getInterval2Ids(life, date2step) }
     println("Model Computed")
     head :: locations
   }
 
   def getCurrentTotal(head: MTree, children: List[MTree], currentDate: LocalDate) = {
-    if (head.value.tags == Nil || (children.size < head.children.size)) {
+    if (head.value.tags == Nil) {
       children.map {
         tree => tree.getCurrentTotal(currentDate)
       }.sum
@@ -72,6 +75,7 @@ class Model(val url: String, val username: String, val password: String, val lif
 
   def createFixedRectangles(children: List[MTree]) = {
     val total = getTotalCount(children)
+    println("Total: " + total)
     val percentages = getPercentages(children, total)
 
     val (width, height) = (1900.0, 1400.0)
@@ -92,6 +96,7 @@ class Model(val url: String, val username: String, val password: String, val lif
         val count = tag.getDayCount(date)
         val total = tag.total
         val container = fixedRectangles(index)
+        
 
         // INTERNAL RECTANGLE
         val rectangle = createInternalRectangle(tag.getMaxDayCount(), count, container)
@@ -165,7 +170,6 @@ class Model(val url: String, val username: String, val password: String, val lif
 
     buckets.zipWithIndex.flatMap {
       case (bucket, index) =>
-        val w, h = (bucket.sum * width) * 5
         val others = buckets.take(index).map { x => x.sum }.sum
         new Bucket(bucket, 0.0, height * others, width, height * bucket.sum, direction, total, first).rectangles
     }

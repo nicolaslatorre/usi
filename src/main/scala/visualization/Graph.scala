@@ -4,15 +4,15 @@ import org.jfree.chart.ChartFactory
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.NumberAxis
 import org.jfree.chart.plot.PlotOrientation
-import org.jfree.chart.renderer.category.StandardBarPainter
 import org.jfree.chart.renderer.xy.ClusteredXYBarRenderer
+import org.jfree.chart.renderer.xy.XYBarPainter
 import org.jfree.data.time._
 import com.github.nscala_time.time.Imports._
-import database.Tag
 import scalax.chart.module.ChartFactories
 import scalax.chart.module.Charting
 import scalax.chart.module.Charting._
-import org.jfree.chart.renderer.xy.XYBarPainter
+import org.jfree.chart.renderer.xy.StandardXYBarPainter
+import org.jfree.chart.renderer.xy.XYAreaRenderer
 
 object Graph {
   def main(args: Array[String]) = {
@@ -31,7 +31,7 @@ object Graph {
     chartLine.show()
   }
 
-  def drawBarCharGraph(locations: List[Location], life: Life) = {
+  def drawBarChartGraph(locations: List[Location], life: Life) = {
     val dates = life.dates
     val dataset = new XYSeriesCollection
 
@@ -46,6 +46,8 @@ object Graph {
     }
 
     val renderer = new ClusteredXYBarRenderer()
+    renderer.setShadowVisible(false)
+    renderer.setBarPainter(new StandardXYBarPainter())
 
     val plot = new XYPlot(dataset, new NumberAxis("Dates"), new NumberAxis("Discussions"), renderer)
     plot.setOrientation(PlotOrientation.VERTICAL)
@@ -55,7 +57,32 @@ object Graph {
     chart
   }
 
-  def drawLineCharGraph(locations: List[Location], life: Life) = {
+  def drawAreaChartGraph(locations: List[Location], life: Life) = {
+
+    val dates = life.dates
+    val dataset = new XYSeriesCollection
+
+    locations.sortBy{ location => location.dates2ids.maxBy { case (day, (count, ids)) => count }._2._1}.foreach { location =>
+      val s = new XYSeries(location.getTagsAsString())
+      dates.zipWithIndex.foreach {
+        case (date, index) =>
+          val value = location.getIntervalCount(date)
+          s.add(index, value)
+      }
+      dataset.addSeries(s)
+    }
+
+    val renderer = new XYAreaRenderer()
+
+    val plot = new XYPlot(dataset, new NumberAxis("Dates"), new NumberAxis("Discussions"), renderer)
+    plot.setOrientation(PlotOrientation.VERTICAL)
+
+    //    val chart = ChartFactory.createXYBarChart("Occurrences", "Date", true, "Frequency", dataset.to)
+    val chart = new JFreeChart("Occurrences", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
+    chart
+  }
+  
+  def drawLineChartGraph(locations: List[Location], life: Life) = {
 
     val dates = life.dates
     val dataset = new org.jfree.data.time.TimeSeriesCollection

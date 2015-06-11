@@ -285,9 +285,11 @@ class View(val model: Model) extends Frame {
       val chartsPanel = new BoxPanel(Orientation.Vertical) {
         val lineChartButton = new Button("Line Chart")
         val barChartButton = new Button("Bar Chart")
+        val mountainButton = new Button("Area Chart")
 
         contents += lineChartButton
         contents += barChartButton
+        contents += mountainButton
         visible = false
       }
 
@@ -353,16 +355,12 @@ class Canvas(val model: Model) extends Panel {
     super.paintComponent(g)
 
     shapes.foreach {
-      case (externalOption, internal, key, message, pointMessage, selected) =>
-        val external = externalOption.getOrElse(new Rectangle2D.Double(0, 0, 0, 0))
-
-        if (drawBorders) {
-          g.setColor(Color.BLACK)
-          g.draw(external)
-        }
+      case (external, internal, key, message, pointMessage, selected) =>
 
         g.setColor(Color.BLACK)
-
+        if (drawBorders) {
+          g.draw(external)
+        }
         g.draw(internal)
 
         g.setColor(gradient.get(key.toInt).get)
@@ -376,7 +374,7 @@ class Canvas(val model: Model) extends Panel {
         if (selected) {
           g.setColor(Color.RED)
           g.fillOval(external.x.toInt, external.y.toInt, 8, 8)
-          g.draw(new Rectangle2D.Double(external.x, external.y, (external.width - 1) * zoomFactor, (external.height - 1) * zoomFactor))
+          g.draw(new Rectangle2D.Double(external.x, external.y, (external.width - 1), (external.height - 1)))
         }
     }
     println("(View) Drew squares")
@@ -410,10 +408,7 @@ class Canvas(val model: Model) extends Panel {
         val pointInternal = (new Point(subRectangle.x, subRectangle.y) + offset) * zoomFactor
         val pointMessage = new Point(pointInternal.x, pointExternal.y) + new Point(0.0, (rectangle.height / 2) * zoomFactor)
 
-        val externalShape = if (drawBorders) {
-          val es = new Rectangle2D.Double(pointExternal.x, pointExternal.y, rectangle.width * zoomFactor, rectangle.height * zoomFactor)
-          Some(es)
-        } else None
+        val externalShape = new Rectangle2D.Double(pointExternal.x, pointExternal.y, rectangle.width * zoomFactor, rectangle.height * zoomFactor)
 
         val key = (location.currentCount / model.maxHeight.toDouble) * 30
 

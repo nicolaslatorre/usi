@@ -5,7 +5,7 @@ import java.io.PrintWriter
 import java.io.File
 import java.util.Date
 import visualization.Life
-import org.joda.time.LocalDate
+import com.github.nscala_time.time.Imports._
 
 object TagTree {
 
@@ -62,8 +62,7 @@ case class MTree(var value: Tag, var children: List[MTree]) {
   }
   
   def getCurrentTotal(date: LocalDate): Int = {
-    val count = value.getDayCount(date)
-    count + children.map{ child => child.getCurrentTotal(date)}.sum
+    value.getDayCount(date)
   }
   
   def getMaxDayCount() = {
@@ -79,10 +78,10 @@ case class MTree(var value: Tag, var children: List[MTree]) {
   }
 
   def changeCounts(life: Life, date2step: Map[LocalDate, Int]) = {
-//    value.changeDates2Counts(life, date2step)
-//    children.par.foreach { child =>
-//      child.value.changeDates2Counts(life, date2step)
-//    }
+    value.getInterval2Ids(life, date2step)
+    children.par.foreach { child =>
+      child.value.getInterval2Ids(life, date2step)
+    }
   }
   
 //  def update(tag: Tag) = {

@@ -168,87 +168,9 @@ object TagFactory {
     cpds.close()
   }
 
-  //  def updateTree(url: String, username: String, password: String, life: Life, levels: Int, tree: MTree) = {
-  //    val ls = (0 until levels).toList
-  //    val path = "../Tags2000000"
-  //
-  //    val files = new java.io.File(path).listFiles.filter(_.getName.endsWith(".csv")).toSet
-  //    val date2step = life.getDateMapping()
-  //
-  //    println("files: " + files.size)
-  //    val chunks = files.grouped(10).toSet
-  //
-  //    val tss = chunks.par.flatMap { files =>
-  //
-  //      val ts = files.map { file =>
-  //        val reader = CSVReader.open(file)
-  //        val linesStream = reader.iterator
-  //
-  //        val discussions = linesStream.map { line =>
-  //          val id = line.head.toInt
-  //          val tags = line(1).split(" ").toList
-  //          val Array(year, month, day) = line(2).split("-")
-  //          val date = new LocalDate(year.toInt, month.toInt, day.toInt)
-  //
-  //          (id, tags, date)
-  //        }.toSet
-  //
-  //        reader.close()
-  //
-  //        val tagsLevel = ls.flatMap { level =>
-  //          discussions.filter {
-  //            case (id, tags, date) =>
-  //              tags.size > level
-  //          }.groupBy {
-  //            case (id, tags, date) =>
-  //              tags.take(level + 1)
-  //          }
-  //        }.toMap
-  //
-  //        val tags = tagsLevel.map {
-  //          case (tags, ds) =>
-  //            val infos = ds.groupBy { case (id, tags, date) => date }.toMap
-  //
-  //            val days2counts = infos.map { case (date, ids) => (date, ids.size) }
-  //            val totalCount = infos.map { case (date, ids) => ids.size }.sum
-  //            val dates2ids = infos.map {
-  //              case (date, ids) =>
-  //                val levelIds = ids.filter { case (id, ts, date) => tags == ts }.map { case (id, ts, date) => id }
-  //                (date, levelIds.toSet.seq)
-  //            }
-  //            //
-  //            //            val dates2counts = days2counts.par.groupBy {
-  //            //              case (step, count) =>
-  //            //                val index = date2step.get(step).getOrElse(0) // retrieve actual step index respect to the interval
-  //            //                life.incrementByInterval(index)
-  //            //            }.mapValues { values =>
-  //            //              values.map { case (step, count) => count }.sum
-  //            //            }
-  //            //
-  //            //            val d2i = dates2ids.par.groupBy {
-  //            //              case (date, count) =>
-  //            //                val index = date2step.get(date).getOrElse(0) // retrieve actual step index respect to the interval
-  //            //                life.incrementByInterval(index)
-  //            //            }.mapValues { values =>
-  //            //              //            values.toMap.values
-  //            //              values.flatMap { case (date, ids) => ids }.toSet.seq
-  //            //            }
-  //
-  //            //          new Tag(tags, totalCount, dates2counts.toMap.seq, days2counts.toList, dates2ids.toMap.seq, d2i.toMap.seq)
-  //            new Tag(tags, totalCount, days2counts.seq, days2counts.toList, dates2ids.seq, dates2ids.seq)
-  //        }
-  //
-  //        tags.foreach { tag => tag }
-  //      }.toList
-  //      ts
-  //    }.toList
-  //
-  //    println("Main vector created, vector length: " + tss.size)
-  //  }
-
   def createVectorFromTags(url: String, username: String, password: String, life: Life, levels: Int) = {
     val ls = (0 until levels).toList
-    val path = "../NewTags"
+    val path = "../NewTags1000000"
 
     val files = new java.io.File(path).listFiles.filter(_.getName.endsWith(".csv")).toSet
     val date2step = life.getDateMapping()
@@ -291,15 +213,16 @@ object TagFactory {
             val newIds = values.flatMap { case (date, (count, ids)) => ids }.toStream
             (newCount, newIds)
           }.toMap.seq
+          
 
-          new Tag(tags, total, d2i.toMap)
+          new Tag(tags, total, dates2ids.toMap)
 
         }.toList
         reader.close()
         
         val sortedTags = tags.sortBy { tag => tag.tags.size }
         TagTree.createTree(sortedTags)
-      }.toList
+      }.toStream
       ts
     }.toList
 
