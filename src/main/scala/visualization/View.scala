@@ -5,7 +5,6 @@ import java.awt.Dimension
 import java.awt.Font
 import java.awt.Toolkit
 import java.awt.geom.Rectangle2D
-
 import scala.swing.BorderPanel
 import scala.swing.BorderPanel.Position.Center
 import scala.swing.BorderPanel.Position.East
@@ -24,15 +23,14 @@ import scala.swing.Panel
 import scala.swing.ScrollPane
 import scala.swing.Slider
 import scala.swing.TextField
-
 import com.github.nscala_time.time.Imports.Interval
 import com.github.nscala_time.time.Imports.LocalDate
 import com.github.nscala_time.time.Imports.richAbstractPartial
 import com.github.nscala_time.time.Imports.richDate
-
 import javax.swing.ImageIcon
 import javax.swing.SwingUtilities
 import javax.swing.WindowConstants.EXIT_ON_CLOSE
+import java.awt.geom.Ellipse2D
 
 object Starter {
   def main(args: Array[String]) {
@@ -412,7 +410,7 @@ class Canvas(val model: Model) extends Panel {
 
         val key = (location.currentCount / model.maxHeight.toDouble) * 30
 
-        val internalShape = new Rectangle2D.Double(pointInternal.x, pointInternal.y, subRectangle.width * zoomFactor, subRectangle.height * zoomFactor)
+        val internalShape = new Ellipse2D.Double(pointInternal.x, pointInternal.y, subRectangle.width * zoomFactor, subRectangle.height * zoomFactor)
 
         val tags = location.getTagsAsString()
         val tagIndex = tags.lastIndexOf(" ")

@@ -376,7 +376,7 @@ class Control(val model: Model, val view: View) {
         view.repaint()
       }
 
-    case ValueChanged(playerPanel.slider) =>
+    case ValueChanged(playerPanel.slider) if (!playerPanel.slider.adjusting) =>
         println("Changed slider")
         currentDate = incrementDate()
         datePanel.dateLabel.peer.setText(currentDate.toString)

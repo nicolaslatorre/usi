@@ -23,6 +23,13 @@ import org.joda.time.Months
 import scala.collection.JavaConversions._
 import database.MTree
 
+object Direction extends Enumeration {
+  val RIGHT = Value("RIGHT")
+  val LEFT = Value("LEFT")
+  val UP = Value("UP")
+  val DOWN = Value("DOWN")
+}
+
 class Model(val url: String, val username: String, val password: String, val life: Life, val name: String) {
   val startColor = new Color(255, 255, 255)
   val endColor = new Color(0, 0, 0)
@@ -44,6 +51,9 @@ class Model(val url: String, val username: String, val password: String, val lif
     val level = tree.search(tag)
     val date2step = life.getDateMapping()
 
+    println("Fixed: " + fixedRectangles.size)
+    println("Childrens: " + level.children.size)
+
     val children = level.children
     val filteredChildrens = filterChildrens(children, tags)
 
@@ -52,7 +62,7 @@ class Model(val url: String, val username: String, val password: String, val lif
     val locations = createLocation(filteredChildrens, currentDate, tags, totalCurrent)
 
     head.getInterval2Ids(life, date2step)
-    locations.foreach { location => location.getInterval2Ids(life, date2step) }
+    locations.par.foreach { location => location.getInterval2Ids(life, date2step) }
     println("Model Computed")
     head :: locations
   }
@@ -73,17 +83,19 @@ class Model(val url: String, val username: String, val password: String, val lif
     } else children
   }
 
-  def createFixedRectangles(children: List[MTree]) = {
+  def createFixedRectangles(children: List[MTree]): Map[Int, ScalaRectangle] = {
     val total = getTotalCount(children)
     println("Total: " + total)
     val percentages = getPercentages(children, total)
 
     val (width, height) = (1900.0, 1400.0)
     val center = new Point(width / 2, height / 2)
-    val buckets = createBuckets(percentages, 0.2, center)
+    val w, h = 300
+    val cRectangle = new Rectangle(center.x - 300, center.y - 300, w, h)
+    //    val buckets = createBuckets(percentages, 0.2, center)
 
-    if (percentages.size > 0) createRectangles(buckets, width, height, total, percentages.head)
-    else Nil
+    if (percentages.size > 0) createRectangles(children, true, cRectangle) //createRectangles(buckets, width, height, total, percentages.head)
+    else Map()
   }
 
   def createLocation(childrenInInterval: List[MTree], date: LocalDate, tags: List[String], total: Double) = {
@@ -95,8 +107,7 @@ class Model(val url: String, val username: String, val password: String, val lif
         val tag = tree.value
         val count = tag.getDayCount(date)
         val total = tag.total
-        val container = fixedRectangles(index)
-        
+        val container = fixedRectangles.getOrElse(index, new ScalaRectangle(0, 0, 0, 0))
 
         // INTERNAL RECTANGLE
         val rectangle = createInternalRectangle(tag.getMaxDayCount(), count, container)
@@ -119,61 +130,87 @@ class Model(val url: String, val username: String, val password: String, val lif
     new ScalaRectangle(x, y, width, height)
   }
 
-  //  def createRectangles(buckets: List[List[Double]], x: Double, y: Double, width: Double, height: Double, dir: Boolean, total: Int, cRectangle: Rectangle, first: Double): List[Rectangle] = {
-  //    val direction = true
-  //
-  //    var start = new Point(cRectangle.x, cRectangle.y)
-  //    var w, h = 100.0
-  //
-  //    println("(Model) TOT: " + total)
-  //    var segment = 1
-  //    var dir = Direction.RIGHT
-  //
-  //    val rects = buckets.zipWithIndex.flatMap {
-  //      case (bucket, index) =>
-  //
-  //        //        val others = buckets.take(index).map { x => x.sum }.sum
-  //        //        new Bucket(bucket, 0.0, height * others, width, height * bucket.sum, direction).rectangles
-  //        if (index > 0 && index % 2 == 0) segment += 1
-  //
-  //        val s = (0 until segment).toList
-  //
-  //        val res = s.flatMap { x =>
-  //          val nw, nh = (bucket.sum / first) * 100
-  //          val b = if (index == 0) new Bucket(bucket, start.x, start.y, 100, 100, direction, total, first).rectangles
-  //          else new Bucket(bucket, start.x, start.y, nw, nh, direction, total, first).rectangles
-  //
-  //          dir match {
-  //            case Direction.LEFT => start = start - new Point(w, 0)
-  //            case Direction.RIGHT => start = start + new Point(w, 0)
-  //            case Direction.UP => start = start - new Point(0, h)
-  //            case Direction.DOWN => start = start + new Point(0, h)
-  //          }
-  //          b
-  //        }
-  //
-  //        dir = dir match {
-  //          case Direction.LEFT => Direction.UP
-  //          case Direction.RIGHT => Direction.DOWN
-  //          case Direction.UP => Direction.RIGHT
-  //          case Direction.DOWN => Direction.LEFT
-  //        }
-  //
-  //        res
-  //    }
-  //    rects
-  //  }
+  def createRectangles(children: List[MTree], dir: Boolean, cRectangle: Rectangle) = {
+    var start = new Point(cRectangle.x, cRectangle.y)
+    var w, h = cRectangle.width
 
-  def createRectangles(buckets: List[List[Double]], width: Double, height: Double, total: Int, first: Double): List[ScalaRectangle] = {
-    val direction = true
-    println("(Model) Total: " + total)
+    var lap = 1
+    var dir = Direction.DOWN
 
-    buckets.zipWithIndex.flatMap {
-      case (bucket, index) =>
-        val others = buckets.take(index).map { x => x.sum }.sum
-        new Bucket(bucket, 0.0, height * others, width, height * bucket.sum, direction, total, first).rectangles
+    val first = (0 -> new ScalaRectangle(start.x, start.y, w, h))
+    start = start + new Point(w, 0)
+    w /= 2
+    h /= 2
+
+    var squares = 2.0
+    var previous = 2.0
+
+    val rects = children.tail.zipWithIndex.map {
+      case (child, index) =>
+
+        val rectangle = new ScalaRectangle(start.x, start.y, w, h)
+
+        dir match {
+          case Direction.LEFT =>
+            squares -= 1
+            start = start - new Point(w, 0)
+          case Direction.RIGHT =>
+            squares -= 1
+            start = start + new Point(w, 0)
+          case Direction.UP =>
+            squares -= 1
+            start = start - new Point(0, h)
+          case Direction.DOWN =>
+            squares -= 1
+            start = start + new Point(0, h)
+        }
+
+        if (squares == 0) {
+
+          dir = dir match {
+            case Direction.LEFT =>
+              if (lap == 1) squares = 3
+              else squares = previous + 1
+              Direction.UP
+            case Direction.RIGHT =>
+              lap += 1
+
+              if (w > 10 && h > 10) {
+                previous = (previous + 2) * 2
+                w /= 2
+                h /= 2
+
+              } else {
+                previous = (previous + 2)
+              }
+              squares = previous
+              Direction.DOWN
+            case Direction.UP =>
+              if (lap == 1) squares = 4
+              else squares = previous + 2
+              Direction.RIGHT
+            case Direction.DOWN =>
+              if (lap == 1) squares = 3
+              else squares = previous + 1
+              Direction.LEFT
+          }
+        }
+
+        (index + 1) -> rectangle
     }
+    (first :: rects).toMap
   }
+
+  //  def createRectangles(buckets: List[List[Double]], width: Double, height: Double, total: Int, first: Double): List[ScalaRectangle] = {
+  //    val direction = true
+  //    println("(Model) Total: " + total)
+  //
+  //    buckets.zipWithIndex.flatMap {
+  //      case (bucket, index) =>
+  //        val others = buckets.take(index).map { x => x.sum }.sum
+  //        new Bucket(bucket, 0.0, height * others, width, height * bucket.sum, direction, total, first).rectangles
+  //    }
+  //  }
 
   def createBuckets(percentages: List[Double], threshold: Double, center: Point) = {
     percentages.foldLeft(List[List[Double]]()) { (acc, elem) =>
@@ -184,6 +221,11 @@ class Model(val url: String, val username: String, val password: String, val lif
         case Nil => List(elem) :: acc
       }
     }.reverse
+    //    percentages.map{ p => 
+    //      val index = percentages.indexOf(p)
+    //      val leave = (0 until index).map{Math.pow(2, _)}.sum
+    //      percentages.drop(leave.toInt - 1).take(Math.pow(2, index).toInt)
+    //    }
   }
 
   def getDiscussions(ids: Set[Int]) = {
