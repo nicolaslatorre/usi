@@ -56,6 +56,18 @@ case class MTree(var value: Tag, var children: List[MTree]) {
     }
   }
   
+  def hasRelation(key: List[String]): Boolean = {
+    val tags = value.tags
+    val contained = key.map{ k => tags.contains(k) }
+    
+    if(contained.contains(true)) true
+    else {
+      val subContained = children.map { child => child.hasRelation(key) }
+      if(subContained.contains(true)) true
+      else false
+    } 
+  }
+  
   def getTotal(date: LocalDate): Int = {
     val count = value.getDayCount(date)
     count + children.map{ child => child.getTotal(date)}.sum

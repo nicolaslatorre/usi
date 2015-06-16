@@ -21,7 +21,7 @@ object DataManagement {
         val tags = buildTags(post.tags.get)
         val title = parseHtml(parseHtml(post.title.get))
         val body = parseHtml(parseHtml(post.body))
-        new Discussion(post.id, title, post.creationDate, body, post.commmentCount, post.answerCount, comments, ans, tags)
+        new Discussion(post.id, title, post.creationDate, None, 0, 0, 0, None)
     }.toList
   }
 

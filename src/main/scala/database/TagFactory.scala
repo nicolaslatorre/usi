@@ -170,7 +170,7 @@ object TagFactory {
 
   def createVectorFromTags(url: String, username: String, password: String, life: Life, levels: Int) = {
     val ls = (0 until levels).toList
-    val path = "../NewTags2000000"
+    val path = "../NewTags1000000"
 
     val files = new java.io.File(path).listFiles.filter(_.getName.endsWith(".csv")).toSet
     val date2step = life.getDateMapping()

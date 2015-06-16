@@ -107,6 +107,22 @@ object DatabaseRequest {
   }
 
   /**
+   *  Retrieve questions informations by ids
+   */
+  def retrieveQuestionsInfoByIds(ids: Set[Int]) = {
+    inTransaction {
+      val result = from(posts)(p => where((p.postTypeId === 1) and (p.id in ids))
+        select (p.id, p.creationDate, p.title, p.score, p.viewCount, p.ownerId, p.closedDate, p.answerCount))
+
+      result.par.map {
+        case (id, creation, title, score, view, owner, closed, answers) =>
+          new Discussion(id, title.get, creation, answers, score, view, owner.get, closed)
+      }.toList
+    }
+
+  }
+
+  /**
    * Retrieve answers with respective comments
    */
   def retrieveAnswersAndComments(ids: Set[Int]) = {

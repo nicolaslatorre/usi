@@ -80,10 +80,17 @@ class View(val model: Model) extends Frame {
 
     val tagListPanel = new BoxPanel(Orientation.Vertical) {
       preferredSize = new Dimension(200, 800)
+      val searchPanel = new FlowPanel() {
+        preferredSize = new Dimension(180, 50)
+    	  val searchField = new TextField(15)
+        contents += searchField        
+      }
       val list = new ListView(model.locations.map { location => location.getTagsAsString() }.sorted)
       val scrollPane = new ScrollPane() {
+        preferredSize = new Dimension(200, 600)
         contents = list
       }
+      contents += searchPanel
       contents += scrollPane
       visible = false
     }
@@ -346,8 +353,11 @@ class Canvas(val model: Model) extends Panel {
 
   var changingViewPort = false
   var drawBorders = true
-
-  var shapes = computeShapes()
+  var drawRelations = false
+  
+  val life = model.life
+  var shapes = computeShapes(life.start)
+  var relatives: List[List[Rectangle2D.Double]] = List()
 
   override def paintComponent(g: Graphics2D) = {
     super.paintComponent(g)
@@ -367,13 +377,27 @@ class Canvas(val model: Model) extends Panel {
         if (key > 15) g.setColor(Color.WHITE) else g.setColor(Color.BLACK)
 
         if (external.width >= 50) {
-          g.drawString(message.toString, pointMessage.x.toInt, pointMessage.y.toInt)
+          val messageLength = g.getFontMetrics.getStringBounds(message, g).getWidth
+          val start = external.width / 2 - messageLength / 2
+          g.drawString(message.toString, (external.x + start).toInt, pointMessage.y.toInt)
         }
         if (selected) {
           g.setColor(Color.RED)
           g.fillOval(external.x.toInt, external.y.toInt, 8, 8)
           g.draw(new Rectangle2D.Double(external.x, external.y, (external.width - 1), (external.height - 1)))
         }
+    }
+
+    if (drawRelations) {
+      relatives.foreach {
+        case relative =>
+          
+          relative.foreach{ 
+            rectangle =>
+              g.setColor(new Color(148, 0, 211))
+              g.draw(rectangle)
+          }
+      }
     }
     println("(View) Drew squares")
   }
@@ -391,7 +415,7 @@ class Canvas(val model: Model) extends Panel {
     else true
   }
 
-  def computeShapes() = {
+  def computeShapes(start: LocalDate) = {
     val currentNodeChildrens = locations.tail.toSet
 
     val chunks = currentNodeChildrens.grouped(1000).toSet
@@ -404,11 +428,14 @@ class Canvas(val model: Model) extends Panel {
         val offset = new Point(offsetX, offsetY)
         val pointExternal = (new Point(rectangle.x, rectangle.y) + offset) * zoomFactor
         val pointInternal = (new Point(subRectangle.x, subRectangle.y) + offset) * zoomFactor
-        val pointMessage = new Point(pointInternal.x, pointExternal.y) + new Point(0.0, (rectangle.height / 2) * zoomFactor)
+        
+        
+        val pointMessage = (location.getLocationCenter() + offset) * zoomFactor
 
         val externalShape = new Rectangle2D.Double(pointExternal.x, pointExternal.y, rectangle.width * zoomFactor, rectangle.height * zoomFactor)
 
-        val key = (location.currentCount / model.maxHeight.toDouble) * 30
+        val count = location.getCurrentCount(start)
+        val key = (count / model.maxHeight.toDouble) * 30
 
         val internalShape = new Ellipse2D.Double(pointInternal.x, pointInternal.y, subRectangle.width * zoomFactor, subRectangle.height * zoomFactor)
 
@@ -424,6 +451,26 @@ class Canvas(val model: Model) extends Panel {
     }
 
     rectangles.toList
+  }
+
+  def computeRelated(relatives: Map[Location, List[Location]]) = {
+    val offset = new Point(offsetX, offsetY)
+
+    relatives.map {
+      case (location, rs) =>
+        val center = (location.getLocationCenter() + offset) * zoomFactor
+
+//        val lines = rs.map { r =>
+//          val c = (r.getLocationCenter() + offset) * zoomFactor
+//          (center, c)
+//        }
+//        lines
+        rs.map{ r => 
+          val rectangle = r.getRectangle()
+          val pointExternal = (new Point(rectangle.x, rectangle.y) + offset) * zoomFactor
+          new Rectangle2D.Double(pointExternal.x + 2.5, pointExternal.y + 2.5, (rectangle.width * zoomFactor) - 5, (rectangle.height * zoomFactor) - 5)
+        }
+    }.toList
   }
 
 }

@@ -35,15 +35,16 @@ class Model(val url: String, val username: String, val password: String, val lif
   val endColor = new Color(0, 0, 0)
   val levels = 30
   val gradient = Gradient.createGradient(startColor, endColor, levels)
+  val dates2step = life.getDateMapping()
 
   var tree = TagFactory.createVectorFromTags(url, username, password, life, 5)
   var root = tree.value
 
-  var maxHeight = getMaxCount(tree.children)
-  println("(Model) max height: " + maxHeight)
-
   var fixedRectangles = createFixedRectangles(tree.children)
   var locations = computeModel(Nil, life.start)
+
+  var maxHeight = getMaxCount(tree.children, dates2step)
+  println("(Model) max height: " + maxHeight)
 
   def computeModel(tag: List[String], currentDate: LocalDate, tags: List[String] = Nil): List[Location] = {
     println("Computing model")
@@ -58,11 +59,14 @@ class Model(val url: String, val username: String, val password: String, val lif
     val filteredChildrens = filterChildrens(children, tags)
 
     val totalCurrent = getCurrentTotal(level, filteredChildrens, currentDate)
-    val head = new Location(level.value.tags, totalCurrent, 0, level.value.days2ids, None, None, false)
+    val head = new Location(level.value.tags, totalCurrent, level.value.days2ids, None, None, false)
     val locations = createLocation(filteredChildrens, currentDate, tags, totalCurrent)
 
     head.getInterval2Ids(life, date2step)
-    locations.par.foreach { location => location.getInterval2Ids(life, date2step) }
+    locations.par.foreach { location =>
+      location.getInterval2Ids(life, date2step)
+    }
+
     println("Model Computed")
     head :: locations
   }
@@ -102,20 +106,27 @@ class Model(val url: String, val username: String, val password: String, val lif
 
     val sorted = childrenInInterval.zipWithIndex.toMap
 
+    val ids = childrenInInterval.par.map { tree =>
+      val tag = tree.value
+      tag -> tag.getInterval2Ids(life, dates2step)
+    }.toMap
+
     val locations = sorted.par.map {
       case (tree, index) =>
         val tag = tree.value
-        val count = tag.getDayCount(date)
+        val d2s = ids.getOrElse(tag, Map())
+        val count = d2s.getOrElse(date, (0, Stream()))._1 //tag.getDayCount(date) // problem !!!
         val total = tag.total
         val container = fixedRectangles.getOrElse(index, new ScalaRectangle(0, 0, 0, 0))
+        val currentTotal = d2s.maxBy { case (day, (count, ids)) => count }._2._1
 
         // INTERNAL RECTANGLE
-        val rectangle = createInternalRectangle(tag.getMaxDayCount(), count, container)
+        val rectangle = createInternalRectangle(currentTotal, count, container)
 
         if (tags.size > 0) {
-          new Location(tag.tags, total, count, tag.days2ids, Some(container), Some(rectangle), true)
+          new Location(tag.tags, total, tag.days2ids, Some(container), Some(rectangle), true)
         } else {
-          new Location(tag.tags, total, count, tag.days2ids, Some(container), Some(rectangle), false)
+          new Location(tag.tags, total, tag.days2ids, Some(container), Some(rectangle), false)
         }
     }
     locations.toList //.filter { location => location.count > 0 }
@@ -242,11 +253,14 @@ class Model(val url: String, val username: String, val password: String, val lif
     discussions
   }
 
-  def getMaxCount(trees: List[MTree]) = {
+  def getMaxCount(trees: List[MTree], dates2step: Map[LocalDate, Int]) = {
     if (trees.size > 0) {
-      trees.map { tree =>
+      val ids = trees.par.map { tree =>
         val tag = tree.value
-        tag.getMaxDayCount()
+        tag.getInterval2Ids(life, dates2step)
+      }
+      ids.map { i =>
+        i.maxBy { case (day, (count, ids)) => count }._2._1
       }.max
     } else {
       0
@@ -281,7 +295,7 @@ class Model(val url: String, val username: String, val password: String, val lif
   }
 
   def getCurrentTotalOccurences(currentDate: LocalDate) = {
-    tree.children.map { child => child.value.getDayCount(currentDate) }.sum
+    locations.map { location => location.getCurrentCount(currentDate) }.sum
   }
 
 }
