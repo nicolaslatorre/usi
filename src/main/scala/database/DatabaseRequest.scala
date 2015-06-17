@@ -116,7 +116,17 @@ object DatabaseRequest {
 
       result.par.map {
         case (id, creation, title, score, view, owner, closed, answers) =>
-          new Discussion(id, title.get, creation, answers, score, view, owner.get, closed)
+          val t = title match {
+            case None => "NO TITLE"
+            case Some(n) => n
+          }
+          
+          val own = owner match {
+            case None => -1
+            case Some(o) => o
+          }
+          
+          new Discussion(id, t, creation, answers, score, view, own, closed)
       }.toList
     }
 

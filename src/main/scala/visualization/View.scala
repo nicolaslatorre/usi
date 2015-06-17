@@ -82,8 +82,8 @@ class View(val model: Model) extends Frame {
       preferredSize = new Dimension(200, 800)
       val searchPanel = new FlowPanel() {
         preferredSize = new Dimension(180, 50)
-    	  val searchField = new TextField(15)
-        contents += searchField        
+        val searchField = new TextField(15)
+        contents += searchField
       }
       val list = new ListView(model.locations.map { location => location.getTagsAsString() }.sorted)
       val scrollPane = new ScrollPane() {
@@ -354,7 +354,7 @@ class Canvas(val model: Model) extends Panel {
   var changingViewPort = false
   var drawBorders = true
   var drawRelations = false
-  
+
   val life = model.life
   var shapes = computeShapes(life.start)
   var relatives: List[List[Rectangle2D.Double]] = List()
@@ -391,15 +391,15 @@ class Canvas(val model: Model) extends Panel {
     if (drawRelations) {
       relatives.foreach {
         case relative =>
-          
-          relative.foreach{ 
+
+          relative.foreach {
             rectangle =>
               g.setColor(new Color(148, 0, 211))
               g.draw(rectangle)
           }
       }
     }
-    println("(View) Drew squares")
+    println("(View) Done")
   }
 
   def isInRectangle(location: Location, rectangle: ScalaRectangle) = {
@@ -420,16 +420,15 @@ class Canvas(val model: Model) extends Panel {
 
     val chunks = currentNodeChildrens.grouped(1000).toSet
 
-    val rectangles = chunks.flatMap { chunk =>
-      chunk.par.filter { location => isInRectangle(location, location.getRectangle()) }.map { location =>
+    val rectangles = chunks.par.flatMap { chunk =>
+      chunk.filter { location => isInRectangle(location, location.getRectangle()) }.map { location =>
         val rectangle = location.getRectangle()
         val subRectangle = location.getInternalRectangle()
 
         val offset = new Point(offsetX, offsetY)
         val pointExternal = (new Point(rectangle.x, rectangle.y) + offset) * zoomFactor
         val pointInternal = (new Point(subRectangle.x, subRectangle.y) + offset) * zoomFactor
-        
-        
+
         val pointMessage = (location.getLocationCenter() + offset) * zoomFactor
 
         val externalShape = new Rectangle2D.Double(pointExternal.x, pointExternal.y, rectangle.width * zoomFactor, rectangle.height * zoomFactor)
@@ -450,7 +449,7 @@ class Canvas(val model: Model) extends Panel {
       }
     }
 
-    rectangles.toList
+    rectangles.seq.toSet
   }
 
   def computeRelated(relatives: Map[Location, List[Location]]) = {
@@ -460,12 +459,12 @@ class Canvas(val model: Model) extends Panel {
       case (location, rs) =>
         val center = (location.getLocationCenter() + offset) * zoomFactor
 
-//        val lines = rs.map { r =>
-//          val c = (r.getLocationCenter() + offset) * zoomFactor
-//          (center, c)
-//        }
-//        lines
-        rs.map{ r => 
+        //        val lines = rs.map { r =>
+        //          val c = (r.getLocationCenter() + offset) * zoomFactor
+        //          (center, c)
+        //        }
+        //        lines
+        rs.map { r =>
           val rectangle = r.getRectangle()
           val pointExternal = (new Point(rectangle.x, rectangle.y) + offset) * zoomFactor
           new Rectangle2D.Double(pointExternal.x + 2.5, pointExternal.y + 2.5, (rectangle.width * zoomFactor) - 5, (rectangle.height * zoomFactor) - 5)

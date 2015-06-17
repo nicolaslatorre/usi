@@ -236,7 +236,7 @@ class Control(val model: Model, val view: View) {
         canvas.shapes = canvas.computeShapes(currentDate)
 
         updateSelectionMenu(canvas.locations)
-        if(discussionPanel.visible) updateDiscussionsList(canvas.locations)
+        if (discussionPanel.visible) updateDiscussionsList(canvas.locations)
         val tagCount = canvas.locations.drop(1).size
         val discussionCount = canvas.locations.head.total
         updateMenu(target, tagCount.toString, discussionCount.toString)
@@ -386,25 +386,35 @@ class Control(val model: Model, val view: View) {
 
       if (b == discussionsListButton) {
         discussionPanel.visible = !discussionPanel.visible
-        if(discussionPanel.visible) {
-          val locations = canvas.locations          
-        	updateDiscussionsList(locations)
+        if (discussionPanel.visible) {
+          val locations = canvas.locations
+          updateDiscussionsList(locations)
         }
         canvas.requestFocus()
         view.repaint()
       }
 
-    case ValueChanged(playerPanel.slider) if (!playerPanel.slider.adjusting) =>
-      println("Changed slider")
-      currentDate = incrementDate()
-      datePanel.dateLabel.peer.setText(currentDate.toString)
-      updateModel()
+    case ValueChanged(playerPanel.slider) =>
+      if (!playerPanel.slider.adjusting) {
+    	  println("Changed slider")
+    	  currentDate = incrementDate()
+        datePanel.dateLabel.peer.setText(currentDate.toString)
+    	  updateModel()       
+      } else {
+        currentDate = incrementDate()
+        datePanel.dateLabel.peer.setText(currentDate.toString)
+      }
 
     case SelectionChanged(tagListPanel.list) if (tagListPanel.list.selection.adjusting) =>
       val item = tagListPanel.list.selection.items(0)
       println("Selected from list: " + item)
 
-      val locations = canvas.locations.map { location => location.getTagsAsString() -> location }.toMap
+      val locations = canvas.locations.tail.map { location =>
+        val tags = location.tags
+        if (tags.size == 1) tags.head -> location
+        else tags.last -> location
+      }.toMap
+
       val location = locations.get(item).get
 
       println("Selected " + location.getTagsAsString())
@@ -416,24 +426,24 @@ class Control(val model: Model, val view: View) {
 
       val item = discussionPanel.list.selection.items(0)
       println("Selected from list: " + item)
-      
+
       val id = item.split(" ").last
 
       val process: Process = Process("open -a Firefox http://www.stackoverflow.com/questions/" + id).run()
       println(process.exitValue())
 
       canvas.requestFocus()
-      
+
     case ValueChanged(searchPanel.searchField) =>
       val key = searchField.text
       val locations = canvas.locations
       if (key == "") updateSelectionMenu(locations)
       else {
-    	  val tags = locations.tail.par.map { location => location.tags.last }.toList
+        val tags = locations.tail.par.map { location => location.tags.last }.toList
         val keyLength = key.size
-        val filtered = tags.par.filter{ tag => tag.take(keyLength) == key}.toList.sorted
-    		tagListPanel.list.listData = filtered
-        
+        val filtered = tags.par.filter { tag => tag.take(keyLength) == key }.toList.sorted
+        tagListPanel.list.listData = filtered
+
       }
   }
 
@@ -479,10 +489,10 @@ class Control(val model: Model, val view: View) {
     canvas.locations = model.computeModel(head.tags, currentDate, filteredTags)
     canvas.shapes = canvas.computeShapes(currentDate)
     updateSelectionMenu(canvas.locations)
-    if(discussionPanel.visible) updateDiscussionsList(canvas.locations)
+    if (discussionPanel.visible) updateDiscussionsList(canvas.locations)
 
     val tagCount = canvas.locations.drop(1).size
-    val discussionCount = canvas.locations.map{location => location.getCurrentCount(currentDate)}.sum
+    val discussionCount = canvas.locations.map { location => location.getCurrentCount(currentDate) }.sum
     if (tags == Nil) updateMenu(List("Root"), tagCount.toString, discussionCount.toString) else updateMenu(tags, tagCount.toString, discussionCount.toString)
     canvas.requestFocus()
     canvas.repaint()
@@ -525,21 +535,18 @@ class Control(val model: Model, val view: View) {
     val url = "jdbc:postgresql://localhost:5432/stackoverflow_dump"
     val username = "sodb"
     val password = "sodb"
-    
-    
+
     val elements = locations.head.dates2ids.getOrElse(currentDate, (0, Stream()))._2.filter { id => id > 0 }.toSet
-    
-    if(elements.size > 0) {
+
+    if (elements.size > 0) {
       val cpds = DatabaseRequest.openConnection(url, username, password)
       val discussions = DatabaseRequest.retrieveQuestionsInfoByIds(elements)
       cpds.close()
       discussionPanel.list.listData = discussions.sortBy { discussion => discussion.score }.reverse.par.map { discussion => discussion.toString }.toList
     } else {
-      discussionPanel.list.listData = Nil      
+      discussionPanel.list.listData = Nil
     }
-    
-    
-    
+
   }
 
   def updateGradient(tree: MTree, tags: List[String] = Nil) = {

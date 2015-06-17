@@ -31,14 +31,20 @@ object Direction extends Enumeration {
 }
 
 class Model(val url: String, val username: String, val password: String, val life: Life, val name: String) {
+  
+  //Gradient
   val startColor = new Color(255, 255, 255)
   val endColor = new Color(0, 0, 0)
   val levels = 30
   val gradient = Gradient.createGradient(startColor, endColor, levels)
+  
+  // Tree
+  val tree = TagFactory.createVectorFromTags(url, username, password, life, 5)
+  var root = tree.value
+  
+  
   val dates2step = life.getDateMapping()
 
-  var tree = TagFactory.createVectorFromTags(url, username, password, life, 5)
-  var root = tree.value
 
   var fixedRectangles = createFixedRectangles(tree.children)
   var locations = computeModel(Nil, life.start)
@@ -62,10 +68,9 @@ class Model(val url: String, val username: String, val password: String, val lif
     val head = new Location(level.value.tags, totalCurrent, level.value.days2ids, None, None, false)
     val locations = createLocation(filteredChildrens, currentDate, tags, totalCurrent)
 
+    println("Locations Created")
+
     head.getInterval2Ids(life, date2step)
-    locations.par.foreach { location =>
-      location.getInterval2Ids(life, date2step)
-    }
 
     println("Model Computed")
     head :: locations
@@ -88,17 +93,11 @@ class Model(val url: String, val username: String, val password: String, val lif
   }
 
   def createFixedRectangles(children: List[MTree]): Map[Int, ScalaRectangle] = {
-    val total = getTotalCount(children)
-    println("Total: " + total)
-    val percentages = getPercentages(children, total)
-
     val (width, height) = (1900.0, 1400.0)
     val center = new Point(width / 2, height / 2)
     val w, h = 300
-    val cRectangle = new Rectangle(center.x - 300, center.y - 300, w, h)
-    //    val buckets = createBuckets(percentages, 0.2, center)
 
-    if (percentages.size > 0) createRectangles(children, true, cRectangle) //createRectangles(buckets, width, height, total, percentages.head)
+    if (children.size > 0) createRectangles(children, true, center, w, h)
     else Map()
   }
 
@@ -124,9 +123,9 @@ class Model(val url: String, val username: String, val password: String, val lif
         val rectangle = createInternalRectangle(currentTotal, count, container)
 
         if (tags.size > 0) {
-          new Location(tag.tags, total, tag.days2ids, Some(container), Some(rectangle), true)
+          new Location(tag.tags, total, d2s, Some(container), Some(rectangle), true)
         } else {
-          new Location(tag.tags, total, tag.days2ids, Some(container), Some(rectangle), false)
+          new Location(tag.tags, total, d2s, Some(container), Some(rectangle), false)
         }
     }
     locations.toList //.filter { location => location.count > 0 }
@@ -141,9 +140,9 @@ class Model(val url: String, val username: String, val password: String, val lif
     new ScalaRectangle(x, y, width, height)
   }
 
-  def createRectangles(children: List[MTree], dir: Boolean, cRectangle: Rectangle) = {
-    var start = new Point(cRectangle.x, cRectangle.y)
-    var w, h = cRectangle.width
+  def createRectangles(children: List[MTree], dir: Boolean, center: Point, width: Double, height: Double) = {
+    var start = center - new Point(width, height)
+    var w, h = width
 
     var lap = 1
     var dir = Direction.DOWN

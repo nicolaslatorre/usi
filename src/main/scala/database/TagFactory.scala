@@ -170,7 +170,7 @@ object TagFactory {
 
   def createVectorFromTags(url: String, username: String, password: String, life: Life, levels: Int) = {
     val ls = (0 until levels).toList
-    val path = "../NewTags1000000"
+    val path = "../NewTags2000000"
 
     val files = new java.io.File(path).listFiles.filter(_.getName.endsWith(".csv")).toSet
     val date2step = life.getDateMapping()
@@ -204,17 +204,6 @@ object TagFactory {
               (date, (count.toInt, ids.toStream))
           }
 
-          val d2i = dates2ids.groupBy {
-            case (date, (count, ids)) =>
-              val index = date2step.get(date).getOrElse(0) // retrieve actual step index respect to the interval
-              life.incrementByInterval(index)
-          }.mapValues { values =>
-            val newCount = values.map { case (date, (count, ids)) => count }.sum
-            val newIds = values.flatMap { case (date, (count, ids)) => ids }.toStream
-            (newCount, newIds)
-          }.toMap.seq
-          
-
           new Tag(tags, total, dates2ids.toMap)
 
         }.toList
@@ -231,86 +220,4 @@ object TagFactory {
     val total = tss.view.filter { tree => tree.value.tags.size == 1 }.map { tree => tree.value.total }.sum
     MTree(new Tag(List(), total, Map()), sortedTree)
   }
-
-//  def mainTagVector(url: String, username: String, password: String, life: Life, levels: Int) = {
-//    val path = "../dayCounts.csv"
-//    val file = new File(path)
-//    val iterator = CSVReader.open(file).iterator.grouped(1000000)
-//    println("Opened file")
-//
-//    val date2step = life.getDateMapping()
-//
-//    val reader = iterator.flatMap { lines =>
-//      lines.par.map { line =>
-//        val firstCell = line.head
-//        val tags = firstCell.split(" ").toList
-//
-//        val days2counts = line.tail.map {
-//          cell =>
-//            val Array(step, count) = cell.split(" ") // daily steps, we need to adapt them to the desired interval
-//            life.increment(step.toInt) -> count.toInt
-//        }.toList
-//
-//        val counts = days2counts.map {
-//          case (step, count) =>
-//            val index = date2step.get(step).getOrElse(0) // retrieve actual step index respect to the interval
-//            index -> count
-//        }
-//
-//        val dates2counts = counts.groupBy {
-//          case (index, count) =>
-//            life.incrementByInterval(index)
-//        }.mapValues { lineCounts =>
-//          lineCounts.map { case (step, count) => count }.sum
-//        }
-//
-//        //        val date2counts = counts.map {
-//        //          case (step, count) =>
-//        //            life.incrementByInterval(step) -> count
-//        //        }.toMap.seq
-//
-//        //        val ids = post2tag.get(firstCell).getOrElse(Map())
-//        //
-//        //        val dates2ids = ids.map {
-//        //          case (date, ids) =>
-//        //            val index = d2s.getOrElse(date, 0)
-//        //            index -> ids
-//        //        }.groupBy { case (step, count) => life.incrementByInterval(step) }.mapValues { lineCounts =>
-//        //          lineCounts.flatMap { case (step, ids) => ids }.toSet
-//        //        }
-//
-//        new Tag(tags, dates2counts.values.sum, dates2counts, days2counts, Map(), Map())
-//      }
-//    }.toList
-//
-//    //    val reader = lines.par.map { line =>
-//    //      val firstCell = line.head
-//    //      val tags = firstCell.split(" ").toList
-//    //
-//    //      val days2counts = line.tail.map {
-//    //        cell =>
-//    //          val Array(step, count) = cell.split(" ") // daily steps, we need to adapt them to the desired interval
-//    //          step.toInt -> count.toInt
-//    //      }.toList
-//    //
-//    //      val counts = days2counts.map {
-//    //        case (step, count) =>
-//    //          val index = date2step.get(step).getOrElse(0) // retrieve actual step index respect to the interval
-//    //          index -> count
-//    //      }.groupBy { case (step, count) => step }.mapValues { lineCounts =>
-//    //        lineCounts.map { case (step, count) => count }.sum
-//    //      }
-//    //
-//    //      val date2counts = counts.map {
-//    //        case (step, count) =>
-//    //          life.incrementByInterval(step) -> count
-//    //      }.toMap
-//    //
-//    //      new Tag(tags, date2counts.values.sum, date2counts, days2counts)
-//    //    }.toList
-//
-//    println("Main vector created, vector length: " + reader.size)
-//    reader.sortBy { tag => tag.dates2counts.values.max }.reverse
-//    //    tags
-//  }
 }
