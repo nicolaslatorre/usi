@@ -211,14 +211,14 @@ class Control(val model: Model, val view: View) {
       val tree = model.tree
 
       if (index == -1) {
-        updateGradient(tree)
         canvas.locations = model.computeModel(tree.value.tags, currentDate)
+        updateMaxHeight(tree)
         canvas.shapes = canvas.computeShapes(currentDate)
 
         updateSelectionMenu(canvas.locations)
         if (discussionPanel.visible) updateDiscussionsList(canvas.locations)
 
-        val discussionCount = canvas.locations.head.total
+        val discussionCount = canvas.locations.map { location => location.getCurrentCount(currentDate) }.sum
         val tagCount = canvas.locations.drop(1).size
         updateMenu(List("Root"), tagCount.toString, discussionCount.toString)
       } else {
@@ -231,14 +231,15 @@ class Control(val model: Model, val view: View) {
         }
         val target = headTags.substring(0, index).split(" ").toList
         val node = tree.search(target) // ATTENTION
-        updateGradient(node)
+
         canvas.locations = model.computeModel(node.value.tags, currentDate, filteredTags) // ATTENTION
+        updateMaxHeight(node)
         canvas.shapes = canvas.computeShapes(currentDate)
 
         updateSelectionMenu(canvas.locations)
         if (discussionPanel.visible) updateDiscussionsList(canvas.locations)
         val tagCount = canvas.locations.drop(1).size
-        val discussionCount = canvas.locations.head.total
+        val discussionCount = canvas.locations.map { location => location.getCurrentCount(currentDate) }.sum
         updateMenu(target, tagCount.toString, discussionCount.toString)
       }
 
@@ -259,7 +260,8 @@ class Control(val model: Model, val view: View) {
 
     case KeyReleased(_, Key.M, _, _) =>
       canvas.drawBorders = !canvas.drawBorders
-      updateModel()
+      canvas.repaint()
+      canvas.requestFocus()
 
     case KeyReleased(_, Key.R, _, _) =>
       canvas.offsetX = 0.0
@@ -273,7 +275,7 @@ class Control(val model: Model, val view: View) {
       val life = model.life
       val value = intervalValue.text
       life.interval = value.toInt
-      val date2step = life.getDateMapping()
+      model.date2step = life.getDateMapping()
 
       val tree = model.tree.search(canvas.locations.head.tags)
       //      tree.changeCounts(life, date2step)
@@ -281,9 +283,8 @@ class Control(val model: Model, val view: View) {
       model.root = model.tree.value
       val root = model.tree.value
 
-      model.maxHeight = model.getMaxCount(model.tree.children, date2step)
+      model.maxHeight = model.getMaxCount(model.tree.children)
       println("(Model) max height: " + model.maxHeight)
-      model.fixedRectangles = model.createFixedRectangles(model.tree.children)
 
       intervalValue.editable = true
       updatePlayer()
@@ -320,7 +321,7 @@ class Control(val model: Model, val view: View) {
               currentDate = incrementDate()
               datePanel.dateLabel.peer.setText(currentDate.toString)
               slider.value += 1
-              updateModel()
+              updateLocations()
               //              canvas.peer.paintImmediately(0, 0, canvas.preferredSize.getWidth.toInt, canvas.preferredSize.getHeight.toInt)
               Thread.sleep(200)
             }
@@ -332,7 +333,7 @@ class Control(val model: Model, val view: View) {
       if (b == stopButton) {
         println("Stop")
         isRunning = false
-        updateModel()
+        updateLocations()
       }
 
       if (b == startButton) {
@@ -340,7 +341,7 @@ class Control(val model: Model, val view: View) {
         val life = model.life
         currentDate = life.start
         slider.value = slider.min
-        updateModel()
+        updateLocations()
       }
 
       if (b == endButton) {
@@ -348,7 +349,7 @@ class Control(val model: Model, val view: View) {
         val life = model.life
         currentDate = life.end
         slider.value = slider.max
-        updateModel()
+        updateLocations()
       }
 
       if (b == lineChartButton) {
@@ -396,10 +397,10 @@ class Control(val model: Model, val view: View) {
 
     case ValueChanged(playerPanel.slider) =>
       if (!playerPanel.slider.adjusting) {
-    	  println("Changed slider")
-    	  currentDate = incrementDate()
+        println("Changed slider")
+        currentDate = incrementDate()
         datePanel.dateLabel.peer.setText(currentDate.toString)
-    	  updateModel()       
+        updateLocations()
       } else {
         currentDate = incrementDate()
         datePanel.dateLabel.peer.setText(currentDate.toString)
@@ -484,9 +485,35 @@ class Control(val model: Model, val view: View) {
 
     val tree = model.tree
     val node = tree.search(head.tags)
-    updateGradient(node, filteredTags)
+    updateMaxHeight(node, filteredTags)
 
     canvas.locations = model.computeModel(head.tags, currentDate, filteredTags)
+    canvas.shapes = canvas.computeShapes(currentDate)
+    updateSelectionMenu(canvas.locations)
+    if (discussionPanel.visible) updateDiscussionsList(canvas.locations)
+
+    val tagCount = canvas.locations.drop(1).size
+    val discussionCount = canvas.locations.map { location => location.getCurrentCount(currentDate) }.sum
+    if (tags == Nil) updateMenu(List("Root"), tagCount.toString, discussionCount.toString) else updateMenu(tags, tagCount.toString, discussionCount.toString)
+    canvas.requestFocus()
+    canvas.repaint()
+  }
+  
+  def updateLocations(root: Option[Location] = None) = {
+    val locations = canvas.locations
+
+    val head = root match {
+      case None => locations.head
+      case Some(location) => location
+    }
+
+    val tags = head.tags
+    val filteredTags = locations.filter { location => location.selected }.map { location => location.getTagsAsString() }
+
+    val tree = model.tree
+    val node = tree.search(head.tags)
+
+    canvas.locations = model.updateModel(locations, currentDate)
     canvas.shapes = canvas.computeShapes(currentDate)
     updateSelectionMenu(canvas.locations)
     if (discussionPanel.visible) updateDiscussionsList(canvas.locations)
@@ -535,8 +562,11 @@ class Control(val model: Model, val view: View) {
     val url = "jdbc:postgresql://localhost:5432/stackoverflow_dump"
     val username = "sodb"
     val password = "sodb"
+    
 
     val elements = locations.head.dates2ids.getOrElse(currentDate, (0, Stream()))._2.filter { id => id > 0 }.toSet
+    
+    println("elements: " + elements.size)
 
     if (elements.size > 0) {
       val cpds = DatabaseRequest.openConnection(url, username, password)
@@ -549,16 +579,13 @@ class Control(val model: Model, val view: View) {
 
   }
 
-  def updateGradient(tree: MTree, tags: List[String] = Nil) = {
-    val date2step = model.life.getDateMapping()
+  def updateMaxHeight(tree: MTree, tags: List[String] = Nil) = {
     if (tags.size > 0) {
       val tree = model.tree
       val nodes = tags.map { tag => tree.search(tag.split(" ").toList) }
-      model.fixedRectangles = model.createFixedRectangles(nodes)
-      model.maxHeight = model.getMaxCount(nodes, date2step)
+      model.maxHeight = model.getMaxCount(nodes)
     } else {
-      model.fixedRectangles = model.createFixedRectangles(tree.children)
-      model.maxHeight = model.getMaxCount(tree.children, date2step)
+      model.maxHeight = model.getMaxCount(tree.children)
     }
   }
 

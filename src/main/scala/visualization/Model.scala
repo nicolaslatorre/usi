@@ -31,49 +31,73 @@ object Direction extends Enumeration {
 }
 
 class Model(val url: String, val username: String, val password: String, val life: Life, val name: String) {
-  
+
   //Gradient
   val startColor = new Color(255, 255, 255)
   val endColor = new Color(0, 0, 0)
   val levels = 30
   val gradient = Gradient.createGradient(startColor, endColor, levels)
-  
+
+  var date2step = life.getDateMapping() // this should change only when interval change
+
   // Tree
   val tree = TagFactory.createVectorFromTags(url, username, password, life, 5)
   var root = tree.value
-  
-  
-  val dates2step = life.getDateMapping()
 
+  // Fixed Spiral Structure
+  val fixedRectangles = createFixedRectangles(tree.children)
 
-  var fixedRectangles = createFixedRectangles(tree.children)
+  // Create Locations
   var locations = computeModel(Nil, life.start)
 
-  var maxHeight = getMaxCount(tree.children, dates2step)
+  var maxHeight = getMaxCount(tree.children)
   println("(Model) max height: " + maxHeight)
 
   def computeModel(tag: List[String], currentDate: LocalDate, tags: List[String] = Nil): List[Location] = {
     println("Computing model")
     val date = life.incrementDate(currentDate)
     val level = tree.search(tag)
-    val date2step = life.getDateMapping()
 
-    println("Fixed: " + fixedRectangles.size)
     println("Childrens: " + level.children.size)
 
     val children = level.children
-    val filteredChildrens = filterChildrens(children, tags)
+    val filteredChildren = filterChildren(children, tags)
+    val ids = computeIntervalIds(filteredChildren)
 
-    val totalCurrent = getCurrentTotal(level, filteredChildrens, currentDate)
+    val totalCurrent = getCurrentTotal(level, filteredChildren, currentDate)
+//    val headIds = ids.getOrElse(level.value, Map())
     val head = new Location(level.value.tags, totalCurrent, level.value.days2ids, None, None, false)
-    val locations = createLocation(filteredChildrens, currentDate, tags, totalCurrent)
-
-    println("Locations Created")
+    val locations = createLocation(filteredChildren, currentDate, tags, totalCurrent, ids)
 
     head.getInterval2Ids(life, date2step)
-
     println("Model Computed")
     head :: locations
+  }
+
+  def updateModel(locations: List[Location], date: LocalDate) = {
+    val head = locations.head
+    val children = locations.tail
+    val ls = children.par.map { location =>
+      if(location.tags == List("c#") ) println("start")
+      val d2s = location.dates2ids
+      val count = d2s.getOrElse(date, (0, Stream()))._1
+      val container = location.getRectangle()
+      if(location.tags == List("c#") ) println("infos")
+      val currentTotal = d2s.maxBy { case (day, (count, ids)) => count }._2._1
+      if(location.tags == List("c#") ) println("current")
+      val rectangle = createInternalRectangle(currentTotal, count, container)
+      if(location.tags == List("c#") ) println("rectangle")
+      location.internalRectangle = Some(rectangle)
+      location
+    }.toList
+    head :: ls
+  }
+
+  def computeIntervalIds(children: List[MTree]) = {
+    children.par.map { tree =>
+      val tag = tree.value
+      tag -> tag.getInterval2Ids(life, date2step)
+    }.toMap.seq
   }
 
   def getCurrentTotal(head: MTree, children: List[MTree], currentDate: LocalDate) = {
@@ -86,7 +110,7 @@ class Model(val url: String, val username: String, val password: String, val lif
     }
   }
 
-  def filterChildrens(children: List[MTree], tags: List[String]) = {
+  def filterChildren(children: List[MTree], tags: List[String]) = {
     if (tags.size > 0) {
       children.toSet.par.filter(child => tags.contains(child.value.getTagsAsString())).toList
     } else children
@@ -101,20 +125,19 @@ class Model(val url: String, val username: String, val password: String, val lif
     else Map()
   }
 
-  def createLocation(childrenInInterval: List[MTree], date: LocalDate, tags: List[String], total: Double) = {
+  def createLocation(childrenInInterval: List[MTree], date: LocalDate, tags: List[String], total: Double, ids: Map[Tag, Map[LocalDate, (Int, Stream[Int])]]) = {
 
-    val sorted = childrenInInterval.zipWithIndex.toMap
+    println("start location creation")
+    //    val sorted = childrenInInterval.zipWithIndex.toMap
 
-    val ids = childrenInInterval.par.map { tree =>
-      val tag = tree.value
-      tag -> tag.getInterval2Ids(life, dates2step)
-    }.toMap
+    println("size initial: " + ids.size)
 
-    val locations = sorted.par.map {
-      case (tree, index) =>
+    val locations = childrenInInterval.par.map {
+      case (tree) =>
+        val index = childrenInInterval.indexOf(tree)
         val tag = tree.value
         val d2s = ids.getOrElse(tag, Map())
-        val count = d2s.getOrElse(date, (0, Stream()))._1 //tag.getDayCount(date) // problem !!!
+        val count = d2s.getOrElse(date, (0, Stream()))._1
         val total = tag.total
         val container = fixedRectangles.getOrElse(index, new ScalaRectangle(0, 0, 0, 0))
         val currentTotal = d2s.maxBy { case (day, (count, ids)) => count }._2._1
@@ -128,7 +151,9 @@ class Model(val url: String, val username: String, val password: String, val lif
           new Location(tag.tags, total, d2s, Some(container), Some(rectangle), false)
         }
     }
-    locations.toList //.filter { location => location.count > 0 }
+
+    println("locations done")
+    locations.toList
   }
 
   def createInternalRectangle(tot: Int, count: Int, container: ScalaRectangle) = {
@@ -252,11 +277,12 @@ class Model(val url: String, val username: String, val password: String, val lif
     discussions
   }
 
-  def getMaxCount(trees: List[MTree], dates2step: Map[LocalDate, Int]) = {
+  def getMaxCount(trees: List[MTree]) = {
+
     if (trees.size > 0) {
       val ids = trees.par.map { tree =>
         val tag = tree.value
-        tag.getInterval2Ids(life, dates2step)
+        tag.getInterval2Ids(life, date2step)
       }
       ids.map { i =>
         i.maxBy { case (day, (count, ids)) => count }._2._1

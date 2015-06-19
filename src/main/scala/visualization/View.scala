@@ -68,7 +68,7 @@ class View(val model: Model) extends Frame {
     }
 
     val northPanel = new BoxPanel(Orientation.Vertical) {
-      preferredSize = new Dimension(1440, 110)
+      preferredSize = new Dimension(1440, 130)
 
       val menuPanel = createMenuPanel()
 
@@ -362,6 +362,7 @@ class Canvas(val model: Model) extends Panel {
   override def paintComponent(g: Graphics2D) = {
     super.paintComponent(g)
 
+    println("(View) start drawing")
     shapes.foreach {
       case (external, internal, key, message, pointMessage, selected) =>
 
@@ -448,8 +449,8 @@ class Canvas(val model: Model) extends Panel {
         (externalShape, internalShape, key, message, pointMessage, location.selected)
       }
     }
-
-    rectangles.seq.toSet
+    println("Shapes Computed")
+    rectangles.toSet.seq
   }
 
   def computeRelated(relatives: Map[Location, List[Location]]) = {

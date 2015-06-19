@@ -40,21 +40,6 @@ class Life(val start: LocalDate, val end: LocalDate, var interval: Int) {
     val intervalSteps = steps.grouped(interval).toList
     intervalSteps.zipWithIndex.map{ case(ste, index) => index}
   }
-
-  /**
-   * Mapping between a step and the index of a step
-   */
-  def getStepsMapping() = {
-    val steps = days
-    val intervalSteps = steps.grouped(interval)
-
-    intervalSteps.zipWithIndex.flatMap { case(steps, index) =>
-      steps.par.map {
-        step =>
-          step -> index
-      }.toMap
-    }.toMap
-  }
   
   /**
    * Mapping between a step and the index of a step

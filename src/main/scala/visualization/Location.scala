@@ -6,7 +6,7 @@ import com.github.nscala_time.time.Imports._
 import database.Tag
 
 case class Location(val tags: List[String], val total: Double, var dates2ids: Map[LocalDate, (Int, Stream[Int])], 
-    val rectangle: Option[ScalaRectangle], val internalRectangle: Option[ScalaRectangle], var selected: Boolean) {
+    val rectangle: Option[ScalaRectangle], var internalRectangle: Option[ScalaRectangle], var selected: Boolean) {
 
   /**
    * Get tags as a string

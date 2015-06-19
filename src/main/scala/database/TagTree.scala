@@ -32,7 +32,7 @@ object TagTree {
   }
 }
 
-case class MTree(var value: Tag, var children: List[MTree]) {
+case class MTree(val value: Tag, val children: List[MTree]) {
   def this(value: Tag) = this(value, List())
   override def toString = "M(" + value.toString + " {" + children.map(_.toString).mkString(",") + "})"
 
@@ -95,21 +95,6 @@ case class MTree(var value: Tag, var children: List[MTree]) {
       child.value.getInterval2Ids(life, date2step)
     }
   }
-  
-//  def update(tag: Tag) = {
-//    val target = search(root, tag.tags)
-//    val targetTag = target.tag
-//    val previousCount = targetTag.totalCount
-//
-//    targetTag.totalCount = previousCount + tag.totalCount
-//    targetTag.days2counts = tag.days2counts ++ targetTag.days2counts
-//    targetTag.dates2counts = tag.dates2counts ++ targetTag.dates2counts
-//
-//    targetTag.ids = tag.ids ++ targetTag.ids
-//    targetTag.dates2ids = tag.dates2ids ++ targetTag.dates2ids
-//
-//  }
-
 }
 
 object MTree {
