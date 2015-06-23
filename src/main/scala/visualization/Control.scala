@@ -1,44 +1,44 @@
 package visualization
 
+import java.awt.Dimension
+import scala.swing.Frame
+import scala.swing.Label
+import scala.swing.Table
 import scala.swing.event.MouseClicked
 import scala.swing.event.MouseEvent
-import com.github.nscala_time.time.Imports._
-import scala.swing.event.ButtonClicked
-import scala.swing.event.ValueChanged
-import scala.swing.event.KeyReleased
-import scala.swing.event.KeyPressed
-import java.awt.Color
-import scala.swing.event.Key
-import scala.sys.process._
-import scala.swing.event.SelectionChanged
-import scala.swing.event.MouseWheelMoved
-import scala.swing.event.MouseDragged
-import scala.swing.event.MousePressed
-import scala.swing.event.MouseReleased
-import java.awt.Graphics2D
+import scala.swing.event.TableEvent
 import org.jfree.chart.ChartPanel
-import scala.swing.Frame
-import java.awt.Dimension
-import javax.swing.WindowConstants.DISPOSE_ON_CLOSE
 import org.jfree.chart.JFreeChart
-import java.awt.geom.Rectangle2D
-import database.TagFactory
-import database.TagTree
-import com.github.tototoshi.csv.CSVReader
-import java.io.File
-import scala.swing.Label
+import com.github.nscala_time.time.Imports._
 import database.DatabaseRequest
 import database.MTree
-import scala.swing.event.EditDone
+import javax.swing.WindowConstants.DISPOSE_ON_CLOSE
+import javax.swing.table.DefaultTableModel
+import scala.swing.event.ButtonClicked
+import scala.swing.event.MousePressed
+import scala.swing.event.SelectionChanged
+import scala.swing.event.MouseDragged
+import scala.swing.event.ValueChanged
+import scala.swing.event.KeyReleased
+import scala.swing.event.MouseReleased
+import scala.swing.event.MouseWheelMoved
+import scala.swing.event.TableRowsSelected
+import scala.swing.event.KeyPressed
+import scala.swing.event.Key
+import scala.sys.process._
+import database.DataManagement
 
 class Control(val model: Model, val view: View) {
   view.peer.setVisible(true)
 
   //PANELS
   val panel = view.mainPanel
+  
+  // South Panel
+  val southPanel = panel.southPanel
 
   // Player Panel
-  val playerPanel = panel.playerPanel
+  val playerPanel = southPanel.playerPanel
   val slider = playerPanel.slider
   val playerButtonsPanel = playerPanel.playerButtonPanel
   val datePanel = playerPanel.datePanel
@@ -58,9 +58,6 @@ class Control(val model: Model, val view: View) {
   val intervalPanel = loadingPanel.intervalPanel
   val intervalValue = intervalPanel.intervalValue
 
-  //  val progressPanel = loadingPanel.progressPanel
-  //  val progress = progressPanel.progress
-
   // Menu Panel
   val menuPanel = northPanel.menuPanel
 
@@ -69,7 +66,8 @@ class Control(val model: Model, val view: View) {
   val canvas = scrollPane.canvas
 
   // Discussion List Panel
-  val discussionPanel = panel.discussionsPanel
+  val discussionPanel = southPanel.discussionsPanel
+  val discussionsTable = discussionPanel.scrollPane.table
 
   // Tag List Panel
   val tagListPanel = panel.tagListPanel
@@ -109,7 +107,7 @@ class Control(val model: Model, val view: View) {
 
   view.listenTo(canvas, canvas.mouse.clicks, canvas.mouse.moves, canvas.mouse.wheel, canvas.keys, slider, showTagsButton, tagListPanel.list.selection, playButton,
     startButton, endButton, stopButton, player, inspectButton, clearButton, chartsButton, lineChartButton, barChartButton, mountainChartButton, intervalValue.keys,
-    discussionsListButton, discussionPanel.list.selection, searchField)
+    discussionsListButton, discussionsTable.selection, searchField)
 
   view.reactions += {
 
@@ -423,12 +421,21 @@ class Control(val model: Model, val view: View) {
 
       updateSelectionInCanvas()
 
-    case SelectionChanged(discussionPanel.list) if (discussionPanel.list.selection.adjusting) =>
+    //    case SelectionChanged(discussionPanel.list) if (discussionPanel.list.selection.adjusting) =>
+    //
+    //      val item = discussionPanel.list.selection.items(0)
+    //      println("Selected from list: " + item)
+    //
+    //      val id = item.split(" ").last
+    //
+    //      val process: Process = Process("open -a Firefox http://www.stackoverflow.com/questions/" + id).run()
+    //      println(process.exitValue())
+    //
+    //      canvas.requestFocus()
 
-      val item = discussionPanel.list.selection.items(0)
-      println("Selected from list: " + item)
-
-      val id = item.split(" ").last
+    case TableRowsSelected(discussionsTable, range, false) =>
+      val index = discussionsTable.selection.rows.mkString("").toInt
+      val id = discussionsTable.model.getValueAt(index, 0)
 
       val process: Process = Process("open -a Firefox http://www.stackoverflow.com/questions/" + id).run()
       println(process.exitValue())
@@ -498,7 +505,7 @@ class Control(val model: Model, val view: View) {
     canvas.requestFocus()
     canvas.repaint()
   }
-  
+
   def updateLocations(root: Option[Location] = None) = {
     val locations = canvas.locations
 
@@ -562,21 +569,28 @@ class Control(val model: Model, val view: View) {
     val url = "jdbc:postgresql://localhost:5432/stackoverflow_dump"
     val username = "sodb"
     val password = "sodb"
-    
 
     val elements = locations.head.dates2ids.getOrElse(currentDate, (0, Stream()))._2.filter { id => id > 0 }.toSet
-    
-    println("elements: " + elements.size)
+    val tags = locations.head.tags
 
     if (elements.size > 0) {
-      val cpds = DatabaseRequest.openConnection(url, username, password)
-      val discussions = DatabaseRequest.retrieveQuestionsInfoByIds(elements)
-      cpds.close()
-      discussionPanel.list.listData = discussions.sortBy { discussion => discussion.score }.reverse.par.map { discussion => discussion.toString }.toList
-    } else {
-      discussionPanel.list.listData = Nil
-    }
+//      val cpds = DatabaseRequest.openConnection(url, username, password)
+//      val discussions = DatabaseRequest.retrieveQuestionsInfoByIds(elements)
+//      cpds.close()
+      val discussions = DataManagement.openDiscussionsFiles(tags, elements)
+      println(discussions.size)
+      val model = discussions.map { discussion =>
+        val infos = discussion.getInfo()
+        infos.toArray.asInstanceOf[Array[AnyRef]] // I hate tables
+      }.toArray
 
+      val headers = Array("ID", "Title", "Creation Date", "Answers", "Score", "View", "Owner", "Closed").asInstanceOf[Array[AnyRef]]
+
+      discussionsTable.model = new DefaultTableModel(model, headers)
+    } else {
+      discussionsTable.model = new DefaultTableModel(Array(Array().asInstanceOf[Array[AnyRef]]), Array().asInstanceOf[Array[AnyRef]])
+
+    }
   }
 
   def updateMaxHeight(tree: MTree, tags: List[String] = Nil) = {
@@ -678,3 +692,5 @@ class Control(val model: Model, val view: View) {
     rel
   }
 }
+
+case class TableSelectedRow(override val source: Table, row: Int) extends TableEvent(source)

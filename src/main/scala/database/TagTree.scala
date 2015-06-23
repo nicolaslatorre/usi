@@ -86,7 +86,7 @@ case class MTree(val value: Tag, val children: List[MTree]) {
   }
 
   def getSize(): Int = {
-    1 + children.size + children.map { child => child.getSize() }.sum
+    children.size + children.map { child => child.getSize() }.sum
   }
 
   def changeCounts(life: Life, date2step: Map[LocalDate, Int]) = {

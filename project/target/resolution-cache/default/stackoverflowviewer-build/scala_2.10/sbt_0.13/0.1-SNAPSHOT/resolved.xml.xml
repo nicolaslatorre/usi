@@ -4,7 +4,7 @@
 		module="stackoverflowviewer-build"
 		revision="0.1-SNAPSHOT"
 		status="integration"
-		publication="20150322191107"
+		publication="20150623213424"
 		e:scalaVersion="2.10" e:sbtVersion="0.13"
 	>
 		<description>

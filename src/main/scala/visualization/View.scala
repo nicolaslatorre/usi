@@ -31,6 +31,8 @@ import javax.swing.ImageIcon
 import javax.swing.SwingUtilities
 import javax.swing.WindowConstants.EXIT_ON_CLOSE
 import java.awt.geom.Ellipse2D
+import database.Discussion
+import scala.swing.Table
 
 object Starter {
   def main(args: Array[String]) {
@@ -95,67 +97,68 @@ class View(val model: Model) extends Frame {
       visible = false
     }
 
-    val playerPanel = new BoxPanel(Orientation.Vertical) {
-      preferredSize = new Dimension(1440, 120)
+    val southPanel = new BoxPanel(Orientation.Vertical) {
 
-      val slider = new Slider() {
-        preferredSize = new Dimension(1440, 40)
-        val life = model.life
-        val steps = life.steps
+      val playerPanel = new BoxPanel(Orientation.Vertical) {
+        preferredSize = new Dimension(1440, 120)
 
-        min = 0
-        max = steps.size - 1
+        val slider = new Slider() {
+          preferredSize = new Dimension(1440, 40)
+          val life = model.life
+          val steps = life.steps
+          val date =
 
-        val checkpoints = (steps.filter { step => step % 100 == 0 } :+ max).distinct
-        labels = checkpoints.map { step => step -> new Label(step.toString) }.toMap
-        paintLabels = true
-        paintTicks = true
+            min = 0
+          max = steps.size - 1
 
-        value = min
-        majorTickSpacing = 1 // one step
-      }
+          val checkpoints = (steps.filter { step => step % 100 == 0 } :+ max).distinct
+          labels = checkpoints.map { step =>
+            val date = life.incrementByInterval(step)
+            step -> new Label(step.toString)
+          }.toMap
+          paintLabels = true
+          paintTicks = true
 
-      val playerButtonPanel = new BoxPanel(Orientation.Horizontal) {
-        val startButton = createButtonWithImage("../Images/mono-player-start.png", 24, 24)
-        val playButton = createButtonWithImage("../Images/mono-player-play.png", 24, 24)
-        val stopButton = createButtonWithImage("../Images/mono-player-stop.png", 24, 24)
-        val endButton = createButtonWithImage("../Images/mono-player-end.png", 24, 24)
-
-        contents += startButton
-        contents += playButton
-        contents += stopButton
-        contents += endButton
-      }
-
-      val datePanel = new FlowPanel(FlowPanel.Alignment.Center)() {
-        val dateLabel = new Label {
-          text = life.start.toString()
-          font = new Font("Ariel", java.awt.Font.BOLD, 20)
+          value = min
+          majorTickSpacing = 1 // one step
         }
-        contents += dateLabel
+
+        val playerButtonPanel = new BoxPanel(Orientation.Horizontal) {
+          val startButton = createButtonWithImage("../Images/mono-player-start.png", 24, 24)
+          val playButton = createButtonWithImage("../Images/mono-player-play.png", 24, 24)
+          val stopButton = createButtonWithImage("../Images/mono-player-stop.png", 24, 24)
+          val endButton = createButtonWithImage("../Images/mono-player-end.png", 24, 24)
+
+          contents += startButton
+          contents += playButton
+          contents += stopButton
+          contents += endButton
+        }
+
+        val datePanel = new FlowPanel(FlowPanel.Alignment.Center)() {
+          val dateLabel = new Label {
+            text = life.start.toString()
+            font = new Font("Ariel", java.awt.Font.BOLD, 20)
+          }
+          contents += dateLabel
+        }
+
+        contents += slider
+        contents += playerButtonPanel
+        contents += datePanel
       }
 
-      contents += slider
-      contents += playerButtonPanel
-      contents += datePanel
-    }
+      val discussionsPanel = createTable()
 
-    val discussionsPanel = new BoxPanel(Orientation.Vertical) {
-      preferredSize = new Dimension(200, 800)
-      //      val list = new ListView(model.locations.flatMap { location => location.ids.getOrElse(life.start, Set(0)) }.filter { elem => elem > 0 })
-      val list = new ListView(List(""))
-      val scrollPane = new ScrollPane() {
-        contents = list
-      }
-      contents += scrollPane
-      visible = false
+      contents += discussionsPanel
+      contents += playerPanel
     }
 
     layout(scrollPane) = Center
     layout(northPanel) = North
-    layout(playerPanel) = South
+    layout(southPanel) = South
     layout(tagListPanel) = East
-    layout(discussionsPanel) = West
+    //    layout(discussionsPanel) = West
   }
   contents = mainPanel
   pack
@@ -311,21 +314,7 @@ class View(val model: Model) extends Frame {
           contents += intervalValue
         }
 
-        //        val progressPanel = new FlowPanel(FlowPanel.Alignment.Left)() {
-        //          val progressLabel = new Label("Loaded: ")
-        //          val currentSize = model.mainVector.size
-        //          val progress = new Label() {
-        //        	  val percentages = (currentSize.toDouble / model.datasetSize) * 100
-        //            text = BigDecimal(percentages).setScale(2, BigDecimal.RoundingMode.HALF_UP).toString + "%"
-        //          }
-        //          
-        //          contents += progressLabel
-        //          contents += progress
-        //        }
-
         contents += intervalPanel
-        //        contents += progressPanel
-
       }
 
       contents += mainInfoPanel
@@ -337,10 +326,30 @@ class View(val model: Model) extends Frame {
 
     }
   }
+
+  def createTable() = {
+    val discussionsPanel = new BoxPanel(Orientation.Vertical) {
+      preferredSize = new Dimension(1440, 200)
+      val scrollPane = new ScrollPane() {
+        val discussions: List[Discussion] = Nil
+        val model = discussions.map { discussion =>
+          discussion.getInfo().toArray.asInstanceOf[Array[Any]] // I hate tables
+        }.toArray
+
+        val headers = Array("ID", "Title", "Creation Date", "Answers", "Score", "View", "Owner", "Closed")
+
+        val table = new Table(model, headers)
+        contents = table
+      }
+      contents += scrollPane
+      visible = false
+    }
+    discussionsPanel
+  }
 }
 
 class Canvas(val model: Model) extends Panel {
-  preferredSize = new Dimension(2000, 2000) //Toolkit.getDefaultToolkit.getScreenSize
+  preferredSize = new Dimension(2000, 2000)
   val backgroundColor = Color.WHITE
   opaque = true
   background = backgroundColor

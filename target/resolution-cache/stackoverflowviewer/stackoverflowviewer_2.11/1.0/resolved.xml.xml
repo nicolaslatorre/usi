@@ -4,7 +4,7 @@
 		module="stackoverflowviewer_2.11"
 		revision="1.0"
 		status="integration"
-		publication="20150506142109"
+		publication="20150623214939"
 	>
 		<description>
 		StackOverflowViewer
@@ -36,7 +36,6 @@
 		<dependency org="org.scala-lang" name="scala-library" rev="2.11.5" conf="scala-tool->default,optional(default);compile->default(compile)"/>
 		<dependency org="org.squeryl" name="squeryl_2.11" rev="0.9.5-7" conf="compile->default(compile)"/>
 		<dependency org="postgresql" name="postgresql" rev="8.4-701.jdbc4" conf="compile->default(compile)"/>
-		<dependency org="org.apache.lucene" name="lucene-core" rev="5.0.0" conf="compile->default(compile)"/>
 		<dependency org="c3p0" name="c3p0" rev="0.9.0.4" conf="compile->default(compile)"/>
 		<dependency org="org.jsoup" name="jsoup" rev="1.8.1" conf="compile->default(compile)"/>
 		<dependency org="com.github.nscala-time" name="nscala-time_2.11" rev="1.8.0" conf="compile->default(compile)"/>

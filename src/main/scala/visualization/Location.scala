@@ -1,6 +1,5 @@
 package visualization
 
-import multidimensionalscaling.Document
 import java.util.Date
 import com.github.nscala_time.time.Imports._
 import database.Tag

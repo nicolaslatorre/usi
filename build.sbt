@@ -3,9 +3,6 @@ libraryDependencies  ++=  Seq(
 	posgresDriver
 )
 
-// LUCENE
-libraryDependencies += "org.apache.lucene" % "lucene-core" % "5.0.0"
-
 // CP30
 libraryDependencies += "c3p0" % "c3p0" % "0.9.0.4"
 

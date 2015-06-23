@@ -1,11 +1,9 @@
 package visualization
 
-import multidimensionalscaling.MultiDimensionalScaling
 import java.io.PrintWriter
 import java.io.File
 import scala.util.Random
 import database.Discussion
-import multidimensionalscaling.Document
 import com.github.tototoshi.csv.CSVReader
 import database.TagFactory
 import database.DatabaseRequest
@@ -65,7 +63,6 @@ class Model(val url: String, val username: String, val password: String, val lif
     val ids = computeIntervalIds(filteredChildren)
 
     val totalCurrent = getCurrentTotal(level, filteredChildren, currentDate)
-//    val headIds = ids.getOrElse(level.value, Map())
     val head = new Location(level.value.tags, totalCurrent, level.value.days2ids, None, None, false)
     val locations = createLocation(filteredChildren, currentDate, tags, totalCurrent, ids)
 
@@ -78,15 +75,11 @@ class Model(val url: String, val username: String, val password: String, val lif
     val head = locations.head
     val children = locations.tail
     val ls = children.par.map { location =>
-      if(location.tags == List("c#") ) println("start")
       val d2s = location.dates2ids
       val count = d2s.getOrElse(date, (0, Stream()))._1
       val container = location.getRectangle()
-      if(location.tags == List("c#") ) println("infos")
       val currentTotal = d2s.maxBy { case (day, (count, ids)) => count }._2._1
-      if(location.tags == List("c#") ) println("current")
       val rectangle = createInternalRectangle(currentTotal, count, container)
-      if(location.tags == List("c#") ) println("rectangle")
       location.internalRectangle = Some(rectangle)
       location
     }.toList

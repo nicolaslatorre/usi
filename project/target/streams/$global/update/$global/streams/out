@@ -98,48 +98,13 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies default#stackoverflowviewer-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.13.0 [compile->default(compile)][0m
 [0m[[0minfo[0m] [0mResolving com.eed3si9n#sbt-assembly;0.13.0 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.eed3si9n#sbt-assembly;0.13.0 {compile=[default(compile)]}[0m
-[0m[[0minfo[0m] [0mResolving com.eed3si9n#sbt-assembly;0.13.0 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain-delegate: Checking cache for: dependency: com.eed3si9n#sbt-assembly;0.13.0 {compile=[default(compile)]}[0m
-[0m[[0mdebug[0m] [0m		tried https://repo.typesafe.com/typesafe/ivy-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.13.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=https://repo.typesafe.com/typesafe/ivy-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.13.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	typesafe-ivy-releases: no ivy file found for com.eed3si9n#sbt-assembly;0.13.0[0m
-[0m[[0mdebug[0m] [0m		tried https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.13.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	sbt-plugin-releases: found md file for com.eed3si9n#sbt-assembly;0.13.0[0m
-[0m[[0mdebug[0m] [0m		=> https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.13.0/ivys/ivy.xml (0.13.0)[0m
-[0m[[0mdebug[0m] [0mdownloading https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.13.0/ivys/ivy.xml ...[0m
-[0m[[0mdebug[0m] [0m	sbt-plugin-releases: downloading https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.13.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	sbt-plugin-releases: downloading https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.13.0/ivys/ivy.xml.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.13.0/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] com.eed3si9n#sbt-assembly;0.13.0!ivy.xml(ivy.original) (1850ms)[0m
-[0m[[0mdebug[0m] [0m	found com.eed3si9n#sbt-assembly;0.13.0 in sbt-plugin-releases[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: com.eed3si9n#sbt-assembly;0.13.0[0m
+[0m[[0mdebug[0m] [0m	found com.eed3si9n#sbt-assembly;0.13.0 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.eed3si9n#sbt-assembly;0.13.0->org.scalactic#scalactic_2.10;2.2.1 [compile->default(compile)][0m
 [0m[[0minfo[0m] [0mResolving org.scalactic#scalactic_2.10;2.2.1 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.scalactic#scalactic_2.10;2.2.1 {compile=[default(compile)]}[0m
-[0m[[0minfo[0m] [0mResolving org.scalactic#scalactic_2.10;2.2.1 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain-delegate: Checking cache for: dependency: org.scalactic#scalactic_2.10;2.2.1 {compile=[default(compile)]}[0m
-[0m[[0mdebug[0m] [0m		tried https://repo.typesafe.com/typesafe/ivy-releases/org.scalactic/scalactic_2.10/2.2.1/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=https://repo.typesafe.com/typesafe/ivy-releases/org.scalactic/scalactic_2.10/2.2.1/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	typesafe-ivy-releases: no ivy file found for org.scalactic#scalactic_2.10;2.2.1[0m
-[0m[[0mdebug[0m] [0m		tried https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/org.scalactic/scalactic_2.10/2.2.1/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/org.scalactic/scalactic_2.10/2.2.1/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	sbt-plugin-releases: no ivy file found for org.scalactic#scalactic_2.10;2.2.1[0m
-[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scalactic/scalactic_2.10/2.2.1/ivys/ivy.xml[0m
-[0m[[0mdebug[0m] [0m	local: no ivy file found for org.scalactic#scalactic_2.10;2.2.1[0m
-[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scalactic/scalactic_2.10/2.2.1/scalactic_2.10-2.2.1.pom[0m
-[0m[[0mdebug[0m] [0m	public: found md file for org.scalactic#scalactic_2.10;2.2.1[0m
-[0m[[0mdebug[0m] [0m		=> https://repo1.maven.org/maven2/org/scalactic/scalactic_2.10/2.2.1/scalactic_2.10-2.2.1.pom (2.2.1)[0m
-[0m[[0mdebug[0m] [0mdownloading https://repo1.maven.org/maven2/org/scalactic/scalactic_2.10/2.2.1/scalactic_2.10-2.2.1.pom ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scalactic/scalactic_2.10/2.2.1/scalactic_2.10-2.2.1.pom[0m
-[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scalactic/scalactic_2.10/2.2.1/scalactic_2.10-2.2.1.pom.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scalactic/scalactic_2.10/2.2.1/scalactic_2.10-2.2.1.pom[0m
-[0m[[0mdebug[0m] [0m	[SUCCESSFUL ] org.scalactic#scalactic_2.10;2.2.1!scalactic_2.10.pom(pom.original) (508ms)[0m
-[0m[[0mdebug[0m] [0m		tried https://repo.typesafe.com/typesafe/ivy-releases/org.scalactic/scalactic_2.10/2.2.1/bundles/scalactic_2.10.jar[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=https://repo.typesafe.com/typesafe/ivy-releases/org.scalactic/scalactic_2.10/2.2.1/bundles/scalactic_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/org.scalactic/scalactic_2.10/2.2.1/bundles/scalactic_2.10.jar[0m
-[0m[[0mdebug[0m] [0mCLIENT ERROR: Not Found url=https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/org.scalactic/scalactic_2.10/2.2.1/bundles/scalactic_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried /Users/nicolaslatorre/.ivy2/local/org.scalactic/scalactic_2.10/2.2.1/bundles/scalactic_2.10.jar[0m
-[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scalactic/scalactic_2.10/2.2.1/scalactic_2.10-2.2.1.jar[0m
-[0m[[0mdebug[0m] [0m	found org.scalactic#scalactic_2.10;2.2.1 in public[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scalactic#scalactic_2.10;2.2.1[0m
+[0m[[0mdebug[0m] [0m	found org.scalactic#scalactic_2.10;2.2.1 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.eed3si9n#sbt-assembly;0.13.0->org.scalactic#scalactic_2.10;2.2.1 [compile->runtime][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.eed3si9n#sbt-assembly;0.13.0->org.scalactic#scalactic_2.10;2.2.1 [compile->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies org.scalactic#scalactic_2.10;2.2.1->org.scala-lang#scala-library;2.10.4 [compile->compile(*)][0m
@@ -2293,23 +2258,13 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies default#stackoverflowviewer-build;0.1-SNAPSHOT->org.scala-lang#scala-library;2.10.4 [scala-tool->optional(default)][0m
 [0m[[0mdebug[0m] [0m	resolved ivy file produced in cache[0m
 [0m[[0mdebug[0m] [0m:: downloading artifacts ::[0m
-[0m[[0mdebug[0m] [0m		tried https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.13.0/jars/sbt-assembly.jar[0m
-[0m[[0minfo[0m] [0mdownloading https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.13.0/jars/sbt-assembly.jar ...[0m
-[0m[[0mdebug[0m] [0m	sbt-plugin-releases: downloading https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.13.0/jars/sbt-assembly.jar[0m
-[0m[[0mdebug[0m] [0m	sbt-plugin-releases: downloading https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.13.0/jars/sbt-assembly.jar.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for https://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.13.0/jars/sbt-assembly.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] com.eed3si9n#sbt-assembly;0.13.0!sbt-assembly.jar (2424ms)[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.eed3si9n#sbt-assembly;0.13.0!sbt-assembly.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.typesafe.sbteclipse#sbteclipse-plugin;2.5.0!sbteclipse-plugin.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.typesafe.sbteclipse#sbteclipse-core;2.5.0!sbteclipse-core.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scalaz#scalaz-core_2.10;7.0.2!scalaz-core_2.10.jar(bundle)[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scalaz#scalaz-effect_2.10;7.0.2!scalaz-effect_2.10.jar(bundle)[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scala-library;2.10.4!scala-library.jar[0m
-[0m[[0mdebug[0m] [0m		tried https://repo1.maven.org/maven2/org/scalactic/scalactic_2.10/2.2.1/scalactic_2.10-2.2.1.jar[0m
-[0m[[0minfo[0m] [0mdownloading https://repo1.maven.org/maven2/org/scalactic/scalactic_2.10/2.2.1/scalactic_2.10-2.2.1.jar ...[0m
-[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scalactic/scalactic_2.10/2.2.1/scalactic_2.10-2.2.1.jar[0m
-[0m[[0mdebug[0m] [0m	public: downloading https://repo1.maven.org/maven2/org/scalactic/scalactic_2.10/2.2.1/scalactic_2.10-2.2.1.jar.sha1[0m
-[0m[[0mdebug[0m] [0msha1 OK for https://repo1.maven.org/maven2/org/scalactic/scalactic_2.10/2.2.1/scalactic_2.10-2.2.1.jar[0m
-[0m[[0minfo[0m] [0m	[SUCCESSFUL ] org.scalactic#scalactic_2.10;2.2.1!scalactic_2.10.jar(bundle) (765ms)[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scalactic#scalactic_2.10;2.2.1!scalactic_2.10.jar(bundle)[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scala-reflect;2.10.4!scala-reflect.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-sbt#sbt;0.13.7!sbt.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-sbt#main;0.13.7!main.jar[0m
@@ -2364,7 +2319,7 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-sbt#apply-macro;0.13.7!apply-macro.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#jline;2.10.4!jline.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.fusesource.jansi#jansi;1.4!jansi.jar[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 7598ms :: artifacts dl 3232ms[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 892ms :: artifacts dl 35ms[0m
 [0m[[0mdebug[0m] [0m	report for default#stackoverflowviewer-build;0.1-SNAPSHOT compile produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/project/target/resolution-cache/reports/default-stackoverflowviewer-build-compile.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#stackoverflowviewer-build;0.1-SNAPSHOT runtime produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/project/target/resolution-cache/reports/default-stackoverflowviewer-build-runtime.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#stackoverflowviewer-build;0.1-SNAPSHOT test produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/project/target/resolution-cache/reports/default-stackoverflowviewer-build-test.xml[0m
@@ -2378,5 +2333,5 @@
 [0m[[0mdebug[0m] [0m	report for default#stackoverflowviewer-build;0.1-SNAPSHOT docs produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/project/target/resolution-cache/reports/default-stackoverflowviewer-build-docs.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#stackoverflowviewer-build;0.1-SNAPSHOT pom produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/project/target/resolution-cache/reports/default-stackoverflowviewer-build-pom.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#stackoverflowviewer-build;0.1-SNAPSHOT scala-tool produced in /Users/nicolaslatorre/Documents/USI/Tesi/StackOverflowViewer/project/target/resolution-cache/reports/default-stackoverflowviewer-build-scala-tool.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (7598ms resolve - 3232ms download)[0m
+[0m[[0mdebug[0m] [0m	resolve done (892ms resolve - 35ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m
