@@ -1,11 +1,7 @@
 package database
 
-import scala.collection.immutable.TreeMap
-import java.io.PrintWriter
-import java.io.File
-import java.util.Date
+import com.github.nscala_time.time.Imports.LocalDate
 import visualization.Life
-import com.github.nscala_time.time.Imports._
 
 object TagTree {
 
@@ -24,7 +20,7 @@ object TagTree {
           val sortedTags = tagsInLevel.toList.sortBy { tag => tag.tags.size }
           val subsubtree = createSubTree(sortedTags.tail, level + 1)
           val subtree = new MTree(sortedTags.head, subsubtree)
-          
+
           subtree
         }.values.toList
         subtrees.sortBy { subtree => subtree.getMaxDayCount() }.reverse
@@ -32,7 +28,7 @@ object TagTree {
   }
 }
 
-case class MTree(val value: Tag, val children: List[MTree]) {
+case class MTree(val value: Tag, var children: List[MTree]) {
   def this(value: Tag) = this(value, List())
   override def toString = "M(" + value.toString + " {" + children.map(_.toString).mkString(",") + "})"
 
@@ -40,43 +36,44 @@ case class MTree(val value: Tag, val children: List[MTree]) {
     val level = value.tags.length + 1
     val res = children.par.find { child => child.value.tags == key.tags.take(level) }
     res match {
-      case Some(n) => 
+      case Some(n) =>
         n.search(key)
       case None => this
     }
   }
-  
+
   def search(key: List[String]): MTree = {
     val level = value.tags.length + 1
     val res = children.par.find { child => child.value.tags == key.take(level) }
     res match {
-      case Some(n) => 
+      case Some(n) =>
         n.search(key)
-      case None => this
+      case None =>
+        this
     }
   }
-  
-  def hasRelation(key: List[String]): Boolean = {
+
+  def hasRelation(key: String): Boolean = {
     val tags = value.tags
-    val contained = key.map{ k => tags.contains(k) }
-    
-    if(contained.contains(true)) true
+    val contained = tags.contains(key)
+
+    if (contained) true
     else {
       val subContained = children.map { child => child.hasRelation(key) }
-      if(subContained.contains(true)) true
+      if (subContained.contains(true)) true
       else false
-    } 
+    }
   }
-  
+
   def getTotal(date: LocalDate): Int = {
     val count = value.getDayCount(date)
-    count + children.map{ child => child.getTotal(date)}.sum
+    count + children.map { child => child.getTotal(date) }.sum
   }
-  
+
   def getCurrentTotal(date: LocalDate): Int = {
     value.getDayCount(date)
   }
-  
+
   def getMaxDayCount() = {
     value.getMaxDayCount()
   }

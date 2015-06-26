@@ -1,18 +1,34 @@
 package database
 
-import com.github.nscala_time.time.Imports._
 import org.jsoup.Jsoup
-import org.squeryl.PrimitiveTypeMode._
+import org.squeryl.PrimitiveTypeMode.date2ScalarDate
+import org.squeryl.PrimitiveTypeMode.from
+import org.squeryl.PrimitiveTypeMode.inTransaction
+import org.squeryl.PrimitiveTypeMode.int2ScalarInt
+import org.squeryl.PrimitiveTypeMode.join
+import org.squeryl.PrimitiveTypeMode.optionInt2ScalarInt
+import org.squeryl.PrimitiveTypeMode.optionString2ScalarString
+import org.squeryl.PrimitiveTypeMode.orderByArg2OrderByExpression
+import org.squeryl.PrimitiveTypeMode.queryable2JoinPrecursor
+import org.squeryl.PrimitiveTypeMode.queryable2RightInnerJoinedQueryable
+import org.squeryl.PrimitiveTypeMode.select
+import org.squeryl.PrimitiveTypeMode.string2ScalarString
+import org.squeryl.PrimitiveTypeMode.traversableOfNumericalExpressionList
+import org.squeryl.PrimitiveTypeMode.typedExpression2OrderByArg
+import org.squeryl.PrimitiveTypeMode.where
 import org.squeryl.Session
 import org.squeryl.SessionFactory
 import org.squeryl.adapters.PostgreSqlAdapter
 
-import com.mchange.v2.c3p0._
+import com.github.nscala_time.time.Imports.LocalDate
+import com.mchange.v2.c3p0.ComboPooledDataSource
 
 import squeryl.Comment
 import squeryl.Post
 import squeryl.Post2Tag
-import squeryl.StackExchangeSchema._
+import squeryl.StackExchangeSchema.comments
+import squeryl.StackExchangeSchema.post2tag
+import squeryl.StackExchangeSchema.posts
 
 object DatabaseRequest {
 
@@ -111,31 +127,31 @@ object DatabaseRequest {
   def retrieveQuestionsInfoByIds(ids: Set[Int]) = {
     inTransaction {
       val result = from(posts)(p => where((p.postTypeId === 1) and (p.id in ids))
-        select (p.id, p.creationDate, p.title, p.tags, p.score, p.viewCount, p.ownerId, p.closedDate, p.answerCount))
+        select (p.id, p.creationDate, p.title, p.tags, p.score, p.viewCount, p.ownerId, p.answerCount))
 
       result.par.map {
-        case (id, creation, title, tags, score, view, owner, closed, answers) =>
+        case (id, creation, title, tags, score, view, owner, answers) =>
           val t = title match {
             case None => "NO TITLE"
             case Some(n) => n
           }
-          
+
           val own = owner match {
             case None => -1
             case Some(o) => o
           }
-          
+
           val ans = answers match {
             case None => 0
             case Some(a) => a
           }
-          
+
           val tagsList = tags match {
             case None => Nil
             case Some(t) => parseHtml(t).replace("<", "").replace(">", " ").split(" ").toList
           }
-          
-          new Discussion(id, t, creation, ans, score, view, own, closed, tagsList)
+
+          new Discussion(id, t, creation, ans, score, view, own, tagsList)
       }.toList
     }
 
@@ -147,36 +163,36 @@ object DatabaseRequest {
   def retrieveQuestionsInfo() = {
     inTransaction {
       val result = from(posts)(p => where((p.postTypeId === 1))
-        select (p.id, p.creationDate, p.title, p.tags, p.score, p.viewCount, p.ownerId, p.closedDate, p.answerCount) orderBy(p.creationDate))
+        select (p.id, p.creationDate, p.title, p.tags, p.score, p.viewCount, p.ownerId, p.answerCount) orderBy (p.creationDate))
 
       result.par.map {
-        case (id, creation, title, tags, score, view, owner, closed, answers) =>
+        case (id, creation, title, tags, score, view, owner, answers) =>
           val t = title match {
             case None => "NO TITLE"
             case Some(n) => n
           }
-          
+
           val own = owner match {
             case None => -1
             case Some(o) => o
           }
-          
+
           val ans = answers match {
             case None => 0
             case Some(a) => a
           }
-          
+
           val tagsList = tags match {
             case None => Nil
             case Some(t) => parseHtml(t).replace("<", "").replace(">", " ").split(" ").toList
           }
-          
-          new Discussion(id, t, creation, ans, score, view, own, closed, tagsList)
+
+          new Discussion(id, t, creation, ans, score, view, own, tagsList)
       }.toList
     }
 
   }
-  
+
   /**
    * Retrieve answers with respective comments
    */
@@ -284,8 +300,8 @@ object DatabaseRequest {
     }
     (tag, occurrence)
   }
-  
-   /**
+
+  /**
    * Build tags as a list of strings
    */
   def buildTags(tags: String) = {

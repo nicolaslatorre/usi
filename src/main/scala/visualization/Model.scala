@@ -1,25 +1,14 @@
 package visualization
 
-import java.io.PrintWriter
-import java.io.File
-import scala.util.Random
-import database.Discussion
-import com.github.tototoshi.csv.CSVReader
-import database.TagFactory
-import database.DatabaseRequest
-import org.squeryl.PrimitiveTypeMode._
-import database.DataManagement
-import database.TagTree
 import java.awt.Color
-import database.TagManager
-import java.awt.Toolkit
-import java.util.ArrayList
-import com.github.nscala_time.time.Imports._
-import java.util.Date
-import database.Tag
-import org.joda.time.Months
-import scala.collection.JavaConversions._
+
+import scala.Stream
+
+import com.github.nscala_time.time.Imports.LocalDate
+
 import database.MTree
+import database.Tag
+import database.TagFactory
 
 object Direction extends Enumeration {
   val RIGHT = Value("RIGHT")
@@ -28,7 +17,7 @@ object Direction extends Enumeration {
   val DOWN = Value("DOWN")
 }
 
-class Model(val url: String, val username: String, val password: String, val life: Life, val name: String) {
+class Model(val life: Life, val name: String) {
 
   //Gradient
   val startColor = new Color(255, 255, 255)
@@ -39,7 +28,7 @@ class Model(val url: String, val username: String, val password: String, val lif
   var date2step = life.getDateMapping() // this should change only when interval change
 
   // Tree
-  val tree = TagFactory.createVectorFromTags(url, username, password, life, 5)
+  var tree = TagFactory.createVectorFromTags(life, 5)
   var root = tree.value
 
   // Fixed Spiral Structure
@@ -227,47 +216,6 @@ class Model(val url: String, val username: String, val password: String, val lif
         (index + 1) -> rectangle
     }
     (first :: rects).toMap
-  }
-
-  //  def createRectangles(buckets: List[List[Double]], width: Double, height: Double, total: Int, first: Double): List[ScalaRectangle] = {
-  //    val direction = true
-  //    println("(Model) Total: " + total)
-  //
-  //    buckets.zipWithIndex.flatMap {
-  //      case (bucket, index) =>
-  //        val others = buckets.take(index).map { x => x.sum }.sum
-  //        new Bucket(bucket, 0.0, height * others, width, height * bucket.sum, direction, total, first).rectangles
-  //    }
-  //  }
-
-  def createBuckets(percentages: List[Double], threshold: Double, center: Point) = {
-    percentages.foldLeft(List[List[Double]]()) { (acc, elem) =>
-      acc match {
-        case head :: tail =>
-          if (head.sum <= threshold && head.size < 2000) (head :+ elem) :: tail
-          else List(elem) :: acc
-        case Nil => List(elem) :: acc
-      }
-    }.reverse
-    //    percentages.map{ p => 
-    //      val index = percentages.indexOf(p)
-    //      val leave = (0 until index).map{Math.pow(2, _)}.sum
-    //      percentages.drop(leave.toInt - 1).take(Math.pow(2, index).toInt)
-    //    }
-  }
-
-  def getDiscussions(ids: Set[Int]) = {
-    val cpds = DatabaseRequest.openConnection(url, username, password)
-
-    val discussions = inTransaction {
-      val questions = DatabaseRequest.retrieveQuestionsAndComments(ids)
-      val answers = DatabaseRequest.retrieveAnswersAndComments(ids)
-
-      DataManagement.buildDiscussions(questions, answers)
-    }
-
-    cpds.close()
-    discussions
   }
 
   def getMaxCount(trees: List[MTree]) = {

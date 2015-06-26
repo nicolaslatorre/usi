@@ -4,13 +4,14 @@ import java.awt.Color
 import java.awt.Dimension
 import java.awt.Font
 import java.awt.Toolkit
+import java.awt.geom.Ellipse2D
 import java.awt.geom.Rectangle2D
+
 import scala.swing.BorderPanel
 import scala.swing.BorderPanel.Position.Center
 import scala.swing.BorderPanel.Position.East
 import scala.swing.BorderPanel.Position.North
 import scala.swing.BorderPanel.Position.South
-import scala.swing.BorderPanel.Position.West
 import scala.swing.BoxPanel
 import scala.swing.Button
 import scala.swing.FlowPanel
@@ -22,17 +23,15 @@ import scala.swing.Orientation
 import scala.swing.Panel
 import scala.swing.ScrollPane
 import scala.swing.Slider
+import scala.swing.Table
 import scala.swing.TextField
-import com.github.nscala_time.time.Imports.Interval
+
 import com.github.nscala_time.time.Imports.LocalDate
-import com.github.nscala_time.time.Imports.richAbstractPartial
-import com.github.nscala_time.time.Imports.richDate
+
+import database.Discussion
 import javax.swing.ImageIcon
 import javax.swing.SwingUtilities
 import javax.swing.WindowConstants.EXIT_ON_CLOSE
-import java.awt.geom.Ellipse2D
-import database.Discussion
-import scala.swing.Table
 
 object Starter {
   def main(args: Array[String]) {
@@ -46,7 +45,7 @@ object Starter {
     val life = new Life(startDate, endDate, interval)
     val name = "StackOverflow"
 
-    val model = new Model(url, username, password, life, name)
+    val model = new Model(life, name)
 
     SwingUtilities.invokeLater(new Runnable {
       def run {
@@ -59,7 +58,7 @@ object Starter {
 }
 
 class View(val model: Model) extends Frame {
-  title = "StackOverflow Dataset Almanac"
+  title = "ChronoTag"
   peer.setDefaultCloseOperation(EXIT_ON_CLOSE)
   val life = model.life
 
@@ -336,7 +335,7 @@ class View(val model: Model) extends Frame {
           discussion.getInfo().toArray.asInstanceOf[Array[Any]] // I hate tables
         }.toArray
 
-        val headers = Array("ID", "Title", "Creation Date", "Answers", "Score", "View", "Owner", "Closed")
+        val headers = Array("ID", "Title", "Creation Date", "Answers", "Score", "View", "Owner")
 
         val table = new Table(model, headers)
         contents = table

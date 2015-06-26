@@ -1,43 +1,21 @@
 package database
 
-import java.io.StringReader
-import org.apache.lucene.analysis.tokenattributes.CharTermAttribute
-import org.jsoup.Jsoup
-import squeryl.Comment
-import squeryl.Post
-import com.github.tototoshi.csv.CSVWriter
 import java.io.File
+import org.jsoup.Jsoup
+import com.github.nscala_time.time.Imports.LocalDate
 import com.github.tototoshi.csv.CSVReader
-import java.util.Date
-import com.github.nscala_time.time.Imports._
+import com.github.tototoshi.csv.CSVWriter
 
 object DataManagement {
 
-  def main(args: Array[String]) = {
-    val url = "jdbc:postgresql://localhost:5432/stackoverflow_dump"
-    val username = "sodb"
-    val password = "sodb"
-    val tags = List("c#")
-
-    buildDiscussionsFiles(url, username, password)
-    println("END")
-  }
-
-  def buildDiscussions(questions: Map[Post, List[Comment]], answers: Map[Post, List[Comment]]) = {
-    val ids = answers.groupBy { case (post, comments) => post.parentId.get }
-
-    questions.map {
-      case (post, comments) =>
-        val ans: List[Answer] = ids.get(post.id) match {
-          case Some(n) => buildAnswers(n)
-          case None => List()
-        }
-        val tags = buildTags(post.tags.get)
-        val title = parseHtml(parseHtml(post.title.get))
-        val body = parseHtml(parseHtml(post.body))
-        new Discussion(post.id, title, post.creationDate, 0, 0, 0, 0, None, Nil)
-    }.toList
-  }
+//  def main(args: Array[String]) = {
+//    val url = "jdbc:postgresql://localhost:5432/stackoverflow_dump"
+//    val username = "sodb"
+//    val password = "sodb"
+//
+//    buildDiscussionsFiles(url, username, password)
+//    println("END")
+//  }
 
   def buildDiscussionsFiles(url: String, username: String, password: String) = {
     val cpds = DatabaseRequest.openConnection(url, username, password)
@@ -49,17 +27,16 @@ object DataManagement {
 
     singleTags2infos.par.map {
       case (single, values) =>
-        val folder = "Discussions/" + single.mkString("") + "/"
+        val savePath = "Discussions/" + single.mkString("") + ".csv"
+        val file = new File(savePath)
+        file.getParentFile.mkdirs()
         val tags2infos = values.groupBy { value => value.tags }
 
         tags2infos.map {
           case (tag, ds) =>
             val infos = ds.map { d => d.getInfo() }
 
-            val savePath = folder + tag.mkString(" ") + ".csv"
-            val file = new File(savePath)
-            file.getParentFile.mkdirs()
-            val writer = CSVWriter.open(file)
+            val writer = CSVWriter.open(file, append = true)
             writer.writeAll(infos)
             writer.close()
         }
@@ -68,7 +45,7 @@ object DataManagement {
 
   def openDiscussionsFiles(tags: List[String], ids: Set[Int]) = {
     val single = tags.take(1).mkString("")
-    val path = "../Discussions/" + single + "/" + tags.mkString(" ") + ".csv"
+    val path = "../Discussions/" + single + ".csv"
     val file = new java.io.File(path)
     val reader = CSVReader.open(file)
 
@@ -79,13 +56,11 @@ object DataManagement {
     }.toList
 
     discussions.map { discussion =>
-      val Array(id, title, creation, answers, score, view, owner, closed) = discussion.toArray
+      val Array(id, title, creation, answers, score, view, owner) = discussion.toArray
       val Array(year, month, day) = creation.split("-")
       val creationDate = new LocalDate(year.toInt, month.toInt, day.toInt)
 
-      val closedDate = getClosedDate(closed)
-
-      new Discussion(id.toInt, title, creationDate.toDate(), answers.toInt, score.toInt, view.toInt, owner.toInt, closedDate, tags)
+      new Discussion(id.toInt, title, creationDate.toDate(), answers.toInt, score.toInt, view.toInt, owner.toInt, tags)
     }
   }
 
@@ -96,21 +71,6 @@ object DataManagement {
       val closed = new LocalDate(year.toInt, month.toInt, day.toInt)
       Some(closed.toDate)
     }
-  }
-
-  /**
-   * Builds answers
-   */
-  def buildAnswers(answers: Map[Post, List[Comment]]) = {
-    answers.map {
-      case (post, comments) =>
-        val body = parseHtml(parseHtml(post.body))
-        new Answer(post.id, post.parentId.get, post.creationDate, body, comments)
-    }.toList
-  }
-
-  def getText(post: List[(Int, Option[String], String, Option[Comment])]) = {
-
   }
 
   /**
