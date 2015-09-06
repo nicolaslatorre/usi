@@ -1,14 +1,13 @@
 package visualization
 
 import java.awt.Color
-
 import scala.Stream
-
 import com.github.nscala_time.time.Imports.LocalDate
-
 import database.MTree
 import database.Tag
 import database.TagFactory
+import java.io.PrintWriter
+import java.io.File
 
 object Direction extends Enumeration {
   val RIGHT = Value("RIGHT")
@@ -29,6 +28,10 @@ class Model(val life: Life, val name: String) {
 
   // Tree
   var tree = TagFactory.createVectorFromTags(life, 5)
+  
+  var lol = tree.search(List("java"))
+  println("Total java: " + lol.value.total)
+  
   var root = tree.value
 
   // Fixed Spiral Structure
@@ -38,20 +41,21 @@ class Model(val life: Life, val name: String) {
   var locations = computeModel(Nil, life.start)
 
   var maxHeight = getMaxCount(tree.children)
-  println("(Model) max height: " + maxHeight)
 
   def computeModel(tag: List[String], currentDate: LocalDate, tags: List[String] = Nil): List[Location] = {
     println("Computing model")
     val date = life.incrementDate(currentDate)
     val level = tree.search(tag)
 
-    println("Childrens: " + level.children.size)
-
     val children = level.children
     val filteredChildren = filterChildren(children, tags)
+    
+//    filteredChildren.foreach { x => println("tag: " + x.value.getTagsAsString()) }
+    
     val ids = computeIntervalIds(filteredChildren)
 
     val totalCurrent = getCurrentTotal(level, filteredChildren, currentDate)
+    
     val head = new Location(level.value.tags, totalCurrent, level.value.days2ids, None, None, false)
     val locations = createLocation(filteredChildren, currentDate, tags, totalCurrent, ids)
 
@@ -94,7 +98,7 @@ class Model(val life: Life, val name: String) {
 
   def filterChildren(children: List[MTree], tags: List[String]) = {
     if (tags.size > 0) {
-      children.toSet.par.filter(child => tags.contains(child.value.getTagsAsString())).toList
+      children.par.filter(child => tags.contains(child.value.getTagsAsString())).toList
     } else children
   }
 
@@ -108,11 +112,6 @@ class Model(val life: Life, val name: String) {
   }
 
   def createLocation(childrenInInterval: List[MTree], date: LocalDate, tags: List[String], total: Double, ids: Map[Tag, Map[LocalDate, (Int, Stream[Int])]]) = {
-
-    println("start location creation")
-    //    val sorted = childrenInInterval.zipWithIndex.toMap
-
-    println("size initial: " + ids.size)
 
     val locations = childrenInInterval.par.map {
       case (tree) =>
@@ -133,8 +132,7 @@ class Model(val life: Life, val name: String) {
           new Location(tag.tags, total, d2s, Some(container), Some(rectangle), false)
         }
     }
-
-    println("locations done")
+    
     locations.toList
   }
 

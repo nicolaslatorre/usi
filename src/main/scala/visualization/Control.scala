@@ -126,7 +126,6 @@ class Control(val model: Model, val view: View) {
       }
 
       if (peer.getButton == java.awt.event.MouseEvent.BUTTON1 && clicks == 2) { // jump
-        println("Clicked")
         if (clickedLocations.size > 0) {
           canvas.locations.foreach { location =>
             location.selected = false
@@ -142,7 +141,6 @@ class Control(val model: Model, val view: View) {
       if (peer.getButton == java.awt.event.MouseEvent.BUTTON3 && clicks == 1) { // select
 
         if (clickedLocations.size > 0) {
-          println("Square in point: " + clickedLocations.size)
           val location = clickedLocations.head
           location.selected = !location.selected
 
@@ -292,7 +290,6 @@ class Control(val model: Model, val view: View) {
       val root = model.tree.value
 
       model.maxHeight = model.getMaxCount(model.tree.children)
-      println("(Model) max height: " + model.maxHeight)
 
       intervalValue.editable = true
       inSelection = false
@@ -322,7 +319,6 @@ class Control(val model: Model, val view: View) {
 
       if (b == playButton) {
         isRunning = true
-        println("Play")
         val thread = new Thread {
           override def run {
             val life = model.life
@@ -340,13 +336,11 @@ class Control(val model: Model, val view: View) {
       }
 
       if (b == stopButton) {
-        println("Stop")
         isRunning = false
         updateLocations()
       }
 
       if (b == startButton) {
-        println("Start")
         val life = model.life
         currentDate = life.start
         slider.value = slider.min
@@ -354,7 +348,6 @@ class Control(val model: Model, val view: View) {
       }
 
       if (b == endButton) {
-        println("End")
         val life = model.life
         currentDate = life.end
         slider.value = slider.max
@@ -416,7 +409,6 @@ class Control(val model: Model, val view: View) {
 
     case SelectionChanged(tagListPanel.list) if (tagListPanel.list.selection.adjusting) =>
       val item = tagListPanel.list.selection.items(0)
-      println("Selected from list: " + item)
 
       val locations = canvas.locations.tail.map { location =>
         val tags = location.tags
@@ -426,7 +418,6 @@ class Control(val model: Model, val view: View) {
 
       val location = locations.get(item).get
 
-      println("Selected " + location.getTagsAsString())
       location.selected = !location.selected
 
       updateSelectionInCanvas()
@@ -435,8 +426,7 @@ class Control(val model: Model, val view: View) {
       val index = discussionsTable.selection.rows.mkString("").toInt
       val id = discussionsTable.model.getValueAt(index, 0)
 
-      val process: Process = Process("open -a Firefox http://www.stackoverflow.com/questions/" + id).run()
-      println(process.exitValue())
+      val process: Process = Process("open http://www.stackoverflow.com/questions/" + id).run()
 
       canvas.requestFocus()
 
@@ -496,7 +486,8 @@ class Control(val model: Model, val view: View) {
 
     val tags = head.tags
     val filteredTags = locations.filter { location => location.selected }.map { location => location.getTagsAsString() }
-
+    
+    
     val node = model.tree.search(head.tags)
 
     updateMaxHeight(node, filteredTags)
@@ -573,10 +564,6 @@ class Control(val model: Model, val view: View) {
   }
 
   def updateDiscussionsList(locations: List[Location]) = {
-    val url = "jdbc:postgresql://localhost:5432/stackoverflow_dump"
-    val username = "sodb"
-    val password = "sodb"
-
     val elements = locations.head.dates2ids.getOrElse(currentDate, (0, Stream()))._2.filter { id => id > 0 }.toSet
     val tags = locations.head.tags
 

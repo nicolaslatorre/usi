@@ -2,7 +2,6 @@ package visualization
 
 import java.awt.Color
 import java.text.SimpleDateFormat
-
 import org.jfree.chart.ChartFactory
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.axis.DateAxis
@@ -13,46 +12,35 @@ import org.jfree.chart.plot.PlotOrientation
 import org.jfree.chart.renderer.xy.ClusteredXYBarRenderer
 import org.jfree.data.time._
 import org.jfree.ui.RectangleInsets
-
 import com.github.nscala_time.time.Imports._
-
 import scalax.chart.module.ChartFactories
 import scalax.chart.module.Charting
 import scalax.chart.module.Charting._
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer
+import org.jfree.chart.renderer.xy.XYBarRenderer
 
 object Graph {
-  def main(args: Array[String]) = {
-
-    val ds = new org.jfree.data.category.DefaultCategoryDataset
-    ds.addValue(5, "Class A", "Bin 1")
-    ds.addValue(7, "Class A", "Bin 2")
-    ds.addValue(8, "Class B", "Bin 1")
-    ds.addValue(3, "Class B", "Bin 2")
-
-    val chart = ChartFactories.LineChart(ds)
-    //    chart.peer.getPlot.
-    chart.show()
-
-    val chartLine = XYLineChart(List((1, 2), (2, 7), (3, 5)))
-    chartLine.show()
-  }
 
   def drawBarChartGraph(locations: List[Location], life: Life) = {
     val dates = life.dates
     val dataset = new org.jfree.data.time.TimeSeriesCollection
-
+    
+    val days = dates.map{ date => 
+      (new Day(date.toDate()), date)
+    }
+    
     locations.foreach { location =>
       val s = new org.jfree.data.time.TimeSeries(location.getTagsAsString())
-      dates.foreach { date =>
+      days.foreach { case(day, date) =>
         val value = location.getIntervalCount(date)
-        s.add(new Day(date.toDate()), value)
+        s.add(day, value)
       }
       dataset.addSeries(s)
     }
 
     val renderer = new ClusteredXYBarRenderer();
     renderer.setShadowVisible(false)
-
+    
     val xyPlot = new XYPlot(dataset, new DateAxis("Dates"), new NumberAxis("Discussions"), renderer);
     xyPlot.setOrientation(PlotOrientation.VERTICAL);
 
@@ -124,7 +112,6 @@ object Graph {
     
     val unit = new DateTickUnit(DateTickUnitType.MONTH, 2, formatter)
     axis.setTickUnit(unit)
-    
     axis.setRange(range, false, true)
 
 

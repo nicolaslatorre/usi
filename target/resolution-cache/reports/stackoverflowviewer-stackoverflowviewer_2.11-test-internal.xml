@@ -7,7 +7,7 @@
 		revision="1.0"
 		conf="test-internal"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool"
-		date="20150623214939"/>
+		date="20150626153319"/>
 	<dependencies>
 		<module organisation="com.github.wookietreiber" name="scala-chart_2.11">
 			<revision name="0.4.2" status="release" pubdate="20140418143953" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://github.com/wookietreiber/scala-chart" extra-info.apiURL="http://wookietreiber.github.io/scala-chart/latest/api/" downloaded="false" searched="true" default="false" conf="default(compile), default, compile, runtime, master" position="15">

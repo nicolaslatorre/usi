@@ -20,6 +20,10 @@ object TagTree {
           val sortedTags = tagsInLevel.toList.sortBy { tag => tag.tags.size }
           val subsubtree = createSubTree(sortedTags.tail, level + 1)
           val subtree = new MTree(sortedTags.head, subsubtree)
+          
+          if(sortedTags.head.tags == List("java", "swing")) {
+            subsubtree.foreach { x => println("tag: " + x.value.getTagsAsString() + " count: " + x.value.getMaxDayCount()) }
+          }
 
           subtree
         }.values.toList
@@ -30,7 +34,7 @@ object TagTree {
 
 case class MTree(val value: Tag, var children: List[MTree]) {
   def this(value: Tag) = this(value, List())
-  override def toString = "M(" + value.toString + " {" + children.map(_.toString).mkString(",") + "})"
+  override def toString = value.tags.mkString(" ") + "(" + value.total+ ")" + "\n\t" + children.map(_.toString).mkString("\n\t") + "\n"
 
   def search(key: Tag): MTree = {
     val level = value.tags.length + 1

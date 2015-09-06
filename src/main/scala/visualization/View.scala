@@ -58,7 +58,7 @@ object Starter {
 }
 
 class View(val model: Model) extends Frame {
-  title = "ChronoTag"
+  title = "StackOverflow Dataset Almanac"
   peer.setDefaultCloseOperation(EXIT_ON_CLOSE)
   val life = model.life
 
@@ -123,10 +123,10 @@ class View(val model: Model) extends Frame {
         }
 
         val playerButtonPanel = new BoxPanel(Orientation.Horizontal) {
-          val startButton = createButtonWithImage("../Images/mono-player-start.png", 24, 24)
-          val playButton = createButtonWithImage("../Images/mono-player-play.png", 24, 24)
-          val stopButton = createButtonWithImage("../Images/mono-player-stop.png", 24, 24)
-          val endButton = createButtonWithImage("../Images/mono-player-end.png", 24, 24)
+          val startButton = createButtonWithImage("images/mono-player-start.png", 24, 24)
+          val playButton = createButtonWithImage("images/mono-player-play.png", 24, 24)
+          val stopButton = createButtonWithImage("images/mono-player-stop.png", 24, 24)
+          val endButton = createButtonWithImage("images/mono-player-end.png", 24, 24)
 
           contents += startButton
           contents += playButton
@@ -370,7 +370,6 @@ class Canvas(val model: Model) extends Panel {
   override def paintComponent(g: Graphics2D) = {
     super.paintComponent(g)
 
-    println("(View) start drawing")
     shapes.foreach {
       case (external, internal, key, message, pointMessage, selected) =>
 
@@ -408,7 +407,8 @@ class Canvas(val model: Model) extends Panel {
           }
       }
     }
-    println("(View) Done")
+    
+    println("Drew")
   }
 
   def isInRectangle(location: Location, rectangle: ScalaRectangle) = {
@@ -457,7 +457,6 @@ class Canvas(val model: Model) extends Panel {
         (externalShape, internalShape, key, message, pointMessage, location.selected)
       }
     }
-    println("Shapes Computed")
     rectangles.toSet.seq
   }
 

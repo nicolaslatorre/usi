@@ -8,15 +8,6 @@ import com.github.tototoshi.csv.CSVWriter
 
 object DataManagement {
 
-//  def main(args: Array[String]) = {
-//    val url = "jdbc:postgresql://localhost:5432/stackoverflow_dump"
-//    val username = "sodb"
-//    val password = "sodb"
-//
-//    buildDiscussionsFiles(url, username, password)
-//    println("END")
-//  }
-
   def buildDiscussionsFiles(url: String, username: String, password: String) = {
     val cpds = DatabaseRequest.openConnection(url, username, password)
 
@@ -27,7 +18,7 @@ object DataManagement {
 
     singleTags2infos.par.map {
       case (single, values) =>
-        val savePath = "Discussions/" + single.mkString("") + ".csv"
+        val savePath = "../Discussions/" + single.mkString("") + ".csv"
         val file = new File(savePath)
         file.getParentFile.mkdirs()
         val tags2infos = values.groupBy { value => value.tags }

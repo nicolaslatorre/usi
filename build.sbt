@@ -1,3 +1,4 @@
+// SQUERYL
 libraryDependencies  ++=  Seq(
 	"org.squeryl" %% "squeryl" % "0.9.5-7",
 	posgresDriver
@@ -20,6 +21,9 @@ libraryDependencies += "com.github.tototoshi" %% "scala-csv" % "1.2.0"
 
 // SCALA-CHARTS
 libraryDependencies += "com.github.wookietreiber" %% "scala-chart" % "latest.integration"
+
+// ASSEMBLY OPTIONS
+mainClass in assembly := Some("visualization.Starter")
 	  
 //yourDatabaseDependency is one of the supported databases :
 	 
